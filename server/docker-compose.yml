@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  server:
+    container_name: paladindeck-server
+    image: paladindeck-server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run start:debug
+    env_file:
+      - .env
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+    depends_on:
+      - postgres
+    networks:
+      - nestjs-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:14.1-alpine
+    container_name: postgres
+    env_file:
+      - .env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - nestjs-network
+    restart: always
+
+  adminer:
+    image: adminer
+    ports:
+      - '8080:8080'
+    networks:
+      - nestjs-network
+
+networks:
+  nestjs-network:
+
+volumes:
+  postgres:
