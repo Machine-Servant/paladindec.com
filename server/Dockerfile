@@ -3,7 +3,7 @@ FROM node:16.13.0-alpine3.11 as builder
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-# COPY prisma ./prisma/
+COPY prisma ./prisma/
 
 RUN npm ci
 
