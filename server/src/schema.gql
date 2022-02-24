@@ -1,0 +1,55 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type BulkDataObjectType {
+  """The size of this file in integer bites"""
+  compressedSize: Int!
+
+  """
+  The Content-Encoding encoding that will be used to transmit this file when you download it
+  """
+  contentEncoding: String!
+
+  """The MIME type of this file"""
+  contentType: String!
+
+  """A human-readable description for this file"""
+  description: String!
+
+  """The URI that hosts this bulk file for fetching"""
+  downloadUri: String!
+
+  """The unique ID for this bulk item"""
+  id: String!
+
+  """A human-readable string for this file"""
+  name: String!
+
+  """The object type for this bulk item (always "bulk_data")"""
+  object: String!
+
+  """A computer-readable string for the kind of bulk item"""
+  type: String!
+
+  """The time when this file was last updated"""
+  updatedAt: DateTime!
+
+  """The Scryfall API URI for this file"""
+  uri: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  downloadBulkData(typeName: String!): Boolean!
+  processBulkData(fileName: String!): Boolean!
+}
+
+type Query {
+  allBulkData: [BulkDataObjectType!]!
+  getString: String!
+}
