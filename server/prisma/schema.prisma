@@ -5,11 +5,171 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+  provider = "node node_modules/prisma-nestjs-graphql"
+  output   = "../src/@generated/prisma-nestjs-graphql"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Thing {
-  id Int @id @default(autoincrement())
+model Set {
+  id            String    @id @default(uuid()) @db.Uuid
+  code          String    @unique
+  mtgoCode      String?   @unique
+  arenaCode     String?   @unique
+  tcgPlayerId   Int?
+  name          String
+  setType       String
+  releasedAt    DateTime?
+  blockCode     String?
+  block         String?
+  parentSetCode String?
+  cardCount     Int
+  printedSize   Int?
+  isDigital     Boolean
+  isFoilOnly    Boolean
+  isNonFoilOnly Boolean
+  scryfallUri   String
+  uri           String
+  iconSvgUri    String
+  searchUri     String
+
+  // Relations
+  cards Card[]
+
+  @@index([code])
+}
+
+model RelatedCard {
+  id          String @id @default(uuid()) @db.Uuid
+  reference   Card   @relation(name: "RelatedCard_reference", fields: [referenceId], references: [id], onDelete: Cascade)
+  referenceId String @db.Uuid
+  card        Card   @relation(name: "RelatedCard_card", fields: [cardId], references: [id], onDelete: Cascade)
+  cardId      String @db.Uuid
+  component   String
+  name        String
+  typeLine    String
+  uri         String
+}
+
+model CardFace {
+  id              String   @id @default(uuid()) @db.Uuid
+  card            Card     @relation(fields: [cardId], references: [id], onDelete: SetNull)
+  cardId          String   @db.Uuid
+  artist          String?
+  cmc             Decimal?
+  colorIndicator  String[]
+  colors          String[]
+  flavorText      String?
+  illustrationId  String?  @db.Uuid
+  imageUris       Json?
+  layout          String?
+  loyalty         String?
+  manaCost        String?
+  name            String
+  oracleId        String?  @db.Uuid
+  oracleText      String?
+  power           String?
+  printedName     String?
+  printedText     String?
+  printedTypeLine String?
+  toughness       String?
+  typeLine        String?
+  watermark       String?
+}
+
+model Card {
+  // Core Fields
+  id                String  @id @default(uuid()) @db.Uuid
+  arenaId           Int?
+  lang              String
+  mtgoId            Int?
+  mtgoFoilId        Int?
+  multiverseIds     Int[]
+  tcgplayerId       Int?
+  tcgplayerEtchedId Int?
+  cardmarketId      Int?
+  oracleId          String?
+  printsSearchUri   String
+  rulingUri         String?
+  scryfallUri       String
+  uri               String
+
+  // Gameplay Fields
+  allParts       Json[]
+  cardFacesRaw   Json[]
+  cmc            Decimal?
+  colorIdentity  String[]
+  colorIndicator String[]
+  colors         String[]
+  edhrecRank     Int?
+  handModifier   String?
+  keywords       String[]
+  layout         String
+  legalities     Json
+  lifeModifier   String?
+  loyalty        String?
+  manaCost       String?
+  name           String
+  oracleText     String?
+  oversized      Boolean
+  power          String?
+  producedMana   String[]
+  reserved       Boolean
+  toughness      String?
+  typeLine       String?
+
+  // Print Fields
+  artist          String?
+  booster         Boolean
+  borderColor     String
+  cardBackId      String?
+  collectorNumber String
+  contentWarning  Boolean?
+  digital         Boolean
+  finishes        String[]
+  flavorName      String?
+  frameEffects    String[]
+  frame           String
+  fullArt         Boolean
+  games           String[]
+  highresImage    Boolean
+  illustrationId  String?
+  imageStatus     String
+  imageUris       Json?
+  prices          Json
+  printedName     String?
+  printedText     String?
+  printedTypeLine String?
+  promo           Boolean
+  promoTypes      String[]
+  purchaseUris    Json?
+  rarity          String
+  relatedUris     Json
+  releasedAt      DateTime
+  reprint         Boolean
+  scryfallSetUri  String
+  setCode         String
+  setName         String
+  setSearchUri    String
+  setType         String
+  setUri          String
+  storySpotlight  Boolean
+  textless        Boolean
+  variation       Boolean
+  varationOf      String?
+  securityStamp   String?
+  watermark       String?
+
+  // Relations
+  set          Set           @relation(fields: [setId], references: [id], onDelete: Cascade)
+  setId        String        @db.Uuid
+  relatedTo    RelatedCard[] @relation("RelatedCard_card")
+  referencedBy RelatedCard[] @relation("RelatedCard_reference")
+  cardFaces    CardFace[]
+
+  @@index([name])
 }

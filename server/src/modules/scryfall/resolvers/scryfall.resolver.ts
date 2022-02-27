@@ -1,10 +1,14 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { BulkDataObjectType } from '../object-types/bulk-data.object-type';
 import { BulkDataService } from '../services/bulk-data.service';
+import { SetDataService } from '../services/set-data.service';
 
 @Resolver()
 export class ScryfallResolver {
-  constructor(private readonly bulkDataService: BulkDataService) {}
+  constructor(
+    private readonly bulkDataService: BulkDataService,
+    private readonly setDataService: SetDataService,
+  ) {}
 
   @Query(() => String)
   async getString(): Promise<string> {
@@ -24,5 +28,20 @@ export class ScryfallResolver {
   @Mutation(() => Boolean)
   async processBulkData(@Args('fileName') fileName: string): Promise<boolean> {
     return this.bulkDataService.process(fileName);
+  }
+
+  @Mutation(() => Boolean)
+  async processSetData(): Promise<boolean> {
+    return this.setDataService.process();
+  }
+
+  @Mutation(() => Boolean)
+  async processCardFaces(): Promise<boolean> {
+    return this.bulkDataService.processCardFaceData();
+  }
+
+  @Mutation(() => Boolean)
+  async processAllParts(): Promise<boolean> {
+    return this.bulkDataService.processAllPartsData();
   }
 }

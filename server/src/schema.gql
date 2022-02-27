@@ -2,6 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
 type BulkDataObjectType {
   """The size of this file in integer bites"""
   compressedSize: Int!
@@ -39,17 +49,1020 @@ type BulkDataObjectType {
   uri: String!
 }
 
+type Card {
+  _count: CardCount!
+  allParts: [JSON!]
+  arenaId: Int
+  artist: String
+  booster: Boolean!
+  borderColor: String!
+  cardBackId: String
+  cardFaces: [CardFace!]!
+  cardFacesRaw: [JSON!]
+  cardmarketId: Int
+  cmc: Decimal
+  collectorNumber: String!
+  colorIdentity: [String!]
+  colorIndicator: [String!]
+  colors: [String!]
+  contentWarning: Boolean
+  digital: Boolean!
+  edhrecRank: Int
+  finishes: [String!]
+  flavorName: String
+  frame: String!
+  frameEffects: [String!]
+  fullArt: Boolean!
+  games: [String!]
+  handModifier: String
+  highresImage: Boolean!
+  id: ID!
+  illustrationId: String
+  imageStatus: String!
+  imageUris: JSON
+  keywords: [String!]
+  lang: String!
+  layout: String!
+  legalities: JSON!
+  lifeModifier: String
+  loyalty: String
+  manaCost: String
+  mtgoFoilId: Int
+  mtgoId: Int
+  multiverseIds: [Int!]
+  name: String!
+  oracleId: String
+  oracleText: String
+  oversized: Boolean!
+  power: String
+  prices: JSON!
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  printsSearchUri: String!
+  producedMana: [String!]
+  promo: Boolean!
+  promoTypes: [String!]
+  purchaseUris: JSON
+  rarity: String!
+  referencedBy: [RelatedCard!]!
+  relatedTo: [RelatedCard!]!
+  relatedUris: JSON!
+  releasedAt: DateTime!
+  reprint: Boolean!
+  reserved: Boolean!
+  rulingUri: String
+  scryfallSetUri: String!
+  scryfallUri: String!
+  securityStamp: String
+  set: Set!
+  setCode: String!
+  setId: String!
+  setName: String!
+  setSearchUri: String!
+  setType: String!
+  setUri: String!
+  storySpotlight: Boolean!
+  tcgplayerEtchedId: Int
+  tcgplayerId: Int
+  textless: Boolean!
+  toughness: String
+  typeLine: String
+  uri: String!
+  varationOf: String
+  variation: Boolean!
+  watermark: String
+}
+
+input CardAvgOrderByAggregateInput {
+  arenaId: SortOrder
+  cardmarketId: SortOrder
+  cmc: SortOrder
+  edhrecRank: SortOrder
+  mtgoFoilId: SortOrder
+  mtgoId: SortOrder
+  multiverseIds: SortOrder
+  tcgplayerEtchedId: SortOrder
+  tcgplayerId: SortOrder
+}
+
+type CardCount {
+  cardFaces: Int!
+  referencedBy: Int!
+  relatedTo: Int!
+}
+
+input CardCountOrderByAggregateInput {
+  allParts: SortOrder
+  arenaId: SortOrder
+  artist: SortOrder
+  booster: SortOrder
+  borderColor: SortOrder
+  cardBackId: SortOrder
+  cardFacesRaw: SortOrder
+  cardmarketId: SortOrder
+  cmc: SortOrder
+  collectorNumber: SortOrder
+  colorIdentity: SortOrder
+  colorIndicator: SortOrder
+  colors: SortOrder
+  contentWarning: SortOrder
+  digital: SortOrder
+  edhrecRank: SortOrder
+  finishes: SortOrder
+  flavorName: SortOrder
+  frame: SortOrder
+  frameEffects: SortOrder
+  fullArt: SortOrder
+  games: SortOrder
+  handModifier: SortOrder
+  highresImage: SortOrder
+  id: SortOrder
+  illustrationId: SortOrder
+  imageStatus: SortOrder
+  imageUris: SortOrder
+  keywords: SortOrder
+  lang: SortOrder
+  layout: SortOrder
+  legalities: SortOrder
+  lifeModifier: SortOrder
+  loyalty: SortOrder
+  manaCost: SortOrder
+  mtgoFoilId: SortOrder
+  mtgoId: SortOrder
+  multiverseIds: SortOrder
+  name: SortOrder
+  oracleId: SortOrder
+  oracleText: SortOrder
+  oversized: SortOrder
+  power: SortOrder
+  prices: SortOrder
+  printedName: SortOrder
+  printedText: SortOrder
+  printedTypeLine: SortOrder
+  printsSearchUri: SortOrder
+  producedMana: SortOrder
+  promo: SortOrder
+  promoTypes: SortOrder
+  purchaseUris: SortOrder
+  rarity: SortOrder
+  relatedUris: SortOrder
+  releasedAt: SortOrder
+  reprint: SortOrder
+  reserved: SortOrder
+  rulingUri: SortOrder
+  scryfallSetUri: SortOrder
+  scryfallUri: SortOrder
+  securityStamp: SortOrder
+  setCode: SortOrder
+  setId: SortOrder
+  setName: SortOrder
+  setSearchUri: SortOrder
+  setType: SortOrder
+  setUri: SortOrder
+  storySpotlight: SortOrder
+  tcgplayerEtchedId: SortOrder
+  tcgplayerId: SortOrder
+  textless: SortOrder
+  toughness: SortOrder
+  typeLine: SortOrder
+  uri: SortOrder
+  varationOf: SortOrder
+  variation: SortOrder
+  watermark: SortOrder
+}
+
+type CardFace {
+  artist: String
+  card: Card!
+  cardId: String!
+  cmc: Decimal
+  colorIndicator: [String!]
+  colors: [String!]
+  flavorText: String
+  id: ID!
+  illustrationId: String
+  imageUris: JSON
+  layout: String
+  loyalty: String
+  manaCost: String
+  name: String!
+  oracleId: String
+  oracleText: String
+  power: String
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  toughness: String
+  typeLine: String
+  watermark: String
+}
+
+input CardFaceListRelationFilter {
+  every: CardFaceWhereInput
+  none: CardFaceWhereInput
+  some: CardFaceWhereInput
+}
+
+input CardFaceWhereInput {
+  AND: [CardFaceWhereInput!]
+  NOT: [CardFaceWhereInput!]
+  OR: [CardFaceWhereInput!]
+  artist: StringNullableFilter
+  card: CardRelationFilter
+  cardId: StringFilter
+  cmc: DecimalNullableFilter
+  colorIndicator: StringNullableListFilter
+  colors: StringNullableListFilter
+  flavorText: StringNullableFilter
+  id: StringFilter
+  illustrationId: StringNullableFilter
+  imageUris: JsonNullableFilter
+  layout: StringNullableFilter
+  loyalty: StringNullableFilter
+  manaCost: StringNullableFilter
+  name: StringFilter
+  oracleId: StringNullableFilter
+  oracleText: StringNullableFilter
+  power: StringNullableFilter
+  printedName: StringNullableFilter
+  printedText: StringNullableFilter
+  printedTypeLine: StringNullableFilter
+  toughness: StringNullableFilter
+  typeLine: StringNullableFilter
+  watermark: StringNullableFilter
+}
+
+input CardListRelationFilter {
+  every: CardWhereInput
+  none: CardWhereInput
+  some: CardWhereInput
+}
+
+input CardMaxOrderByAggregateInput {
+  arenaId: SortOrder
+  artist: SortOrder
+  booster: SortOrder
+  borderColor: SortOrder
+  cardBackId: SortOrder
+  cardmarketId: SortOrder
+  cmc: SortOrder
+  collectorNumber: SortOrder
+  contentWarning: SortOrder
+  digital: SortOrder
+  edhrecRank: SortOrder
+  flavorName: SortOrder
+  frame: SortOrder
+  fullArt: SortOrder
+  handModifier: SortOrder
+  highresImage: SortOrder
+  id: SortOrder
+  illustrationId: SortOrder
+  imageStatus: SortOrder
+  lang: SortOrder
+  layout: SortOrder
+  lifeModifier: SortOrder
+  loyalty: SortOrder
+  manaCost: SortOrder
+  mtgoFoilId: SortOrder
+  mtgoId: SortOrder
+  name: SortOrder
+  oracleId: SortOrder
+  oracleText: SortOrder
+  oversized: SortOrder
+  power: SortOrder
+  printedName: SortOrder
+  printedText: SortOrder
+  printedTypeLine: SortOrder
+  printsSearchUri: SortOrder
+  promo: SortOrder
+  rarity: SortOrder
+  releasedAt: SortOrder
+  reprint: SortOrder
+  reserved: SortOrder
+  rulingUri: SortOrder
+  scryfallSetUri: SortOrder
+  scryfallUri: SortOrder
+  securityStamp: SortOrder
+  setCode: SortOrder
+  setId: SortOrder
+  setName: SortOrder
+  setSearchUri: SortOrder
+  setType: SortOrder
+  setUri: SortOrder
+  storySpotlight: SortOrder
+  tcgplayerEtchedId: SortOrder
+  tcgplayerId: SortOrder
+  textless: SortOrder
+  toughness: SortOrder
+  typeLine: SortOrder
+  uri: SortOrder
+  varationOf: SortOrder
+  variation: SortOrder
+  watermark: SortOrder
+}
+
+input CardMinOrderByAggregateInput {
+  arenaId: SortOrder
+  artist: SortOrder
+  booster: SortOrder
+  borderColor: SortOrder
+  cardBackId: SortOrder
+  cardmarketId: SortOrder
+  cmc: SortOrder
+  collectorNumber: SortOrder
+  contentWarning: SortOrder
+  digital: SortOrder
+  edhrecRank: SortOrder
+  flavorName: SortOrder
+  frame: SortOrder
+  fullArt: SortOrder
+  handModifier: SortOrder
+  highresImage: SortOrder
+  id: SortOrder
+  illustrationId: SortOrder
+  imageStatus: SortOrder
+  lang: SortOrder
+  layout: SortOrder
+  lifeModifier: SortOrder
+  loyalty: SortOrder
+  manaCost: SortOrder
+  mtgoFoilId: SortOrder
+  mtgoId: SortOrder
+  name: SortOrder
+  oracleId: SortOrder
+  oracleText: SortOrder
+  oversized: SortOrder
+  power: SortOrder
+  printedName: SortOrder
+  printedText: SortOrder
+  printedTypeLine: SortOrder
+  printsSearchUri: SortOrder
+  promo: SortOrder
+  rarity: SortOrder
+  releasedAt: SortOrder
+  reprint: SortOrder
+  reserved: SortOrder
+  rulingUri: SortOrder
+  scryfallSetUri: SortOrder
+  scryfallUri: SortOrder
+  securityStamp: SortOrder
+  setCode: SortOrder
+  setId: SortOrder
+  setName: SortOrder
+  setSearchUri: SortOrder
+  setType: SortOrder
+  setUri: SortOrder
+  storySpotlight: SortOrder
+  tcgplayerEtchedId: SortOrder
+  tcgplayerId: SortOrder
+  textless: SortOrder
+  toughness: SortOrder
+  typeLine: SortOrder
+  uri: SortOrder
+  varationOf: SortOrder
+  variation: SortOrder
+  watermark: SortOrder
+}
+
+input CardOrderByWithAggregationInput {
+  _avg: CardAvgOrderByAggregateInput
+  _count: CardCountOrderByAggregateInput
+  _max: CardMaxOrderByAggregateInput
+  _min: CardMinOrderByAggregateInput
+  _sum: CardSumOrderByAggregateInput
+  allParts: SortOrder
+  arenaId: SortOrder
+  artist: SortOrder
+  booster: SortOrder
+  borderColor: SortOrder
+  cardBackId: SortOrder
+  cardFacesRaw: SortOrder
+  cardmarketId: SortOrder
+  cmc: SortOrder
+  collectorNumber: SortOrder
+  colorIdentity: SortOrder
+  colorIndicator: SortOrder
+  colors: SortOrder
+  contentWarning: SortOrder
+  digital: SortOrder
+  edhrecRank: SortOrder
+  finishes: SortOrder
+  flavorName: SortOrder
+  frame: SortOrder
+  frameEffects: SortOrder
+  fullArt: SortOrder
+  games: SortOrder
+  handModifier: SortOrder
+  highresImage: SortOrder
+  id: SortOrder
+  illustrationId: SortOrder
+  imageStatus: SortOrder
+  imageUris: SortOrder
+  keywords: SortOrder
+  lang: SortOrder
+  layout: SortOrder
+  legalities: SortOrder
+  lifeModifier: SortOrder
+  loyalty: SortOrder
+  manaCost: SortOrder
+  mtgoFoilId: SortOrder
+  mtgoId: SortOrder
+  multiverseIds: SortOrder
+  name: SortOrder
+  oracleId: SortOrder
+  oracleText: SortOrder
+  oversized: SortOrder
+  power: SortOrder
+  prices: SortOrder
+  printedName: SortOrder
+  printedText: SortOrder
+  printedTypeLine: SortOrder
+  printsSearchUri: SortOrder
+  producedMana: SortOrder
+  promo: SortOrder
+  promoTypes: SortOrder
+  purchaseUris: SortOrder
+  rarity: SortOrder
+  relatedUris: SortOrder
+  releasedAt: SortOrder
+  reprint: SortOrder
+  reserved: SortOrder
+  rulingUri: SortOrder
+  scryfallSetUri: SortOrder
+  scryfallUri: SortOrder
+  securityStamp: SortOrder
+  setCode: SortOrder
+  setId: SortOrder
+  setName: SortOrder
+  setSearchUri: SortOrder
+  setType: SortOrder
+  setUri: SortOrder
+  storySpotlight: SortOrder
+  tcgplayerEtchedId: SortOrder
+  tcgplayerId: SortOrder
+  textless: SortOrder
+  toughness: SortOrder
+  typeLine: SortOrder
+  uri: SortOrder
+  varationOf: SortOrder
+  variation: SortOrder
+  watermark: SortOrder
+}
+
+input CardRelationFilter {
+  is: CardWhereInput
+  isNot: CardWhereInput
+}
+
+input CardSumOrderByAggregateInput {
+  arenaId: SortOrder
+  cardmarketId: SortOrder
+  cmc: SortOrder
+  edhrecRank: SortOrder
+  mtgoFoilId: SortOrder
+  mtgoId: SortOrder
+  multiverseIds: SortOrder
+  tcgplayerEtchedId: SortOrder
+  tcgplayerId: SortOrder
+}
+
+input CardWhereInput {
+  AND: [CardWhereInput!]
+  NOT: [CardWhereInput!]
+  OR: [CardWhereInput!]
+  allParts: JsonNullableListFilter
+  arenaId: IntNullableFilter
+  artist: StringNullableFilter
+  booster: BoolFilter
+  borderColor: StringFilter
+  cardBackId: StringNullableFilter
+  cardFaces: CardFaceListRelationFilter
+  cardFacesRaw: JsonNullableListFilter
+  cardmarketId: IntNullableFilter
+  cmc: DecimalNullableFilter
+  collectorNumber: StringFilter
+  colorIdentity: StringNullableListFilter
+  colorIndicator: StringNullableListFilter
+  colors: StringNullableListFilter
+  contentWarning: BoolNullableFilter
+  digital: BoolFilter
+  edhrecRank: IntNullableFilter
+  finishes: StringNullableListFilter
+  flavorName: StringNullableFilter
+  frame: StringFilter
+  frameEffects: StringNullableListFilter
+  fullArt: BoolFilter
+  games: StringNullableListFilter
+  handModifier: StringNullableFilter
+  highresImage: BoolFilter
+  id: StringFilter
+  illustrationId: StringNullableFilter
+  imageStatus: StringFilter
+  imageUris: JsonNullableFilter
+  keywords: StringNullableListFilter
+  lang: StringFilter
+  layout: StringFilter
+  legalities: JsonFilter
+  lifeModifier: StringNullableFilter
+  loyalty: StringNullableFilter
+  manaCost: StringNullableFilter
+  mtgoFoilId: IntNullableFilter
+  mtgoId: IntNullableFilter
+  multiverseIds: IntNullableListFilter
+  name: StringFilter
+  oracleId: StringNullableFilter
+  oracleText: StringNullableFilter
+  oversized: BoolFilter
+  power: StringNullableFilter
+  prices: JsonFilter
+  printedName: StringNullableFilter
+  printedText: StringNullableFilter
+  printedTypeLine: StringNullableFilter
+  printsSearchUri: StringFilter
+  producedMana: StringNullableListFilter
+  promo: BoolFilter
+  promoTypes: StringNullableListFilter
+  purchaseUris: JsonNullableFilter
+  rarity: StringFilter
+  referencedBy: RelatedCardListRelationFilter
+  relatedTo: RelatedCardListRelationFilter
+  relatedUris: JsonFilter
+  releasedAt: DateTimeFilter
+  reprint: BoolFilter
+  reserved: BoolFilter
+  rulingUri: StringNullableFilter
+  scryfallSetUri: StringFilter
+  scryfallUri: StringFilter
+  securityStamp: StringNullableFilter
+  set: SetRelationFilter
+  setCode: StringFilter
+  setId: StringFilter
+  setName: StringFilter
+  setSearchUri: StringFilter
+  setType: StringFilter
+  setUri: StringFilter
+  storySpotlight: BoolFilter
+  tcgplayerEtchedId: IntNullableFilter
+  tcgplayerId: IntNullableFilter
+  textless: BoolFilter
+  toughness: StringNullableFilter
+  typeLine: StringNullableFilter
+  uri: StringFilter
+  varationOf: StringNullableFilter
+  variation: BoolFilter
+  watermark: StringNullableFilter
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
 
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+"""An arbitrary-precision Decimal type"""
+scalar Decimal
+
+input DecimalNullableFilter {
+  equals: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal!]
+  lt: Decimal
+  lte: Decimal
+  not: NestedDecimalNullableFilter
+  notIn: [Decimal!]
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input IntNullableListFilter {
+  equals: [Int!]
+  has: Int
+  hasEvery: [Int!]
+  hasSome: [Int!]
+  isEmpty: Boolean
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input JsonFilter {
+  equals: JSON
+  not: JSON
+}
+
+input JsonNullableFilter {
+  equals: JSON
+  not: JSON
+}
+
+input JsonNullableListFilter {
+  equals: [JSON!]
+  has: JSON
+  hasEvery: [JSON!]
+  hasSome: [JSON!]
+  isEmpty: Boolean
+}
+
 type Mutation {
   downloadBulkData(typeName: String!): Boolean!
+  processAllParts: Boolean!
   processBulkData(fileName: String!): Boolean!
+  processCardFaces: Boolean!
+  processSetData: Boolean!
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedDecimalNullableFilter {
+  equals: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal!]
+  lt: Decimal
+  lte: Decimal
+  not: NestedDecimalNullableFilter
+  notIn: [Decimal!]
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
 }
 
 type Query {
   allBulkData: [BulkDataObjectType!]!
+  allCards(take: Float, where: CardWhereInput): [Card!]!
+  allSets(orderBy: SetOrderByWithAggregationInput, where: SetWhereInput): [Set!]!
   getString: String!
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+type RelatedCard {
+  card: [Card!]!
+  cardId: String!
+  component: String!
+  id: ID!
+  name: String!
+  reference: [Card!]!
+  referenceId: String!
+  typeLine: String!
+  uri: String!
+}
+
+input RelatedCardListRelationFilter {
+  every: RelatedCardWhereInput
+  none: RelatedCardWhereInput
+  some: RelatedCardWhereInput
+}
+
+input RelatedCardWhereInput {
+  AND: [RelatedCardWhereInput!]
+  NOT: [RelatedCardWhereInput!]
+  OR: [RelatedCardWhereInput!]
+  card: CardRelationFilter
+  cardId: StringFilter
+  component: StringFilter
+  id: StringFilter
+  name: StringFilter
+  reference: CardRelationFilter
+  referenceId: StringFilter
+  typeLine: StringFilter
+  uri: StringFilter
+}
+
+type Set {
+  _count: SetCount!
+  arenaCode: String
+  block: String
+  blockCode: String
+  cardCount: Int!
+  cards(orderBy: CardOrderByWithAggregationInput, where: CardWhereInput): [Card!]!
+  code: String!
+  iconSvgUri: String!
+  id: ID!
+  isDigital: Boolean!
+  isFoilOnly: Boolean!
+  isNonFoilOnly: Boolean!
+  mtgoCode: String
+  name: String!
+  parentSetCode: String
+  printedSize: Int
+  releasedAt: DateTime
+  scryfallUri: String!
+  searchUri: String!
+  setType: String!
+  tcgPlayerId: Int
+  uri: String!
+}
+
+input SetAvgOrderByAggregateInput {
+  cardCount: SortOrder
+  printedSize: SortOrder
+  tcgPlayerId: SortOrder
+}
+
+type SetCount {
+  cards: Int!
+}
+
+input SetCountOrderByAggregateInput {
+  arenaCode: SortOrder
+  block: SortOrder
+  blockCode: SortOrder
+  cardCount: SortOrder
+  code: SortOrder
+  iconSvgUri: SortOrder
+  id: SortOrder
+  isDigital: SortOrder
+  isFoilOnly: SortOrder
+  isNonFoilOnly: SortOrder
+  mtgoCode: SortOrder
+  name: SortOrder
+  parentSetCode: SortOrder
+  printedSize: SortOrder
+  releasedAt: SortOrder
+  scryfallUri: SortOrder
+  searchUri: SortOrder
+  setType: SortOrder
+  tcgPlayerId: SortOrder
+  uri: SortOrder
+}
+
+input SetMaxOrderByAggregateInput {
+  arenaCode: SortOrder
+  block: SortOrder
+  blockCode: SortOrder
+  cardCount: SortOrder
+  code: SortOrder
+  iconSvgUri: SortOrder
+  id: SortOrder
+  isDigital: SortOrder
+  isFoilOnly: SortOrder
+  isNonFoilOnly: SortOrder
+  mtgoCode: SortOrder
+  name: SortOrder
+  parentSetCode: SortOrder
+  printedSize: SortOrder
+  releasedAt: SortOrder
+  scryfallUri: SortOrder
+  searchUri: SortOrder
+  setType: SortOrder
+  tcgPlayerId: SortOrder
+  uri: SortOrder
+}
+
+input SetMinOrderByAggregateInput {
+  arenaCode: SortOrder
+  block: SortOrder
+  blockCode: SortOrder
+  cardCount: SortOrder
+  code: SortOrder
+  iconSvgUri: SortOrder
+  id: SortOrder
+  isDigital: SortOrder
+  isFoilOnly: SortOrder
+  isNonFoilOnly: SortOrder
+  mtgoCode: SortOrder
+  name: SortOrder
+  parentSetCode: SortOrder
+  printedSize: SortOrder
+  releasedAt: SortOrder
+  scryfallUri: SortOrder
+  searchUri: SortOrder
+  setType: SortOrder
+  tcgPlayerId: SortOrder
+  uri: SortOrder
+}
+
+input SetOrderByWithAggregationInput {
+  _avg: SetAvgOrderByAggregateInput
+  _count: SetCountOrderByAggregateInput
+  _max: SetMaxOrderByAggregateInput
+  _min: SetMinOrderByAggregateInput
+  _sum: SetSumOrderByAggregateInput
+  arenaCode: SortOrder
+  block: SortOrder
+  blockCode: SortOrder
+  cardCount: SortOrder
+  code: SortOrder
+  iconSvgUri: SortOrder
+  id: SortOrder
+  isDigital: SortOrder
+  isFoilOnly: SortOrder
+  isNonFoilOnly: SortOrder
+  mtgoCode: SortOrder
+  name: SortOrder
+  parentSetCode: SortOrder
+  printedSize: SortOrder
+  releasedAt: SortOrder
+  scryfallUri: SortOrder
+  searchUri: SortOrder
+  setType: SortOrder
+  tcgPlayerId: SortOrder
+  uri: SortOrder
+}
+
+input SetRelationFilter {
+  is: SetWhereInput
+  isNot: SetWhereInput
+}
+
+input SetSumOrderByAggregateInput {
+  cardCount: SortOrder
+  printedSize: SortOrder
+  tcgPlayerId: SortOrder
+}
+
+input SetWhereInput {
+  AND: [SetWhereInput!]
+  NOT: [SetWhereInput!]
+  OR: [SetWhereInput!]
+  arenaCode: StringNullableFilter
+  block: StringNullableFilter
+  blockCode: StringNullableFilter
+  cardCount: IntFilter
+  cards: CardListRelationFilter
+  code: StringFilter
+  iconSvgUri: StringFilter
+  id: StringFilter
+  isDigital: BoolFilter
+  isFoilOnly: BoolFilter
+  isNonFoilOnly: BoolFilter
+  mtgoCode: StringNullableFilter
+  name: StringFilter
+  parentSetCode: StringNullableFilter
+  printedSize: IntNullableFilter
+  releasedAt: DateTimeNullableFilter
+  scryfallUri: StringFilter
+  searchUri: StringFilter
+  setType: StringFilter
+  tcgPlayerId: IntNullableFilter
+  uri: StringFilter
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableListFilter {
+  equals: [String!]
+  has: String
+  hasEvery: [String!]
+  hasSome: [String!]
+  isEmpty: Boolean
 }
