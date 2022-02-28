@@ -4,27 +4,27 @@ import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { Queue } from 'bull';
 import { flatten } from 'lodash';
-import { CardService } from '../../card/services/card.service';
-import { toCardFaceObjectType } from '../../card/utils/to-card-face-object-type';
-import { toRelatedCardObjectType } from '../../card/utils/to-related-card-object-type';
+import { toCardFaceObjectType } from '../utils/to-prisma-scryfall-card-face';
+import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
 import { BulkDataObjectType } from '../object-types/bulk-data.object-type';
 import {
-  BulkDataResponseType,
-  BulkDataType,
-  CardFaceDataType,
-  RelatedCardDataType,
+  ScryfallBulkDataResponseType,
+  ScryfallBulkDataType,
+  ScryfallCardFaceDataType,
+  ScryfallRelatedCardDataType,
 } from '../types/scryfall.types';
+import { ScryfallCardService } from './scryfall-card.service';
 
 @Injectable()
 export class BulkDataService {
   constructor(
     private readonly configService: ConfigService,
-    private readonly cardService: CardService,
+    private readonly scryfallCardService: ScryfallCardService,
     @InjectQueue('bulk-data') private readonly bulkDataQueue: Queue,
   ) {}
 
   async getBulkData(): Promise<BulkDataObjectType[]> {
-    const results = await axios.get<BulkDataResponseType>(
+    const results = await axios.get<ScryfallBulkDataResponseType>(
       `${this.configService.get<string>('SCRYFALL_API_URI')}/bulk-data`,
     );
 
@@ -49,7 +49,7 @@ export class BulkDataService {
   }
 
   async download(typeName: string): Promise<boolean> {
-    const results = await axios.get<BulkDataType>(
+    const results = await axios.get<ScryfallBulkDataType>(
       `${this.configService.get<string>(
         'SCRYFALL_API_URI',
       )}/bulk-data/${typeName}`,
@@ -73,13 +73,15 @@ export class BulkDataService {
   }
 
   async processCardFaceData(): Promise<boolean> {
-    const cardsWithCardFaces = await this.cardService.findMany({
-      cardFacesRaw: { isEmpty: false },
+    const cardsWithCardFaces = await this.scryfallCardService.findMany({
+      where: {
+        cardFacesRaw: { isEmpty: false },
+      },
     });
     await this.bulkDataQueue.add('process-card-faces', {
       cardFaceData: flatten(
         cardsWithCardFaces.map((card) =>
-          (card.cardFacesRaw as CardFaceDataType[]).map((cf) => {
+          (card.cardFacesRaw as ScryfallCardFaceDataType[]).map((cf) => {
             const cardFace = toCardFaceObjectType(cf);
             cardFace.cardId = card.id;
             return cardFace;
@@ -91,14 +93,14 @@ export class BulkDataService {
   }
 
   async processAllPartsData(): Promise<boolean> {
-    const cardsWithAllParts = await this.cardService.findMany({
-      allParts: { isEmpty: false },
+    const cardsWithAllParts = await this.scryfallCardService.findMany({
+      where: { allParts: { isEmpty: false } },
     });
     await this.bulkDataQueue.add('process-all-parts', {
       allPartsData: flatten(
         cardsWithAllParts.map((card) =>
-          (card.allParts as RelatedCardDataType[]).map((ap) => {
-            const relatedCard = toRelatedCardObjectType(ap);
+          (card.allParts as ScryfallRelatedCardDataType[]).map((ap) => {
+            const relatedCard = toPrismaScryfallRelatedCard(ap);
             relatedCard.id = undefined;
             relatedCard.referenceId = ap.id;
             relatedCard.cardId = card.id;

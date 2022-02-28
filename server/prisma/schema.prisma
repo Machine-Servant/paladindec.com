@@ -15,7 +15,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Set {
+model ScryfallSet {
   id            String    @id @default(uuid()) @db.Uuid
   code          String    @unique
   mtgoCode      String?   @unique
@@ -38,39 +38,39 @@ model Set {
   searchUri     String
 
   // Relations
-  cards Card[]
+  cards ScryfallCard[]
 
   @@index([code])
 }
 
-model RelatedCard {
-  id          String @id @default(uuid()) @db.Uuid
-  reference   Card   @relation(name: "RelatedCard_reference", fields: [referenceId], references: [id], onDelete: Cascade)
-  referenceId String @db.Uuid
-  card        Card   @relation(name: "RelatedCard_card", fields: [cardId], references: [id], onDelete: Cascade)
-  cardId      String @db.Uuid
+model ScryfallRelatedCard {
+  id          String       @id @default(uuid()) @db.Uuid
+  reference   ScryfallCard @relation(name: "RelatedCard_reference", fields: [referenceId], references: [id], onDelete: Cascade)
+  referenceId String       @db.Uuid
+  card        ScryfallCard @relation(name: "RelatedCard_card", fields: [cardId], references: [id], onDelete: Cascade)
+  cardId      String       @db.Uuid
   component   String
   name        String
   typeLine    String
   uri         String
 }
 
-model CardFace {
-  id              String   @id @default(uuid()) @db.Uuid
-  card            Card     @relation(fields: [cardId], references: [id], onDelete: SetNull)
-  cardId          String   @db.Uuid
+model ScryfallCardFace {
+  id              String       @id @default(uuid()) @db.Uuid
+  card            ScryfallCard @relation(fields: [cardId], references: [id], onDelete: SetNull)
+  cardId          String       @db.Uuid
   artist          String?
-  cmc             Decimal?
+  cmc             Float?       @db.Real
   colorIndicator  String[]
   colors          String[]
   flavorText      String?
-  illustrationId  String?  @db.Uuid
+  illustrationId  String?      @db.Uuid
   imageUris       Json?
   layout          String?
   loyalty         String?
   manaCost        String?
   name            String
-  oracleId        String?  @db.Uuid
+  oracleId        String?      @db.Uuid
   oracleText      String?
   power           String?
   printedName     String?
@@ -81,7 +81,7 @@ model CardFace {
   watermark       String?
 }
 
-model Card {
+model ScryfallCard {
   // Core Fields
   id                String  @id @default(uuid()) @db.Uuid
   arenaId           Int?
@@ -101,7 +101,7 @@ model Card {
   // Gameplay Fields
   allParts       Json[]
   cardFacesRaw   Json[]
-  cmc            Decimal?
+  cmc            Float?   @db.Real
   colorIdentity  String[]
   colorIndicator String[]
   colors         String[]
@@ -165,11 +165,28 @@ model Card {
   watermark       String?
 
   // Relations
-  set          Set           @relation(fields: [setId], references: [id], onDelete: Cascade)
-  setId        String        @db.Uuid
-  relatedTo    RelatedCard[] @relation("RelatedCard_card")
-  referencedBy RelatedCard[] @relation("RelatedCard_reference")
-  cardFaces    CardFace[]
+  set           ScryfallSet           @relation(fields: [setId], references: [id], onDelete: Cascade)
+  setId         String                @db.Uuid
+  relatedTo     ScryfallRelatedCard[] @relation("RelatedCard_card")
+  referencedBy  ScryfallRelatedCard[] @relation("RelatedCard_reference")
+  cardFaces     ScryfallCardFace[]
+  scryfallPrice ScryfallPrice[]
 
   @@index([name])
+}
+
+model ScryfallPrice {
+  id   String   @id @default(uuid())
+  date DateTime @db.Date
+
+  eur       Float? @db.Real
+  tix       Float? @db.Real
+  usd       Float? @db.Real
+  eurFoil   Float? @db.Real
+  usdFoil   Float? @db.Real
+  usdEtched Float? @db.Real
+
+  // Relations
+  card   ScryfallCard @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  cardId String       @db.Uuid
 }

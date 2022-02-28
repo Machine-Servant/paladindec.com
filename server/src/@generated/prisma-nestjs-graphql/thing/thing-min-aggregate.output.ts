@@ -1,9 +1,0 @@
-import { Field } from '@nestjs/graphql';
-import { ObjectType } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
-
-@ObjectType()
-export class ThingMinAggregate {
-  @Field(() => Int, { nullable: true })
-  id?: number;
-}

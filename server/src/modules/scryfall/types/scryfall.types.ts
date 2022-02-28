@@ -1,12 +1,12 @@
-import { SetType } from '../../set/types/set.types';
+import { ScryfallSetType } from './scryfall-set.types';
 
-export type ResponseType<T extends string, P> = {
+export type ScryfallResponseType<T extends string, P> = {
   object: T;
   has_more: boolean;
   data: P;
 };
 
-export type BulkDataType = {
+export type ScryfallBulkDataType = {
   object: string;
   id: string;
   uri: string;
@@ -20,14 +20,14 @@ export type BulkDataType = {
   content_encoding: string;
 };
 
-export type SetDataType = {
+export type ScryfallSetDataType = {
   id: string;
   arena_code?: string;
   code: string;
   mtgo_code?: string;
   tcgplayer_id?: number;
   name: string;
-  set_type: SetType;
+  set_type: ScryfallSetType;
   released_at?: string;
   block_code?: string;
   block?: string;
@@ -44,7 +44,7 @@ export type SetDataType = {
   object: string;
 };
 
-export type RelatedCardDataType = {
+export type ScryfallRelatedCardDataType = {
   id: string;
   object: string;
   component: string;
@@ -53,7 +53,7 @@ export type RelatedCardDataType = {
   uri: string;
 };
 
-export type ColorDataType = string[];
+export type ScryfallColorDataType = string[];
 
 export type ImageUrisDataType = {
   small?: string;
@@ -64,11 +64,11 @@ export type ImageUrisDataType = {
   border_crop?: string;
 };
 
-export type CardFaceDataType = {
+export type ScryfallCardFaceDataType = {
   artist?: string;
   cmc?: number;
-  color_indicator?: ColorDataType;
-  colors?: ColorDataType;
+  color_indicator?: ScryfallColorDataType;
+  colors?: ScryfallColorDataType;
   flavor_text?: string;
   illustration_id?: string;
   image_uris?: ImageUrisDataType;
@@ -88,13 +88,13 @@ export type CardFaceDataType = {
   watermark?: string;
 };
 
-export type LegalitiesDataType =
+export type ScryfallLegalitiesDataType =
   | 'legal'
   | 'not_legal'
   | 'restricted'
   | 'banned';
 
-export type FinishesDataType = 'foil' | 'nonfoil' | 'etched' | 'glossy';
+export type ScryfallFinishesDataType = 'foil' | 'nonfoil' | 'etched' | 'glossy';
 
 export type BorderColorDataType =
   | 'black'
@@ -103,9 +103,9 @@ export type BorderColorDataType =
   | 'silver'
   | 'gold';
 
-export type FrameDataType = '1993' | '1997' | '2003' | '2015';
+export type ScryfallFrameDataType = '1993' | '1997' | '2003' | '2015';
 
-export type PricesDataType = {
+export type ScryfallPricesDataType = {
   usd?: string;
   usd_foil: string;
   usd_etched: string;
@@ -114,7 +114,7 @@ export type PricesDataType = {
   tix: string;
 };
 
-export type RarityDataType =
+export type ScryfallRarityDataType =
   | 'common'
   | 'uncommon'
   | 'rare'
@@ -122,7 +122,7 @@ export type RarityDataType =
   | 'special'
   | 'bonus';
 
-export type CardDataType = {
+export type ScryfallCardDataType = {
   // Core Fields
   id: string;
   arena_id?: number;
@@ -141,17 +141,17 @@ export type CardDataType = {
   uri: string;
 
   // Gameplay Fields
-  all_parts?: RelatedCardDataType[];
-  card_faces?: CardFaceDataType[];
+  all_parts?: ScryfallRelatedCardDataType[];
+  card_faces?: ScryfallCardFaceDataType[];
   cmc: number;
-  color_identity: ColorDataType;
-  color_indicator?: ColorDataType;
-  colors?: ColorDataType;
+  color_identity: ScryfallColorDataType;
+  color_indicator?: ScryfallColorDataType;
+  colors?: ScryfallColorDataType;
   edhrec_rank?: number;
   hand_modifier?: string;
   keywords: string[];
   layout: string;
-  legalities: Record<string, LegalitiesDataType>;
+  legalities: Record<string, ScryfallLegalitiesDataType>;
   life_modifier?: string;
   loyalty?: string;
   mana_cost?: string;
@@ -159,7 +159,7 @@ export type CardDataType = {
   oracle_text?: string;
   oversized: boolean;
   power?: string;
-  produced_mana?: ColorDataType;
+  produced_mana?: ScryfallColorDataType;
   reserved: boolean;
   toughness?: string;
   type_line: string;
@@ -172,24 +172,24 @@ export type CardDataType = {
   collector_number: string;
   content_warning?: boolean;
   digital: boolean;
-  finishes: FinishesDataType[];
+  finishes: ScryfallFinishesDataType[];
   flavor_name?: string;
   frame_effects?: string[];
-  frame: FrameDataType;
+  frame: ScryfallFrameDataType;
   full_art: boolean;
   games: string[];
   highres_image: boolean;
   illustration_id?: string;
   image_status: string;
   image_uris?: ImageUrisDataType;
-  prices: PricesDataType;
+  prices: ScryfallPricesDataType;
   printed_name?: string;
   printed_text?: string;
   printed_type_line?: string;
   promo: boolean;
   promo_types?: string[];
   purchase_uris: Record<string, string>;
-  rarity: RarityDataType;
+  rarity: ScryfallRarityDataType;
   related_uris: Record<string, string>;
   released_at: string;
   reprint: boolean;
@@ -208,5 +208,11 @@ export type CardDataType = {
   watermark?: string;
 };
 
-export type BulkDataResponseType = ResponseType<'list', BulkDataType[]>;
-export type SetDataListResponseType = ResponseType<'list', SetDataType[]>;
+export type ScryfallBulkDataResponseType = ScryfallResponseType<
+  'list',
+  ScryfallBulkDataType[]
+>;
+export type ScryfallSetDataListResponseType = ScryfallResponseType<
+  'list',
+  ScryfallSetDataType[]
+>;

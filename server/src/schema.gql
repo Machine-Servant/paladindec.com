@@ -49,571 +49,6 @@ type BulkDataObjectType {
   uri: String!
 }
 
-type Card {
-  _count: CardCount!
-  allParts: [JSON!]
-  arenaId: Int
-  artist: String
-  booster: Boolean!
-  borderColor: String!
-  cardBackId: String
-  cardFaces: [CardFace!]!
-  cardFacesRaw: [JSON!]
-  cardmarketId: Int
-  cmc: Decimal
-  collectorNumber: String!
-  colorIdentity: [String!]
-  colorIndicator: [String!]
-  colors: [String!]
-  contentWarning: Boolean
-  digital: Boolean!
-  edhrecRank: Int
-  finishes: [String!]
-  flavorName: String
-  frame: String!
-  frameEffects: [String!]
-  fullArt: Boolean!
-  games: [String!]
-  handModifier: String
-  highresImage: Boolean!
-  id: ID!
-  illustrationId: String
-  imageStatus: String!
-  imageUris: JSON
-  keywords: [String!]
-  lang: String!
-  layout: String!
-  legalities: JSON!
-  lifeModifier: String
-  loyalty: String
-  manaCost: String
-  mtgoFoilId: Int
-  mtgoId: Int
-  multiverseIds: [Int!]
-  name: String!
-  oracleId: String
-  oracleText: String
-  oversized: Boolean!
-  power: String
-  prices: JSON!
-  printedName: String
-  printedText: String
-  printedTypeLine: String
-  printsSearchUri: String!
-  producedMana: [String!]
-  promo: Boolean!
-  promoTypes: [String!]
-  purchaseUris: JSON
-  rarity: String!
-  referencedBy: [RelatedCard!]!
-  relatedTo: [RelatedCard!]!
-  relatedUris: JSON!
-  releasedAt: DateTime!
-  reprint: Boolean!
-  reserved: Boolean!
-  rulingUri: String
-  scryfallSetUri: String!
-  scryfallUri: String!
-  securityStamp: String
-  set: Set!
-  setCode: String!
-  setId: String!
-  setName: String!
-  setSearchUri: String!
-  setType: String!
-  setUri: String!
-  storySpotlight: Boolean!
-  tcgplayerEtchedId: Int
-  tcgplayerId: Int
-  textless: Boolean!
-  toughness: String
-  typeLine: String
-  uri: String!
-  varationOf: String
-  variation: Boolean!
-  watermark: String
-}
-
-input CardAvgOrderByAggregateInput {
-  arenaId: SortOrder
-  cardmarketId: SortOrder
-  cmc: SortOrder
-  edhrecRank: SortOrder
-  mtgoFoilId: SortOrder
-  mtgoId: SortOrder
-  multiverseIds: SortOrder
-  tcgplayerEtchedId: SortOrder
-  tcgplayerId: SortOrder
-}
-
-type CardCount {
-  cardFaces: Int!
-  referencedBy: Int!
-  relatedTo: Int!
-}
-
-input CardCountOrderByAggregateInput {
-  allParts: SortOrder
-  arenaId: SortOrder
-  artist: SortOrder
-  booster: SortOrder
-  borderColor: SortOrder
-  cardBackId: SortOrder
-  cardFacesRaw: SortOrder
-  cardmarketId: SortOrder
-  cmc: SortOrder
-  collectorNumber: SortOrder
-  colorIdentity: SortOrder
-  colorIndicator: SortOrder
-  colors: SortOrder
-  contentWarning: SortOrder
-  digital: SortOrder
-  edhrecRank: SortOrder
-  finishes: SortOrder
-  flavorName: SortOrder
-  frame: SortOrder
-  frameEffects: SortOrder
-  fullArt: SortOrder
-  games: SortOrder
-  handModifier: SortOrder
-  highresImage: SortOrder
-  id: SortOrder
-  illustrationId: SortOrder
-  imageStatus: SortOrder
-  imageUris: SortOrder
-  keywords: SortOrder
-  lang: SortOrder
-  layout: SortOrder
-  legalities: SortOrder
-  lifeModifier: SortOrder
-  loyalty: SortOrder
-  manaCost: SortOrder
-  mtgoFoilId: SortOrder
-  mtgoId: SortOrder
-  multiverseIds: SortOrder
-  name: SortOrder
-  oracleId: SortOrder
-  oracleText: SortOrder
-  oversized: SortOrder
-  power: SortOrder
-  prices: SortOrder
-  printedName: SortOrder
-  printedText: SortOrder
-  printedTypeLine: SortOrder
-  printsSearchUri: SortOrder
-  producedMana: SortOrder
-  promo: SortOrder
-  promoTypes: SortOrder
-  purchaseUris: SortOrder
-  rarity: SortOrder
-  relatedUris: SortOrder
-  releasedAt: SortOrder
-  reprint: SortOrder
-  reserved: SortOrder
-  rulingUri: SortOrder
-  scryfallSetUri: SortOrder
-  scryfallUri: SortOrder
-  securityStamp: SortOrder
-  setCode: SortOrder
-  setId: SortOrder
-  setName: SortOrder
-  setSearchUri: SortOrder
-  setType: SortOrder
-  setUri: SortOrder
-  storySpotlight: SortOrder
-  tcgplayerEtchedId: SortOrder
-  tcgplayerId: SortOrder
-  textless: SortOrder
-  toughness: SortOrder
-  typeLine: SortOrder
-  uri: SortOrder
-  varationOf: SortOrder
-  variation: SortOrder
-  watermark: SortOrder
-}
-
-type CardFace {
-  artist: String
-  card: Card!
-  cardId: String!
-  cmc: Decimal
-  colorIndicator: [String!]
-  colors: [String!]
-  flavorText: String
-  id: ID!
-  illustrationId: String
-  imageUris: JSON
-  layout: String
-  loyalty: String
-  manaCost: String
-  name: String!
-  oracleId: String
-  oracleText: String
-  power: String
-  printedName: String
-  printedText: String
-  printedTypeLine: String
-  toughness: String
-  typeLine: String
-  watermark: String
-}
-
-input CardFaceListRelationFilter {
-  every: CardFaceWhereInput
-  none: CardFaceWhereInput
-  some: CardFaceWhereInput
-}
-
-input CardFaceWhereInput {
-  AND: [CardFaceWhereInput!]
-  NOT: [CardFaceWhereInput!]
-  OR: [CardFaceWhereInput!]
-  artist: StringNullableFilter
-  card: CardRelationFilter
-  cardId: StringFilter
-  cmc: DecimalNullableFilter
-  colorIndicator: StringNullableListFilter
-  colors: StringNullableListFilter
-  flavorText: StringNullableFilter
-  id: StringFilter
-  illustrationId: StringNullableFilter
-  imageUris: JsonNullableFilter
-  layout: StringNullableFilter
-  loyalty: StringNullableFilter
-  manaCost: StringNullableFilter
-  name: StringFilter
-  oracleId: StringNullableFilter
-  oracleText: StringNullableFilter
-  power: StringNullableFilter
-  printedName: StringNullableFilter
-  printedText: StringNullableFilter
-  printedTypeLine: StringNullableFilter
-  toughness: StringNullableFilter
-  typeLine: StringNullableFilter
-  watermark: StringNullableFilter
-}
-
-input CardListRelationFilter {
-  every: CardWhereInput
-  none: CardWhereInput
-  some: CardWhereInput
-}
-
-input CardMaxOrderByAggregateInput {
-  arenaId: SortOrder
-  artist: SortOrder
-  booster: SortOrder
-  borderColor: SortOrder
-  cardBackId: SortOrder
-  cardmarketId: SortOrder
-  cmc: SortOrder
-  collectorNumber: SortOrder
-  contentWarning: SortOrder
-  digital: SortOrder
-  edhrecRank: SortOrder
-  flavorName: SortOrder
-  frame: SortOrder
-  fullArt: SortOrder
-  handModifier: SortOrder
-  highresImage: SortOrder
-  id: SortOrder
-  illustrationId: SortOrder
-  imageStatus: SortOrder
-  lang: SortOrder
-  layout: SortOrder
-  lifeModifier: SortOrder
-  loyalty: SortOrder
-  manaCost: SortOrder
-  mtgoFoilId: SortOrder
-  mtgoId: SortOrder
-  name: SortOrder
-  oracleId: SortOrder
-  oracleText: SortOrder
-  oversized: SortOrder
-  power: SortOrder
-  printedName: SortOrder
-  printedText: SortOrder
-  printedTypeLine: SortOrder
-  printsSearchUri: SortOrder
-  promo: SortOrder
-  rarity: SortOrder
-  releasedAt: SortOrder
-  reprint: SortOrder
-  reserved: SortOrder
-  rulingUri: SortOrder
-  scryfallSetUri: SortOrder
-  scryfallUri: SortOrder
-  securityStamp: SortOrder
-  setCode: SortOrder
-  setId: SortOrder
-  setName: SortOrder
-  setSearchUri: SortOrder
-  setType: SortOrder
-  setUri: SortOrder
-  storySpotlight: SortOrder
-  tcgplayerEtchedId: SortOrder
-  tcgplayerId: SortOrder
-  textless: SortOrder
-  toughness: SortOrder
-  typeLine: SortOrder
-  uri: SortOrder
-  varationOf: SortOrder
-  variation: SortOrder
-  watermark: SortOrder
-}
-
-input CardMinOrderByAggregateInput {
-  arenaId: SortOrder
-  artist: SortOrder
-  booster: SortOrder
-  borderColor: SortOrder
-  cardBackId: SortOrder
-  cardmarketId: SortOrder
-  cmc: SortOrder
-  collectorNumber: SortOrder
-  contentWarning: SortOrder
-  digital: SortOrder
-  edhrecRank: SortOrder
-  flavorName: SortOrder
-  frame: SortOrder
-  fullArt: SortOrder
-  handModifier: SortOrder
-  highresImage: SortOrder
-  id: SortOrder
-  illustrationId: SortOrder
-  imageStatus: SortOrder
-  lang: SortOrder
-  layout: SortOrder
-  lifeModifier: SortOrder
-  loyalty: SortOrder
-  manaCost: SortOrder
-  mtgoFoilId: SortOrder
-  mtgoId: SortOrder
-  name: SortOrder
-  oracleId: SortOrder
-  oracleText: SortOrder
-  oversized: SortOrder
-  power: SortOrder
-  printedName: SortOrder
-  printedText: SortOrder
-  printedTypeLine: SortOrder
-  printsSearchUri: SortOrder
-  promo: SortOrder
-  rarity: SortOrder
-  releasedAt: SortOrder
-  reprint: SortOrder
-  reserved: SortOrder
-  rulingUri: SortOrder
-  scryfallSetUri: SortOrder
-  scryfallUri: SortOrder
-  securityStamp: SortOrder
-  setCode: SortOrder
-  setId: SortOrder
-  setName: SortOrder
-  setSearchUri: SortOrder
-  setType: SortOrder
-  setUri: SortOrder
-  storySpotlight: SortOrder
-  tcgplayerEtchedId: SortOrder
-  tcgplayerId: SortOrder
-  textless: SortOrder
-  toughness: SortOrder
-  typeLine: SortOrder
-  uri: SortOrder
-  varationOf: SortOrder
-  variation: SortOrder
-  watermark: SortOrder
-}
-
-input CardOrderByWithAggregationInput {
-  _avg: CardAvgOrderByAggregateInput
-  _count: CardCountOrderByAggregateInput
-  _max: CardMaxOrderByAggregateInput
-  _min: CardMinOrderByAggregateInput
-  _sum: CardSumOrderByAggregateInput
-  allParts: SortOrder
-  arenaId: SortOrder
-  artist: SortOrder
-  booster: SortOrder
-  borderColor: SortOrder
-  cardBackId: SortOrder
-  cardFacesRaw: SortOrder
-  cardmarketId: SortOrder
-  cmc: SortOrder
-  collectorNumber: SortOrder
-  colorIdentity: SortOrder
-  colorIndicator: SortOrder
-  colors: SortOrder
-  contentWarning: SortOrder
-  digital: SortOrder
-  edhrecRank: SortOrder
-  finishes: SortOrder
-  flavorName: SortOrder
-  frame: SortOrder
-  frameEffects: SortOrder
-  fullArt: SortOrder
-  games: SortOrder
-  handModifier: SortOrder
-  highresImage: SortOrder
-  id: SortOrder
-  illustrationId: SortOrder
-  imageStatus: SortOrder
-  imageUris: SortOrder
-  keywords: SortOrder
-  lang: SortOrder
-  layout: SortOrder
-  legalities: SortOrder
-  lifeModifier: SortOrder
-  loyalty: SortOrder
-  manaCost: SortOrder
-  mtgoFoilId: SortOrder
-  mtgoId: SortOrder
-  multiverseIds: SortOrder
-  name: SortOrder
-  oracleId: SortOrder
-  oracleText: SortOrder
-  oversized: SortOrder
-  power: SortOrder
-  prices: SortOrder
-  printedName: SortOrder
-  printedText: SortOrder
-  printedTypeLine: SortOrder
-  printsSearchUri: SortOrder
-  producedMana: SortOrder
-  promo: SortOrder
-  promoTypes: SortOrder
-  purchaseUris: SortOrder
-  rarity: SortOrder
-  relatedUris: SortOrder
-  releasedAt: SortOrder
-  reprint: SortOrder
-  reserved: SortOrder
-  rulingUri: SortOrder
-  scryfallSetUri: SortOrder
-  scryfallUri: SortOrder
-  securityStamp: SortOrder
-  setCode: SortOrder
-  setId: SortOrder
-  setName: SortOrder
-  setSearchUri: SortOrder
-  setType: SortOrder
-  setUri: SortOrder
-  storySpotlight: SortOrder
-  tcgplayerEtchedId: SortOrder
-  tcgplayerId: SortOrder
-  textless: SortOrder
-  toughness: SortOrder
-  typeLine: SortOrder
-  uri: SortOrder
-  varationOf: SortOrder
-  variation: SortOrder
-  watermark: SortOrder
-}
-
-input CardRelationFilter {
-  is: CardWhereInput
-  isNot: CardWhereInput
-}
-
-input CardSumOrderByAggregateInput {
-  arenaId: SortOrder
-  cardmarketId: SortOrder
-  cmc: SortOrder
-  edhrecRank: SortOrder
-  mtgoFoilId: SortOrder
-  mtgoId: SortOrder
-  multiverseIds: SortOrder
-  tcgplayerEtchedId: SortOrder
-  tcgplayerId: SortOrder
-}
-
-input CardWhereInput {
-  AND: [CardWhereInput!]
-  NOT: [CardWhereInput!]
-  OR: [CardWhereInput!]
-  allParts: JsonNullableListFilter
-  arenaId: IntNullableFilter
-  artist: StringNullableFilter
-  booster: BoolFilter
-  borderColor: StringFilter
-  cardBackId: StringNullableFilter
-  cardFaces: CardFaceListRelationFilter
-  cardFacesRaw: JsonNullableListFilter
-  cardmarketId: IntNullableFilter
-  cmc: DecimalNullableFilter
-  collectorNumber: StringFilter
-  colorIdentity: StringNullableListFilter
-  colorIndicator: StringNullableListFilter
-  colors: StringNullableListFilter
-  contentWarning: BoolNullableFilter
-  digital: BoolFilter
-  edhrecRank: IntNullableFilter
-  finishes: StringNullableListFilter
-  flavorName: StringNullableFilter
-  frame: StringFilter
-  frameEffects: StringNullableListFilter
-  fullArt: BoolFilter
-  games: StringNullableListFilter
-  handModifier: StringNullableFilter
-  highresImage: BoolFilter
-  id: StringFilter
-  illustrationId: StringNullableFilter
-  imageStatus: StringFilter
-  imageUris: JsonNullableFilter
-  keywords: StringNullableListFilter
-  lang: StringFilter
-  layout: StringFilter
-  legalities: JsonFilter
-  lifeModifier: StringNullableFilter
-  loyalty: StringNullableFilter
-  manaCost: StringNullableFilter
-  mtgoFoilId: IntNullableFilter
-  mtgoId: IntNullableFilter
-  multiverseIds: IntNullableListFilter
-  name: StringFilter
-  oracleId: StringNullableFilter
-  oracleText: StringNullableFilter
-  oversized: BoolFilter
-  power: StringNullableFilter
-  prices: JsonFilter
-  printedName: StringNullableFilter
-  printedText: StringNullableFilter
-  printedTypeLine: StringNullableFilter
-  printsSearchUri: StringFilter
-  producedMana: StringNullableListFilter
-  promo: BoolFilter
-  promoTypes: StringNullableListFilter
-  purchaseUris: JsonNullableFilter
-  rarity: StringFilter
-  referencedBy: RelatedCardListRelationFilter
-  relatedTo: RelatedCardListRelationFilter
-  relatedUris: JsonFilter
-  releasedAt: DateTimeFilter
-  reprint: BoolFilter
-  reserved: BoolFilter
-  rulingUri: StringNullableFilter
-  scryfallSetUri: StringFilter
-  scryfallUri: StringFilter
-  securityStamp: StringNullableFilter
-  set: SetRelationFilter
-  setCode: StringFilter
-  setId: StringFilter
-  setName: StringFilter
-  setSearchUri: StringFilter
-  setType: StringFilter
-  setUri: StringFilter
-  storySpotlight: BoolFilter
-  tcgplayerEtchedId: IntNullableFilter
-  tcgplayerId: IntNullableFilter
-  textless: BoolFilter
-  toughness: StringNullableFilter
-  typeLine: StringNullableFilter
-  uri: StringFilter
-  varationOf: StringNullableFilter
-  variation: BoolFilter
-  watermark: StringNullableFilter
-}
-
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -641,18 +76,45 @@ input DateTimeNullableFilter {
   notIn: [DateTime!]
 }
 
-"""An arbitrary-precision Decimal type"""
-scalar Decimal
+input DateTimeWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedDateTimeFilter
+  _min: NestedDateTimeFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeWithAggregatesFilter
+  notIn: [DateTime!]
+}
 
-input DecimalNullableFilter {
-  equals: Decimal
-  gt: Decimal
-  gte: Decimal
-  in: [Decimal!]
-  lt: Decimal
-  lte: Decimal
-  not: NestedDecimalNullableFilter
-  notIn: [Decimal!]
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
+}
+
+input FloatNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedFloatNullableFilter
+  _min: NestedFloatNullableFilter
+  _sum: NestedFloatNullableFilter
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableWithAggregatesFilter
+  notIn: [Float!]
 }
 
 input IntFilter {
@@ -713,6 +175,7 @@ type Mutation {
   processAllParts: Boolean!
   processBulkData(fileName: String!): Boolean!
   processCardFaces: Boolean!
+  processPriceData: Boolean!
   processSetData: Boolean!
 }
 
@@ -748,15 +211,45 @@ input NestedDateTimeNullableFilter {
   notIn: [DateTime!]
 }
 
-input NestedDecimalNullableFilter {
-  equals: Decimal
-  gt: Decimal
-  gte: Decimal
-  in: [Decimal!]
-  lt: Decimal
-  lte: Decimal
-  not: NestedDecimalNullableFilter
-  notIn: [Decimal!]
+input NestedDateTimeWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedDateTimeFilter
+  _min: NestedDateTimeFilter
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeWithAggregatesFilter
+  notIn: [DateTime!]
+}
+
+input NestedFloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
+}
+
+input NestedFloatNullableWithAggregatesFilter {
+  _avg: NestedFloatNullableFilter
+  _count: NestedIntNullableFilter
+  _max: NestedFloatNullableFilter
+  _min: NestedFloatNullableFilter
+  _sum: NestedFloatNullableFilter
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableWithAggregatesFilter
+  notIn: [Float!]
 }
 
 input NestedIntFilter {
@@ -809,10 +302,28 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+input NestedStringWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedStringFilter
+  _min: NestedStringFilter
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringWithAggregatesFilter
+  notIn: [String!]
+  startsWith: String
+}
+
 type Query {
   allBulkData: [BulkDataObjectType!]!
-  allCards(take: Float, where: CardWhereInput): [Card!]!
-  allSets(orderBy: SetOrderByWithAggregationInput, where: SetWhereInput): [Set!]!
+  allScryfallCards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
+  allScryfallPrices(cursor: ScryfallPriceWhereUniqueInput, distinct: [ScryfallPriceScalarFieldEnum!], orderBy: [ScryfallPriceOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPrice!]!
+  allScryfallSets(orderBy: ScryfallSetOrderByWithAggregationInput, where: ScryfallSetWhereInput): [ScryfallSet!]!
   getString: String!
 }
 
@@ -821,46 +332,762 @@ enum QueryMode {
   insensitive
 }
 
-type RelatedCard {
-  card: [Card!]!
+type ScryfallCard {
+  _count: ScryfallCardCount!
+  allParts: [JSON!]
+  arenaId: Int
+  artist: String
+  booster: Boolean!
+  borderColor: String!
+  cardBackId: String
+  cardFaces: [ScryfallCardFace!]!
+  cardFacesRaw: [JSON!]
+  cardmarketId: Int
+  cmc: Float
+  collectorNumber: String!
+  colorIdentity: [String!]
+  colorIndicator: [String!]
+  colors: [String!]
+  contentWarning: Boolean
+  digital: Boolean!
+  edhrecRank: Int
+  finishes: [String!]
+  flavorName: String
+  frame: String!
+  frameEffects: [String!]
+  fullArt: Boolean!
+  games: [String!]
+  handModifier: String
+  highresImage: Boolean!
+  id: ID!
+  illustrationId: String
+  imageStatus: String!
+  imageUris: JSON
+  keywords: [String!]
+  lang: String!
+  layout: String!
+  legalities: JSON!
+  lifeModifier: String
+  loyalty: String
+  manaCost: String
+  mtgoFoilId: Int
+  mtgoId: Int
+  multiverseIds: [Int!]
+  name: String!
+  oracleId: String
+  oracleText: String
+  oversized: Boolean!
+  power: String
+  prices: JSON!
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  printsSearchUri: String!
+  producedMana: [String!]
+  promo: Boolean!
+  promoTypes: [String!]
+  purchaseUris: JSON
+  rarity: String!
+  referencedBy: [ScryfallRelatedCard!]!
+  relatedTo: [ScryfallRelatedCard!]!
+  relatedUris: JSON!
+  releasedAt: DateTime!
+  reprint: Boolean!
+  reserved: Boolean!
+  rulingUri: String
+  scryfallPrice(cursor: ScryfallPriceWhereUniqueInput, distinct: [ScryfallPriceScalarFieldEnum!], orderBy: [ScryfallPriceOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPrice!]!
+  scryfallPricesGroupBy(_avg: ScryfallPriceAvgAggregateInput, _count: ScryfallPriceCountAggregateInput, _max: ScryfallPriceMaxAggregateInput, _min: ScryfallPriceMinAggregateInput, _sum: ScryfallPriceSumAggregateInput, having: ScryfallPriceScalarWhereWithAggregatesInput, orderBy: [ScryfallPriceOrderByWithAggregationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPriceGroupBy!]!
+  scryfallSetUri: String!
+  scryfallUri: String!
+  securityStamp: String
+  set: ScryfallSet!
+  setCode: String!
+  setId: String!
+  setName: String!
+  setSearchUri: String!
+  setType: String!
+  setUri: String!
+  storySpotlight: Boolean!
+  tcgplayerEtchedId: Int
+  tcgplayerId: Int
+  textless: Boolean!
+  toughness: String
+  typeLine: String
+  uri: String!
+  varationOf: String
+  variation: Boolean!
+  watermark: String
+}
+
+type ScryfallCardCount {
+  cardFaces: Int!
+  referencedBy: Int!
+  relatedTo: Int!
+  scryfallPrice: Int!
+}
+
+type ScryfallCardFace {
+  artist: String
+  card: ScryfallCard!
+  cardId: String!
+  cmc: Float
+  colorIndicator: [String!]
+  colors: [String!]
+  flavorText: String
+  id: ID!
+  illustrationId: String
+  imageUris: JSON
+  layout: String
+  loyalty: String
+  manaCost: String
+  name: String!
+  oracleId: String
+  oracleText: String
+  power: String
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  toughness: String
+  typeLine: String
+  watermark: String
+}
+
+input ScryfallCardFaceListRelationFilter {
+  every: ScryfallCardFaceWhereInput
+  none: ScryfallCardFaceWhereInput
+  some: ScryfallCardFaceWhereInput
+}
+
+input ScryfallCardFaceOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ScryfallCardFaceWhereInput {
+  AND: [ScryfallCardFaceWhereInput!]
+  NOT: [ScryfallCardFaceWhereInput!]
+  OR: [ScryfallCardFaceWhereInput!]
+  artist: StringNullableFilter
+  card: ScryfallCardRelationFilter
+  cardId: StringFilter
+  cmc: FloatNullableFilter
+  colorIndicator: StringNullableListFilter
+  colors: StringNullableListFilter
+  flavorText: StringNullableFilter
+  id: StringFilter
+  illustrationId: StringNullableFilter
+  imageUris: JsonNullableFilter
+  layout: StringNullableFilter
+  loyalty: StringNullableFilter
+  manaCost: StringNullableFilter
+  name: StringFilter
+  oracleId: StringNullableFilter
+  oracleText: StringNullableFilter
+  power: StringNullableFilter
+  printedName: StringNullableFilter
+  printedText: StringNullableFilter
+  printedTypeLine: StringNullableFilter
+  toughness: StringNullableFilter
+  typeLine: StringNullableFilter
+  watermark: StringNullableFilter
+}
+
+input ScryfallCardListRelationFilter {
+  every: ScryfallCardWhereInput
+  none: ScryfallCardWhereInput
+  some: ScryfallCardWhereInput
+}
+
+input ScryfallCardOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ScryfallCardOrderByWithRelationInput {
+  allParts: SortOrder
+  arenaId: SortOrder
+  artist: SortOrder
+  booster: SortOrder
+  borderColor: SortOrder
+  cardBackId: SortOrder
+  cardFaces: ScryfallCardFaceOrderByRelationAggregateInput
+  cardFacesRaw: SortOrder
+  cardmarketId: SortOrder
+  cmc: SortOrder
+  collectorNumber: SortOrder
+  colorIdentity: SortOrder
+  colorIndicator: SortOrder
+  colors: SortOrder
+  contentWarning: SortOrder
+  digital: SortOrder
+  edhrecRank: SortOrder
+  finishes: SortOrder
+  flavorName: SortOrder
+  frame: SortOrder
+  frameEffects: SortOrder
+  fullArt: SortOrder
+  games: SortOrder
+  handModifier: SortOrder
+  highresImage: SortOrder
+  id: SortOrder
+  illustrationId: SortOrder
+  imageStatus: SortOrder
+  imageUris: SortOrder
+  keywords: SortOrder
+  lang: SortOrder
+  layout: SortOrder
+  legalities: SortOrder
+  lifeModifier: SortOrder
+  loyalty: SortOrder
+  manaCost: SortOrder
+  mtgoFoilId: SortOrder
+  mtgoId: SortOrder
+  multiverseIds: SortOrder
+  name: SortOrder
+  oracleId: SortOrder
+  oracleText: SortOrder
+  oversized: SortOrder
+  power: SortOrder
+  prices: SortOrder
+  printedName: SortOrder
+  printedText: SortOrder
+  printedTypeLine: SortOrder
+  printsSearchUri: SortOrder
+  producedMana: SortOrder
+  promo: SortOrder
+  promoTypes: SortOrder
+  purchaseUris: SortOrder
+  rarity: SortOrder
+  referencedBy: ScryfallRelatedCardOrderByRelationAggregateInput
+  relatedTo: ScryfallRelatedCardOrderByRelationAggregateInput
+  relatedUris: SortOrder
+  releasedAt: SortOrder
+  reprint: SortOrder
+  reserved: SortOrder
+  rulingUri: SortOrder
+  scryfallPrice: ScryfallPriceOrderByRelationAggregateInput
+  scryfallSetUri: SortOrder
+  scryfallUri: SortOrder
+  securityStamp: SortOrder
+  set: ScryfallSetOrderByWithRelationInput
+  setCode: SortOrder
+  setId: SortOrder
+  setName: SortOrder
+  setSearchUri: SortOrder
+  setType: SortOrder
+  setUri: SortOrder
+  storySpotlight: SortOrder
+  tcgplayerEtchedId: SortOrder
+  tcgplayerId: SortOrder
+  textless: SortOrder
+  toughness: SortOrder
+  typeLine: SortOrder
+  uri: SortOrder
+  varationOf: SortOrder
+  variation: SortOrder
+  watermark: SortOrder
+}
+
+input ScryfallCardRelationFilter {
+  is: ScryfallCardWhereInput
+  isNot: ScryfallCardWhereInput
+}
+
+enum ScryfallCardScalarFieldEnum {
+  allParts
+  arenaId
+  artist
+  booster
+  borderColor
+  cardBackId
+  cardFacesRaw
+  cardmarketId
+  cmc
+  collectorNumber
+  colorIdentity
+  colorIndicator
+  colors
+  contentWarning
+  digital
+  edhrecRank
+  finishes
+  flavorName
+  frame
+  frameEffects
+  fullArt
+  games
+  handModifier
+  highresImage
+  id
+  illustrationId
+  imageStatus
+  imageUris
+  keywords
+  lang
+  layout
+  legalities
+  lifeModifier
+  loyalty
+  manaCost
+  mtgoFoilId
+  mtgoId
+  multiverseIds
+  name
+  oracleId
+  oracleText
+  oversized
+  power
+  prices
+  printedName
+  printedText
+  printedTypeLine
+  printsSearchUri
+  producedMana
+  promo
+  promoTypes
+  purchaseUris
+  rarity
+  relatedUris
+  releasedAt
+  reprint
+  reserved
+  rulingUri
+  scryfallSetUri
+  scryfallUri
+  securityStamp
+  setCode
+  setId
+  setName
+  setSearchUri
+  setType
+  setUri
+  storySpotlight
+  tcgplayerEtchedId
+  tcgplayerId
+  textless
+  toughness
+  typeLine
+  uri
+  varationOf
+  variation
+  watermark
+}
+
+input ScryfallCardWhereInput {
+  AND: [ScryfallCardWhereInput!]
+  NOT: [ScryfallCardWhereInput!]
+  OR: [ScryfallCardWhereInput!]
+  allParts: JsonNullableListFilter
+  arenaId: IntNullableFilter
+  artist: StringNullableFilter
+  booster: BoolFilter
+  borderColor: StringFilter
+  cardBackId: StringNullableFilter
+  cardFaces: ScryfallCardFaceListRelationFilter
+  cardFacesRaw: JsonNullableListFilter
+  cardmarketId: IntNullableFilter
+  cmc: FloatNullableFilter
+  collectorNumber: StringFilter
+  colorIdentity: StringNullableListFilter
+  colorIndicator: StringNullableListFilter
+  colors: StringNullableListFilter
+  contentWarning: BoolNullableFilter
+  digital: BoolFilter
+  edhrecRank: IntNullableFilter
+  finishes: StringNullableListFilter
+  flavorName: StringNullableFilter
+  frame: StringFilter
+  frameEffects: StringNullableListFilter
+  fullArt: BoolFilter
+  games: StringNullableListFilter
+  handModifier: StringNullableFilter
+  highresImage: BoolFilter
+  id: StringFilter
+  illustrationId: StringNullableFilter
+  imageStatus: StringFilter
+  imageUris: JsonNullableFilter
+  keywords: StringNullableListFilter
+  lang: StringFilter
+  layout: StringFilter
+  legalities: JsonFilter
+  lifeModifier: StringNullableFilter
+  loyalty: StringNullableFilter
+  manaCost: StringNullableFilter
+  mtgoFoilId: IntNullableFilter
+  mtgoId: IntNullableFilter
+  multiverseIds: IntNullableListFilter
+  name: StringFilter
+  oracleId: StringNullableFilter
+  oracleText: StringNullableFilter
+  oversized: BoolFilter
+  power: StringNullableFilter
+  prices: JsonFilter
+  printedName: StringNullableFilter
+  printedText: StringNullableFilter
+  printedTypeLine: StringNullableFilter
+  printsSearchUri: StringFilter
+  producedMana: StringNullableListFilter
+  promo: BoolFilter
+  promoTypes: StringNullableListFilter
+  purchaseUris: JsonNullableFilter
+  rarity: StringFilter
+  referencedBy: ScryfallRelatedCardListRelationFilter
+  relatedTo: ScryfallRelatedCardListRelationFilter
+  relatedUris: JsonFilter
+  releasedAt: DateTimeFilter
+  reprint: BoolFilter
+  reserved: BoolFilter
+  rulingUri: StringNullableFilter
+  scryfallPrice: ScryfallPriceListRelationFilter
+  scryfallSetUri: StringFilter
+  scryfallUri: StringFilter
+  securityStamp: StringNullableFilter
+  set: ScryfallSetRelationFilter
+  setCode: StringFilter
+  setId: StringFilter
+  setName: StringFilter
+  setSearchUri: StringFilter
+  setType: StringFilter
+  setUri: StringFilter
+  storySpotlight: BoolFilter
+  tcgplayerEtchedId: IntNullableFilter
+  tcgplayerId: IntNullableFilter
+  textless: BoolFilter
+  toughness: StringNullableFilter
+  typeLine: StringNullableFilter
+  uri: StringFilter
+  varationOf: StringNullableFilter
+  variation: BoolFilter
+  watermark: StringNullableFilter
+}
+
+input ScryfallCardWhereUniqueInput {
+  id: String
+}
+
+type ScryfallPrice {
+  card: ScryfallCard!
+  cardId: String!
+  date: DateTime!
+  eur: Float
+  eurFoil: Float
+  id: ID!
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
+type ScryfallPriceAvgAggregate {
+  eur: Float
+  eurFoil: Float
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
+input ScryfallPriceAvgAggregateInput {
+  eur: Boolean
+  eurFoil: Boolean
+  tix: Boolean
+  usd: Boolean
+  usdEtched: Boolean
+  usdFoil: Boolean
+}
+
+input ScryfallPriceAvgOrderByAggregateInput {
+  eur: SortOrder
+  eurFoil: SortOrder
+  tix: SortOrder
+  usd: SortOrder
+  usdEtched: SortOrder
+  usdFoil: SortOrder
+}
+
+type ScryfallPriceCountAggregate {
+  _all: Int!
+  cardId: Int!
+  date: Int!
+  eur: Int!
+  eurFoil: Int!
+  id: Int!
+  tix: Int!
+  usd: Int!
+  usdEtched: Int!
+  usdFoil: Int!
+}
+
+input ScryfallPriceCountAggregateInput {
+  _all: Boolean
+  cardId: Boolean
+  date: Boolean
+  eur: Boolean
+  eurFoil: Boolean
+  id: Boolean
+  tix: Boolean
+  usd: Boolean
+  usdEtched: Boolean
+  usdFoil: Boolean
+}
+
+input ScryfallPriceCountOrderByAggregateInput {
+  cardId: SortOrder
+  date: SortOrder
+  eur: SortOrder
+  eurFoil: SortOrder
+  id: SortOrder
+  tix: SortOrder
+  usd: SortOrder
+  usdEtched: SortOrder
+  usdFoil: SortOrder
+}
+
+type ScryfallPriceGroupBy {
+  _avg: ScryfallPriceAvgAggregate
+  _count: ScryfallPriceCountAggregate
+  _max: ScryfallPriceMaxAggregate
+  _min: ScryfallPriceMinAggregate
+  _sum: ScryfallPriceSumAggregate
+  cardId: String!
+  date: DateTime!
+  eur: Float
+  eurFoil: Float
+  id: String!
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
+input ScryfallPriceListRelationFilter {
+  every: ScryfallPriceWhereInput
+  none: ScryfallPriceWhereInput
+  some: ScryfallPriceWhereInput
+}
+
+type ScryfallPriceMaxAggregate {
+  cardId: String
+  date: DateTime
+  eur: Float
+  eurFoil: Float
+  id: String
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
+input ScryfallPriceMaxAggregateInput {
+  cardId: Boolean
+  date: Boolean
+  eur: Boolean
+  eurFoil: Boolean
+  id: Boolean
+  tix: Boolean
+  usd: Boolean
+  usdEtched: Boolean
+  usdFoil: Boolean
+}
+
+input ScryfallPriceMaxOrderByAggregateInput {
+  cardId: SortOrder
+  date: SortOrder
+  eur: SortOrder
+  eurFoil: SortOrder
+  id: SortOrder
+  tix: SortOrder
+  usd: SortOrder
+  usdEtched: SortOrder
+  usdFoil: SortOrder
+}
+
+type ScryfallPriceMinAggregate {
+  cardId: String
+  date: DateTime
+  eur: Float
+  eurFoil: Float
+  id: String
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
+input ScryfallPriceMinAggregateInput {
+  cardId: Boolean
+  date: Boolean
+  eur: Boolean
+  eurFoil: Boolean
+  id: Boolean
+  tix: Boolean
+  usd: Boolean
+  usdEtched: Boolean
+  usdFoil: Boolean
+}
+
+input ScryfallPriceMinOrderByAggregateInput {
+  cardId: SortOrder
+  date: SortOrder
+  eur: SortOrder
+  eurFoil: SortOrder
+  id: SortOrder
+  tix: SortOrder
+  usd: SortOrder
+  usdEtched: SortOrder
+  usdFoil: SortOrder
+}
+
+input ScryfallPriceOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ScryfallPriceOrderByWithAggregationInput {
+  _avg: ScryfallPriceAvgOrderByAggregateInput
+  _count: ScryfallPriceCountOrderByAggregateInput
+  _max: ScryfallPriceMaxOrderByAggregateInput
+  _min: ScryfallPriceMinOrderByAggregateInput
+  _sum: ScryfallPriceSumOrderByAggregateInput
+  cardId: SortOrder
+  date: SortOrder
+  eur: SortOrder
+  eurFoil: SortOrder
+  id: SortOrder
+  tix: SortOrder
+  usd: SortOrder
+  usdEtched: SortOrder
+  usdFoil: SortOrder
+}
+
+input ScryfallPriceOrderByWithRelationInput {
+  card: ScryfallCardOrderByWithRelationInput
+  cardId: SortOrder
+  date: SortOrder
+  eur: SortOrder
+  eurFoil: SortOrder
+  id: SortOrder
+  tix: SortOrder
+  usd: SortOrder
+  usdEtched: SortOrder
+  usdFoil: SortOrder
+}
+
+enum ScryfallPriceScalarFieldEnum {
+  cardId
+  date
+  eur
+  eurFoil
+  id
+  tix
+  usd
+  usdEtched
+  usdFoil
+}
+
+input ScryfallPriceScalarWhereWithAggregatesInput {
+  AND: [ScryfallPriceScalarWhereWithAggregatesInput!]
+  NOT: [ScryfallPriceScalarWhereWithAggregatesInput!]
+  OR: [ScryfallPriceScalarWhereWithAggregatesInput!]
+  cardId: StringWithAggregatesFilter
+  date: DateTimeWithAggregatesFilter
+  eur: FloatNullableWithAggregatesFilter
+  eurFoil: FloatNullableWithAggregatesFilter
+  id: StringWithAggregatesFilter
+  tix: FloatNullableWithAggregatesFilter
+  usd: FloatNullableWithAggregatesFilter
+  usdEtched: FloatNullableWithAggregatesFilter
+  usdFoil: FloatNullableWithAggregatesFilter
+}
+
+type ScryfallPriceSumAggregate {
+  eur: Float
+  eurFoil: Float
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
+input ScryfallPriceSumAggregateInput {
+  eur: Boolean
+  eurFoil: Boolean
+  tix: Boolean
+  usd: Boolean
+  usdEtched: Boolean
+  usdFoil: Boolean
+}
+
+input ScryfallPriceSumOrderByAggregateInput {
+  eur: SortOrder
+  eurFoil: SortOrder
+  tix: SortOrder
+  usd: SortOrder
+  usdEtched: SortOrder
+  usdFoil: SortOrder
+}
+
+input ScryfallPriceWhereInput {
+  AND: [ScryfallPriceWhereInput!]
+  NOT: [ScryfallPriceWhereInput!]
+  OR: [ScryfallPriceWhereInput!]
+  card: ScryfallCardRelationFilter
+  cardId: StringFilter
+  date: DateTimeFilter
+  eur: FloatNullableFilter
+  eurFoil: FloatNullableFilter
+  id: StringFilter
+  tix: FloatNullableFilter
+  usd: FloatNullableFilter
+  usdEtched: FloatNullableFilter
+  usdFoil: FloatNullableFilter
+}
+
+input ScryfallPriceWhereUniqueInput {
+  id: String
+}
+
+type ScryfallRelatedCard {
+  card: [ScryfallCard!]!
   cardId: String!
   component: String!
   id: ID!
   name: String!
-  reference: [Card!]!
+  reference: [ScryfallCard!]!
   referenceId: String!
   typeLine: String!
   uri: String!
 }
 
-input RelatedCardListRelationFilter {
-  every: RelatedCardWhereInput
-  none: RelatedCardWhereInput
-  some: RelatedCardWhereInput
+input ScryfallRelatedCardListRelationFilter {
+  every: ScryfallRelatedCardWhereInput
+  none: ScryfallRelatedCardWhereInput
+  some: ScryfallRelatedCardWhereInput
 }
 
-input RelatedCardWhereInput {
-  AND: [RelatedCardWhereInput!]
-  NOT: [RelatedCardWhereInput!]
-  OR: [RelatedCardWhereInput!]
-  card: CardRelationFilter
+input ScryfallRelatedCardOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ScryfallRelatedCardWhereInput {
+  AND: [ScryfallRelatedCardWhereInput!]
+  NOT: [ScryfallRelatedCardWhereInput!]
+  OR: [ScryfallRelatedCardWhereInput!]
+  card: ScryfallCardRelationFilter
   cardId: StringFilter
   component: StringFilter
   id: StringFilter
   name: StringFilter
-  reference: CardRelationFilter
+  reference: ScryfallCardRelationFilter
   referenceId: StringFilter
   typeLine: StringFilter
   uri: StringFilter
 }
 
-type Set {
-  _count: SetCount!
+type ScryfallSet {
+  _count: ScryfallSetCount!
   arenaCode: String
   block: String
   blockCode: String
   cardCount: Int!
-  cards(orderBy: CardOrderByWithAggregationInput, where: CardWhereInput): [Card!]!
+  cards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
   code: String!
   iconSvgUri: String!
   id: ID!
@@ -879,17 +1106,17 @@ type Set {
   uri: String!
 }
 
-input SetAvgOrderByAggregateInput {
+input ScryfallSetAvgOrderByAggregateInput {
   cardCount: SortOrder
   printedSize: SortOrder
   tcgPlayerId: SortOrder
 }
 
-type SetCount {
+type ScryfallSetCount {
   cards: Int!
 }
 
-input SetCountOrderByAggregateInput {
+input ScryfallSetCountOrderByAggregateInput {
   arenaCode: SortOrder
   block: SortOrder
   blockCode: SortOrder
@@ -912,7 +1139,7 @@ input SetCountOrderByAggregateInput {
   uri: SortOrder
 }
 
-input SetMaxOrderByAggregateInput {
+input ScryfallSetMaxOrderByAggregateInput {
   arenaCode: SortOrder
   block: SortOrder
   blockCode: SortOrder
@@ -935,7 +1162,7 @@ input SetMaxOrderByAggregateInput {
   uri: SortOrder
 }
 
-input SetMinOrderByAggregateInput {
+input ScryfallSetMinOrderByAggregateInput {
   arenaCode: SortOrder
   block: SortOrder
   blockCode: SortOrder
@@ -958,12 +1185,12 @@ input SetMinOrderByAggregateInput {
   uri: SortOrder
 }
 
-input SetOrderByWithAggregationInput {
-  _avg: SetAvgOrderByAggregateInput
-  _count: SetCountOrderByAggregateInput
-  _max: SetMaxOrderByAggregateInput
-  _min: SetMinOrderByAggregateInput
-  _sum: SetSumOrderByAggregateInput
+input ScryfallSetOrderByWithAggregationInput {
+  _avg: ScryfallSetAvgOrderByAggregateInput
+  _count: ScryfallSetCountOrderByAggregateInput
+  _max: ScryfallSetMaxOrderByAggregateInput
+  _min: ScryfallSetMinOrderByAggregateInput
+  _sum: ScryfallSetSumOrderByAggregateInput
   arenaCode: SortOrder
   block: SortOrder
   blockCode: SortOrder
@@ -986,26 +1213,50 @@ input SetOrderByWithAggregationInput {
   uri: SortOrder
 }
 
-input SetRelationFilter {
-  is: SetWhereInput
-  isNot: SetWhereInput
+input ScryfallSetOrderByWithRelationInput {
+  arenaCode: SortOrder
+  block: SortOrder
+  blockCode: SortOrder
+  cardCount: SortOrder
+  cards: ScryfallCardOrderByRelationAggregateInput
+  code: SortOrder
+  iconSvgUri: SortOrder
+  id: SortOrder
+  isDigital: SortOrder
+  isFoilOnly: SortOrder
+  isNonFoilOnly: SortOrder
+  mtgoCode: SortOrder
+  name: SortOrder
+  parentSetCode: SortOrder
+  printedSize: SortOrder
+  releasedAt: SortOrder
+  scryfallUri: SortOrder
+  searchUri: SortOrder
+  setType: SortOrder
+  tcgPlayerId: SortOrder
+  uri: SortOrder
 }
 
-input SetSumOrderByAggregateInput {
+input ScryfallSetRelationFilter {
+  is: ScryfallSetWhereInput
+  isNot: ScryfallSetWhereInput
+}
+
+input ScryfallSetSumOrderByAggregateInput {
   cardCount: SortOrder
   printedSize: SortOrder
   tcgPlayerId: SortOrder
 }
 
-input SetWhereInput {
-  AND: [SetWhereInput!]
-  NOT: [SetWhereInput!]
-  OR: [SetWhereInput!]
+input ScryfallSetWhereInput {
+  AND: [ScryfallSetWhereInput!]
+  NOT: [ScryfallSetWhereInput!]
+  OR: [ScryfallSetWhereInput!]
   arenaCode: StringNullableFilter
   block: StringNullableFilter
   blockCode: StringNullableFilter
   cardCount: IntFilter
-  cards: CardListRelationFilter
+  cards: ScryfallCardListRelationFilter
   code: StringFilter
   iconSvgUri: StringFilter
   id: StringFilter
@@ -1065,4 +1316,22 @@ input StringNullableListFilter {
   hasEvery: [String!]
   hasSome: [String!]
   isEmpty: Boolean
+}
+
+input StringWithAggregatesFilter {
+  _count: NestedIntFilter
+  _max: NestedStringFilter
+  _min: NestedStringFilter
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringWithAggregatesFilter
+  notIn: [String!]
+  startsWith: String
 }

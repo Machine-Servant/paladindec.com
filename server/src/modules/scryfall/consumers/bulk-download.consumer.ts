@@ -5,33 +5,48 @@ import axios from 'axios';
 import { Job, Queue } from 'bull';
 import * as fs from 'fs';
 import { chunk, flatten } from 'lodash';
+import {
+  ScryfallCard,
+  ScryfallCardFace,
+  ScryfallRelatedCard,
+} from 'prisma/prisma-client';
 import * as stream from 'stream';
 import { chain } from 'stream-chain';
 import { parser } from 'stream-json/Parser';
 import { streamArray } from 'stream-json/streamers/StreamArray';
 import { promisify } from 'util';
-import { CardFace } from '../../../@generated/prisma-nestjs-graphql/card-face/card-face.model';
-import { Card } from '../../../@generated/prisma-nestjs-graphql/card/card.model';
-import { RelatedCard } from '../../../@generated/prisma-nestjs-graphql/related-card/related-card.model';
-import { CardFaceService } from '../../card/services/card-face.service';
-import { CardService } from '../../card/services/card.service';
-import { RelatedCardService } from '../../card/services/related-card.service';
-import { toCardFaceObjectType } from '../../card/utils/to-card-face-object-type';
-import { toCardObjectType } from '../../card/utils/to-card-object-type';
-import { toRelatedCardObjectType } from '../../card/utils/to-related-card-object-type';
-import { SetService } from '../../set/services/set.service';
-import { CardDataType } from '../types/scryfall.types';
+import { toCardObjectType } from '../utils/to-prisma-card';
+import { toCardFaceObjectType } from '../utils/to-prisma-scryfall-card-face';
+import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
+import { ScryfallCardDataType } from '../types/scryfall.types';
+import { ScryfallCardService } from '../services/scryfall-card.service';
+import { ScryfallCardFaceService } from '../services/scryfall-card-face.service';
+import { ScryfallRelatedCardService } from '../services/scryfall-related-card.service';
 
 const finished = promisify(stream.finished);
+
+type BulkScryfallRelatedCard = Omit<ScryfallRelatedCard, 'id'>;
+type BulkScryfallCardFace = Omit<ScryfallCardFace, 'id'>;
+
+function isBulkScryfallRelatedCard(
+  input: Partial<BulkScryfallRelatedCard>,
+): input is BulkScryfallRelatedCard {
+  return !!input.cardId && !!input.referenceId;
+}
+
+function isBulkScryfallCardFace(
+  input: Partial<BulkScryfallCardFace>,
+): input is BulkScryfallCardFace {
+  return !!input.cardId;
+}
 
 @Processor('bulk-data')
 export class BulkDownloadConsumer {
   constructor(
     private readonly configService: ConfigService,
-    private readonly cardService: CardService,
-    private readonly cardFaceService: CardFaceService,
-    private readonly relatedCardService: RelatedCardService,
-    private readonly setSerivce: SetService,
+    private readonly scryfallCardService: ScryfallCardService,
+    private readonly scryfallCardFaceService: ScryfallCardFaceService,
+    private readonly scryfallRelatedCardService: ScryfallRelatedCardService,
     @InjectQueue('bulk-data') private readonly bulkDataQueue: Queue,
   ) {}
 
@@ -85,30 +100,47 @@ export class BulkDownloadConsumer {
     let count = 0;
 
     return new Promise((resolve, reject) => {
-      const cards: Card[] = [];
-      let cardFaceData: CardFace[] = [];
-      let relatedCardData: RelatedCard[] = [];
+      const cards: ScryfallCard[] = [];
+      let cardFaceData: BulkScryfallCardFace[] = [];
+      let relatedCardData: BulkScryfallRelatedCard[] = [];
 
       pipeline.on(
         'data',
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        async ({ key, value }: { key: number; value: CardDataType }) => {
+        async ({
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          key,
+          value,
+        }: {
+          key: number;
+          value: ScryfallCardDataType;
+        }) => {
           count++;
           cards.push(toCardObjectType(value));
           if (value.card_faces?.length) {
             const cardFaces = value.card_faces.map((input) => {
               const cardFace = toCardFaceObjectType(input);
               cardFace.cardId = value.id;
+              if (!isBulkScryfallCardFace(cardFace)) {
+                this.logger.error('Invalid BulkScryfallCardFace', cardFace);
+                throw new Error('Invalid BulkScryfallCardFace');
+              }
               return cardFace;
             });
             cardFaceData = cardFaceData.concat(cardFaces);
           }
           if (value.all_parts?.length) {
             const relatedCards = value.all_parts.map((input) => {
-              const relatedCard = toRelatedCardObjectType(input);
+              const relatedCard = toPrismaScryfallRelatedCard(input);
               relatedCard.id = undefined;
               relatedCard.cardId = value.id;
               relatedCard.referenceId = input.id;
+              if (!isBulkScryfallRelatedCard(relatedCard)) {
+                this.logger.error(
+                  `Invalid BulkScryfallRelatedCard`,
+                  relatedCard,
+                );
+                throw new Error('Invalid BulkScryfallRelatedCard.');
+              }
               return relatedCard;
             });
             relatedCardData = relatedCardData.concat(relatedCards);
@@ -141,9 +173,9 @@ export class BulkDownloadConsumer {
   @Process('process-cards')
   async processCards(
     job: Job<{
-      cards: Card[];
-      cardFaceData: CardFace[];
-      relatedCardData: RelatedCard[];
+      cards: ScryfallCard[];
+      cardFaceData: BulkScryfallCardFace[];
+      relatedCardData: BulkScryfallRelatedCard[];
     }>,
   ) {
     this.logger.debug(
@@ -153,7 +185,7 @@ export class BulkDownloadConsumer {
     let batchCount = 0;
 
     const batches = chunk(job.data.cards, 100);
-    const results: Card[][] = [];
+    const results: ScryfallCard[][] = [];
 
     try {
       while (batches.length) {
@@ -161,7 +193,7 @@ export class BulkDownloadConsumer {
         const batch = batches.shift();
         const result = await Promise.all(
           batch.map(async (card) => {
-            return await this.cardService.upsert(card);
+            return await this.scryfallCardService.upsert(card);
           }),
         );
         results.push(result);
@@ -185,12 +217,12 @@ export class BulkDownloadConsumer {
   }
 
   @Process('process-card-faces')
-  async processCardFaces(job: Job<{ cardFaceData: CardFace[] }>) {
+  async processCardFaces(job: Job<{ cardFaceData: BulkScryfallCardFace[] }>) {
     this.logger.debug(`Processing CardFace objects`);
 
     try {
       this.logger.debug(`Deleting old references`);
-      const countDeleted = await this.cardFaceService.drop();
+      const countDeleted = await this.scryfallCardFaceService.drop();
       this.logger.debug(`Deleted #${countDeleted} CardFace records`);
     } catch (err) {
       this.logger.error(err);
@@ -200,14 +232,16 @@ export class BulkDownloadConsumer {
     try {
       let batchCount = 0;
       const batches = chunk(job.data.cardFaceData, 100);
-      const results: CardFace[][] = [];
+      const results: ScryfallCardFace[][] = [];
 
       while (batches.length) {
         this.logger.debug(`Processing batch #${++batchCount}`);
         const batch = batches.shift();
         const result = await Promise.all(
           batch.map(
-            async (cardFace) => await this.cardFaceService.create(cardFace),
+            async (cardFace) =>
+              // TODO: FIX THIS ANY
+              await this.scryfallCardFaceService.create(cardFace as any),
           ),
         );
         results.push(result);
@@ -222,12 +256,12 @@ export class BulkDownloadConsumer {
   }
 
   @Process('process-all-parts')
-  async processAllParts(job: Job<{ allPartsData: RelatedCard[] }>) {
+  async processAllParts(job: Job<{ allPartsData: BulkScryfallRelatedCard[] }>) {
     this.logger.debug(`Processing RelatedCard objects`);
 
     try {
       this.logger.debug(`Deleting old references`);
-      const countDeleted = await this.relatedCardService.drop();
+      const countDeleted = await this.scryfallRelatedCardService.drop();
       this.logger.debug(`Deleted #${countDeleted} RelatedCard records`);
     } catch (err) {
       this.logger.error(err);
@@ -237,7 +271,7 @@ export class BulkDownloadConsumer {
     try {
       let batchCount = 0;
       const batches = chunk(job.data.allPartsData, 100);
-      const results: RelatedCard[][] = [];
+      const results: ScryfallRelatedCard[][] = [];
 
       while (batches.length) {
         this.logger.debug(`Processing batch ${++batchCount}`);
@@ -245,7 +279,7 @@ export class BulkDownloadConsumer {
         const result = await Promise.all(
           batch.map(
             async (relatedCard) =>
-              await this.relatedCardService.create(relatedCard),
+              await this.scryfallRelatedCardService.create(relatedCard),
           ),
         );
         results.push(result);
