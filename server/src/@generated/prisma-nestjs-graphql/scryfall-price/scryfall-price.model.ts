@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { Float } from '@nestjs/graphql';
 import { ScryfallCard } from '../scryfall-card/scryfall-card.model';
+import { Card } from '../card/card.model';
 
 @ObjectType()
 export class ScryfallPrice {
@@ -35,4 +36,10 @@ export class ScryfallPrice {
 
   @Field(() => String, { nullable: false })
   cardId!: string;
+
+  @Field(() => Card, { nullable: true })
+  currentPriceOfCard?: Card | null;
+
+  @Field(() => String, { nullable: true })
+  currentPriceOfCardId!: string | null;
 }

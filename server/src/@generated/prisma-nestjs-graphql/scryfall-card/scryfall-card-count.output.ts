@@ -15,4 +15,7 @@ export class ScryfallCardCount {
 
   @Field(() => Int, { nullable: false })
   scryfallPrice?: number;
+
+  @Field(() => Int, { nullable: false })
+  card?: number;
 }

@@ -5,4 +5,7 @@ import { InputType } from '@nestjs/graphql';
 export class ScryfallPriceWhereUniqueInput {
   @Field(() => String, { nullable: true })
   id?: string;
+
+  @Field(() => String, { nullable: true })
+  currentPriceOfCardId?: string;
 }

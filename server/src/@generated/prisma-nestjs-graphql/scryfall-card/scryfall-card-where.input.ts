@@ -16,6 +16,7 @@ import { ScryfallSetRelationFilter } from '../scryfall-set/scryfall-set-relation
 import { ScryfallRelatedCardListRelationFilter } from '../scryfall-related-card/scryfall-related-card-list-relation-filter.input';
 import { ScryfallCardFaceListRelationFilter } from '../scryfall-card-face/scryfall-card-face-list-relation-filter.input';
 import { ScryfallPriceListRelationFilter } from '../scryfall-price/scryfall-price-list-relation-filter.input';
+import { CardListRelationFilter } from '../card/card-list-relation-filter.input';
 
 @InputType()
 export class ScryfallCardWhereInput {
@@ -273,4 +274,7 @@ export class ScryfallCardWhereInput {
 
   @Field(() => ScryfallPriceListRelationFilter, { nullable: true })
   scryfallPrice?: ScryfallPriceListRelationFilter;
+
+  @Field(() => CardListRelationFilter, { nullable: true })
+  card?: CardListRelationFilter;
 }

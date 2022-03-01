@@ -31,5 +31,8 @@ export class ScryfallPriceCountAggregateInput {
   cardId?: true;
 
   @Field(() => Boolean, { nullable: true })
+  currentPriceOfCardId?: true;
+
+  @Field(() => Boolean, { nullable: true })
   _all?: true;
 }

@@ -4,6 +4,8 @@ import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { FloatNullableFilter } from '../prisma/float-nullable-filter.input';
 import { ScryfallCardRelationFilter } from '../scryfall-card/scryfall-card-relation-filter.input';
+import { CardRelationFilter } from '../card/card-relation-filter.input';
+import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 
 @InputType()
 export class ScryfallPriceWhereInput {
@@ -45,4 +47,10 @@ export class ScryfallPriceWhereInput {
 
   @Field(() => StringFilter, { nullable: true })
   cardId?: StringFilter;
+
+  @Field(() => CardRelationFilter, { nullable: true })
+  currentPriceOfCard?: CardRelationFilter;
+
+  @Field(() => StringNullableFilter, { nullable: true })
+  currentPriceOfCardId?: StringNullableFilter;
 }

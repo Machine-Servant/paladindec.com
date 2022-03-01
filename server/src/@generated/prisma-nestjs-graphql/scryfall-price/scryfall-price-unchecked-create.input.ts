@@ -30,4 +30,7 @@ export class ScryfallPriceUncheckedCreateInput {
 
   @Field(() => String, { nullable: false })
   cardId!: string;
+
+  @Field(() => String, { nullable: true })
+  currentPriceOfCardId?: string;
 }

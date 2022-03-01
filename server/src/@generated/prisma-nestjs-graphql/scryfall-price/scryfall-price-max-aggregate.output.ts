@@ -30,4 +30,7 @@ export class ScryfallPriceMaxAggregate {
 
   @Field(() => String, { nullable: true })
   cardId?: string;
+
+  @Field(() => String, { nullable: true })
+  currentPriceOfCardId?: string;
 }

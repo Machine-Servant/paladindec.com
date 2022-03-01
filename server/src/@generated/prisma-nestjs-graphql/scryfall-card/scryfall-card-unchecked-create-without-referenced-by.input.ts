@@ -18,6 +18,7 @@ import { ScryfallCardCreatepromoTypesInput } from '../prisma/scryfall-card-creat
 import { ScryfallRelatedCardUncheckedCreateNestedManyWithoutCardInput } from '../scryfall-related-card/scryfall-related-card-unchecked-create-nested-many-without-card.input';
 import { ScryfallCardFaceUncheckedCreateNestedManyWithoutCardInput } from '../scryfall-card-face/scryfall-card-face-unchecked-create-nested-many-without-card.input';
 import { ScryfallPriceUncheckedCreateNestedManyWithoutCardInput } from '../scryfall-price/scryfall-price-unchecked-create-nested-many-without-card.input';
+import { CardUncheckedCreateNestedManyWithoutScryfallCardInput } from '../card/card-unchecked-create-nested-many-without-scryfall-card.input';
 
 @InputType()
 export class ScryfallCardUncheckedCreateWithoutReferencedByInput {
@@ -266,4 +267,9 @@ export class ScryfallCardUncheckedCreateWithoutReferencedByInput {
     nullable: true,
   })
   scryfallPrice?: ScryfallPriceUncheckedCreateNestedManyWithoutCardInput;
+
+  @Field(() => CardUncheckedCreateNestedManyWithoutScryfallCardInput, {
+    nullable: true,
+  })
+  card?: CardUncheckedCreateNestedManyWithoutScryfallCardInput;
 }

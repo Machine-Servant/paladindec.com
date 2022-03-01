@@ -19,6 +19,7 @@ import { ScryfallRelatedCardCreateNestedManyWithoutCardInput } from '../scryfall
 import { ScryfallRelatedCardCreateNestedManyWithoutReferenceInput } from '../scryfall-related-card/scryfall-related-card-create-nested-many-without-reference.input';
 import { ScryfallCardFaceCreateNestedManyWithoutCardInput } from '../scryfall-card-face/scryfall-card-face-create-nested-many-without-card.input';
 import { ScryfallPriceCreateNestedManyWithoutCardInput } from '../scryfall-price/scryfall-price-create-nested-many-without-card.input';
+import { CardCreateNestedManyWithoutScryfallCardInput } from '../card/card-create-nested-many-without-scryfall-card.input';
 
 @InputType()
 export class ScryfallCardCreateWithoutSetInput {
@@ -269,4 +270,7 @@ export class ScryfallCardCreateWithoutSetInput {
     nullable: true,
   })
   scryfallPrice?: ScryfallPriceCreateNestedManyWithoutCardInput;
+
+  @Field(() => CardCreateNestedManyWithoutScryfallCardInput, { nullable: true })
+  card?: CardCreateNestedManyWithoutScryfallCardInput;
 }

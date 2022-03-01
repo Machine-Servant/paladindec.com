@@ -30,4 +30,7 @@ export class ScryfallPriceCountOrderByAggregateInput {
 
   @Field(() => SortOrder, { nullable: true })
   cardId?: keyof typeof SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
+  currentPriceOfCardId?: keyof typeof SortOrder;
 }

@@ -24,6 +24,7 @@ import { ScryfallSetUpdateOneRequiredWithoutCardsInput } from '../scryfall-set/s
 import { ScryfallRelatedCardUpdateManyWithoutCardInput } from '../scryfall-related-card/scryfall-related-card-update-many-without-card.input';
 import { ScryfallRelatedCardUpdateManyWithoutReferenceInput } from '../scryfall-related-card/scryfall-related-card-update-many-without-reference.input';
 import { ScryfallCardFaceUpdateManyWithoutCardInput } from '../scryfall-card-face/scryfall-card-face-update-many-without-card.input';
+import { CardUpdateManyWithoutScryfallCardInput } from '../card/card-update-many-without-scryfall-card.input';
 
 @InputType()
 export class ScryfallCardUpdateWithoutScryfallPriceInput {
@@ -272,4 +273,7 @@ export class ScryfallCardUpdateWithoutScryfallPriceInput {
 
   @Field(() => ScryfallCardFaceUpdateManyWithoutCardInput, { nullable: true })
   cardFaces?: ScryfallCardFaceUpdateManyWithoutCardInput;
+
+  @Field(() => CardUpdateManyWithoutScryfallCardInput, { nullable: true })
+  card?: CardUpdateManyWithoutScryfallCardInput;
 }

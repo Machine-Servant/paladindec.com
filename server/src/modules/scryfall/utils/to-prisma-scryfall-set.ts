@@ -1,4 +1,4 @@
-import { ScryfallSet } from 'prisma/prisma-client';
+import { ScryfallSet } from '@prisma/client';
 import { ScryfallSetDataType } from '../types/scryfall.types';
 
 export function toPrismaScryfallSet(data: ScryfallSetDataType): ScryfallSet {

@@ -8,6 +8,7 @@ import { ScryfallSet } from '../scryfall-set/scryfall-set.model';
 import { ScryfallRelatedCard } from '../scryfall-related-card/scryfall-related-card.model';
 import { ScryfallCardFace } from '../scryfall-card-face/scryfall-card-face.model';
 import { ScryfallPrice } from '../scryfall-price/scryfall-price.model';
+import { Card } from '../card/card.model';
 import { ScryfallCardCount } from './scryfall-card-count.output';
 
 @ObjectType()
@@ -257,6 +258,9 @@ export class ScryfallCard {
 
   @Field(() => [ScryfallPrice], { nullable: true })
   scryfallPrice?: Array<ScryfallPrice>;
+
+  @Field(() => [Card], { nullable: true })
+  card?: Array<Card>;
 
   @Field(() => ScryfallCardCount, { nullable: false })
   _count?: ScryfallCardCount;

@@ -24,6 +24,7 @@ import { ScryfallRelatedCardUncheckedUpdateManyWithoutCardInput } from '../scryf
 import { ScryfallRelatedCardUncheckedUpdateManyWithoutReferenceInput } from '../scryfall-related-card/scryfall-related-card-unchecked-update-many-without-reference.input';
 import { ScryfallCardFaceUncheckedUpdateManyWithoutCardInput } from '../scryfall-card-face/scryfall-card-face-unchecked-update-many-without-card.input';
 import { ScryfallPriceUncheckedUpdateManyWithoutCardInput } from '../scryfall-price/scryfall-price-unchecked-update-many-without-card.input';
+import { CardUncheckedUpdateManyWithoutScryfallCardInput } from '../card/card-unchecked-update-many-without-scryfall-card.input';
 
 @InputType()
 export class ScryfallCardUncheckedUpdateInput {
@@ -277,4 +278,9 @@ export class ScryfallCardUncheckedUpdateInput {
     nullable: true,
   })
   scryfallPrice?: ScryfallPriceUncheckedUpdateManyWithoutCardInput;
+
+  @Field(() => CardUncheckedUpdateManyWithoutScryfallCardInput, {
+    nullable: true,
+  })
+  card?: CardUncheckedUpdateManyWithoutScryfallCardInput;
 }

@@ -32,5 +32,8 @@ export class ScryfallPriceCountAggregate {
   cardId!: number;
 
   @Field(() => Int, { nullable: false })
+  currentPriceOfCardId!: number;
+
+  @Field(() => Int, { nullable: false })
   _all!: number;
 }

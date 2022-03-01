@@ -40,6 +40,11 @@ model ScryfallSet {
   // Relations
   cards ScryfallCard[]
 
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
+
   @@index([code])
 }
 
@@ -53,6 +58,11 @@ model ScryfallRelatedCard {
   name        String
   typeLine    String
   uri         String
+
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
 }
 
 model ScryfallCardFace {
@@ -79,6 +89,11 @@ model ScryfallCardFace {
   toughness       String?
   typeLine        String?
   watermark       String?
+
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
 }
 
 model ScryfallCard {
@@ -171,12 +186,16 @@ model ScryfallCard {
   referencedBy  ScryfallRelatedCard[] @relation("RelatedCard_reference")
   cardFaces     ScryfallCardFace[]
   scryfallPrice ScryfallPrice[]
+  card          Card[]
 
-  @@index([name])
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
 }
 
 model ScryfallPrice {
-  id   String   @id @default(uuid())
+  id   String   @id @default(uuid()) @db.Uuid
   date DateTime @db.Date
 
   eur       Float? @db.Real
@@ -186,7 +205,84 @@ model ScryfallPrice {
   usdFoil   Float? @db.Real
   usdEtched Float? @db.Real
 
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
+
   // Relations
-  card   ScryfallCard @relation(fields: [cardId], references: [id], onDelete: Cascade)
-  cardId String       @db.Uuid
+  card                 ScryfallCard @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  cardId               String       @db.Uuid
+  currentPriceOfCard   Card?        @relation(fields: [currentPriceOfCardId], references: [id])
+  currentPriceOfCardId String?      @unique @db.Uuid
+}
+
+model User {
+  id             String @id @default(uuid()) @db.Uuid
+  externalAuthId String @unique
+  email          String @unique
+
+  // Relations
+  collections Collection[]
+
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
+
+  @@index([externalAuthId])
+  @@index([email])
+}
+
+model Card {
+  id String @id @default(uuid()) @db.Uuid
+
+  scryfallCard   ScryfallCard @relation(fields: [scryfallCardId], references: [id], onDelete: Cascade)
+  scryfallCardId String       @unique @db.Uuid
+
+  currentPrice ScryfallPrice?
+
+  collections CardsInCollection[]
+
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
+
+  @@index([scryfallCardId])
+}
+
+model Collection {
+  id   String @id @default(uuid()) @db.Uuid
+  name String
+
+  // Relations
+  user   User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String              @db.Uuid
+  cards  CardsInCollection[]
+
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+model CardsInCollection {
+  card   Card   @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  cardId String @db.Uuid
+
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  collectionId String     @db.Uuid
+
+  count Int @default(0)
+
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
+
+  @@id([cardId, collectionId])
 }

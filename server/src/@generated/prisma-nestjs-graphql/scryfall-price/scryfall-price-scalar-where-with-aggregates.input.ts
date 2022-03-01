@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 import { FloatNullableWithAggregatesFilter } from '../prisma/float-nullable-with-aggregates-filter.input';
+import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
 
 @InputType()
 export class ScryfallPriceScalarWhereWithAggregatesInput {
@@ -47,4 +48,7 @@ export class ScryfallPriceScalarWhereWithAggregatesInput {
 
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   cardId?: StringWithAggregatesFilter;
+
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  currentPriceOfCardId?: StringNullableWithAggregatesFilter;
 }

@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
 import { ScryfallCardOrderByWithRelationInput } from '../scryfall-card/scryfall-card-order-by-with-relation.input';
+import { CardOrderByWithRelationInput } from '../card/card-order-by-with-relation.input';
 
 @InputType()
 export class ScryfallPriceOrderByWithRelationInput {
@@ -34,4 +35,10 @@ export class ScryfallPriceOrderByWithRelationInput {
 
   @Field(() => SortOrder, { nullable: true })
   cardId?: keyof typeof SortOrder;
+
+  @Field(() => CardOrderByWithRelationInput, { nullable: true })
+  currentPriceOfCard?: CardOrderByWithRelationInput;
+
+  @Field(() => SortOrder, { nullable: true })
+  currentPriceOfCardId?: keyof typeof SortOrder;
 }

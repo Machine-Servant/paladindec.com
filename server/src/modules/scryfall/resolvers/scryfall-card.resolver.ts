@@ -1,11 +1,4 @@
-import {
-  Args,
-  Parent,
-  Query,
-  ResolveField,
-  ResolveProperty,
-  Resolver,
-} from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { ScryfallCardFace } from '../../../@generated/prisma-nestjs-graphql/scryfall-card-face/scryfall-card-face.model';
 import { FindManyScryfallCardArgs } from '../../../@generated/prisma-nestjs-graphql/scryfall-card/find-many-scryfall-card.args';
 import { ScryfallCardCount } from '../../../@generated/prisma-nestjs-graphql/scryfall-card/scryfall-card-count.output';
@@ -99,7 +92,7 @@ export class ScryfallCardResolver {
     });
   }
 
-  @ResolveProperty('scryfallPricesGroupBy', () => [ScryfallPriceGroupBy])
+  @ResolveField('scryfallPricesGroupBy', () => [ScryfallPriceGroupBy])
   async getScryfallPricesGroupBy(
     @Parent() card: ScryfallCard,
     @Args() args?: ScryfallPriceGroupByWithoutByArgs,
@@ -110,5 +103,19 @@ export class ScryfallCardResolver {
       where: { ...args.where, cardId: { equals: card.id } },
     });
     return results;
+  }
+
+  @ResolveField('scryfallMostRecentPrice', () => ScryfallPrice, {
+    nullable: true,
+  })
+  async getScryfallMostRecentPrice(@Parent() card: ScryfallCard) {
+    const results = await this.scryfallPriceService.findMany({
+      where: { cardId: { equals: card.id } },
+      orderBy: [{ date: 'desc' }],
+    });
+    if (results.length === 0) {
+      return null;
+    }
+    return results[0];
   }
 }

@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { NullableFloatFieldUpdateOperationsInput } from '../prisma/nullable-float-field-update-operations.input';
+import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 
 @InputType()
 export class ScryfallPriceUncheckedUpdateManyWithoutScryfallPriceInput {
@@ -29,4 +30,7 @@ export class ScryfallPriceUncheckedUpdateManyWithoutScryfallPriceInput {
 
   @Field(() => NullableFloatFieldUpdateOperationsInput, { nullable: true })
   usdEtched?: NullableFloatFieldUpdateOperationsInput;
+
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  currentPriceOfCardId?: NullableStringFieldUpdateOperationsInput;
 }

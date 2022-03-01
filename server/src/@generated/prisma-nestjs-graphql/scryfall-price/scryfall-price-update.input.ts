@@ -4,6 +4,7 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { NullableFloatFieldUpdateOperationsInput } from '../prisma/nullable-float-field-update-operations.input';
 import { ScryfallCardUpdateOneRequiredWithoutScryfallPriceInput } from '../scryfall-card/scryfall-card-update-one-required-without-scryfall-price.input';
+import { CardUpdateOneWithoutCurrentPriceInput } from '../card/card-update-one-without-current-price.input';
 
 @InputType()
 export class ScryfallPriceUpdateInput {
@@ -35,4 +36,7 @@ export class ScryfallPriceUpdateInput {
     nullable: true,
   })
   card?: ScryfallCardUpdateOneRequiredWithoutScryfallPriceInput;
+
+  @Field(() => CardUpdateOneWithoutCurrentPriceInput, { nullable: true })
+  currentPriceOfCard?: CardUpdateOneWithoutCurrentPriceInput;
 }

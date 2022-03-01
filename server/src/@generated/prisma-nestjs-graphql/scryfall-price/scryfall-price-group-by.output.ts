@@ -36,6 +36,9 @@ export class ScryfallPriceGroupBy {
   @Field(() => String, { nullable: false })
   cardId!: string;
 
+  @Field(() => String, { nullable: true })
+  currentPriceOfCardId?: string;
+
   @Field(() => ScryfallPriceCountAggregate, { nullable: true })
   _count?: ScryfallPriceCountAggregate;
 

@@ -5,6 +5,7 @@ import { ScryfallSetOrderByWithRelationInput } from '../scryfall-set/scryfall-se
 import { ScryfallRelatedCardOrderByRelationAggregateInput } from '../scryfall-related-card/scryfall-related-card-order-by-relation-aggregate.input';
 import { ScryfallCardFaceOrderByRelationAggregateInput } from '../scryfall-card-face/scryfall-card-face-order-by-relation-aggregate.input';
 import { ScryfallPriceOrderByRelationAggregateInput } from '../scryfall-price/scryfall-price-order-by-relation-aggregate.input';
+import { CardOrderByRelationAggregateInput } from '../card/card-order-by-relation-aggregate.input';
 
 @InputType()
 export class ScryfallCardOrderByWithRelationInput {
@@ -259,4 +260,7 @@ export class ScryfallCardOrderByWithRelationInput {
 
   @Field(() => ScryfallPriceOrderByRelationAggregateInput, { nullable: true })
   scryfallPrice?: ScryfallPriceOrderByRelationAggregateInput;
+
+  @Field(() => CardOrderByRelationAggregateInput, { nullable: true })
+  card?: CardOrderByRelationAggregateInput;
 }

@@ -27,4 +27,7 @@ export class ScryfallPriceCreateManyCardInput {
 
   @Field(() => Float, { nullable: true })
   usdEtched?: number;
+
+  @Field(() => String, { nullable: true })
+  currentPriceOfCardId?: string;
 }

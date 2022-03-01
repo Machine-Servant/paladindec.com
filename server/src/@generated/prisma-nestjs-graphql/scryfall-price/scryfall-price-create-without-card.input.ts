@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Float } from '@nestjs/graphql';
+import { CardCreateNestedOneWithoutCurrentPriceInput } from '../card/card-create-nested-one-without-current-price.input';
 
 @InputType()
 export class ScryfallPriceCreateWithoutCardInput {
@@ -27,4 +28,7 @@ export class ScryfallPriceCreateWithoutCardInput {
 
   @Field(() => Float, { nullable: true })
   usdEtched?: number;
+
+  @Field(() => CardCreateNestedOneWithoutCurrentPriceInput, { nullable: true })
+  currentPriceOfCard?: CardCreateNestedOneWithoutCurrentPriceInput;
 }

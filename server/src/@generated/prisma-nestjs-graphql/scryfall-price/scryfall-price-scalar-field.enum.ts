@@ -10,6 +10,7 @@ export enum ScryfallPriceScalarFieldEnum {
   usdFoil = 'usdFoil',
   usdEtched = 'usdEtched',
   cardId = 'cardId',
+  currentPriceOfCardId = 'currentPriceOfCardId',
 }
 
 registerEnumType(ScryfallPriceScalarFieldEnum, {
