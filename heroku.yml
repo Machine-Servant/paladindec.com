@@ -7,7 +7,7 @@ build:
     web: ./server/Dockerfile
 release:
   command:
-    - ./server/scripts/release.sh
+    - ./scripts/release.sh
   image: web
 run:
   web: node dist/src/main
