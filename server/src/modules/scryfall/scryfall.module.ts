@@ -1,5 +1,5 @@
 import { BullModule } from '@nestjs/bull';
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from '../prisma/prisma.module';
 import { BulkDownloadConsumer } from './consumers/bulk-download.consumer';
@@ -17,6 +17,7 @@ import { SetDataService } from './services/set-data.service';
 import { ScryfallPriceService } from './services/scryfall-price.service';
 import { ScryfallPriceConsumer } from './consumers/scryfall-price.consumer';
 import { ScryfallPriceResolver } from './resolvers/scryfall-price.resolver';
+import { CardModule } from '../card/card.module';
 
 @Module({
   imports: [
@@ -24,7 +25,9 @@ import { ScryfallPriceResolver } from './resolvers/scryfall-price.resolver';
     BullModule.registerQueue({ name: 'bulk-data' }),
     BullModule.registerQueue({ name: 'set-data' }),
     BullModule.registerQueue({ name: 'price-data' }),
+    BullModule.registerQueue({ name: 'card' }),
     ConfigModule,
+    forwardRef(() => CardModule),
   ],
   providers: [
     BulkDataService,

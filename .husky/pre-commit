@@ -3,3 +3,6 @@
 
 cd server
 npx lint-staged
+
+cd ../client
+npx lint-staged

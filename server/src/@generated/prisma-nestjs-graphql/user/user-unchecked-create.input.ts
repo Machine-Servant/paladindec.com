@@ -4,17 +4,16 @@ import { CollectionUncheckedCreateNestedManyWithoutUserInput } from '../collecti
 
 @InputType()
 export class UserUncheckedCreateInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => String, { nullable: false })
-  externalAuthId!: string;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => String, { nullable: false })
-  email!: string;
+    @Field(() => String, {nullable:false})
+    externalAuthId!: string;
 
-  @Field(() => CollectionUncheckedCreateNestedManyWithoutUserInput, {
-    nullable: true,
-  })
-  collections?: CollectionUncheckedCreateNestedManyWithoutUserInput;
+    @Field(() => String, {nullable:false})
+    email!: string;
+
+    @Field(() => CollectionUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    collections?: CollectionUncheckedCreateNestedManyWithoutUserInput;
 }

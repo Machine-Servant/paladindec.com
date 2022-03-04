@@ -4,6 +4,7 @@ import { ScryfallSetWhereUniqueInput } from './scryfall-set-where-unique.input';
 
 @ArgsType()
 export class FindUniqueScryfallSetArgs {
-  @Field(() => ScryfallSetWhereUniqueInput, { nullable: false })
-  where!: ScryfallSetWhereUniqueInput;
+
+    @Field(() => ScryfallSetWhereUniqueInput, {nullable:false})
+    where!: ScryfallSetWhereUniqueInput;
 }

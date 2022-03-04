@@ -4,6 +4,7 @@ import { SortOrder } from '../prisma/sort-order.enum';
 
 @InputType()
 export class ScryfallCardFaceAvgOrderByAggregateInput {
-  @Field(() => SortOrder, { nullable: true })
-  cmc?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    cmc?: keyof typeof SortOrder;
 }

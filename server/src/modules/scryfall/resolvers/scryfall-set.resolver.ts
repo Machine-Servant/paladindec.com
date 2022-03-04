@@ -2,9 +2,8 @@ import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { ScryfallSet as PrismaScryfallSet } from 'prisma/prisma-client';
 import { FindManyScryfallCardArgs } from '../../../@generated/prisma-nestjs-graphql/scryfall-card/find-many-scryfall-card.args';
 import { ScryfallCard } from '../../../@generated/prisma-nestjs-graphql/scryfall-card/scryfall-card.model';
+import { FindManyScryfallSetArgs } from '../../../@generated/prisma-nestjs-graphql/scryfall-set/find-many-scryfall-set.args';
 import { ScryfallSetCount } from '../../../@generated/prisma-nestjs-graphql/scryfall-set/scryfall-set-count.output';
-import { ScryfallSetOrderByWithAggregationInput } from '../../../@generated/prisma-nestjs-graphql/scryfall-set/scryfall-set-order-by-with-aggregation.input';
-import { ScryfallSetWhereInput } from '../../../@generated/prisma-nestjs-graphql/scryfall-set/scryfall-set-where.input';
 import { ScryfallSet } from '../../../@generated/prisma-nestjs-graphql/scryfall-set/scryfall-set.model';
 import { ScryfallCardService } from '../services/scryfall-card.service';
 import { ScryfallSetService } from '../services/scryfall-set.service';
@@ -18,11 +17,9 @@ export class ScryfallSetResolver {
 
   @Query(() => [ScryfallSet])
   async allScryfallSets(
-    @Args('where', { nullable: true }) where?: ScryfallSetWhereInput,
-    @Args('orderBy', { nullable: true })
-    orderBy?: ScryfallSetOrderByWithAggregationInput,
+    @Args({ nullable: true }) args?: FindManyScryfallSetArgs,
   ): Promise<ScryfallSet[]> {
-    return this.scryfallSetService.findMany(where, orderBy);
+    return this.scryfallSetService.findMany(args);
   }
 
   @ResolveField('cards', () => [ScryfallCard])

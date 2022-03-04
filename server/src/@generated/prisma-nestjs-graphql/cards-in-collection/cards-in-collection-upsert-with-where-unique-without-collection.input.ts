@@ -6,16 +6,13 @@ import { CardsInCollectionCreateWithoutCollectionInput } from './cards-in-collec
 
 @InputType()
 export class CardsInCollectionUpsertWithWhereUniqueWithoutCollectionInput {
-  @Field(() => CardsInCollectionWhereUniqueInput, { nullable: false })
-  where!: CardsInCollectionWhereUniqueInput;
 
-  @Field(() => CardsInCollectionUpdateWithoutCollectionInput, {
-    nullable: false,
-  })
-  update!: CardsInCollectionUpdateWithoutCollectionInput;
+    @Field(() => CardsInCollectionWhereUniqueInput, {nullable:false})
+    where!: CardsInCollectionWhereUniqueInput;
 
-  @Field(() => CardsInCollectionCreateWithoutCollectionInput, {
-    nullable: false,
-  })
-  create!: CardsInCollectionCreateWithoutCollectionInput;
+    @Field(() => CardsInCollectionUpdateWithoutCollectionInput, {nullable:false})
+    update!: CardsInCollectionUpdateWithoutCollectionInput;
+
+    @Field(() => CardsInCollectionCreateWithoutCollectionInput, {nullable:false})
+    create!: CardsInCollectionCreateWithoutCollectionInput;
 }

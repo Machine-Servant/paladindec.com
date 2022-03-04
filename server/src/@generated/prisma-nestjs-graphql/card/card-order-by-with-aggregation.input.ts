@@ -7,18 +7,34 @@ import { CardMinOrderByAggregateInput } from './card-min-order-by-aggregate.inpu
 
 @InputType()
 export class CardOrderByWithAggregationInput {
-  @Field(() => SortOrder, { nullable: true })
-  id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  scryfallCardId?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    id?: keyof typeof SortOrder;
 
-  @Field(() => CardCountOrderByAggregateInput, { nullable: true })
-  _count?: CardCountOrderByAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    scryfallCardId?: keyof typeof SortOrder;
 
-  @Field(() => CardMaxOrderByAggregateInput, { nullable: true })
-  _max?: CardMaxOrderByAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    collectorNumber?: keyof typeof SortOrder;
 
-  @Field(() => CardMinOrderByAggregateInput, { nullable: true })
-  _min?: CardMinOrderByAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    isBorderless?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    isShowcase?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    isPaper?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    canBeFoil?: keyof typeof SortOrder;
+
+    @Field(() => CardCountOrderByAggregateInput, {nullable:true})
+    _count?: CardCountOrderByAggregateInput;
+
+    @Field(() => CardMaxOrderByAggregateInput, {nullable:true})
+    _max?: CardMaxOrderByAggregateInput;
+
+    @Field(() => CardMinOrderByAggregateInput, {nullable:true})
+    _min?: CardMinOrderByAggregateInput;
 }

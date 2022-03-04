@@ -14,6 +14,7 @@ import { PrismaModule } from './modules/prisma/prisma.module';
 import { ScryfallModule } from './modules/scryfall/scryfall.module';
 import { UserModule } from './modules/user/user.module';
 import { CardModule } from './modules/card/card.module';
+import { CollectionModule } from './modules/collection/collection.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { CardModule } from './modules/card/card.module';
     CommonModule,
     UserModule,
     CardModule,
+    CollectionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

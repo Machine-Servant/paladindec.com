@@ -4,18 +4,16 @@ import { CardsInCollectionUncheckedCreateNestedManyWithoutCollectionInput } from
 
 @InputType()
 export class CollectionUncheckedCreateInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => String, { nullable: false })
-  userId!: string;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(
-    () => CardsInCollectionUncheckedCreateNestedManyWithoutCollectionInput,
-    { nullable: true },
-  )
-  cards?: CardsInCollectionUncheckedCreateNestedManyWithoutCollectionInput;
+    @Field(() => String, {nullable:false})
+    userId!: string;
+
+    @Field(() => CardsInCollectionUncheckedCreateNestedManyWithoutCollectionInput, {nullable:true})
+    cards?: CardsInCollectionUncheckedCreateNestedManyWithoutCollectionInput;
 }

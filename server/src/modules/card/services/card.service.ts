@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { Card } from '@prisma/client';
+import { Card, Prisma } from '@prisma/client';
+import { isEmpty } from 'lodash';
 import { CardCreateInput } from '../../../@generated/prisma-nestjs-graphql/card/card-create.input';
 import { FindManyCardArgs } from '../../../@generated/prisma-nestjs-graphql/card/find-many-card.args';
 import { FindUniqueCardArgs } from '../../../@generated/prisma-nestjs-graphql/card/find-unique-card.args';
@@ -26,11 +27,14 @@ export class CardService {
     }
     return this.prismaService.card.findMany({
       ...args,
-      include,
+      include: !isEmpty(include) ? include : undefined,
     });
   }
 
-  async findUnique(args: FindUniqueCardArgs, include: any): Promise<Card> {
+  async findUnique(
+    args: FindUniqueCardArgs,
+    include?: Prisma.CardInclude,
+  ): Promise<Card> {
     return this.prismaService.card.findUnique({ ...args, include });
   }
 
@@ -43,6 +47,7 @@ export class CardService {
       });
       return result;
     } catch (err) {
+      this.logger.error(data);
       this.logger.error(err);
       throw err;
     }

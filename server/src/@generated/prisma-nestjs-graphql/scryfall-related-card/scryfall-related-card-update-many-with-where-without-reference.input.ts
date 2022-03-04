@@ -5,9 +5,10 @@ import { ScryfallRelatedCardUpdateManyMutationInput } from './scryfall-related-c
 
 @InputType()
 export class ScryfallRelatedCardUpdateManyWithWhereWithoutReferenceInput {
-  @Field(() => ScryfallRelatedCardScalarWhereInput, { nullable: false })
-  where!: ScryfallRelatedCardScalarWhereInput;
 
-  @Field(() => ScryfallRelatedCardUpdateManyMutationInput, { nullable: false })
-  data!: ScryfallRelatedCardUpdateManyMutationInput;
+    @Field(() => ScryfallRelatedCardScalarWhereInput, {nullable:false})
+    where!: ScryfallRelatedCardScalarWhereInput;
+
+    @Field(() => ScryfallRelatedCardUpdateManyMutationInput, {nullable:false})
+    data!: ScryfallRelatedCardUpdateManyMutationInput;
 }

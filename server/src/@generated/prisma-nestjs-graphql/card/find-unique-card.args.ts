@@ -4,6 +4,7 @@ import { CardWhereUniqueInput } from './card-where-unique.input';
 
 @ArgsType()
 export class FindUniqueCardArgs {
-  @Field(() => CardWhereUniqueInput, { nullable: false })
-  where!: CardWhereUniqueInput;
+
+    @Field(() => CardWhereUniqueInput, {nullable:false})
+    where!: CardWhereUniqueInput;
 }

@@ -4,6 +4,7 @@ import { CardWhereInput } from './card-where.input';
 
 @ArgsType()
 export class DeleteManyCardArgs {
-  @Field(() => CardWhereInput, { nullable: true })
-  where?: CardWhereInput;
+
+    @Field(() => CardWhereInput, {nullable:true})
+    where?: CardWhereInput;
 }

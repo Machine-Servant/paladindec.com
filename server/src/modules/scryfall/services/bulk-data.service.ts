@@ -64,11 +64,27 @@ export class BulkDataService {
     return true;
   }
 
-  async process(fileName: string): Promise<boolean> {
+  async process(): Promise<boolean> {
+    const results = await axios.get<ScryfallBulkDataType>(
+      `${this.configService.get<string>(
+        'SCRYFALL_API_URI',
+      )}/bulk-data/default_cards`,
+    );
+
+    await this.bulkDataQueue.add('process', {
+      uri: results.data.download_uri,
+      contentType: results.data.content_type,
+      typeName: 'default_cards',
+    });
+
+    return true;
+  }
+
+  async processBulkData(fileName: string): Promise<boolean> {
     const filePath = `${this.configService.get<string>(
       'DOWNLOADS_DIR',
     )}/${fileName}`;
-    await this.bulkDataQueue.add('process', { filePath });
+    await this.bulkDataQueue.add('process-bulk-data', { filePath });
     return true;
   }
 

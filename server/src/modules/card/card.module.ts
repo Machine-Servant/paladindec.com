@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { CardService } from './services/card.service';
 import { CardResolver } from './resolvers/card.resolver';
 import { PrismaModule } from '../prisma/prisma.module';
@@ -9,9 +9,10 @@ import { CardConsumer } from './consumers/card.consumer';
 @Module({
   imports: [
     PrismaModule,
-    ScryfallModule,
+    forwardRef(() => ScryfallModule),
     BullModule.registerQueue({ name: 'card' }),
   ],
   providers: [CardService, CardResolver, CardConsumer],
+  exports: [CardService],
 })
 export class CardModule {}

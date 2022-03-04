@@ -6,12 +6,19 @@ import { Int } from '@nestjs/graphql';
 
 @InputType()
 export class CardsInCollectionCreateInput {
-  @Field(() => CardCreateNestedOneWithoutCollectionsInput, { nullable: false })
-  card!: CardCreateNestedOneWithoutCollectionsInput;
 
-  @Field(() => CollectionCreateNestedOneWithoutCardsInput, { nullable: false })
-  collection!: CollectionCreateNestedOneWithoutCardsInput;
+    @Field(() => CardCreateNestedOneWithoutCollectionsInput, {nullable:false})
+    card!: CardCreateNestedOneWithoutCollectionsInput;
 
-  @Field(() => Int, { nullable: true })
-  count?: number;
+    @Field(() => CollectionCreateNestedOneWithoutCardsInput, {nullable:false})
+    collection!: CollectionCreateNestedOneWithoutCardsInput;
+
+    @Field(() => Boolean, {nullable:true})
+    isFoil?: boolean;
+
+    @Field(() => Boolean, {nullable:true})
+    isEtched?: boolean;
+
+    @Field(() => Int, {nullable:true})
+    count?: number;
 }

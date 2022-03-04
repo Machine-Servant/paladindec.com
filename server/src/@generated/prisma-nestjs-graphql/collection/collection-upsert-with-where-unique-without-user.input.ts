@@ -6,12 +6,13 @@ import { CollectionCreateWithoutUserInput } from './collection-create-without-us
 
 @InputType()
 export class CollectionUpsertWithWhereUniqueWithoutUserInput {
-  @Field(() => CollectionWhereUniqueInput, { nullable: false })
-  where!: CollectionWhereUniqueInput;
 
-  @Field(() => CollectionUpdateWithoutUserInput, { nullable: false })
-  update!: CollectionUpdateWithoutUserInput;
+    @Field(() => CollectionWhereUniqueInput, {nullable:false})
+    where!: CollectionWhereUniqueInput;
 
-  @Field(() => CollectionCreateWithoutUserInput, { nullable: false })
-  create!: CollectionCreateWithoutUserInput;
+    @Field(() => CollectionUpdateWithoutUserInput, {nullable:false})
+    update!: CollectionUpdateWithoutUserInput;
+
+    @Field(() => CollectionCreateWithoutUserInput, {nullable:false})
+    create!: CollectionCreateWithoutUserInput;
 }

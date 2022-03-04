@@ -6,12 +6,13 @@ import { ScryfallSetWhereUniqueInput } from './scryfall-set-where-unique.input';
 
 @InputType()
 export class ScryfallSetCreateNestedOneWithoutCardsInput {
-  @Field(() => ScryfallSetCreateWithoutCardsInput, { nullable: true })
-  create?: ScryfallSetCreateWithoutCardsInput;
 
-  @Field(() => ScryfallSetCreateOrConnectWithoutCardsInput, { nullable: true })
-  connectOrCreate?: ScryfallSetCreateOrConnectWithoutCardsInput;
+    @Field(() => ScryfallSetCreateWithoutCardsInput, {nullable:true})
+    create?: ScryfallSetCreateWithoutCardsInput;
 
-  @Field(() => ScryfallSetWhereUniqueInput, { nullable: true })
-  connect?: ScryfallSetWhereUniqueInput;
+    @Field(() => ScryfallSetCreateOrConnectWithoutCardsInput, {nullable:true})
+    connectOrCreate?: ScryfallSetCreateOrConnectWithoutCardsInput;
+
+    @Field(() => ScryfallSetWhereUniqueInput, {nullable:true})
+    connect?: ScryfallSetWhereUniqueInput;
 }

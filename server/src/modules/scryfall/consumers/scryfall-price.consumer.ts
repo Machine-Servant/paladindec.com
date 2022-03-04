@@ -1,6 +1,7 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { Job } from 'bull';
 import { chunk } from 'lodash';
 import { ScryfallPriceUncheckedCreateInput } from '../../../@generated/prisma-nestjs-graphql/scryfall-price/scryfall-price-unchecked-create.input';
 import { ScryfallCardService } from '../services/scryfall-card.service';
@@ -37,7 +38,7 @@ export class ScryfallPriceConsumer {
   private readonly logger = new Logger(ScryfallPriceConsumer.name);
 
   @Process('process')
-  async processPriceData() {
+  async processPriceData(job: Job) {
     this.logger.debug(`Processing price data for all cards`);
 
     this.logger.debug(`Fetching all cards`);
@@ -50,34 +51,49 @@ export class ScryfallPriceConsumer {
 
     const date = new Date();
 
-    while (batches.length) {
-      this.logger.debug(
-        `Processing price data batch #${++batchCount} of ${batchLength}`,
-      );
-      const batch = batches.shift();
+    try {
+      while (batches.length) {
+        this.logger.debug(
+          `Processing price data batch #${++batchCount} of ${batchLength}`,
+        );
+        const batch = batches.shift();
 
-      await Promise.all(
-        batch.map(async (card) => {
-          const prices = card.prices;
+        await Promise.all(
+          batch.map(async (card) => {
+            const prices = card.prices;
 
-          if (!isPriceJsonData(prices)) return;
+            if (!isPriceJsonData(prices)) return;
 
-          const priceData: ScryfallPriceUncheckedCreateInput = {
-            date,
-            cardId: card.id,
-            eur: Number(prices.eur),
-            tix: Number(prices.tix),
-            usd: Number(prices.usd),
-            eurFoil: Number(prices.eur_foil),
-            usdFoil: Number(prices.usd_foil),
-            usdEtched: Number(prices.usd_etched),
-          };
+            const priceData: ScryfallPriceUncheckedCreateInput = {
+              date,
+              cardId: card.id,
+              eur: Number(prices.eur),
+              tix: Number(prices.tix),
+              usd: Number(prices.usd),
+              eurFoil: Number(prices.eur_foil),
+              usdFoil: Number(prices.usd_foil),
+              usdEtched: Number(prices.usd_etched),
+            };
 
-          return await this.scryfallPriceService.create(priceData);
-        }),
-      );
+            try {
+              const results = await this.scryfallPriceService.create(priceData);
+              return results;
+            } catch (err) {
+              this.logger.error(err, priceData);
+              job.moveToFailed(err);
+              throw err;
+            }
+          }),
+        );
 
-      this.logger.debug(`Processed ${batchCount}`);
+        this.logger.debug(`Processed ${batchCount}`);
+      }
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
     }
+
+    job.moveToCompleted('done', true);
   }
 }

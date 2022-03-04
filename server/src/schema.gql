@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
 input BoolFilter {
   equals: Boolean
   not: NestedBoolFilter
@@ -51,9 +55,14 @@ type BulkDataObjectType {
 
 type Card {
   _count: CardCount!
+  canBeFoil: Boolean!
   collections: [CardsInCollection!]
+  collectorNumber: String
   currentPrice: ScryfallPrice!
   id: ID!
+  isBorderless: Boolean!
+  isPaper: Boolean!
+  isShowcase: Boolean!
   scryfallCard: ScryfallCard!
   scryfallCardId: String!
 }
@@ -73,9 +82,14 @@ input CardOrderByRelationAggregateInput {
 }
 
 input CardOrderByWithRelationInput {
+  canBeFoil: SortOrder
   collections: CardsInCollectionOrderByRelationAggregateInput
+  collectorNumber: SortOrder
   currentPrice: ScryfallPriceOrderByWithRelationInput
   id: SortOrder
+  isBorderless: SortOrder
+  isPaper: SortOrder
+  isShowcase: SortOrder
   scryfallCard: ScryfallCardOrderByWithRelationInput
   scryfallCardId: SortOrder
 }
@@ -86,7 +100,12 @@ input CardRelationFilter {
 }
 
 enum CardScalarFieldEnum {
+  canBeFoil
+  collectorNumber
   id
+  isBorderless
+  isPaper
+  isShowcase
   scryfallCardId
 }
 
@@ -94,9 +113,14 @@ input CardWhereInput {
   AND: [CardWhereInput!]
   NOT: [CardWhereInput!]
   OR: [CardWhereInput!]
+  canBeFoil: BoolFilter
   collections: CardsInCollectionListRelationFilter
+  collectorNumber: StringNullableFilter
   currentPrice: ScryfallPriceRelationFilter
   id: StringFilter
+  isBorderless: BoolFilter
+  isPaper: BoolFilter
+  isShowcase: BoolFilter
   scryfallCard: ScryfallCardRelationFilter
   scryfallCardId: StringFilter
 }
@@ -112,6 +136,19 @@ type CardsInCollection {
   collection: Collection!
   collectionId: String!
   count: Int!
+  isEtched: Boolean!
+  isFoil: Boolean!
+  price: CardsInCollectionCardPrice
+}
+
+input CardsInCollectionCardIdCollectionIdCompoundUniqueInput {
+  cardId: String!
+  collectionId: String!
+}
+
+type CardsInCollectionCardPrice {
+  eur: Float!
+  usd: Float!
 }
 
 input CardsInCollectionListRelationFilter {
@@ -124,6 +161,32 @@ input CardsInCollectionOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+input CardsInCollectionOrderByWithRelationInput {
+  card: CardOrderByWithRelationInput
+  cardId: SortOrder
+  collection: CollectionOrderByWithRelationInput
+  collectionId: SortOrder
+  count: SortOrder
+  isEtched: SortOrder
+  isFoil: SortOrder
+}
+
+enum CardsInCollectionScalarFieldEnum {
+  cardId
+  collectionId
+  count
+  isEtched
+  isFoil
+}
+
+input CardsInCollectionUncheckedUpdateInput {
+  cardId: StringFieldUpdateOperationsInput
+  collectionId: StringFieldUpdateOperationsInput
+  count: IntFieldUpdateOperationsInput
+  isEtched: BoolFieldUpdateOperationsInput
+  isFoil: BoolFieldUpdateOperationsInput
+}
+
 input CardsInCollectionWhereInput {
   AND: [CardsInCollectionWhereInput!]
   NOT: [CardsInCollectionWhereInput!]
@@ -133,11 +196,17 @@ input CardsInCollectionWhereInput {
   collection: CollectionRelationFilter
   collectionId: StringFilter
   count: IntFilter
+  isEtched: BoolFilter
+  isFoil: BoolFilter
+}
+
+input CardsInCollectionWhereUniqueInput {
+  cardId_collectionId: CardsInCollectionCardIdCollectionIdCompoundUniqueInput
 }
 
 type Collection {
   _count: CollectionCount!
-  cards: [CardsInCollection!]
+  cards(cursor: CardsInCollectionWhereUniqueInput, distinct: [CardsInCollectionScalarFieldEnum!], orderBy: [CardsInCollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CardsInCollectionWhereInput): [CardsInCollection!]!
   id: ID!
   name: String!
   user: User!
@@ -154,9 +223,32 @@ input CollectionListRelationFilter {
   some: CollectionWhereInput
 }
 
+input CollectionOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input CollectionOrderByWithRelationInput {
+  cards: CardsInCollectionOrderByRelationAggregateInput
+  id: SortOrder
+  name: SortOrder
+  user: UserOrderByWithRelationInput
+  userId: SortOrder
+}
+
 input CollectionRelationFilter {
   is: CollectionWhereInput
   isNot: CollectionWhereInput
+}
+
+enum CollectionScalarFieldEnum {
+  id
+  name
+  userId
+}
+
+input CollectionUserIdNameCompoundUniqueInput {
+  name: String!
+  userId: String!
 }
 
 input CollectionWhereInput {
@@ -168,6 +260,11 @@ input CollectionWhereInput {
   name: StringFilter
   user: UserRelationFilter
   userId: StringFilter
+}
+
+input CollectionWhereUniqueInput {
+  id: String
+  userId_name: CollectionUserIdNameCompoundUniqueInput
 }
 
 """
@@ -238,6 +335,14 @@ input FloatNullableWithAggregatesFilter {
   notIn: [Float!]
 }
 
+input IntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
+}
+
 input IntFilter {
   equals: Int
   gt: Int
@@ -296,9 +401,11 @@ type Mutation {
   processAllParts: Boolean!
   processBulkData(fileName: String!): Boolean!
   processCardFaces: Boolean!
+  processDaily: Boolean!
   processPriceData: Boolean!
   processSetData: Boolean!
   processUpdateCardList: Boolean!
+  updateCardsInCollection(input: CardsInCollectionUncheckedUpdateInput!): CardsInCollection!
 }
 
 input NestedBoolFilter {
@@ -461,9 +568,10 @@ input NestedStringWithAggregatesFilter {
 type Query {
   allBulkData: [BulkDataObjectType!]!
   allCards(cursor: CardWhereUniqueInput, distinct: [CardScalarFieldEnum!], orderBy: [CardOrderByWithRelationInput!], skip: Int, take: Int, where: CardWhereInput): [Card!]!
+  allCollections(cursor: CollectionWhereUniqueInput, distinct: [CollectionScalarFieldEnum!], orderBy: [CollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CollectionWhereInput): [Collection!]!
   allScryfallCards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
   allScryfallPrices(cursor: ScryfallPriceWhereUniqueInput, distinct: [ScryfallPriceScalarFieldEnum!], orderBy: [ScryfallPriceOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPrice!]!
-  allScryfallSets(orderBy: ScryfallSetOrderByWithAggregationInput, where: ScryfallSetWhereInput): [ScryfallSet!]!
+  allScryfallSets(cursor: ScryfallSetWhereUniqueInput, distinct: [ScryfallSetScalarFieldEnum!], orderBy: [ScryfallSetOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallSetWhereInput): [ScryfallSet!]!
   getString: String!
 }
 
@@ -917,7 +1025,6 @@ type ScryfallPrice {
   eur: Float
   eurFoil: Float
   id: ID!
-  test: Int!
   tix: Float
   usd: Float
   usdEtched: Float
@@ -1277,111 +1384,8 @@ type ScryfallSet {
   uri: String!
 }
 
-input ScryfallSetAvgOrderByAggregateInput {
-  cardCount: SortOrder
-  printedSize: SortOrder
-  tcgPlayerId: SortOrder
-}
-
 type ScryfallSetCount {
   cards: Int!
-}
-
-input ScryfallSetCountOrderByAggregateInput {
-  arenaCode: SortOrder
-  block: SortOrder
-  blockCode: SortOrder
-  cardCount: SortOrder
-  code: SortOrder
-  iconSvgUri: SortOrder
-  id: SortOrder
-  isDigital: SortOrder
-  isFoilOnly: SortOrder
-  isNonFoilOnly: SortOrder
-  mtgoCode: SortOrder
-  name: SortOrder
-  parentSetCode: SortOrder
-  printedSize: SortOrder
-  releasedAt: SortOrder
-  scryfallUri: SortOrder
-  searchUri: SortOrder
-  setType: SortOrder
-  tcgPlayerId: SortOrder
-  uri: SortOrder
-}
-
-input ScryfallSetMaxOrderByAggregateInput {
-  arenaCode: SortOrder
-  block: SortOrder
-  blockCode: SortOrder
-  cardCount: SortOrder
-  code: SortOrder
-  iconSvgUri: SortOrder
-  id: SortOrder
-  isDigital: SortOrder
-  isFoilOnly: SortOrder
-  isNonFoilOnly: SortOrder
-  mtgoCode: SortOrder
-  name: SortOrder
-  parentSetCode: SortOrder
-  printedSize: SortOrder
-  releasedAt: SortOrder
-  scryfallUri: SortOrder
-  searchUri: SortOrder
-  setType: SortOrder
-  tcgPlayerId: SortOrder
-  uri: SortOrder
-}
-
-input ScryfallSetMinOrderByAggregateInput {
-  arenaCode: SortOrder
-  block: SortOrder
-  blockCode: SortOrder
-  cardCount: SortOrder
-  code: SortOrder
-  iconSvgUri: SortOrder
-  id: SortOrder
-  isDigital: SortOrder
-  isFoilOnly: SortOrder
-  isNonFoilOnly: SortOrder
-  mtgoCode: SortOrder
-  name: SortOrder
-  parentSetCode: SortOrder
-  printedSize: SortOrder
-  releasedAt: SortOrder
-  scryfallUri: SortOrder
-  searchUri: SortOrder
-  setType: SortOrder
-  tcgPlayerId: SortOrder
-  uri: SortOrder
-}
-
-input ScryfallSetOrderByWithAggregationInput {
-  _avg: ScryfallSetAvgOrderByAggregateInput
-  _count: ScryfallSetCountOrderByAggregateInput
-  _max: ScryfallSetMaxOrderByAggregateInput
-  _min: ScryfallSetMinOrderByAggregateInput
-  _sum: ScryfallSetSumOrderByAggregateInput
-  arenaCode: SortOrder
-  block: SortOrder
-  blockCode: SortOrder
-  cardCount: SortOrder
-  code: SortOrder
-  iconSvgUri: SortOrder
-  id: SortOrder
-  isDigital: SortOrder
-  isFoilOnly: SortOrder
-  isNonFoilOnly: SortOrder
-  mtgoCode: SortOrder
-  name: SortOrder
-  parentSetCode: SortOrder
-  printedSize: SortOrder
-  releasedAt: SortOrder
-  scryfallUri: SortOrder
-  searchUri: SortOrder
-  setType: SortOrder
-  tcgPlayerId: SortOrder
-  uri: SortOrder
 }
 
 input ScryfallSetOrderByWithRelationInput {
@@ -1413,10 +1417,27 @@ input ScryfallSetRelationFilter {
   isNot: ScryfallSetWhereInput
 }
 
-input ScryfallSetSumOrderByAggregateInput {
-  cardCount: SortOrder
-  printedSize: SortOrder
-  tcgPlayerId: SortOrder
+enum ScryfallSetScalarFieldEnum {
+  arenaCode
+  block
+  blockCode
+  cardCount
+  code
+  iconSvgUri
+  id
+  isDigital
+  isFoilOnly
+  isNonFoilOnly
+  mtgoCode
+  name
+  parentSetCode
+  printedSize
+  releasedAt
+  scryfallUri
+  searchUri
+  setType
+  tcgPlayerId
+  uri
 }
 
 input ScryfallSetWhereInput {
@@ -1446,9 +1467,20 @@ input ScryfallSetWhereInput {
   uri: StringFilter
 }
 
+input ScryfallSetWhereUniqueInput {
+  arenaCode: String
+  code: String
+  id: String
+  mtgoCode: String
+}
+
 enum SortOrder {
   asc
   desc
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
 }
 
 input StringFilter {
@@ -1535,6 +1567,13 @@ type User {
 
 type UserCount {
   collections: Int!
+}
+
+input UserOrderByWithRelationInput {
+  collections: CollectionOrderByRelationAggregateInput
+  email: SortOrder
+  externalAuthId: SortOrder
+  id: SortOrder
 }
 
 input UserRelationFilter {

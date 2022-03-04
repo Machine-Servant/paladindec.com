@@ -23,13 +23,18 @@ export class ScryfallResolver {
   }
 
   @Mutation(() => Boolean)
+  async processDaily(): Promise<boolean> {
+    return this.bulkDataService.process();
+  }
+
+  @Mutation(() => Boolean)
   async downloadBulkData(@Args('typeName') typeName: string): Promise<boolean> {
     return this.bulkDataService.download(typeName);
   }
 
   @Mutation(() => Boolean)
   async processBulkData(@Args('fileName') fileName: string): Promise<boolean> {
-    return this.bulkDataService.process(fileName);
+    return this.bulkDataService.processBulkData(fileName);
   }
 
   @Mutation(() => Boolean)

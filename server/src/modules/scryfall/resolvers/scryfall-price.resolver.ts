@@ -30,9 +30,4 @@ export class ScryfallPriceResolver {
   async getCard(@Parent() parent: ScryfallPrice): Promise<ScryfallCard> {
     return this.scryfallCardService.findOne(parent.cardId);
   }
-
-  @ResolveField('test', () => Int)
-  async getTest(): Promise<number> {
-    return 1;
-  }
 }

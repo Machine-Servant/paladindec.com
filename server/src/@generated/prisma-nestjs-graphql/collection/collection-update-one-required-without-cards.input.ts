@@ -8,18 +8,19 @@ import { CollectionUpdateWithoutCardsInput } from './collection-update-without-c
 
 @InputType()
 export class CollectionUpdateOneRequiredWithoutCardsInput {
-  @Field(() => CollectionCreateWithoutCardsInput, { nullable: true })
-  create?: CollectionCreateWithoutCardsInput;
 
-  @Field(() => CollectionCreateOrConnectWithoutCardsInput, { nullable: true })
-  connectOrCreate?: CollectionCreateOrConnectWithoutCardsInput;
+    @Field(() => CollectionCreateWithoutCardsInput, {nullable:true})
+    create?: CollectionCreateWithoutCardsInput;
 
-  @Field(() => CollectionUpsertWithoutCardsInput, { nullable: true })
-  upsert?: CollectionUpsertWithoutCardsInput;
+    @Field(() => CollectionCreateOrConnectWithoutCardsInput, {nullable:true})
+    connectOrCreate?: CollectionCreateOrConnectWithoutCardsInput;
 
-  @Field(() => CollectionWhereUniqueInput, { nullable: true })
-  connect?: CollectionWhereUniqueInput;
+    @Field(() => CollectionUpsertWithoutCardsInput, {nullable:true})
+    upsert?: CollectionUpsertWithoutCardsInput;
 
-  @Field(() => CollectionUpdateWithoutCardsInput, { nullable: true })
-  update?: CollectionUpdateWithoutCardsInput;
+    @Field(() => CollectionWhereUniqueInput, {nullable:true})
+    connect?: CollectionWhereUniqueInput;
+
+    @Field(() => CollectionUpdateWithoutCardsInput, {nullable:true})
+    update?: CollectionUpdateWithoutCardsInput;
 }

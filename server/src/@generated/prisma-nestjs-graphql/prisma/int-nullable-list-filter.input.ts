@@ -4,18 +4,19 @@ import { Int } from '@nestjs/graphql';
 
 @InputType()
 export class IntNullableListFilter {
-  @Field(() => [Int], { nullable: true })
-  equals?: Array<number>;
 
-  @Field(() => Int, { nullable: true })
-  has?: number;
+    @Field(() => [Int], {nullable:true})
+    equals?: Array<number>;
 
-  @Field(() => [Int], { nullable: true })
-  hasEvery?: Array<number>;
+    @Field(() => Int, {nullable:true})
+    has?: number;
 
-  @Field(() => [Int], { nullable: true })
-  hasSome?: Array<number>;
+    @Field(() => [Int], {nullable:true})
+    hasEvery?: Array<number>;
 
-  @Field(() => Boolean, { nullable: true })
-  isEmpty?: boolean;
+    @Field(() => [Int], {nullable:true})
+    hasSome?: Array<number>;
+
+    @Field(() => Boolean, {nullable:true})
+    isEmpty?: boolean;
 }

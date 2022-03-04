@@ -148,7 +148,7 @@ export function toCardObjectType(data: ScryfallCardDataType): ScryfallCard {
     printedTypeLine,
     promo,
     promoTypes,
-    purchaseUris,
+    purchaseUris: purchaseUris ? purchaseUris : undefined,
     rarity,
     relatedUris,
     releasedAt: new Date(releasedAt),

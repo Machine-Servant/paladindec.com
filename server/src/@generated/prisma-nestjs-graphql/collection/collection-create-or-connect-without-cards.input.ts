@@ -5,9 +5,10 @@ import { CollectionCreateWithoutCardsInput } from './collection-create-without-c
 
 @InputType()
 export class CollectionCreateOrConnectWithoutCardsInput {
-  @Field(() => CollectionWhereUniqueInput, { nullable: false })
-  where!: CollectionWhereUniqueInput;
 
-  @Field(() => CollectionCreateWithoutCardsInput, { nullable: false })
-  create!: CollectionCreateWithoutCardsInput;
+    @Field(() => CollectionWhereUniqueInput, {nullable:false})
+    where!: CollectionWhereUniqueInput;
+
+    @Field(() => CollectionCreateWithoutCardsInput, {nullable:false})
+    create!: CollectionCreateWithoutCardsInput;
 }

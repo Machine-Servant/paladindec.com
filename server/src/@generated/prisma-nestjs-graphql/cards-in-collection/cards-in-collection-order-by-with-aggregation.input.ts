@@ -9,27 +9,34 @@ import { CardsInCollectionSumOrderByAggregateInput } from './cards-in-collection
 
 @InputType()
 export class CardsInCollectionOrderByWithAggregationInput {
-  @Field(() => SortOrder, { nullable: true })
-  cardId?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  collectionId?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    cardId?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  count?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    collectionId?: keyof typeof SortOrder;
 
-  @Field(() => CardsInCollectionCountOrderByAggregateInput, { nullable: true })
-  _count?: CardsInCollectionCountOrderByAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    isFoil?: keyof typeof SortOrder;
 
-  @Field(() => CardsInCollectionAvgOrderByAggregateInput, { nullable: true })
-  _avg?: CardsInCollectionAvgOrderByAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    isEtched?: keyof typeof SortOrder;
 
-  @Field(() => CardsInCollectionMaxOrderByAggregateInput, { nullable: true })
-  _max?: CardsInCollectionMaxOrderByAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    count?: keyof typeof SortOrder;
 
-  @Field(() => CardsInCollectionMinOrderByAggregateInput, { nullable: true })
-  _min?: CardsInCollectionMinOrderByAggregateInput;
+    @Field(() => CardsInCollectionCountOrderByAggregateInput, {nullable:true})
+    _count?: CardsInCollectionCountOrderByAggregateInput;
 
-  @Field(() => CardsInCollectionSumOrderByAggregateInput, { nullable: true })
-  _sum?: CardsInCollectionSumOrderByAggregateInput;
+    @Field(() => CardsInCollectionAvgOrderByAggregateInput, {nullable:true})
+    _avg?: CardsInCollectionAvgOrderByAggregateInput;
+
+    @Field(() => CardsInCollectionMaxOrderByAggregateInput, {nullable:true})
+    _max?: CardsInCollectionMaxOrderByAggregateInput;
+
+    @Field(() => CardsInCollectionMinOrderByAggregateInput, {nullable:true})
+    _min?: CardsInCollectionMinOrderByAggregateInput;
+
+    @Field(() => CardsInCollectionSumOrderByAggregateInput, {nullable:true})
+    _sum?: CardsInCollectionSumOrderByAggregateInput;
 }

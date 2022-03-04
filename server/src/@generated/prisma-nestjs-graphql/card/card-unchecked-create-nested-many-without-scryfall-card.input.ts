@@ -7,17 +7,16 @@ import { CardWhereUniqueInput } from './card-where-unique.input';
 
 @InputType()
 export class CardUncheckedCreateNestedManyWithoutScryfallCardInput {
-  @Field(() => [CardCreateWithoutScryfallCardInput], { nullable: true })
-  create?: Array<CardCreateWithoutScryfallCardInput>;
 
-  @Field(() => [CardCreateOrConnectWithoutScryfallCardInput], {
-    nullable: true,
-  })
-  connectOrCreate?: Array<CardCreateOrConnectWithoutScryfallCardInput>;
+    @Field(() => [CardCreateWithoutScryfallCardInput], {nullable:true})
+    create?: Array<CardCreateWithoutScryfallCardInput>;
 
-  @Field(() => CardCreateManyScryfallCardInputEnvelope, { nullable: true })
-  createMany?: CardCreateManyScryfallCardInputEnvelope;
+    @Field(() => [CardCreateOrConnectWithoutScryfallCardInput], {nullable:true})
+    connectOrCreate?: Array<CardCreateOrConnectWithoutScryfallCardInput>;
 
-  @Field(() => [CardWhereUniqueInput], { nullable: true })
-  connect?: Array<CardWhereUniqueInput>;
+    @Field(() => CardCreateManyScryfallCardInputEnvelope, {nullable:true})
+    createMany?: CardCreateManyScryfallCardInputEnvelope;
+
+    @Field(() => [CardWhereUniqueInput], {nullable:true})
+    connect?: Array<CardWhereUniqueInput>;
 }

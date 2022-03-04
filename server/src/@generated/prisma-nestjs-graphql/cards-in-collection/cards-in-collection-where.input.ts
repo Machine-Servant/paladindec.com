@@ -3,31 +3,39 @@ import { InputType } from '@nestjs/graphql';
 import { CardRelationFilter } from '../card/card-relation-filter.input';
 import { StringFilter } from '../prisma/string-filter.input';
 import { CollectionRelationFilter } from '../collection/collection-relation-filter.input';
+import { BoolFilter } from '../prisma/bool-filter.input';
 import { IntFilter } from '../prisma/int-filter.input';
 
 @InputType()
 export class CardsInCollectionWhereInput {
-  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
-  AND?: Array<CardsInCollectionWhereInput>;
 
-  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
-  OR?: Array<CardsInCollectionWhereInput>;
+    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
+    AND?: Array<CardsInCollectionWhereInput>;
 
-  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
-  NOT?: Array<CardsInCollectionWhereInput>;
+    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
+    OR?: Array<CardsInCollectionWhereInput>;
 
-  @Field(() => CardRelationFilter, { nullable: true })
-  card?: CardRelationFilter;
+    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
+    NOT?: Array<CardsInCollectionWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  cardId?: StringFilter;
+    @Field(() => CardRelationFilter, {nullable:true})
+    card?: CardRelationFilter;
 
-  @Field(() => CollectionRelationFilter, { nullable: true })
-  collection?: CollectionRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    cardId?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  collectionId?: StringFilter;
+    @Field(() => CollectionRelationFilter, {nullable:true})
+    collection?: CollectionRelationFilter;
 
-  @Field(() => IntFilter, { nullable: true })
-  count?: IntFilter;
+    @Field(() => StringFilter, {nullable:true})
+    collectionId?: StringFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    isFoil?: BoolFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    isEtched?: BoolFilter;
+
+    @Field(() => IntFilter, {nullable:true})
+    count?: IntFilter;
 }

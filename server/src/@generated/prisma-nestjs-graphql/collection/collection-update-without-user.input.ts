@@ -5,14 +5,13 @@ import { CardsInCollectionUpdateManyWithoutCollectionInput } from '../cards-in-c
 
 @InputType()
 export class CollectionUpdateWithoutUserInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  name?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => CardsInCollectionUpdateManyWithoutCollectionInput, {
-    nullable: true,
-  })
-  cards?: CardsInCollectionUpdateManyWithoutCollectionInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    name?: StringFieldUpdateOperationsInput;
+
+    @Field(() => CardsInCollectionUpdateManyWithoutCollectionInput, {nullable:true})
+    cards?: CardsInCollectionUpdateManyWithoutCollectionInput;
 }

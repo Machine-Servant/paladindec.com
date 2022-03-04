@@ -6,12 +6,13 @@ import { CollectionMaxAggregate } from './collection-max-aggregate.output';
 
 @ObjectType()
 export class AggregateCollection {
-  @Field(() => CollectionCountAggregate, { nullable: true })
-  _count?: CollectionCountAggregate;
 
-  @Field(() => CollectionMinAggregate, { nullable: true })
-  _min?: CollectionMinAggregate;
+    @Field(() => CollectionCountAggregate, {nullable:true})
+    _count?: CollectionCountAggregate;
 
-  @Field(() => CollectionMaxAggregate, { nullable: true })
-  _max?: CollectionMaxAggregate;
+    @Field(() => CollectionMinAggregate, {nullable:true})
+    _min?: CollectionMinAggregate;
+
+    @Field(() => CollectionMaxAggregate, {nullable:true})
+    _max?: CollectionMaxAggregate;
 }

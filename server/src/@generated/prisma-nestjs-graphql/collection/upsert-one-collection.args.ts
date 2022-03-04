@@ -6,12 +6,13 @@ import { CollectionUpdateInput } from './collection-update.input';
 
 @ArgsType()
 export class UpsertOneCollectionArgs {
-  @Field(() => CollectionWhereUniqueInput, { nullable: false })
-  where!: CollectionWhereUniqueInput;
 
-  @Field(() => CollectionCreateInput, { nullable: false })
-  create!: CollectionCreateInput;
+    @Field(() => CollectionWhereUniqueInput, {nullable:false})
+    where!: CollectionWhereUniqueInput;
 
-  @Field(() => CollectionUpdateInput, { nullable: false })
-  update!: CollectionUpdateInput;
+    @Field(() => CollectionCreateInput, {nullable:false})
+    create!: CollectionCreateInput;
+
+    @Field(() => CollectionUpdateInput, {nullable:false})
+    update!: CollectionUpdateInput;
 }

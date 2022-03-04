@@ -5,17 +5,28 @@ import { CardsInCollectionUncheckedCreateNestedManyWithoutCardInput } from '../c
 
 @InputType()
 export class CardUncheckedCreateWithoutScryfallCardInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(
-    () => ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput,
-    { nullable: true },
-  )
-  currentPrice?: ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => CardsInCollectionUncheckedCreateNestedManyWithoutCardInput, {
-    nullable: true,
-  })
-  collections?: CardsInCollectionUncheckedCreateNestedManyWithoutCardInput;
+    @Field(() => String, {nullable:true})
+    collectorNumber?: string;
+
+    @Field(() => Boolean, {nullable:true})
+    isBorderless?: boolean;
+
+    @Field(() => Boolean, {nullable:true})
+    isShowcase?: boolean;
+
+    @Field(() => Boolean, {nullable:true})
+    isPaper?: boolean;
+
+    @Field(() => Boolean, {nullable:true})
+    canBeFoil?: boolean;
+
+    @Field(() => ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput, {nullable:true})
+    currentPrice?: ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput;
+
+    @Field(() => CardsInCollectionUncheckedCreateNestedManyWithoutCardInput, {nullable:true})
+    collections?: CardsInCollectionUncheckedCreateNestedManyWithoutCardInput;
 }

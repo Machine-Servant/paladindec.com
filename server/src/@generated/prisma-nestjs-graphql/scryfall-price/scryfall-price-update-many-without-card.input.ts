@@ -11,44 +11,37 @@ import { ScryfallPriceScalarWhereInput } from './scryfall-price-scalar-where.inp
 
 @InputType()
 export class ScryfallPriceUpdateManyWithoutCardInput {
-  @Field(() => [ScryfallPriceCreateWithoutCardInput], { nullable: true })
-  create?: Array<ScryfallPriceCreateWithoutCardInput>;
 
-  @Field(() => [ScryfallPriceCreateOrConnectWithoutCardInput], {
-    nullable: true,
-  })
-  connectOrCreate?: Array<ScryfallPriceCreateOrConnectWithoutCardInput>;
+    @Field(() => [ScryfallPriceCreateWithoutCardInput], {nullable:true})
+    create?: Array<ScryfallPriceCreateWithoutCardInput>;
 
-  @Field(() => [ScryfallPriceUpsertWithWhereUniqueWithoutCardInput], {
-    nullable: true,
-  })
-  upsert?: Array<ScryfallPriceUpsertWithWhereUniqueWithoutCardInput>;
+    @Field(() => [ScryfallPriceCreateOrConnectWithoutCardInput], {nullable:true})
+    connectOrCreate?: Array<ScryfallPriceCreateOrConnectWithoutCardInput>;
 
-  @Field(() => ScryfallPriceCreateManyCardInputEnvelope, { nullable: true })
-  createMany?: ScryfallPriceCreateManyCardInputEnvelope;
+    @Field(() => [ScryfallPriceUpsertWithWhereUniqueWithoutCardInput], {nullable:true})
+    upsert?: Array<ScryfallPriceUpsertWithWhereUniqueWithoutCardInput>;
 
-  @Field(() => [ScryfallPriceWhereUniqueInput], { nullable: true })
-  set?: Array<ScryfallPriceWhereUniqueInput>;
+    @Field(() => ScryfallPriceCreateManyCardInputEnvelope, {nullable:true})
+    createMany?: ScryfallPriceCreateManyCardInputEnvelope;
 
-  @Field(() => [ScryfallPriceWhereUniqueInput], { nullable: true })
-  disconnect?: Array<ScryfallPriceWhereUniqueInput>;
+    @Field(() => [ScryfallPriceWhereUniqueInput], {nullable:true})
+    set?: Array<ScryfallPriceWhereUniqueInput>;
 
-  @Field(() => [ScryfallPriceWhereUniqueInput], { nullable: true })
-  delete?: Array<ScryfallPriceWhereUniqueInput>;
+    @Field(() => [ScryfallPriceWhereUniqueInput], {nullable:true})
+    disconnect?: Array<ScryfallPriceWhereUniqueInput>;
 
-  @Field(() => [ScryfallPriceWhereUniqueInput], { nullable: true })
-  connect?: Array<ScryfallPriceWhereUniqueInput>;
+    @Field(() => [ScryfallPriceWhereUniqueInput], {nullable:true})
+    delete?: Array<ScryfallPriceWhereUniqueInput>;
 
-  @Field(() => [ScryfallPriceUpdateWithWhereUniqueWithoutCardInput], {
-    nullable: true,
-  })
-  update?: Array<ScryfallPriceUpdateWithWhereUniqueWithoutCardInput>;
+    @Field(() => [ScryfallPriceWhereUniqueInput], {nullable:true})
+    connect?: Array<ScryfallPriceWhereUniqueInput>;
 
-  @Field(() => [ScryfallPriceUpdateManyWithWhereWithoutCardInput], {
-    nullable: true,
-  })
-  updateMany?: Array<ScryfallPriceUpdateManyWithWhereWithoutCardInput>;
+    @Field(() => [ScryfallPriceUpdateWithWhereUniqueWithoutCardInput], {nullable:true})
+    update?: Array<ScryfallPriceUpdateWithWhereUniqueWithoutCardInput>;
 
-  @Field(() => [ScryfallPriceScalarWhereInput], { nullable: true })
-  deleteMany?: Array<ScryfallPriceScalarWhereInput>;
+    @Field(() => [ScryfallPriceUpdateManyWithWhereWithoutCardInput], {nullable:true})
+    updateMany?: Array<ScryfallPriceUpdateManyWithWhereWithoutCardInput>;
+
+    @Field(() => [ScryfallPriceScalarWhereInput], {nullable:true})
+    deleteMany?: Array<ScryfallPriceScalarWhereInput>;
 }

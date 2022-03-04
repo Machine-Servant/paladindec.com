@@ -1,8 +1,6 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bull';
-import { chunk } from 'lodash';
-import { UpsertOneCardArgs } from '../../../@generated/prisma-nestjs-graphql/card/upsert-one-card.args';
 import { ScryfallCardService } from '../../scryfall/services/scryfall-card.service';
 import { ScryfallPriceService } from '../../scryfall/services/scryfall-price.service';
 import { CardService } from '../services/card.service';
@@ -24,35 +22,53 @@ export class CardConsumer {
     );
     this.logger.debug(`Fetching ScryfallCard results`);
 
-    const allScryfallCards = await this.scryfallCardService.findMany();
+    try {
+      const cardCount = await this.scryfallCardService.getCount();
 
-    this.logger.debug(`Found #${allScryfallCards.length} results`);
+      const batchSize = 100;
+      const totalBatches = Math.ceil(cardCount / batchSize);
 
-    const batches = chunk(allScryfallCards, 100);
-    let batchCount = 0;
-
-    this.logger.debug(`Processing #${batches.length} chunks`);
-
-    while (batches.length) {
-      this.logger.debug(`Processing batch #${++batchCount}`);
-      const batch = batches.shift();
-
-      await Promise.all(
-        batch.map(async (scryfallCard) => {
-          const currentPrice =
-            await this.scryfallPriceService.findMostRecentPriceForCard(
-              scryfallCard.id,
-            );
-          return await this.cardService.upsert({
-            scryfallCard: { connect: { id: scryfallCard.id } },
-            currentPrice: { connect: { id: currentPrice.id } },
-          });
-        }),
-      );
-
-      this.logger.debug(`Processed #${batchCount}`);
+      for (let i = 0; i < totalBatches; i++) {
+        this.logger.debug(`Processing #${i + 1} of ${totalBatches}`);
+        const batch = await this.scryfallCardService.findMany({
+          take: batchSize,
+          skip: i * batchSize,
+        });
+        await Promise.all(
+          batch.map(async (card) => {
+            try {
+              const currentPrice =
+                await this.scryfallPriceService.findMostRecentPriceForCard(
+                  card.id,
+                );
+              if (currentPrice) {
+                return await this.cardService.upsert({
+                  scryfallCard: { connect: { id: card.id } },
+                  currentPrice: { connect: { id: currentPrice.id } },
+                  isBorderless: card.frameEffects.includes('borderless'),
+                  isShowcase: card.frameEffects.includes('showcase'),
+                  isPaper: card.games.includes('paper'),
+                  collectorNumber: card.collectorNumber,
+                  canBeFoil: card.finishes.includes('foil'),
+                });
+              }
+              return;
+            } catch (err) {
+              this.logger.error(err);
+              this.logger.error(card);
+              throw err;
+            }
+          }),
+        );
+        this.logger.debug(`Processed #${i + 1}`);
+      }
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
     }
 
     this.logger.debug(`Finished processing PaladinDeck Card list`);
+    job.moveToCompleted('done', true);
   }
 }

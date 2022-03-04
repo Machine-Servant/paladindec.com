@@ -9,27 +9,34 @@ import { CardsInCollectionMaxAggregate } from './cards-in-collection-max-aggrega
 
 @ObjectType()
 export class CardsInCollectionGroupBy {
-  @Field(() => String, { nullable: false })
-  cardId!: string;
 
-  @Field(() => String, { nullable: false })
-  collectionId!: string;
+    @Field(() => String, {nullable:false})
+    cardId!: string;
 
-  @Field(() => Int, { nullable: false })
-  count!: number;
+    @Field(() => String, {nullable:false})
+    collectionId!: string;
 
-  @Field(() => CardsInCollectionCountAggregate, { nullable: true })
-  _count?: CardsInCollectionCountAggregate;
+    @Field(() => Boolean, {nullable:false})
+    isFoil!: boolean;
 
-  @Field(() => CardsInCollectionAvgAggregate, { nullable: true })
-  _avg?: CardsInCollectionAvgAggregate;
+    @Field(() => Boolean, {nullable:false})
+    isEtched!: boolean;
 
-  @Field(() => CardsInCollectionSumAggregate, { nullable: true })
-  _sum?: CardsInCollectionSumAggregate;
+    @Field(() => Int, {nullable:false})
+    count!: number;
 
-  @Field(() => CardsInCollectionMinAggregate, { nullable: true })
-  _min?: CardsInCollectionMinAggregate;
+    @Field(() => CardsInCollectionCountAggregate, {nullable:true})
+    _count?: CardsInCollectionCountAggregate;
 
-  @Field(() => CardsInCollectionMaxAggregate, { nullable: true })
-  _max?: CardsInCollectionMaxAggregate;
+    @Field(() => CardsInCollectionAvgAggregate, {nullable:true})
+    _avg?: CardsInCollectionAvgAggregate;
+
+    @Field(() => CardsInCollectionSumAggregate, {nullable:true})
+    _sum?: CardsInCollectionSumAggregate;
+
+    @Field(() => CardsInCollectionMinAggregate, {nullable:true})
+    _min?: CardsInCollectionMinAggregate;
+
+    @Field(() => CardsInCollectionMaxAggregate, {nullable:true})
+    _max?: CardsInCollectionMaxAggregate;
 }

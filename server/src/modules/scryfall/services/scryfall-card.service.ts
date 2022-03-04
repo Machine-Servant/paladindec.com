@@ -16,6 +16,13 @@ export class ScryfallCardService {
       const toUpsert = {
         set: { connect: { id: data.setId } },
         ...omit(data, 'setId'),
+        purchaseUris: data.purchaseUris ? data.purchaseUris : undefined,
+        imageUris: data.imageUris ? data.imageUris : undefined,
+        allParts: data.allParts ? data.allParts : undefined,
+        cardFacesRaw: data.cardFacesRaw ? data.cardFacesRaw : undefined,
+        legalities: data.legalities ? data.legalities : undefined,
+        prices: data.prices ? data.prices : undefined,
+        relatedUris: data.relatedUris ? data.relatedUris : undefined,
       };
       return this.prismaService.scryfallCard.upsert({
         where: { id: data.id },
@@ -26,6 +33,10 @@ export class ScryfallCardService {
       this.logger.error(err);
       throw err;
     }
+  }
+
+  async getCount(args?: FindManyScryfallCardArgs): Promise<number> {
+    return this.prismaService.scryfallCard.count(args);
   }
 
   async findMany(args?: FindManyScryfallCardArgs): Promise<ScryfallCard[]> {

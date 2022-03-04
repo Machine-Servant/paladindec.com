@@ -6,12 +6,13 @@ import { ScryfallSetUpdateInput } from './scryfall-set-update.input';
 
 @ArgsType()
 export class UpsertOneScryfallSetArgs {
-  @Field(() => ScryfallSetWhereUniqueInput, { nullable: false })
-  where!: ScryfallSetWhereUniqueInput;
 
-  @Field(() => ScryfallSetCreateInput, { nullable: false })
-  create!: ScryfallSetCreateInput;
+    @Field(() => ScryfallSetWhereUniqueInput, {nullable:false})
+    where!: ScryfallSetWhereUniqueInput;
 
-  @Field(() => ScryfallSetUpdateInput, { nullable: false })
-  update!: ScryfallSetUpdateInput;
+    @Field(() => ScryfallSetCreateInput, {nullable:false})
+    create!: ScryfallSetCreateInput;
+
+    @Field(() => ScryfallSetUpdateInput, {nullable:false})
+    update!: ScryfallSetUpdateInput;
 }

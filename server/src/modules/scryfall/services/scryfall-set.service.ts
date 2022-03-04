@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ScryfallSet } from 'prisma/prisma-client';
-import { ScryfallSetOrderByWithAggregationInput } from '../../../@generated/prisma-nestjs-graphql/scryfall-set/scryfall-set-order-by-with-aggregation.input';
-import { ScryfallSetWhereInput } from '../../../@generated/prisma-nestjs-graphql/scryfall-set/scryfall-set-where.input';
+import { FindManyScryfallSetArgs } from '../../../@generated/prisma-nestjs-graphql/scryfall-set/find-many-scryfall-set.args';
 import { PrismaService } from '../../prisma/services/prisma.service';
 
 @Injectable()
@@ -33,11 +32,8 @@ export class ScryfallSetService {
     return results;
   }
 
-  async findMany(
-    where?: ScryfallSetWhereInput,
-    orderBy?: ScryfallSetOrderByWithAggregationInput,
-  ): Promise<ScryfallSet[]> {
-    return this.prismaService.scryfallSet.findMany({ where, orderBy });
+  async findMany(query?: FindManyScryfallSetArgs): Promise<ScryfallSet[]> {
+    return this.prismaService.scryfallSet.findMany(query);
   }
 
   async findOne(id: string): Promise<ScryfallSet> {

@@ -4,6 +4,7 @@ import { CollectionWhereInput } from './collection-where.input';
 
 @ArgsType()
 export class DeleteManyCollectionArgs {
-  @Field(() => CollectionWhereInput, { nullable: true })
-  where?: CollectionWhereInput;
+
+    @Field(() => CollectionWhereInput, {nullable:true})
+    where?: CollectionWhereInput;
 }

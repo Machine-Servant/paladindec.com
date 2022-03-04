@@ -19,5 +19,7 @@ export class ScryfallSetConsumer {
     );
     await this.scryfallSetService.bulkUpsert(setObjects);
     this.logger.debug(`Processing set data complete`);
+    job.moveToCompleted('done', true);
+    return true;
   }
 }

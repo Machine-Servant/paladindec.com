@@ -5,9 +5,10 @@ import { CardCreateWithoutCurrentPriceInput } from './card-create-without-curren
 
 @InputType()
 export class CardCreateOrConnectWithoutCurrentPriceInput {
-  @Field(() => CardWhereUniqueInput, { nullable: false })
-  where!: CardWhereUniqueInput;
 
-  @Field(() => CardCreateWithoutCurrentPriceInput, { nullable: false })
-  create!: CardCreateWithoutCurrentPriceInput;
+    @Field(() => CardWhereUniqueInput, {nullable:false})
+    where!: CardWhereUniqueInput;
+
+    @Field(() => CardCreateWithoutCurrentPriceInput, {nullable:false})
+    create!: CardCreateWithoutCurrentPriceInput;
 }

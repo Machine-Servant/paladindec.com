@@ -15,13 +15,14 @@ import { chain } from 'stream-chain';
 import { parser } from 'stream-json/Parser';
 import { streamArray } from 'stream-json/streamers/StreamArray';
 import { promisify } from 'util';
+import { ScryfallCardFaceService } from '../services/scryfall-card-face.service';
+import { ScryfallCardService } from '../services/scryfall-card.service';
+import { ScryfallRelatedCardService } from '../services/scryfall-related-card.service';
+import { SetDataService } from '../services/set-data.service';
+import { ScryfallCardDataType } from '../types/scryfall.types';
 import { toCardObjectType } from '../utils/to-prisma-card';
 import { toCardFaceObjectType } from '../utils/to-prisma-scryfall-card-face';
 import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
-import { ScryfallCardDataType } from '../types/scryfall.types';
-import { ScryfallCardService } from '../services/scryfall-card.service';
-import { ScryfallCardFaceService } from '../services/scryfall-card-face.service';
-import { ScryfallRelatedCardService } from '../services/scryfall-related-card.service';
 
 const finished = promisify(stream.finished);
 
@@ -47,10 +48,66 @@ export class BulkDownloadConsumer {
     private readonly scryfallCardService: ScryfallCardService,
     private readonly scryfallCardFaceService: ScryfallCardFaceService,
     private readonly scryfallRelatedCardService: ScryfallRelatedCardService,
+    private readonly setDataService: SetDataService,
     @InjectQueue('bulk-data') private readonly bulkDataQueue: Queue,
+    @InjectQueue('price-data') private readonly priceDataQueue: Queue,
+    @InjectQueue('set-data') private readonly setDataQueue: Queue,
+    @InjectQueue('card') private readonly cardQueue: Queue,
   ) {}
 
   private readonly logger = new Logger(BulkDownloadConsumer.name);
+
+  @Process('process')
+  async process(
+    job: Job<{ uri: string; contentType: string; typeName: string }>,
+  ) {
+    this.logger.debug(`Processing set data`);
+    const setData = await this.setDataService.getSetData();
+    const setProcess = await this.setDataQueue.add(
+      'process',
+      {
+        data: setData,
+      },
+      { removeOnComplete: true },
+    );
+    await setProcess.finished();
+    this.logger.debug(`Done processing sets`);
+
+    this.logger.debug(`Downloading bulk data`);
+    const download = await this.bulkDataQueue.add('download', job.data, {
+      removeOnComplete: true,
+    });
+    const { filePath } = await download.finished();
+    this.logger.debug(`Done downloading data`, `filePath is ${filePath}`);
+
+    this.logger.debug(`Processing bulk data`);
+    const processBulkData = await this.bulkDataQueue.add(
+      'process-bulk-data',
+      {
+        filePath,
+      },
+      { removeOnComplete: true },
+    );
+    await processBulkData.finished();
+    this.logger.debug(`Done processing bulk data`);
+
+    this.logger.debug(`Processing price data`);
+    const processPriceData = await this.priceDataQueue.add('process', null, {
+      removeOnComplete: true,
+    });
+    await processPriceData.finished();
+    this.logger.debug(`Done processing price data`);
+
+    const processPaladinDeckCards = await this.cardQueue.add(
+      'update-card-list',
+      null,
+      {
+        removeOnComplete: true,
+      },
+    );
+    await processPaladinDeckCards.finished();
+    this.logger.debug(`Finished processing paladindeck cards`);
+  }
 
   @Process('download')
   async downloadBulkData(
@@ -84,10 +141,18 @@ export class BulkDownloadConsumer {
 
     response.data.pipe(writer);
 
-    return finished(writer);
+    await finished(writer);
+
+    const results = { filePath: outputFilePath };
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    job.moveToCompleted(results, true);
+
+    return { filePath: outputFilePath };
   }
 
-  @Process('process')
+  @Process('process-bulk-data')
   async processBulkData(job: Job<{ filePath: string }>) {
     this.logger.debug(`Processing ${job.data.filePath}`);
 
@@ -99,7 +164,7 @@ export class BulkDownloadConsumer {
 
     let count = 0;
 
-    return new Promise((resolve, reject) => {
+    const results = await new Promise((resolve, reject) => {
       const cards: ScryfallCard[] = [];
       let cardFaceData: BulkScryfallCardFace[] = [];
       let relatedCardData: BulkScryfallRelatedCard[] = [];
@@ -150,74 +215,57 @@ export class BulkDownloadConsumer {
 
       pipeline.on('end', async () => {
         this.logger.debug(`Processed ${count} objects`);
-        try {
-          await this.bulkDataQueue.add('process-cards', {
-            cards,
-            cardFaceData,
-            relatedCardData,
-          });
-        } catch (err) {
-          this.logger.error(err);
-          throw err;
-        }
+
+        await this.processCards(cards);
+        await this.processCardFaces(cardFaceData);
+        await this.processAllParts(relatedCardData);
+
         resolve(true);
       });
 
       pipeline.on('error', (err) => {
         this.logger.error('error', err);
+        job.moveToFailed(err);
         reject(err);
       });
     });
+
+    this.logger.debug(`Marking job as done`);
+
+    job.moveToCompleted('done', true);
+
+    return results;
   }
 
-  @Process('process-cards')
-  async processCards(
-    job: Job<{
-      cards: ScryfallCard[];
-      cardFaceData: BulkScryfallCardFace[];
-      relatedCardData: BulkScryfallRelatedCard[];
-    }>,
-  ) {
-    this.logger.debug(
-      `Processing all Card objects (${job.data.cards.length} Card records)`,
-    );
-
-    let batchCount = 0;
-
-    const batches = chunk(job.data.cards, 100);
-    const results: ScryfallCard[][] = [];
+  async processCards(cards: ScryfallCard[]) {
+    this.logger.debug(`Processing PaladinDeck Card objects from data`);
+    this.logger.debug(`Processing #${cards.length} objects`);
 
     try {
+      const batches = chunk(cards, 100);
+      const batchesLength = batches.length;
+      let batchCount = 0;
+
       while (batches.length) {
-        this.logger.debug(`Processing batch #${++batchCount}`);
+        this.logger.debug(
+          `Processing batch #${++batchCount} (of #${batchesLength})`,
+        );
         const batch = batches.shift();
-        const result = await Promise.all(
+        await Promise.all(
           batch.map(async (card) => {
             return await this.scryfallCardService.upsert(card);
           }),
         );
-        results.push(result);
-        this.logger.debug(`Batch ${batchCount} finished`);
+        this.logger.debug(`Batch #${batchCount} complete`);
       }
-      this.logger.debug(
-        `Done processing cards (Processed ${flatten(results).length} records)`,
-      );
+      this.logger.debug(`Done processing PaladinDeck Card objects`);
     } catch (err) {
       this.logger.error(err);
       throw err;
     }
-
-    await this.bulkDataQueue.add('process-card-faces', {
-      cardFaceData: job.data.cardFaceData,
-    });
-
-    await this.bulkDataQueue.add('process-all-parts', {
-      allPartsData: job.data.relatedCardData,
-    });
   }
 
-  @Process('process-card-faces')
-  async processCardFaces(job: Job<{ cardFaceData: BulkScryfallCardFace[] }>) {
+  async processCardFaces(cardFaceData: BulkScryfallCardFace[]) {
     this.logger.debug(`Processing CardFace objects`);
 
     try {
@@ -231,7 +279,7 @@ export class BulkDownloadConsumer {
 
     try {
       let batchCount = 0;
-      const batches = chunk(job.data.cardFaceData, 100);
+      const batches = chunk(cardFaceData, 100);
       const results: ScryfallCardFace[][] = [];
 
       while (batches.length) {
@@ -248,6 +296,7 @@ export class BulkDownloadConsumer {
       }
       const flatResults = flatten(results);
       this.logger.debug(`Processed ${flatResults.length} CardFace records`);
+
       return flatResults;
     } catch (err) {
       this.logger.error(err);
@@ -255,8 +304,7 @@ export class BulkDownloadConsumer {
     }
   }
 
-  @Process('process-all-parts')
-  async processAllParts(job: Job<{ allPartsData: BulkScryfallRelatedCard[] }>) {
+  async processAllParts(allPartsData: BulkScryfallRelatedCard[]) {
     this.logger.debug(`Processing RelatedCard objects`);
 
     try {
@@ -270,7 +318,7 @@ export class BulkDownloadConsumer {
 
     try {
       let batchCount = 0;
-      const batches = chunk(job.data.allPartsData, 100);
+      const batches = chunk(allPartsData, 100);
       const results: ScryfallRelatedCard[][] = [];
 
       while (batches.length) {
@@ -286,6 +334,7 @@ export class BulkDownloadConsumer {
       }
       const flatResults = flatten(results);
       this.logger.debug(`Processed ${flatResults.length} RelatedCard records`);
+
       return flatResults;
     } catch (err) {
       this.logger.error(err);

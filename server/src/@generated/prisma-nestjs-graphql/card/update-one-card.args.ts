@@ -5,9 +5,10 @@ import { CardWhereUniqueInput } from './card-where-unique.input';
 
 @ArgsType()
 export class UpdateOneCardArgs {
-  @Field(() => CardUpdateInput, { nullable: false })
-  data!: CardUpdateInput;
 
-  @Field(() => CardWhereUniqueInput, { nullable: false })
-  where!: CardWhereUniqueInput;
+    @Field(() => CardUpdateInput, {nullable:false})
+    data!: CardUpdateInput;
+
+    @Field(() => CardWhereUniqueInput, {nullable:false})
+    where!: CardWhereUniqueInput;
 }

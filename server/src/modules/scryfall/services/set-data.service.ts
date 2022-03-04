@@ -15,7 +15,7 @@ export class SetDataService {
     @InjectQueue('set-data') private readonly setDataQueue: Queue,
   ) {}
 
-  private async getSetData(): Promise<ScryfallSetDataType[]> {
+  async getSetData(): Promise<ScryfallSetDataType[]> {
     const results = await axios.get<ScryfallSetDataListResponseType>(
       `${this.configService.get<string>('SCRYFALL_API_URI')}/sets`,
     );

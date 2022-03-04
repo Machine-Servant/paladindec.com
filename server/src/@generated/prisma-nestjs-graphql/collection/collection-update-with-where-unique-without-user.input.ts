@@ -5,9 +5,10 @@ import { CollectionUpdateWithoutUserInput } from './collection-update-without-us
 
 @InputType()
 export class CollectionUpdateWithWhereUniqueWithoutUserInput {
-  @Field(() => CollectionWhereUniqueInput, { nullable: false })
-  where!: CollectionWhereUniqueInput;
 
-  @Field(() => CollectionUpdateWithoutUserInput, { nullable: false })
-  data!: CollectionUpdateWithoutUserInput;
+    @Field(() => CollectionWhereUniqueInput, {nullable:false})
+    where!: CollectionWhereUniqueInput;
+
+    @Field(() => CollectionUpdateWithoutUserInput, {nullable:false})
+    data!: CollectionUpdateWithoutUserInput;
 }

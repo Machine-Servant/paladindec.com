@@ -4,6 +4,7 @@ import { CollectionWhereUniqueInput } from './collection-where-unique.input';
 
 @ArgsType()
 export class DeleteOneCollectionArgs {
-  @Field(() => CollectionWhereUniqueInput, { nullable: false })
-  where!: CollectionWhereUniqueInput;
+
+    @Field(() => CollectionWhereUniqueInput, {nullable:false})
+    where!: CollectionWhereUniqueInput;
 }

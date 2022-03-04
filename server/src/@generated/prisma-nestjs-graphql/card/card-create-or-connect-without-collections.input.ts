@@ -5,9 +5,10 @@ import { CardCreateWithoutCollectionsInput } from './card-create-without-collect
 
 @InputType()
 export class CardCreateOrConnectWithoutCollectionsInput {
-  @Field(() => CardWhereUniqueInput, { nullable: false })
-  where!: CardWhereUniqueInput;
 
-  @Field(() => CardCreateWithoutCollectionsInput, { nullable: false })
-  create!: CardCreateWithoutCollectionsInput;
+    @Field(() => CardWhereUniqueInput, {nullable:false})
+    where!: CardWhereUniqueInput;
+
+    @Field(() => CardCreateWithoutCollectionsInput, {nullable:false})
+    create!: CardCreateWithoutCollectionsInput;
 }

@@ -48,7 +48,7 @@ export class CardResolver {
   }
 
   @ResolveField('currentPrice', () => ScryfallPrice)
-  async getScryfallPrice(@Parent() card: Card) {
+  async getCurrentPrice(@Parent() card: Card): Promise<ScryfallPrice> {
     if (!card.currentPrice) {
       return await this.scryfallPriceService.findUnique({
         where: { currentPriceOfCardId: card.id },

@@ -5,9 +5,10 @@ import { UserCreateWithoutCollectionsInput } from './user-create-without-collect
 
 @InputType()
 export class UserCreateOrConnectWithoutCollectionsInput {
-  @Field(() => UserWhereUniqueInput, { nullable: false })
-  where!: UserWhereUniqueInput;
 
-  @Field(() => UserCreateWithoutCollectionsInput, { nullable: false })
-  create!: UserCreateWithoutCollectionsInput;
+    @Field(() => UserWhereUniqueInput, {nullable:false})
+    where!: UserWhereUniqueInput;
+
+    @Field(() => UserCreateWithoutCollectionsInput, {nullable:false})
+    create!: UserCreateWithoutCollectionsInput;
 }

@@ -5,9 +5,10 @@ import { CardUpdateWithoutScryfallCardInput } from './card-update-without-scryfa
 
 @InputType()
 export class CardUpdateWithWhereUniqueWithoutScryfallCardInput {
-  @Field(() => CardWhereUniqueInput, { nullable: false })
-  where!: CardWhereUniqueInput;
 
-  @Field(() => CardUpdateWithoutScryfallCardInput, { nullable: false })
-  data!: CardUpdateWithoutScryfallCardInput;
+    @Field(() => CardWhereUniqueInput, {nullable:false})
+    where!: CardWhereUniqueInput;
+
+    @Field(() => CardUpdateWithoutScryfallCardInput, {nullable:false})
+    data!: CardUpdateWithoutScryfallCardInput;
 }

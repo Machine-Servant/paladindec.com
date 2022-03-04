@@ -2,32 +2,50 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
 import { ScryfallCardRelationFilter } from '../scryfall-card/scryfall-card-relation-filter.input';
+import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
+import { BoolFilter } from '../prisma/bool-filter.input';
 import { ScryfallPriceRelationFilter } from '../scryfall-price/scryfall-price-relation-filter.input';
 import { CardsInCollectionListRelationFilter } from '../cards-in-collection/cards-in-collection-list-relation-filter.input';
 
 @InputType()
 export class CardWhereInput {
-  @Field(() => [CardWhereInput], { nullable: true })
-  AND?: Array<CardWhereInput>;
 
-  @Field(() => [CardWhereInput], { nullable: true })
-  OR?: Array<CardWhereInput>;
+    @Field(() => [CardWhereInput], {nullable:true})
+    AND?: Array<CardWhereInput>;
 
-  @Field(() => [CardWhereInput], { nullable: true })
-  NOT?: Array<CardWhereInput>;
+    @Field(() => [CardWhereInput], {nullable:true})
+    OR?: Array<CardWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  id?: StringFilter;
+    @Field(() => [CardWhereInput], {nullable:true})
+    NOT?: Array<CardWhereInput>;
 
-  @Field(() => ScryfallCardRelationFilter, { nullable: true })
-  scryfallCard?: ScryfallCardRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    id?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  scryfallCardId?: StringFilter;
+    @Field(() => ScryfallCardRelationFilter, {nullable:true})
+    scryfallCard?: ScryfallCardRelationFilter;
 
-  @Field(() => ScryfallPriceRelationFilter, { nullable: true })
-  currentPrice?: ScryfallPriceRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    scryfallCardId?: StringFilter;
 
-  @Field(() => CardsInCollectionListRelationFilter, { nullable: true })
-  collections?: CardsInCollectionListRelationFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    collectorNumber?: StringNullableFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    isBorderless?: BoolFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    isShowcase?: BoolFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    isPaper?: BoolFilter;
+
+    @Field(() => BoolFilter, {nullable:true})
+    canBeFoil?: BoolFilter;
+
+    @Field(() => ScryfallPriceRelationFilter, {nullable:true})
+    currentPrice?: ScryfallPriceRelationFilter;
+
+    @Field(() => CardsInCollectionListRelationFilter, {nullable:true})
+    collections?: CardsInCollectionListRelationFilter;
 }

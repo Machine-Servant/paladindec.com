@@ -4,6 +4,7 @@ import { ScryfallCardFaceCreateInput } from './scryfall-card-face-create.input';
 
 @ArgsType()
 export class CreateOneScryfallCardFaceArgs {
-  @Field(() => ScryfallCardFaceCreateInput, { nullable: false })
-  data!: ScryfallCardFaceCreateInput;
+
+    @Field(() => ScryfallCardFaceCreateInput, {nullable:false})
+    data!: ScryfallCardFaceCreateInput;
 }
