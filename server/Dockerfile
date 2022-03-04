@@ -1,24 +1,66 @@
-FROM node:16.13.0-alpine3.11 as builder 
+# FROM node:16.13.0-alpine3.11 as builder 
+
+# WORKDIR /usr/src/app
+
+# COPY package*.json ./
+# COPY prisma ./prisma/
+
+# RUN npm ci
+
+# COPY . ./
+
+# RUN npm run build
+
+# FROM node:16.13.0-alpine3.11
+
+# WORKDIR /usr/src/app
+
+# COPY --from=builder /usr/src/app/dist ./dist/
+# COPY --from=builder /usr/src/app/package*.json ./
+# COPY --from=builder /usr/src/app/node_modules ./node_modules
+
+# EXPOSE 3000
+
+# CMD ["npm", "run", "start:prod"]
+
+FROM node:16.13.0-alpine3.11 As development
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 COPY prisma ./prisma/
 
-RUN npm ci
+RUN npm install --only=development
 
-COPY . ./
+COPY . .
 
 RUN npm run build
 
-FROM node:16.13.0-alpine3.11
+FROM node:16.13.0-alpine3.11 as production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+ARG SCRYFALL_API_URI=https://api.scryfall.com
+ENV SCRYFALL_API_URI=${SCRYFALL_API_URI}}
+ARG FIREBASE_PROJECT_ID=paladindeck-45ae6
+ENV FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+ARG FIREBASE_CLIENT_EMAIL=firebase-adminsdk-qx63v@paladindeck-45ae6.iam.gserviceaccount.com
+ENV FIREBASE_CLIENT_EMAIL=${FIREBASE_CLIENT_EMAIL}
+
+RUN apk add --no-cache curl
 
 WORKDIR /usr/src/app
 
-COPY --from=builder /usr/src/app/dist ./dist/
-COPY --from=builder /usr/src/app/package*.json ./
-COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY package*.json ./
 
-EXPOSE 3000
+RUN npm install --only=production
 
-CMD ["npm", "run", "start:prod"]
+COPY . .
+
+RUN npm run prisma:generate
+
+COPY --from=development /usr/src/app/dist ./dist
+COPY --from=development /usr/src/app/prisma ./prisma
+
+# CMD ["ls"]
+CMD ["node", "dist/src/main"]
