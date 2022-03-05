@@ -8,13 +8,13 @@ import { ServiceAccount } from 'firebase-admin';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CardModule } from './modules/card/card.module';
+import { CollectionModule } from './modules/collection/collection.module';
 import { CommonModule } from './modules/common/common.module';
 import { FirebaseModule } from './modules/firebase/firebase.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { ScryfallModule } from './modules/scryfall/scryfall.module';
 import { UserModule } from './modules/user/user.module';
-import { CardModule } from './modules/card/card.module';
-import { CollectionModule } from './modules/collection/collection.module';
 
 @Module({
   imports: [
@@ -29,6 +29,10 @@ import { CollectionModule } from './modules/collection/collection.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
+        settings: {
+          lockDuration: 60 * 20 * 1000,
+          maxStalledCount: 0,
+        },
         redis: {
           host: configService.get<string>('REDIS_HOST'),
           port: configService.get<number>('REDIS_PORT'),

@@ -1,5 +1,5 @@
 import { InjectQueue } from '@nestjs/bull';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { Queue } from 'bull';
@@ -22,6 +22,8 @@ export class BulkDataService {
     private readonly scryfallCardService: ScryfallCardService,
     @InjectQueue('bulk-data') private readonly bulkDataQueue: Queue,
   ) {}
+
+  private readonly logger = new Logger(BulkDataService.name);
 
   async getBulkData(): Promise<BulkDataObjectType[]> {
     const results = await axios.get<ScryfallBulkDataResponseType>(
@@ -49,12 +51,18 @@ export class BulkDataService {
   }
 
   async download(typeName: string): Promise<boolean> {
+    this.logger.debug(`Getting bulk data information from scryfall`);
     const results = await axios.get<ScryfallBulkDataType>(
       `${this.configService.get<string>(
         'SCRYFALL_API_URI',
       )}/bulk-data/${typeName}`,
     );
 
+    this.logger.debug(
+      `Queueing download`,
+      `uri: ${results.data.download_uri}`,
+      `contentType: ${results.data.content_type}`,
+    );
     await this.bulkDataQueue.add('download', {
       uri: results.data.download_uri,
       contentType: results.data.content_type,

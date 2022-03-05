@@ -1,7 +1,7 @@
 import { InjectQueue, Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Job, Queue } from 'bull';
 import * as fs from 'fs';
 import { chunk, flatten } from 'lodash';
@@ -11,7 +11,7 @@ import {
   ScryfallRelatedCard,
 } from 'prisma/prisma-client';
 import * as stream from 'stream';
-import { chain } from 'stream-chain';
+import Chain, { chain } from 'stream-chain';
 import { parser } from 'stream-json/Parser';
 import { streamArray } from 'stream-json/streamers/StreamArray';
 import { promisify } from 'util';
@@ -23,6 +23,7 @@ import { ScryfallCardDataType } from '../types/scryfall.types';
 import { toCardObjectType } from '../utils/to-prisma-card';
 import { toCardFaceObjectType } from '../utils/to-prisma-scryfall-card-face';
 import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
+import { S3 } from '@aws-sdk/client-s3';
 
 const finished = promisify(stream.finished);
 
@@ -73,23 +74,33 @@ export class BulkDownloadConsumer {
     await setProcess.finished();
     this.logger.debug(`Done processing sets`);
 
-    this.logger.debug(`Downloading bulk data`);
-    const download = await this.bulkDataQueue.add('download', job.data, {
-      removeOnComplete: true,
-    });
-    const { filePath } = await download.finished();
-    this.logger.debug(`Done downloading data`, `filePath is ${filePath}`);
+    try {
+      this.logger.debug(`Downloading bulk data`);
+      const download = await this.bulkDataQueue.add('download', job.data, {
+        removeOnComplete: true,
+      });
+      await download.finished();
+      this.logger.debug(`Done downloading data`);
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
 
-    this.logger.debug(`Processing bulk data`);
-    const processBulkData = await this.bulkDataQueue.add(
-      'process-bulk-data',
-      {
-        filePath,
-      },
-      { removeOnComplete: true },
-    );
-    await processBulkData.finished();
-    this.logger.debug(`Done processing bulk data`);
+    try {
+      this.logger.debug(`Processing bulk data`);
+      const processBulkData = await this.bulkDataQueue.add(
+        'process-bulk-data',
+        null,
+        { removeOnComplete: true },
+      );
+      await processBulkData.finished();
+      this.logger.debug(`Done processing bulk data`);
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
 
     this.logger.debug(`Processing price data`);
     const processPriceData = await this.priceDataQueue.add('process', null, {
@@ -113,6 +124,28 @@ export class BulkDownloadConsumer {
   async downloadBulkData(
     job: Job<{ uri: string; contentType: string; typeName: string }>,
   ) {
+    this.logger.debug(`Starting download job`);
+
+    this.logger.debug(`Creating S3 object`);
+    let s3: S3;
+    try {
+      s3 = new S3({
+        credentials: {
+          accessKeyId: this.configService.get<string>(
+            'BUCKETEER_AWS_ACCESS_KEY_ID',
+          ),
+          secretAccessKey: this.configService.get<string>(
+            'BUCKETEER_AWS_SECRET_ACCESS_KEY',
+          ),
+        },
+        region: this.configService.get<string>('BUCKETEER_AWS_REGION'),
+      });
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
+
     const { uri, contentType } = job.data;
 
     if (contentType !== 'application/json') {
@@ -121,46 +154,124 @@ export class BulkDownloadConsumer {
       );
     }
 
-    const outputFilePath = `${this.configService.get<string>(
-      'DOWNLOADS_DIR',
-    )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}_${
-      job.data.typeName
-    }.json`;
-    const writer = fs.createWriteStream(outputFilePath);
+    this.logger.debug(`Downloadindg ${uri}`);
+    let results: AxiosResponse<any>;
+    try {
+      results = await axios.get(uri, { responseType: 'json' });
+      this.logger.debug(`Done downloading data`, `status: ${results.status}`);
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
 
-    this.logger.debug(`Starting download of: ${job.data.uri}`);
+    if (results.status !== 200) {
+      const err = new Error(`Got ${results.status} when downloading`);
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
 
-    const response = await axios.get(uri, {
-      method: 'get',
-      responseType: 'stream',
+    this.logger.debug(`Beginning upload to s3`);
+    await new Promise((resolve, reject) => {
+      s3.putObject(
+        {
+          Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
+          Body: JSON.stringify(results.data),
+          Key: `${this.configService.get<string>(
+            'DOWNLOADS_DIR',
+          )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}`,
+        },
+        (err, data) => {
+          this.logger.debug(`Upload to s3 complete`);
+          if (err) {
+            this.logger.error(err);
+            job.moveToFailed(err);
+            reject(err);
+            throw err;
+          }
+          this.logger.debug(`Successfully downloaded bulk data to S3`);
+          job.moveToCompleted('done', true);
+          resolve(true);
+        },
+      );
     });
 
-    writer.on('finish', () => {
-      this.logger.debug('Download complete');
-    });
+    // const outputFilePath = `${this.configService.get<string>(
+    //   'DOWNLOADS_DIR',
+    // )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}_${
+    //   job.data.typeName
+    // }.json`;
+    // const writer = fs.createWriteStream(outputFilePath);
 
-    response.data.pipe(writer);
+    // this.logger.debug(`Starting download of: ${job.data.uri}`);
 
-    await finished(writer);
+    // const response = await axios.get(uri, {
+    //   method: 'get',
+    //   responseType: 'stream',
+    // });
 
-    const results = { filePath: outputFilePath };
+    // writer.on('finish', () => {
+    //   this.logger.debug('Download complete');
+    // });
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    job.moveToCompleted(results, true);
+    // response.data.pipe(writer);
 
-    return { filePath: outputFilePath };
+    // await finished(writer);
+
+    // const results = { filePath: outputFilePath };
+
+    // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // // @ts-expect-error
+    // job.moveToCompleted(results, true);
+
+    // return
+
+    // return { filePath: outputFilePath };
   }
 
   @Process('process-bulk-data')
-  async processBulkData(job: Job<{ filePath: string }>) {
+  async processBulkData(job: Job) {
     this.logger.debug(`Processing ${job.data.filePath}`);
 
-    const pipeline = chain([
-      fs.createReadStream(job.data.filePath),
-      parser(),
-      streamArray(),
-    ]);
+    let s3: S3;
+    try {
+      s3 = new S3({
+        credentials: {
+          accessKeyId: this.configService.get<string>(
+            'BUCKETEER_AWS_ACCESS_KEY_ID',
+          ),
+          secretAccessKey: this.configService.get<string>(
+            'BUCKETEER_AWS_SECRET_ACCESS_KEY',
+          ),
+        },
+        region: this.configService.get<string>('BUCKETEER_AWS_REGION'),
+      });
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
+
+    const getObject = async () => {
+      const response = await s3.getObject({
+        Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
+        Key: 'downloads/bulk_data',
+      });
+      if (response.Body instanceof stream.Readable) {
+        return response.Body;
+      }
+      throw new Error();
+    };
+
+    let pipeline: Chain;
+    try {
+      pipeline = chain([await getObject(), parser(), streamArray()]);
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
 
     let count = 0;
 

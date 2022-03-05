@@ -22,7 +22,7 @@ services:
       - .:/usr/src/app
       - .downloads:/tmp/downloads
       - .data:/tmp/data
-      - paladindeckserver_node_modules:/usr/src/app/node_modules
+      # - paladindeckserver_node_modules:/usr/src/app/node_modules
     restart: unless-stopped
 
   redis:
@@ -61,7 +61,7 @@ networks:
   nestjs-network:
 
 volumes:
-  paladindeckserver_node_modules:
+  # paladindeckserver_node_modules:
   postgres:
   redis:
     driver: local

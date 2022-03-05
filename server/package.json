@@ -23,6 +23,7 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.53.1",
     "@nestjs/apollo": "^10.0.5",
     "@nestjs/bull": "^0.5.0",
     "@nestjs/common": "^8.0.0",
@@ -33,6 +34,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@prisma/client": "^3.10.0",
     "apollo-server-express": "^3.6.3",
+    "aws-sdk": "^2.1087.0",
     "axios": "^0.26.0",
     "bull": "^4.6.2",
     "class-transformer": "^0.5.1",

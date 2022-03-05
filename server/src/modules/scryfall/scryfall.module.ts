@@ -22,7 +22,15 @@ import { CardModule } from '../card/card.module';
 @Module({
   imports: [
     PrismaModule,
-    BullModule.registerQueue({ name: 'bulk-data' }),
+    BullModule.registerQueue({
+      name: 'bulk-data',
+      defaultJobOptions: { removeOnComplete: true },
+      settings: {
+        lockDuration: 60 * 20 * 1000,
+        lockRenewTime: 60 * 10 * 1000,
+        maxStalledCount: 0,
+      },
+    }),
     BullModule.registerQueue({ name: 'set-data' }),
     BullModule.registerQueue({ name: 'price-data' }),
     BullModule.registerQueue({ name: 'card' }),
