@@ -39,9 +39,11 @@ import { UserModule } from './modules/user/user.module';
             maxStalledCount: 0,
           },
           redis: {
-            host: parsedUrl.host.split(':')[0],
-            port: Number(parsedUrl.port),
-            password: parsedUrl.password,
+            tls: {
+              host: parsedUrl.host.split(':')[0],
+              port: Number(parsedUrl.port),
+              password: parsedUrl.password,
+            },
           },
         };
       },
