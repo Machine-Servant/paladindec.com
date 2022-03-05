@@ -58,10 +58,6 @@ export class BulkDataService {
       )}/bulk-data/${typeName}`,
     );
 
-    this.logger.log(this.configService.get<string>('REDIS_HOST'));
-    this.logger.log(this.configService.get<string>('REDIS_PORT'));
-    this.logger.log(this.configService.get<string>('REDIS_PASSWORD'));
-
     this.logger.debug(
       `Queueing download`,
       `uri: ${results.data.download_uri}`,
@@ -83,6 +79,10 @@ export class BulkDataService {
         'SCRYFALL_API_URI',
       )}/bulk-data/default_cards`,
     );
+
+    this.logger.log(this.configService.get<string>('REDIS_HOST'));
+    this.logger.log(this.configService.get<string>('REDIS_PORT'));
+    this.logger.log(this.configService.get<string>('REDIS_PASSWORD'));
 
     this.logger.log(`Adding to queue`);
     await this.bulkDataQueue.add('process', {
