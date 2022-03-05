@@ -58,6 +58,10 @@ export class BulkDataService {
       )}/bulk-data/${typeName}`,
     );
 
+    this.logger.log(this.configService.get<string>('REDIS_HOST'));
+    this.logger.log(this.configService.get<string>('REDIS_PORT'));
+    this.logger.log(this.configService.get<string>('REDIS_PASSWORD'));
+
     this.logger.debug(
       `Queueing download`,
       `uri: ${results.data.download_uri}`,
