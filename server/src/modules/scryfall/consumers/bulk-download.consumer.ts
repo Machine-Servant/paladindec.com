@@ -1,4 +1,4 @@
-import { BullQueueEvents, InjectQueue, Process, Processor } from '@nestjs/bull';
+import { InjectQueue, Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
@@ -62,7 +62,7 @@ export class BulkDownloadConsumer {
   async process(
     job: Job<{ uri: string; contentType: string; typeName: string }>,
   ) {
-    this.logger.log(`Processing set data`);
+    this.logger.debug(`Processing set data`);
     const setData = await this.setDataService.getSetData();
     const setProcess = await this.setDataQueue.add(
       'process',
@@ -72,15 +72,15 @@ export class BulkDownloadConsumer {
       { removeOnComplete: true },
     );
     await setProcess.finished();
-    this.logger.log(`Done processing sets`);
+    this.logger.debug(`Done processing sets`);
 
     try {
-      this.logger.log(`Downloading bulk data`);
+      this.logger.debug(`Downloading bulk data`);
       const download = await this.bulkDataQueue.add('download', job.data, {
         removeOnComplete: true,
       });
       await download.finished();
-      this.logger.log(`Done downloading data`);
+      this.logger.debug(`Done downloading data`);
     } catch (err) {
       this.logger.error(err);
       job.moveToFailed(err);
@@ -88,26 +88,26 @@ export class BulkDownloadConsumer {
     }
 
     try {
-      this.logger.log(`Processing bulk data`);
+      this.logger.debug(`Processing bulk data`);
       const processBulkData = await this.bulkDataQueue.add(
         'process-bulk-data',
         null,
         { removeOnComplete: true },
       );
       await processBulkData.finished();
-      this.logger.log(`Done processing bulk data`);
+      this.logger.debug(`Done processing bulk data`);
     } catch (err) {
       this.logger.error(err);
       job.moveToFailed(err);
       throw err;
     }
 
-    this.logger.log(`Processing price data`);
+    this.logger.debug(`Processing price data`);
     const processPriceData = await this.priceDataQueue.add('process', null, {
       removeOnComplete: true,
     });
     await processPriceData.finished();
-    this.logger.log(`Done processing price data`);
+    this.logger.debug(`Done processing price data`);
 
     const processPaladinDeckCards = await this.cardQueue.add(
       'update-card-list',
@@ -117,7 +117,7 @@ export class BulkDownloadConsumer {
       },
     );
     await processPaladinDeckCards.finished();
-    this.logger.log(`Finished processing paladindeck cards`);
+    this.logger.debug(`Finished processing paladindeck cards`);
   }
 
   @Process('download')
