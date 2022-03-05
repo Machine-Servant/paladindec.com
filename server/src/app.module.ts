@@ -15,6 +15,7 @@ import { FirebaseModule } from './modules/firebase/firebase.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { ScryfallModule } from './modules/scryfall/scryfall.module';
 import { UserModule } from './modules/user/user.module';
+import Redis from 'ioredis';
 
 @Module({
   imports: [
@@ -29,21 +30,19 @@ import { UserModule } from './modules/user/user.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
-        // On Heroku, this configuration variable can change and they don't
-        // provide it broken out into host, port, password. So, we have to parse
-        // it.
-        const parsedUrl = new URL(configService.get<string>('REDIS_URL'));
         return {
           settings: {
             lockDuration: 60 * 20 * 1000,
             maxStalledCount: 0,
           },
-          redis: {
-            tls: {
-              host: parsedUrl.host.split(':')[0],
-              port: Number(parsedUrl.port),
-              password: parsedUrl.password,
-            },
+          createClient: () => {
+            return new Redis(configService.get<string>('REDIS_URL'), {
+              tls: {
+                rejectUnauthorized: false,
+              },
+              enableReadyCheck: false,
+              maxRetriesPerRequest: null,
+            });
           },
         };
       },
