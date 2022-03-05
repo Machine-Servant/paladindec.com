@@ -80,10 +80,6 @@ export class BulkDataService {
       )}/bulk-data/default_cards`,
     );
 
-    this.logger.debug(this.configService.get<string>('REDIS_HOST'));
-    this.logger.debug(this.configService.get<string>('REDIS_PORT'));
-    this.logger.debug(this.configService.get<string>('REDIS_PASSWORD'));
-
     this.logger.debug(`Adding to queue`);
     try {
       await this.bulkDataQueue.add('process', {
