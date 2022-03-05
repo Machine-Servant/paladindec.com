@@ -41,4 +41,4 @@ RUN npm run prisma:generate
 COPY --from=development /usr/src/app/dist ./dist
 COPY --from=development /usr/src/app/prisma ./prisma
 
-CMD ["node", "dist/src/main"]
+CMD ["node", "--max_old_space_size=2048" "dist/src/main"]
