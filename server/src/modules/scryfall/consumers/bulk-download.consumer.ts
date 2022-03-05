@@ -23,7 +23,7 @@ import { ScryfallCardDataType } from '../types/scryfall.types';
 import { toCardObjectType } from '../utils/to-prisma-card';
 import { toCardFaceObjectType } from '../utils/to-prisma-scryfall-card-face';
 import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
-import { S3 } from '@aws-sdk/client-s3';
+import { PutObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
 
 const finished = promisify(stream.finished);
 
@@ -154,48 +154,81 @@ export class BulkDownloadConsumer {
       );
     }
 
-    this.logger.debug(`Downloadindg ${uri}`);
-    let results: AxiosResponse<any>;
-    try {
-      results = await axios.get(uri, { responseType: 'json' });
-      this.logger.debug(`Done downloading data`, `status: ${results.status}`);
-    } catch (err) {
-      this.logger.error(err);
-      job.moveToFailed(err);
-      throw err;
-    }
+    const downloadFile = async (
+      downloadUrl: string,
+    ): Promise<AxiosResponse<stream.Stream>> =>
+      axios.get(downloadUrl, { responseType: 'stream' });
 
-    if (results.status !== 200) {
-      const err = new Error(`Got ${results.status} when downloading`);
-      this.logger.error(err);
-      job.moveToFailed(err);
-      throw err;
-    }
+    const uploadFromStream = (
+      fileResponse: AxiosResponse<stream.Stream>,
+    ): {
+      passthrough: stream.PassThrough;
+      promise: Promise<PutObjectCommandOutput>;
+    } => {
+      this.logger.debug(`Uploading data to S3`);
+      const passthrough = new stream.PassThrough();
+      const results = s3.putObject({
+        Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
+        Key: `${this.configService.get<string>(
+          'DOWNLOADS_DIR',
+        )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}`,
+        ContentType: contentType,
+        ContentLength: Number(fileResponse.headers['content-length']),
+      });
+      return { passthrough, promise: results };
+    };
 
-    this.logger.debug(`Beginning upload to s3`);
-    await new Promise((resolve, reject) => {
-      s3.putObject(
-        {
-          Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
-          Body: JSON.stringify(results.data),
-          Key: `${this.configService.get<string>(
-            'DOWNLOADS_DIR',
-          )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}`,
-        },
-        (err, data) => {
-          this.logger.debug(`Upload to s3 complete`);
-          if (err) {
-            this.logger.error(err);
-            job.moveToFailed(err);
-            reject(err);
-            throw err;
-          }
-          this.logger.debug(`Successfully downloaded bulk data to S3`);
-          job.moveToCompleted('done', true);
-          resolve(true);
-        },
-      );
-    });
+    this.logger.debug(`Downloading file ${uri}`);
+    const responseStream = await downloadFile(uri);
+    this.logger.debug(`Done with downloadFile`);
+    this.logger.debug(`Beginning upload to S3`);
+    const { passthrough, promise } = uploadFromStream(responseStream);
+    responseStream.data.pipe(passthrough);
+    await promise;
+    this.logger.debug(`Done uploading to S3`);
+
+    // this.logger.debug(`Downloadindg ${uri}`);
+    // let results: AxiosResponse<any>;
+    // try {
+    //   results = await axios.get(uri, { responseType: 'stream' });
+    //   this.logger.debug(`Done downloading data`, `status: ${results.status}`);
+    // } catch (err) {
+    //   this.logger.error(err);
+    //   job.moveToFailed(err);
+    //   throw err;
+    // }
+
+    // if (results.status !== 200) {
+    //   const err = new Error(`Got ${results.status} when downloading`);
+    //   this.logger.error(err);
+    //   job.moveToFailed(err);
+    //   throw err;
+    // }
+
+    // this.logger.debug(`Beginning upload to s3`);
+    // await new Promise((resolve, reject) => {
+    //   s3.putObject(
+    //     {
+    //       Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
+    //       Body: results.data,
+    //       Key: `${this.configService.get<string>(
+    //         'DOWNLOADS_DIR',
+    //       )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}`,
+    //     },
+    //     (err, data) => {
+    //       this.logger.debug(`Upload to s3 complete`);
+    //       if (err) {
+    //         this.logger.error(err);
+    //         job.moveToFailed(err);
+    //         reject(err);
+    //         throw err;
+    //       }
+    //       this.logger.debug(`Successfully downloaded bulk data to S3`);
+    //       job.moveToCompleted('done', true);
+    //       resolve(true);
+    //     },
+    //   );
+    // });
 
     // const outputFilePath = `${this.configService.get<string>(
     //   'DOWNLOADS_DIR',
