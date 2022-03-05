@@ -28,17 +28,23 @@ import { UserModule } from './modules/user/user.module';
     BullModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        settings: {
-          lockDuration: 60 * 20 * 1000,
-          maxStalledCount: 0,
-        },
-        redis: {
-          host: configService.get<string>('REDIS_HOST'),
-          port: configService.get<number>('REDIS_PORT'),
-          password: configService.get<string>('REDIS_PASSWORD'),
-        },
-      }),
+      useFactory: async (configService: ConfigService) => {
+        // On Heroku, this configuration variable can change and they don't
+        // provide it broken out into host, port, password. So, we have to parse
+        // it.
+        const parsedUrl = new URL(configService.get<string>('REDIS_URL'));
+        return {
+          settings: {
+            lockDuration: 60 * 20 * 1000,
+            maxStalledCount: 0,
+          },
+          redis: {
+            host: parsedUrl.host.split(':')[0],
+            port: Number(parsedUrl.port),
+            password: parsedUrl.password,
+          },
+        };
+      },
     }),
     PrismaModule,
     ScryfallModule,

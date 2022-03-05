@@ -73,24 +73,29 @@ export class BulkDataService {
   }
 
   async process(): Promise<boolean> {
-    this.logger.log(`Getting bulk data object`);
+    this.logger.debug(`Getting bulk data object`);
     const results = await axios.get<ScryfallBulkDataType>(
       `${this.configService.get<string>(
         'SCRYFALL_API_URI',
       )}/bulk-data/default_cards`,
     );
 
-    this.logger.log(this.configService.get<string>('REDIS_HOST'));
-    this.logger.log(this.configService.get<string>('REDIS_PORT'));
-    this.logger.log(this.configService.get<string>('REDIS_PASSWORD'));
+    this.logger.debug(this.configService.get<string>('REDIS_HOST'));
+    this.logger.debug(this.configService.get<string>('REDIS_PORT'));
+    this.logger.debug(this.configService.get<string>('REDIS_PASSWORD'));
 
-    this.logger.log(`Adding to queue`);
-    await this.bulkDataQueue.add('process', {
-      uri: results.data.download_uri,
-      contentType: results.data.content_type,
-      typeName: 'default_cards',
-    });
-    this.logger.log(`Done adding to queue`);
+    this.logger.debug(`Adding to queue`);
+    try {
+      await this.bulkDataQueue.add('process', {
+        uri: results.data.download_uri,
+        contentType: results.data.content_type,
+        typeName: 'default_cards',
+      });
+    } catch (err) {
+      this.logger.error(err);
+      throw err;
+    }
+    this.logger.debug(`Done adding to queue`);
 
     return true;
   }
