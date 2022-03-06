@@ -24,7 +24,7 @@ import { CardModule } from '../card/card.module';
     PrismaModule,
     BullModule.registerQueue({
       name: 'bulk-data',
-      defaultJobOptions: { removeOnComplete: true, preventParsingData: true },
+      defaultJobOptions: { removeOnComplete: true },
       settings: {
         lockDuration: 60 * 20 * 1000,
         lockRenewTime: 60 * 10 * 1000,
