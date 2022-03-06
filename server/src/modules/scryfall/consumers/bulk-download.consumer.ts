@@ -116,6 +116,7 @@ export class BulkDownloadConsumer {
     await processPriceData.finished();
     this.logger.debug(`Done processing price data`);
 
+    this.logger.debug(`Updating PaladinDeck cards`);
     const processPaladinDeckCards = await this.cardQueue.add(
       'update-card-list',
       null,
@@ -451,10 +452,12 @@ export class BulkDownloadConsumer {
 
     let count = 0;
 
+    this.logger.debug(`Doing stuff`);
     const results = await new Promise((resolve, reject) => {
-      const cards: ScryfallCard[] = [];
-      let cardFaceData: BulkScryfallCardFace[] = [];
-      let relatedCardData: BulkScryfallRelatedCard[] = [];
+      const buffer = [];
+      let cards: ScryfallCard[] = [];
+      // let cardFaceData: BulkScryfallCardFace[] = [];
+      // let relatedCardData: BulkScryfallRelatedCard[] = [];
 
       pipeline.on(
         'data',
@@ -466,46 +469,73 @@ export class BulkDownloadConsumer {
           key: number;
           value: ScryfallCardDataType;
         }) => {
-          count++;
-          cards.push(toCardObjectType(value));
-          if (value.card_faces?.length) {
-            const cardFaces = value.card_faces.map((input) => {
-              const cardFace = toCardFaceObjectType(input);
-              cardFace.cardId = value.id;
-              if (!isBulkScryfallCardFace(cardFace)) {
-                this.logger.error('Invalid BulkScryfallCardFace', cardFace);
-                throw new Error('Invalid BulkScryfallCardFace');
-              }
-              return cardFace;
-            });
-            cardFaceData = cardFaceData.concat(cardFaces);
+          buffer.push(value);
+          // this.logger.debug(`Processing ${value.id}`);
+          if (cards.length < 1000) {
+            cards.push(toCardObjectType(value));
+          } else {
+            this.logger.debug(`Pushing new queue of 1000 cards ${++count}`);
+            pipeline.pause();
+            const processScryfallCards = await this.bulkDataQueue.add(
+              'process-scryfall-cards',
+              {
+                cards: JSON.stringify(cards),
+              },
+            );
+            this.logger.debug(`Done pushing queue`);
+            await processScryfallCards.finished();
+            cards = [];
+            pipeline.resume();
           }
-          if (value.all_parts?.length) {
-            const relatedCards = value.all_parts.map((input) => {
-              const relatedCard = toPrismaScryfallRelatedCard(input);
-              relatedCard.id = undefined;
-              relatedCard.cardId = value.id;
-              relatedCard.referenceId = input.id;
-              if (!isBulkScryfallRelatedCard(relatedCard)) {
-                this.logger.error(
-                  `Invalid BulkScryfallRelatedCard`,
-                  relatedCard,
-                );
-                throw new Error('Invalid BulkScryfallRelatedCard.');
-              }
-              return relatedCard;
-            });
-            relatedCardData = relatedCardData.concat(relatedCards);
-          }
+          // cards.push(toCardObjectType(value));
+          // if (value.card_faces?.length) {
+          //   const cardFaces = value.card_faces.map((input) => {
+          //     const cardFace = toCardFaceObjectType(input);
+          //     cardFace.cardId = value.id;
+          //     if (!isBulkScryfallCardFace(cardFace)) {
+          //       this.logger.error('Invalid BulkScryfallCardFace', cardFace);
+          //       throw new Error('Invalid BulkScryfallCardFace');
+          //     }
+          //     return cardFace;
+          //   });
+          //   cardFaceData = cardFaceData.concat(cardFaces);
+          // }
+          // if (value.all_parts?.length) {
+          //   const relatedCards = value.all_parts.map((input) => {
+          //     const relatedCard = toPrismaScryfallRelatedCard(input);
+          //     relatedCard.id = undefined;
+          //     relatedCard.cardId = value.id;
+          //     relatedCard.referenceId = input.id;
+          //     if (!isBulkScryfallRelatedCard(relatedCard)) {
+          //       this.logger.error(
+          //         `Invalid BulkScryfallRelatedCard`,
+          //         relatedCard,
+          //       );
+          //       throw new Error('Invalid BulkScryfallRelatedCard.');
+          //     }
+          //     return relatedCard;
+          //   });
+          //   relatedCardData = relatedCardData.concat(relatedCards);
+          // }
         },
       );
 
       pipeline.on('end', async () => {
-        this.logger.debug(`Processed ${count} objects`);
+        if (cards.length) {
+          this.logger.debug(
+            `Finishing processing of cards #${cards.length} cards trailing`,
+          );
+          const processScryfallCards = await this.bulkDataQueue.add(
+            'process-scryfall-cards',
+            { cards: JSON.stringify(cards) },
+          );
+          await processScryfallCards.finished();
+        }
+        this.logger.debug(`Done processing all cards`);
 
-        await this.processCards(cards);
-        await this.processCardFaces(cardFaceData);
-        await this.processAllParts(relatedCardData);
+        // await this.processCards(cards);
+        // await this.processCardFaces(cardFaceData);
+        // await this.processAllParts(relatedCardData);
 
         resolve(true);
       });
@@ -524,26 +554,27 @@ export class BulkDownloadConsumer {
     return results;
   }
 
-  async processCards(cards: ScryfallCard[]) {
+  @Process('process-scryfall-cards')
+  async processCards(job: Job<{ cards: string }>) {
+    const cards = JSON.parse(job.data.cards) as ScryfallCard[];
     this.logger.debug(`Processing PaladinDeck Card objects from data`);
     this.logger.debug(`Processing #${cards.length} objects`);
 
     try {
-      const batches = chunk(cards, 100);
+      const batches = chunk(cards, 10);
       const batchesLength = batches.length;
       let batchCount = 0;
 
       while (batches.length) {
-        this.logger.debug(
-          `Processing batch #${++batchCount} (of #${batchesLength})`,
-        );
         const batch = batches.shift();
         await Promise.all(
           batch.map(async (card) => {
             return await this.scryfallCardService.upsert(card);
           }),
         );
-        this.logger.debug(`Batch #${batchCount} complete`);
+        this.logger.debug(
+          `Batch #${++batchCount} of ${batchesLength} complete`,
+        );
       }
       this.logger.debug(`Done processing PaladinDeck Card objects`);
     } catch (err) {
@@ -552,80 +583,80 @@ export class BulkDownloadConsumer {
     }
   }
 
-  async processCardFaces(cardFaceData: BulkScryfallCardFace[]) {
-    this.logger.debug(`Processing CardFace objects`);
+  // async processCardFaces(cardFaceData: BulkScryfallCardFace[]) {
+  //   this.logger.debug(`Processing CardFace objects`);
 
-    try {
-      this.logger.debug(`Deleting old references`);
-      const countDeleted = await this.scryfallCardFaceService.drop();
-      this.logger.debug(`Deleted #${countDeleted} CardFace records`);
-    } catch (err) {
-      this.logger.error(err);
-      throw err;
-    }
+  //   try {
+  //     this.logger.debug(`Deleting old references`);
+  //     const countDeleted = await this.scryfallCardFaceService.drop();
+  //     this.logger.debug(`Deleted #${countDeleted} CardFace records`);
+  //   } catch (err) {
+  //     this.logger.error(err);
+  //     throw err;
+  //   }
 
-    try {
-      let batchCount = 0;
-      const batches = chunk(cardFaceData, 100);
-      const results: ScryfallCardFace[][] = [];
+  //   try {
+  //     let batchCount = 0;
+  //     const batches = chunk(cardFaceData, 100);
+  //     const results: ScryfallCardFace[][] = [];
 
-      while (batches.length) {
-        this.logger.debug(`Processing batch #${++batchCount}`);
-        const batch = batches.shift();
-        const result = await Promise.all(
-          batch.map(
-            async (cardFace) =>
-              // TODO: FIX THIS ANY
-              await this.scryfallCardFaceService.create(cardFace as any),
-          ),
-        );
-        results.push(result);
-      }
-      const flatResults = flatten(results);
-      this.logger.debug(`Processed ${flatResults.length} CardFace records`);
+  //     while (batches.length) {
+  //       this.logger.debug(`Processing batch #${++batchCount}`);
+  //       const batch = batches.shift();
+  //       const result = await Promise.all(
+  //         batch.map(
+  //           async (cardFace) =>
+  //             // TODO: FIX THIS ANY
+  //             await this.scryfallCardFaceService.create(cardFace as any),
+  //         ),
+  //       );
+  //       results.push(result);
+  //     }
+  //     const flatResults = flatten(results);
+  //     this.logger.debug(`Processed ${flatResults.length} CardFace records`);
 
-      return flatResults;
-    } catch (err) {
-      this.logger.error(err);
-      throw err;
-    }
-  }
+  //     return flatResults;
+  //   } catch (err) {
+  //     this.logger.error(err);
+  //     throw err;
+  //   }
+  // }
 
-  async processAllParts(allPartsData: BulkScryfallRelatedCard[]) {
-    this.logger.debug(`Processing RelatedCard objects`);
+  // async processAllParts(allPartsData: BulkScryfallRelatedCard[]) {
+  //   this.logger.debug(`Processing RelatedCard objects`);
 
-    try {
-      this.logger.debug(`Deleting old references`);
-      const countDeleted = await this.scryfallRelatedCardService.drop();
-      this.logger.debug(`Deleted #${countDeleted} RelatedCard records`);
-    } catch (err) {
-      this.logger.error(err);
-      throw err;
-    }
+  //   try {
+  //     this.logger.debug(`Deleting old references`);
+  //     const countDeleted = await this.scryfallRelatedCardService.drop();
+  //     this.logger.debug(`Deleted #${countDeleted} RelatedCard records`);
+  //   } catch (err) {
+  //     this.logger.error(err);
+  //     throw err;
+  //   }
 
-    try {
-      let batchCount = 0;
-      const batches = chunk(allPartsData, 100);
-      const results: ScryfallRelatedCard[][] = [];
+  //   try {
+  //     let batchCount = 0;
+  //     const batches = chunk(allPartsData, 100);
+  //     const results: ScryfallRelatedCard[][] = [];
 
-      while (batches.length) {
-        this.logger.debug(`Processing batch ${++batchCount}`);
-        const batch = batches.shift();
-        const result = await Promise.all(
-          batch.map(
-            async (relatedCard) =>
-              await this.scryfallRelatedCardService.create(relatedCard),
-          ),
-        );
-        results.push(result);
-      }
-      const flatResults = flatten(results);
-      this.logger.debug(`Processed ${flatResults.length} RelatedCard records`);
+  //     while (batches.length) {
+  //       this.logger.debug(`Processing batch ${++batchCount}`);
+  //       const batch = batches.shift();
+  //       const result = await Promise.all(
+  //         batch.map(
+  //           async (relatedCard) =>
+  //             await this.scryfallRelatedCardService.create(relatedCard),
+  //         ),
+  //       );
+  //       results.push(result);
+  //     }
+  //     const flatResults = flatten(results);
+  //     this.logger.debug(`Processed ${flatResults.length} RelatedCard records`);
 
-      return flatResults;
-    } catch (err) {
-      this.logger.error(err);
-      throw err;
-    }
-  }
+  //     return flatResults;
+  //   } catch (err) {
+  //     this.logger.error(err);
+  //     throw err;
+  //   }
+  // }
 }

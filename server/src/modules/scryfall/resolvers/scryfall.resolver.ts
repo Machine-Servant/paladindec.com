@@ -33,8 +33,9 @@ export class ScryfallResolver {
   }
 
   @Mutation(() => Boolean)
-  async processBulkData(@Args('fileName') fileName: string): Promise<boolean> {
-    return this.bulkDataService.processBulkData(fileName);
+  async processBulkData(): Promise<boolean> {
+    console.log('???');
+    return this.bulkDataService.processBulkData();
   }
 
   @Mutation(() => Boolean)

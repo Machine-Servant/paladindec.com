@@ -399,7 +399,7 @@ input JsonNullableListFilter {
 type Mutation {
   downloadBulkData(typeName: String!): Boolean!
   processAllParts: Boolean!
-  processBulkData(fileName: String!): Boolean!
+  processBulkData: Boolean!
   processCardFaces: Boolean!
   processDaily: Boolean!
   processPriceData: Boolean!

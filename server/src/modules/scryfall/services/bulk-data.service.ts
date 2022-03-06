@@ -96,11 +96,9 @@ export class BulkDataService {
     return true;
   }
 
-  async processBulkData(fileName: string): Promise<boolean> {
-    const filePath = `${this.configService.get<string>(
-      'DOWNLOADS_DIR',
-    )}/${fileName}`;
-    await this.bulkDataQueue.add('process-bulk-data', { filePath });
+  async processBulkData(): Promise<boolean> {
+    await this.bulkDataQueue.add('process-bulk-data');
+    console.log('!!!');
     return true;
   }
 

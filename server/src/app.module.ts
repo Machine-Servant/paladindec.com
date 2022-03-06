@@ -37,10 +37,14 @@ import Redis from 'ioredis';
             maxStalledCount: 0,
           },
           createClient: () => {
-            return new Redis(configService.get<string>('REDIS_URL'), {
-              tls: {
-                rejectUnauthorized: false,
-              },
+            const url = configService.get<string>('REDIS_URL');
+            const isTls = url.startsWith('rediss');
+            return new Redis(url, {
+              tls: isTls
+                ? {
+                    rejectUnauthorized: false,
+                  }
+                : undefined,
               enableReadyCheck: false,
               maxRetriesPerRequest: null,
             });
