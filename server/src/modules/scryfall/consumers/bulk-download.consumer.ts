@@ -23,7 +23,14 @@ import { ScryfallCardDataType } from '../types/scryfall.types';
 import { toCardObjectType } from '../utils/to-prisma-card';
 import { toCardFaceObjectType } from '../utils/to-prisma-scryfall-card-face';
 import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
-import { PutObjectCommandOutput, S3 } from '@aws-sdk/client-s3';
+import {
+  CompleteMultipartUploadCommandInput,
+  CreateMultipartUploadCommandOutput,
+  Part,
+  PutObjectCommandOutput,
+  S3,
+  UploadPartCommandInput,
+} from '@aws-sdk/client-s3';
 
 const finished = promisify(stream.finished);
 
@@ -74,18 +81,18 @@ export class BulkDownloadConsumer {
     await setProcess.finished();
     this.logger.debug(`Done processing sets`);
 
-    try {
-      this.logger.debug(`Downloading bulk data`);
-      const download = await this.bulkDataQueue.add('download', job.data, {
-        removeOnComplete: true,
-      });
-      await download.finished();
-      this.logger.debug(`Done downloading data`);
-    } catch (err) {
-      this.logger.error(err);
-      job.moveToFailed(err);
-      throw err;
-    }
+    // try {
+    //   this.logger.debug(`Downloading bulk data`);
+    //   const download = await this.bulkDataQueue.add('download', job.data, {
+    //     removeOnComplete: true,
+    //   });
+    //   await download.finished();
+    //   this.logger.debug(`Done downloading data`);
+    // } catch (err) {
+    //   this.logger.error(err);
+    //   job.moveToFailed(err);
+    //   throw err;
+    // }
 
     try {
       this.logger.debug(`Processing bulk data`);
@@ -122,7 +129,11 @@ export class BulkDownloadConsumer {
 
   @Process('download')
   async downloadBulkData(
-    job: Job<{ uri: string; contentType: string; typeName: string }>,
+    job: Job<{
+      uri: string;
+      contentType: string;
+      typeName: string;
+    }>,
   ) {
     this.logger.debug(`Starting download job`);
 
@@ -156,36 +167,168 @@ export class BulkDownloadConsumer {
 
     const downloadFile = async (
       downloadUrl: string,
-    ): Promise<AxiosResponse<stream.Stream>> =>
-      axios.get(downloadUrl, { responseType: 'stream' });
+    ): Promise<AxiosResponse<string>> =>
+      axios.get(downloadUrl, { responseType: 'arraybuffer' });
 
-    const uploadFromStream = (
-      fileResponse: AxiosResponse<stream.Stream>,
-    ): {
-      passthrough: stream.PassThrough;
-      promise: Promise<PutObjectCommandOutput>;
-    } => {
-      this.logger.debug(`Uploading data to S3`);
-      const passthrough = new stream.PassThrough();
-      const results = s3.putObject({
-        Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
-        Key: `${this.configService.get<string>(
-          'DOWNLOADS_DIR',
-        )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}`,
-        ContentType: contentType,
-        ContentLength: Number(fileResponse.headers['content-length']),
+    const fileResponse = await downloadFile(uri);
+    const buffer = Buffer.from(fileResponse.data, 'binary');
+    const partSize = 1024 * 1024 * 5;
+    const bucket = this.configService.get<string>('BUCKETEER_BUCKET_NAME');
+    const fileKey = `${this.configService.get<string>(
+      'DOWNLOADS_DIR',
+    )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}.json`;
+    const multipartMap = {
+      Parts: [],
+    };
+    let partsLeft = Math.ceil(buffer.length / partSize);
+
+    const completeMultipartUpload = (
+      doneParams: CompleteMultipartUploadCommandInput,
+    ) => {
+      s3.completeMultipartUpload(doneParams, (err, data) => {
+        if (err) {
+          this.logger.error(err);
+          job.moveToFailed(err);
+          throw err;
+        }
+
+        this.logger.debug(`Completed upload`);
+        // job.moveToCompleted('done', true);
       });
-      return { passthrough, promise: results };
     };
 
-    this.logger.debug(`Downloading file ${uri}`);
-    const responseStream = await downloadFile(uri);
-    this.logger.debug(`Done with downloadFile`);
-    this.logger.debug(`Beginning upload to S3`);
-    const { passthrough, promise } = uploadFromStream(responseStream);
-    responseStream.data.pipe(passthrough);
-    await promise;
-    this.logger.debug(`Done uploading to S3`);
+    const uploadPart = (
+      multipart: CreateMultipartUploadCommandOutput,
+      partParams: UploadPartCommandInput,
+      tryNumber = 1,
+    ) => {
+      s3.uploadPart(partParams, (err, data) => {
+        if (err) {
+          this.logger.warn(`Error uploading part`, err);
+          if (tryNumber < 3) {
+            this.logger.warn(
+              `Retrying upload of part #${partParams.PartNumber}`,
+            );
+            uploadPart(multipart, partParams, tryNumber + 1);
+          } else {
+            this.logger.error(
+              `Failed uploading part #${partParams.PartNumber}`,
+            );
+            job.moveToFailed(err);
+            throw err;
+          }
+          return;
+        }
+
+        multipartMap.Parts[partParams.PartNumber - 1] = {
+          ETag: data.ETag,
+          PartNumber: partParams.PartNumber,
+        };
+
+        this.logger.debug(`Completed part #${partParams.PartNumber}`);
+        if (--partsLeft > 0) return;
+
+        const doneParams: CompleteMultipartUploadCommandInput = {
+          Bucket: bucket,
+          Key: fileKey,
+          MultipartUpload: multipartMap,
+          UploadId: multipart.UploadId,
+        };
+
+        this.logger.debug(`Completing upload...`);
+        completeMultipartUpload(doneParams);
+      });
+    };
+
+    s3.createMultipartUpload(
+      {
+        Bucket: bucket,
+        Key: fileKey,
+        ContentType: contentType,
+      },
+      (err, multipart) => {
+        if (err) {
+          this.logger.error(err);
+          job.moveToFailed(err);
+          throw err;
+        }
+
+        const uploadId = multipart.UploadId;
+
+        this.logger.debug(`Processing UploadId #${uploadId}`);
+
+        let partNumber = 0;
+        for (
+          let rangeStart = 0;
+          rangeStart < buffer.length;
+          rangeStart += partSize
+        ) {
+          const end = Math.min(rangeStart + partSize, buffer.length);
+          const partParams: UploadPartCommandInput = {
+            Body: buffer.slice(rangeStart, end),
+            Bucket: bucket,
+            Key: fileKey,
+            PartNumber: ++partNumber,
+            UploadId: uploadId,
+          };
+          this.logger.debug(`Uploading part #${partParams.PartNumber}`);
+          uploadPart(multipart, partParams);
+        }
+      },
+    );
+
+    /*
+        const buffer = Buffer.from(fileResponse.data)
+        const results = await s3.createMultipartUpload({
+          Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
+          Key: `${this.configService.get<string>(
+            'DOWNLOADS_DIR',
+          )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}.json`,
+          ContentType: fileResponse.headers['content-type'],
+        }, (err, multipart) => {
+          fileResponse
+        })
+    */
+
+    // const uploadFromStream = (
+    //   fileResponse: AxiosResponse<stream.Stream>,
+    // ): {
+    //   passthrough: stream.PassThrough;
+    //   promise: Promise<PutObjectCommandOutput>;
+    // } => {
+    //   this.logger.debug(`Uploading data to S3`);
+    //   const passthrough = new stream.PassThrough();
+    //   try {
+    //     const results = s3.putObject({
+    //       Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
+    //       Key: `${this.configService.get<string>(
+    //         'DOWNLOADS_DIR',
+    //       )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}.json`,
+    //       ContentType: fileResponse.headers['content-type'],
+    //       Body: passthrough,
+    //     });
+    //     return { passthrough, promise: results };
+    //   } catch (err) {
+    //     this.logger.error(err);
+    //     throw err;
+    //   }
+    // };
+
+    // this.logger.debug(`Downloading file ${uri}`);
+    // const responseStream = await downloadFile(uri);
+    // this.logger.debug(`Done with downloadFile`);
+    // this.logger.debug(`Beginning upload to S3`);
+    // try {
+    //   const { passthrough, promise } = uploadFromStream(responseStream);
+    //   responseStream.data.pipe(passthrough);
+    //   await promise;
+    //   job.moveToCompleted('done', true);
+    //   this.logger.debug(`Done uploading to S3`);
+    // } catch (err) {
+    //   this.logger.error(err);
+    //   job.moveToFailed(err);
+    //   throw err;
+    // }
 
     // this.logger.debug(`Downloadindg ${uri}`);
     // let results: AxiosResponse<any>;
@@ -289,7 +432,7 @@ export class BulkDownloadConsumer {
     const getObject = async () => {
       const response = await s3.getObject({
         Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
-        Key: 'downloads/bulk_data',
+        Key: 'downloads/bulk_data.json',
       });
       if (response.Body instanceof stream.Readable) {
         return response.Body;

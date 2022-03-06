@@ -33,6 +33,7 @@ import Redis from 'ioredis';
         return {
           settings: {
             lockDuration: 60 * 20 * 1000,
+            lockRenewTime: 60 * 10 * 1000,
             maxStalledCount: 0,
           },
           createClient: () => {
