@@ -454,7 +454,7 @@ export class BulkDownloadConsumer {
 
     this.logger.debug(`Doing stuff`);
     const results = await new Promise((resolve, reject) => {
-      const buffer = [];
+      // const buffer = [];
       let cards: ScryfallCard[] = [];
       // let cardFaceData: BulkScryfallCardFace[] = [];
       // let relatedCardData: BulkScryfallRelatedCard[] = [];
@@ -469,21 +469,24 @@ export class BulkDownloadConsumer {
           key: number;
           value: ScryfallCardDataType;
         }) => {
-          buffer.push(value);
+          // buffer.push(value);
           // this.logger.debug(`Processing ${value.id}`);
           if (cards.length < 1000) {
             cards.push(toCardObjectType(value));
           } else {
-            this.logger.debug(`Pushing new queue of 1000 cards ${++count}`);
+            this.logger.debug(`Processing new batch of 1000 cards #${++count}`);
             pipeline.pause();
+            await new Promise((resolve) =>
+              setTimeout(() => resolve(true), 100),
+            );
             const processScryfallCards = await this.bulkDataQueue.add(
               'process-scryfall-cards',
               {
                 cards: JSON.stringify(cards),
               },
             );
-            this.logger.debug(`Done pushing queue`);
             await processScryfallCards.finished();
+            this.logger.debug(`Done processing batch #${count}`);
             cards = [];
             pipeline.resume();
           }
