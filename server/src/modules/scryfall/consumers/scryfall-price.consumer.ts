@@ -41,57 +41,66 @@ export class ScryfallPriceConsumer {
   async processPriceData(job: Job) {
     this.logger.debug(`Processing price data for all cards`);
 
-    this.logger.debug(`Fetching all cards`);
-    const allCards = await this.scryfallCardService.findMany();
-    this.logger.debug(`Fetched #${allCards.length} Card objects`);
+    const allCardsCount = await this.scryfallCardService.getCount();
+    this.logger.debug(`Found #${allCardsCount} cards`);
 
-    const batches = chunk(allCards, 100);
-    const batchLength = batches.length;
-    let batchCount = 0;
+    for (let i = 0; i < Math.ceil(allCardsCount / 1000); i++) {
+      const currentCards = await this.scryfallCardService.findMany({
+        skip: i * 1000,
+        take: 1000,
+        orderBy: [{ id: 'asc' }],
+      });
+      this.logger.debug(`Fetched #${currentCards.length} Card objects (#${i})`);
+      const batches = chunk(currentCards, 100);
+      const batchLength = batches.length;
+      let batchCount = 0;
 
-    const date = new Date();
+      const date = new Date();
 
-    try {
-      while (batches.length) {
-        this.logger.debug(
-          `Processing price data batch #${++batchCount} of ${batchLength}`,
-        );
-        const batch = batches.shift();
+      try {
+        while (batches.length) {
+          this.logger.debug(
+            `Processing price data batch #${++batchCount} of ${batchLength}`,
+          );
+          const batch = batches.shift();
 
-        await Promise.all(
-          batch.map(async (card) => {
-            const prices = card.prices;
+          await Promise.all(
+            batch.map(async (card) => {
+              const prices = card.prices;
 
-            if (!isPriceJsonData(prices)) return;
+              if (!isPriceJsonData(prices)) return;
 
-            const priceData: ScryfallPriceUncheckedCreateInput = {
-              date,
-              cardId: card.id,
-              eur: Number(prices.eur),
-              tix: Number(prices.tix),
-              usd: Number(prices.usd),
-              eurFoil: Number(prices.eur_foil),
-              usdFoil: Number(prices.usd_foil),
-              usdEtched: Number(prices.usd_etched),
-            };
+              const priceData: ScryfallPriceUncheckedCreateInput = {
+                date,
+                cardId: card.id,
+                eur: Number(prices.eur),
+                tix: Number(prices.tix),
+                usd: Number(prices.usd),
+                eurFoil: Number(prices.eur_foil),
+                usdFoil: Number(prices.usd_foil),
+                usdEtched: Number(prices.usd_etched),
+              };
 
-            try {
-              const results = await this.scryfallPriceService.create(priceData);
-              return results;
-            } catch (err) {
-              this.logger.error(err, priceData);
-              job.moveToFailed(err);
-              throw err;
-            }
-          }),
-        );
+              try {
+                const results = await this.scryfallPriceService.create(
+                  priceData,
+                );
+                return results;
+              } catch (err) {
+                this.logger.error(err, priceData);
+                job.moveToFailed(err);
+                throw err;
+              }
+            }),
+          );
 
-        this.logger.debug(`Processed ${batchCount}`);
+          this.logger.debug(`Processed ${batchCount}`);
+        }
+      } catch (err) {
+        this.logger.error(err);
+        job.moveToFailed(err);
+        throw err;
       }
-    } catch (err) {
-      this.logger.error(err);
-      job.moveToFailed(err);
-      throw err;
     }
 
     job.moveToCompleted('done', true);
