@@ -8,34 +8,33 @@ import { IntFilter } from '../prisma/int-filter.input';
 
 @InputType()
 export class CardsInCollectionWhereInput {
+  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
+  AND?: Array<CardsInCollectionWhereInput>;
 
-    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
-    AND?: Array<CardsInCollectionWhereInput>;
+  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
+  OR?: Array<CardsInCollectionWhereInput>;
 
-    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
-    OR?: Array<CardsInCollectionWhereInput>;
+  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
+  NOT?: Array<CardsInCollectionWhereInput>;
 
-    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
-    NOT?: Array<CardsInCollectionWhereInput>;
+  @Field(() => CardRelationFilter, { nullable: true })
+  card?: CardRelationFilter;
 
-    @Field(() => CardRelationFilter, {nullable:true})
-    card?: CardRelationFilter;
+  @Field(() => StringFilter, { nullable: true })
+  cardId?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    cardId?: StringFilter;
+  @Field(() => CollectionRelationFilter, { nullable: true })
+  collection?: CollectionRelationFilter;
 
-    @Field(() => CollectionRelationFilter, {nullable:true})
-    collection?: CollectionRelationFilter;
+  @Field(() => StringFilter, { nullable: true })
+  collectionId?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    collectionId?: StringFilter;
+  @Field(() => BoolFilter, { nullable: true })
+  isFoil?: BoolFilter;
 
-    @Field(() => BoolFilter, {nullable:true})
-    isFoil?: BoolFilter;
+  @Field(() => BoolFilter, { nullable: true })
+  isEtched?: BoolFilter;
 
-    @Field(() => BoolFilter, {nullable:true})
-    isEtched?: BoolFilter;
-
-    @Field(() => IntFilter, {nullable:true})
-    count?: IntFilter;
+  @Field(() => IntFilter, { nullable: true })
+  count?: IntFilter;
 }

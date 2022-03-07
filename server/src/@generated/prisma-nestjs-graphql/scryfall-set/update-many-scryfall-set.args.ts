@@ -5,10 +5,9 @@ import { ScryfallSetWhereInput } from './scryfall-set-where.input';
 
 @ArgsType()
 export class UpdateManyScryfallSetArgs {
+  @Field(() => ScryfallSetUpdateManyMutationInput, { nullable: false })
+  data!: ScryfallSetUpdateManyMutationInput;
 
-    @Field(() => ScryfallSetUpdateManyMutationInput, {nullable:false})
-    data!: ScryfallSetUpdateManyMutationInput;
-
-    @Field(() => ScryfallSetWhereInput, {nullable:true})
-    where?: ScryfallSetWhereInput;
+  @Field(() => ScryfallSetWhereInput, { nullable: true })
+  where?: ScryfallSetWhereInput;
 }

@@ -4,7 +4,6 @@ import { Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class ScryfallCardFaceSumAggregate {
-
-    @Field(() => Float, {nullable:true})
-    cmc?: number;
+  @Field(() => Float, { nullable: true })
+  cmc?: number;
 }

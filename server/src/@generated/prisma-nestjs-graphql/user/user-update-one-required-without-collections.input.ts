@@ -8,19 +8,18 @@ import { UserUpdateWithoutCollectionsInput } from './user-update-without-collect
 
 @InputType()
 export class UserUpdateOneRequiredWithoutCollectionsInput {
+  @Field(() => UserCreateWithoutCollectionsInput, { nullable: true })
+  create?: UserCreateWithoutCollectionsInput;
 
-    @Field(() => UserCreateWithoutCollectionsInput, {nullable:true})
-    create?: UserCreateWithoutCollectionsInput;
+  @Field(() => UserCreateOrConnectWithoutCollectionsInput, { nullable: true })
+  connectOrCreate?: UserCreateOrConnectWithoutCollectionsInput;
 
-    @Field(() => UserCreateOrConnectWithoutCollectionsInput, {nullable:true})
-    connectOrCreate?: UserCreateOrConnectWithoutCollectionsInput;
+  @Field(() => UserUpsertWithoutCollectionsInput, { nullable: true })
+  upsert?: UserUpsertWithoutCollectionsInput;
 
-    @Field(() => UserUpsertWithoutCollectionsInput, {nullable:true})
-    upsert?: UserUpsertWithoutCollectionsInput;
+  @Field(() => UserWhereUniqueInput, { nullable: true })
+  connect?: UserWhereUniqueInput;
 
-    @Field(() => UserWhereUniqueInput, {nullable:true})
-    connect?: UserWhereUniqueInput;
-
-    @Field(() => UserUpdateWithoutCollectionsInput, {nullable:true})
-    update?: UserUpdateWithoutCollectionsInput;
+  @Field(() => UserUpdateWithoutCollectionsInput, { nullable: true })
+  update?: UserUpdateWithoutCollectionsInput;
 }

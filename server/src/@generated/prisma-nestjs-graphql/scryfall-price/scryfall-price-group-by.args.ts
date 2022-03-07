@@ -13,37 +13,36 @@ import { ScryfallPriceMaxAggregateInput } from './scryfall-price-max-aggregate.i
 
 @ArgsType()
 export class ScryfallPriceGroupByArgs {
+  @Field(() => ScryfallPriceWhereInput, { nullable: true })
+  where?: ScryfallPriceWhereInput;
 
-    @Field(() => ScryfallPriceWhereInput, {nullable:true})
-    where?: ScryfallPriceWhereInput;
+  @Field(() => [ScryfallPriceOrderByWithAggregationInput], { nullable: true })
+  orderBy?: Array<ScryfallPriceOrderByWithAggregationInput>;
 
-    @Field(() => [ScryfallPriceOrderByWithAggregationInput], {nullable:true})
-    orderBy?: Array<ScryfallPriceOrderByWithAggregationInput>;
+  @Field(() => [ScryfallPriceScalarFieldEnum], { nullable: false })
+  by!: Array<keyof typeof ScryfallPriceScalarFieldEnum>;
 
-    @Field(() => [ScryfallPriceScalarFieldEnum], {nullable:false})
-    by!: Array<keyof typeof ScryfallPriceScalarFieldEnum>;
+  @Field(() => ScryfallPriceScalarWhereWithAggregatesInput, { nullable: true })
+  having?: ScryfallPriceScalarWhereWithAggregatesInput;
 
-    @Field(() => ScryfallPriceScalarWhereWithAggregatesInput, {nullable:true})
-    having?: ScryfallPriceScalarWhereWithAggregatesInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
+  @Field(() => ScryfallPriceCountAggregateInput, { nullable: true })
+  _count?: ScryfallPriceCountAggregateInput;
 
-    @Field(() => ScryfallPriceCountAggregateInput, {nullable:true})
-    _count?: ScryfallPriceCountAggregateInput;
+  @Field(() => ScryfallPriceAvgAggregateInput, { nullable: true })
+  _avg?: ScryfallPriceAvgAggregateInput;
 
-    @Field(() => ScryfallPriceAvgAggregateInput, {nullable:true})
-    _avg?: ScryfallPriceAvgAggregateInput;
+  @Field(() => ScryfallPriceSumAggregateInput, { nullable: true })
+  _sum?: ScryfallPriceSumAggregateInput;
 
-    @Field(() => ScryfallPriceSumAggregateInput, {nullable:true})
-    _sum?: ScryfallPriceSumAggregateInput;
+  @Field(() => ScryfallPriceMinAggregateInput, { nullable: true })
+  _min?: ScryfallPriceMinAggregateInput;
 
-    @Field(() => ScryfallPriceMinAggregateInput, {nullable:true})
-    _min?: ScryfallPriceMinAggregateInput;
-
-    @Field(() => ScryfallPriceMaxAggregateInput, {nullable:true})
-    _max?: ScryfallPriceMaxAggregateInput;
+  @Field(() => ScryfallPriceMaxAggregateInput, { nullable: true })
+  _max?: ScryfallPriceMaxAggregateInput;
 }

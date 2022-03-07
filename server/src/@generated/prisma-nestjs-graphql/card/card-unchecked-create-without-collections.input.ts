@@ -4,28 +4,30 @@ import { ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput } f
 
 @InputType()
 export class CardUncheckedCreateWithoutCollectionsInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
 
-    @Field(() => String, {nullable:true})
-    id?: string;
+  @Field(() => String, { nullable: false })
+  scryfallCardId!: string;
 
-    @Field(() => String, {nullable:false})
-    scryfallCardId!: string;
+  @Field(() => String, { nullable: true })
+  collectorNumber?: string;
 
-    @Field(() => String, {nullable:true})
-    collectorNumber?: string;
+  @Field(() => Boolean, { nullable: true })
+  isBorderless?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    isBorderless?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isShowcase?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    isShowcase?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isPaper?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    isPaper?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  canBeFoil?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    canBeFoil?: boolean;
-
-    @Field(() => ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput, {nullable:true})
-    currentPrice?: ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput;
+  @Field(
+    () => ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput,
+    { nullable: true },
+  )
+  currentPrice?: ScryfallPriceUncheckedCreateNestedOneWithoutCurrentPriceOfCardInput;
 }

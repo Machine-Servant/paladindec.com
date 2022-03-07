@@ -4,10 +4,9 @@ import { CardCreateManyScryfallCardInput } from './card-create-many-scryfall-car
 
 @InputType()
 export class CardCreateManyScryfallCardInputEnvelope {
+  @Field(() => [CardCreateManyScryfallCardInput], { nullable: false })
+  data!: Array<CardCreateManyScryfallCardInput>;
 
-    @Field(() => [CardCreateManyScryfallCardInput], {nullable:false})
-    data!: Array<CardCreateManyScryfallCardInput>;
-
-    @Field(() => Boolean, {nullable:true})
-    skipDuplicates?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
 }

@@ -4,22 +4,23 @@ import { ScryfallCardCreateNestedOneWithoutReferencedByInput } from '../scryfall
 
 @InputType()
 export class ScryfallRelatedCardCreateWithoutCardInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
 
-    @Field(() => String, {nullable:true})
-    id?: string;
+  @Field(() => ScryfallCardCreateNestedOneWithoutReferencedByInput, {
+    nullable: false,
+  })
+  reference!: ScryfallCardCreateNestedOneWithoutReferencedByInput;
 
-    @Field(() => ScryfallCardCreateNestedOneWithoutReferencedByInput, {nullable:false})
-    reference!: ScryfallCardCreateNestedOneWithoutReferencedByInput;
+  @Field(() => String, { nullable: false })
+  component!: string;
 
-    @Field(() => String, {nullable:false})
-    component!: string;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-    @Field(() => String, {nullable:false})
-    name!: string;
+  @Field(() => String, { nullable: false })
+  typeLine!: string;
 
-    @Field(() => String, {nullable:false})
-    typeLine!: string;
-
-    @Field(() => String, {nullable:false})
-    uri!: string;
+  @Field(() => String, { nullable: false })
+  uri!: string;
 }

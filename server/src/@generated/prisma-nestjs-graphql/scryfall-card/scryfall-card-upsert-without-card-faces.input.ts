@@ -5,10 +5,9 @@ import { ScryfallCardCreateWithoutCardFacesInput } from './scryfall-card-create-
 
 @InputType()
 export class ScryfallCardUpsertWithoutCardFacesInput {
+  @Field(() => ScryfallCardUpdateWithoutCardFacesInput, { nullable: false })
+  update!: ScryfallCardUpdateWithoutCardFacesInput;
 
-    @Field(() => ScryfallCardUpdateWithoutCardFacesInput, {nullable:false})
-    update!: ScryfallCardUpdateWithoutCardFacesInput;
-
-    @Field(() => ScryfallCardCreateWithoutCardFacesInput, {nullable:false})
-    create!: ScryfallCardCreateWithoutCardFacesInput;
+  @Field(() => ScryfallCardCreateWithoutCardFacesInput, { nullable: false })
+  create!: ScryfallCardCreateWithoutCardFacesInput;
 }

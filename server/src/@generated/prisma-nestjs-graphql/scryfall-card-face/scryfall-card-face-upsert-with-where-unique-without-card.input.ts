@@ -6,13 +6,12 @@ import { ScryfallCardFaceCreateWithoutCardInput } from './scryfall-card-face-cre
 
 @InputType()
 export class ScryfallCardFaceUpsertWithWhereUniqueWithoutCardInput {
+  @Field(() => ScryfallCardFaceWhereUniqueInput, { nullable: false })
+  where!: ScryfallCardFaceWhereUniqueInput;
 
-    @Field(() => ScryfallCardFaceWhereUniqueInput, {nullable:false})
-    where!: ScryfallCardFaceWhereUniqueInput;
+  @Field(() => ScryfallCardFaceUpdateWithoutCardInput, { nullable: false })
+  update!: ScryfallCardFaceUpdateWithoutCardInput;
 
-    @Field(() => ScryfallCardFaceUpdateWithoutCardInput, {nullable:false})
-    update!: ScryfallCardFaceUpdateWithoutCardInput;
-
-    @Field(() => ScryfallCardFaceCreateWithoutCardInput, {nullable:false})
-    create!: ScryfallCardFaceCreateWithoutCardInput;
+  @Field(() => ScryfallCardFaceCreateWithoutCardInput, { nullable: false })
+  create!: ScryfallCardFaceCreateWithoutCardInput;
 }

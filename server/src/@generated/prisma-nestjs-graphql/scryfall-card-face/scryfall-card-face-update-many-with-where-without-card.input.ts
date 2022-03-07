@@ -5,10 +5,9 @@ import { ScryfallCardFaceUpdateManyMutationInput } from './scryfall-card-face-up
 
 @InputType()
 export class ScryfallCardFaceUpdateManyWithWhereWithoutCardInput {
+  @Field(() => ScryfallCardFaceScalarWhereInput, { nullable: false })
+  where!: ScryfallCardFaceScalarWhereInput;
 
-    @Field(() => ScryfallCardFaceScalarWhereInput, {nullable:false})
-    where!: ScryfallCardFaceScalarWhereInput;
-
-    @Field(() => ScryfallCardFaceUpdateManyMutationInput, {nullable:false})
-    data!: ScryfallCardFaceUpdateManyMutationInput;
+  @Field(() => ScryfallCardFaceUpdateManyMutationInput, { nullable: false })
+  data!: ScryfallCardFaceUpdateManyMutationInput;
 }

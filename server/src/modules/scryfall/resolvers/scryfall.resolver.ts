@@ -12,11 +12,6 @@ export class ScryfallResolver {
     private readonly scryfallPriceService: ScryfallPriceService,
   ) {}
 
-  @Query(() => String)
-  async getString(): Promise<string> {
-    return 'hello';
-  }
-
   @Query(() => [BulkDataObjectType])
   async allBulkData(): Promise<BulkDataObjectType[]> {
     return this.bulkDataService.getBulkData();
@@ -34,7 +29,6 @@ export class ScryfallResolver {
 
   @Mutation(() => Boolean)
   async processBulkData(): Promise<boolean> {
-    console.log('???');
     return this.bulkDataService.processBulkData();
   }
 

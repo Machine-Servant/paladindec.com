@@ -4,10 +4,9 @@ import { ScryfallPriceCreateManyInput } from './scryfall-price-create-many.input
 
 @ArgsType()
 export class CreateManyScryfallPriceArgs {
+  @Field(() => [ScryfallPriceCreateManyInput], { nullable: false })
+  data!: Array<ScryfallPriceCreateManyInput>;
 
-    @Field(() => [ScryfallPriceCreateManyInput], {nullable:false})
-    data!: Array<ScryfallPriceCreateManyInput>;
-
-    @Field(() => Boolean, {nullable:true})
-    skipDuplicates?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
 }

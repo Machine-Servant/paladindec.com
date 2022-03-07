@@ -6,13 +6,12 @@ import { ScryfallCardUpdateInput } from './scryfall-card-update.input';
 
 @ArgsType()
 export class UpsertOneScryfallCardArgs {
+  @Field(() => ScryfallCardWhereUniqueInput, { nullable: false })
+  where!: ScryfallCardWhereUniqueInput;
 
-    @Field(() => ScryfallCardWhereUniqueInput, {nullable:false})
-    where!: ScryfallCardWhereUniqueInput;
+  @Field(() => ScryfallCardCreateInput, { nullable: false })
+  create!: ScryfallCardCreateInput;
 
-    @Field(() => ScryfallCardCreateInput, {nullable:false})
-    create!: ScryfallCardCreateInput;
-
-    @Field(() => ScryfallCardUpdateInput, {nullable:false})
-    update!: ScryfallCardUpdateInput;
+  @Field(() => ScryfallCardUpdateInput, { nullable: false })
+  update!: ScryfallCardUpdateInput;
 }

@@ -11,31 +11,30 @@ import { CardMaxAggregateInput } from './card-max-aggregate.input';
 
 @ArgsType()
 export class CardGroupByArgs {
+  @Field(() => CardWhereInput, { nullable: true })
+  where?: CardWhereInput;
 
-    @Field(() => CardWhereInput, {nullable:true})
-    where?: CardWhereInput;
+  @Field(() => [CardOrderByWithAggregationInput], { nullable: true })
+  orderBy?: Array<CardOrderByWithAggregationInput>;
 
-    @Field(() => [CardOrderByWithAggregationInput], {nullable:true})
-    orderBy?: Array<CardOrderByWithAggregationInput>;
+  @Field(() => [CardScalarFieldEnum], { nullable: false })
+  by!: Array<keyof typeof CardScalarFieldEnum>;
 
-    @Field(() => [CardScalarFieldEnum], {nullable:false})
-    by!: Array<keyof typeof CardScalarFieldEnum>;
+  @Field(() => CardScalarWhereWithAggregatesInput, { nullable: true })
+  having?: CardScalarWhereWithAggregatesInput;
 
-    @Field(() => CardScalarWhereWithAggregatesInput, {nullable:true})
-    having?: CardScalarWhereWithAggregatesInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
+  @Field(() => CardCountAggregateInput, { nullable: true })
+  _count?: CardCountAggregateInput;
 
-    @Field(() => CardCountAggregateInput, {nullable:true})
-    _count?: CardCountAggregateInput;
+  @Field(() => CardMinAggregateInput, { nullable: true })
+  _min?: CardMinAggregateInput;
 
-    @Field(() => CardMinAggregateInput, {nullable:true})
-    _min?: CardMinAggregateInput;
-
-    @Field(() => CardMaxAggregateInput, {nullable:true})
-    _max?: CardMaxAggregateInput;
+  @Field(() => CardMaxAggregateInput, { nullable: true })
+  _max?: CardMaxAggregateInput;
 }

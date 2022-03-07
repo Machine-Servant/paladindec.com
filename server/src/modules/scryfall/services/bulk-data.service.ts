@@ -4,15 +4,13 @@ import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { Queue } from 'bull';
 import { flatten } from 'lodash';
-import { toCardFaceObjectType } from '../utils/to-prisma-scryfall-card-face';
-import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
 import { BulkDataObjectType } from '../object-types/bulk-data.object-type';
 import {
   ScryfallBulkDataResponseType,
   ScryfallBulkDataType,
-  ScryfallCardFaceDataType,
   ScryfallRelatedCardDataType,
 } from '../types/scryfall.types';
+import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
 import { ScryfallCardService } from './scryfall-card.service';
 
 @Injectable()
@@ -98,27 +96,11 @@ export class BulkDataService {
 
   async processBulkData(): Promise<boolean> {
     await this.bulkDataQueue.add('process-bulk-data');
-    console.log('!!!');
     return true;
   }
 
   async processCardFaceData(): Promise<boolean> {
-    const cardsWithCardFaces = await this.scryfallCardService.findMany({
-      where: {
-        cardFacesRaw: { isEmpty: false },
-      },
-    });
-    await this.bulkDataQueue.add('process-card-faces', {
-      cardFaceData: flatten(
-        cardsWithCardFaces.map((card) =>
-          (card.cardFacesRaw as ScryfallCardFaceDataType[]).map((cf) => {
-            const cardFace = toCardFaceObjectType(cf);
-            cardFace.cardId = card.id;
-            return cardFace;
-          }),
-        ),
-      ),
-    });
+    await this.bulkDataQueue.add('process-card-faces');
     return true;
   }
 

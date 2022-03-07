@@ -5,10 +5,9 @@ import { CollectionWhereInput } from './collection-where.input';
 
 @ArgsType()
 export class UpdateManyCollectionArgs {
+  @Field(() => CollectionUpdateManyMutationInput, { nullable: false })
+  data!: CollectionUpdateManyMutationInput;
 
-    @Field(() => CollectionUpdateManyMutationInput, {nullable:false})
-    data!: CollectionUpdateManyMutationInput;
-
-    @Field(() => CollectionWhereInput, {nullable:true})
-    where?: CollectionWhereInput;
+  @Field(() => CollectionWhereInput, { nullable: true })
+  where?: CollectionWhereInput;
 }

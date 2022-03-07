@@ -4,7 +4,6 @@ import { CardCreateInput } from './card-create.input';
 
 @ArgsType()
 export class CreateOneCardArgs {
-
-    @Field(() => CardCreateInput, {nullable:false})
-    data!: CardCreateInput;
+  @Field(() => CardCreateInput, { nullable: false })
+  data!: CardCreateInput;
 }

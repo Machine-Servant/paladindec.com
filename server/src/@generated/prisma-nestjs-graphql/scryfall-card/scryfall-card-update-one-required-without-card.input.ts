@@ -8,19 +8,18 @@ import { ScryfallCardUpdateWithoutCardInput } from './scryfall-card-update-witho
 
 @InputType()
 export class ScryfallCardUpdateOneRequiredWithoutCardInput {
+  @Field(() => ScryfallCardCreateWithoutCardInput, { nullable: true })
+  create?: ScryfallCardCreateWithoutCardInput;
 
-    @Field(() => ScryfallCardCreateWithoutCardInput, {nullable:true})
-    create?: ScryfallCardCreateWithoutCardInput;
+  @Field(() => ScryfallCardCreateOrConnectWithoutCardInput, { nullable: true })
+  connectOrCreate?: ScryfallCardCreateOrConnectWithoutCardInput;
 
-    @Field(() => ScryfallCardCreateOrConnectWithoutCardInput, {nullable:true})
-    connectOrCreate?: ScryfallCardCreateOrConnectWithoutCardInput;
+  @Field(() => ScryfallCardUpsertWithoutCardInput, { nullable: true })
+  upsert?: ScryfallCardUpsertWithoutCardInput;
 
-    @Field(() => ScryfallCardUpsertWithoutCardInput, {nullable:true})
-    upsert?: ScryfallCardUpsertWithoutCardInput;
+  @Field(() => ScryfallCardWhereUniqueInput, { nullable: true })
+  connect?: ScryfallCardWhereUniqueInput;
 
-    @Field(() => ScryfallCardWhereUniqueInput, {nullable:true})
-    connect?: ScryfallCardWhereUniqueInput;
-
-    @Field(() => ScryfallCardUpdateWithoutCardInput, {nullable:true})
-    update?: ScryfallCardUpdateWithoutCardInput;
+  @Field(() => ScryfallCardUpdateWithoutCardInput, { nullable: true })
+  update?: ScryfallCardUpdateWithoutCardInput;
 }

@@ -5,10 +5,9 @@ import { CardWhereInput } from './card-where.input';
 
 @ArgsType()
 export class UpdateManyCardArgs {
+  @Field(() => CardUpdateManyMutationInput, { nullable: false })
+  data!: CardUpdateManyMutationInput;
 
-    @Field(() => CardUpdateManyMutationInput, {nullable:false})
-    data!: CardUpdateManyMutationInput;
-
-    @Field(() => CardWhereInput, {nullable:true})
-    where?: CardWhereInput;
+  @Field(() => CardWhereInput, { nullable: true })
+  where?: CardWhereInput;
 }

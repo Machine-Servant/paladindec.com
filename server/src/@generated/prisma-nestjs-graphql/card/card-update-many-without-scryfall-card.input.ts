@@ -11,37 +11,44 @@ import { CardScalarWhereInput } from './card-scalar-where.input';
 
 @InputType()
 export class CardUpdateManyWithoutScryfallCardInput {
+  @Field(() => [CardCreateWithoutScryfallCardInput], { nullable: true })
+  create?: Array<CardCreateWithoutScryfallCardInput>;
 
-    @Field(() => [CardCreateWithoutScryfallCardInput], {nullable:true})
-    create?: Array<CardCreateWithoutScryfallCardInput>;
+  @Field(() => [CardCreateOrConnectWithoutScryfallCardInput], {
+    nullable: true,
+  })
+  connectOrCreate?: Array<CardCreateOrConnectWithoutScryfallCardInput>;
 
-    @Field(() => [CardCreateOrConnectWithoutScryfallCardInput], {nullable:true})
-    connectOrCreate?: Array<CardCreateOrConnectWithoutScryfallCardInput>;
+  @Field(() => [CardUpsertWithWhereUniqueWithoutScryfallCardInput], {
+    nullable: true,
+  })
+  upsert?: Array<CardUpsertWithWhereUniqueWithoutScryfallCardInput>;
 
-    @Field(() => [CardUpsertWithWhereUniqueWithoutScryfallCardInput], {nullable:true})
-    upsert?: Array<CardUpsertWithWhereUniqueWithoutScryfallCardInput>;
+  @Field(() => CardCreateManyScryfallCardInputEnvelope, { nullable: true })
+  createMany?: CardCreateManyScryfallCardInputEnvelope;
 
-    @Field(() => CardCreateManyScryfallCardInputEnvelope, {nullable:true})
-    createMany?: CardCreateManyScryfallCardInputEnvelope;
+  @Field(() => [CardWhereUniqueInput], { nullable: true })
+  set?: Array<CardWhereUniqueInput>;
 
-    @Field(() => [CardWhereUniqueInput], {nullable:true})
-    set?: Array<CardWhereUniqueInput>;
+  @Field(() => [CardWhereUniqueInput], { nullable: true })
+  disconnect?: Array<CardWhereUniqueInput>;
 
-    @Field(() => [CardWhereUniqueInput], {nullable:true})
-    disconnect?: Array<CardWhereUniqueInput>;
+  @Field(() => [CardWhereUniqueInput], { nullable: true })
+  delete?: Array<CardWhereUniqueInput>;
 
-    @Field(() => [CardWhereUniqueInput], {nullable:true})
-    delete?: Array<CardWhereUniqueInput>;
+  @Field(() => [CardWhereUniqueInput], { nullable: true })
+  connect?: Array<CardWhereUniqueInput>;
 
-    @Field(() => [CardWhereUniqueInput], {nullable:true})
-    connect?: Array<CardWhereUniqueInput>;
+  @Field(() => [CardUpdateWithWhereUniqueWithoutScryfallCardInput], {
+    nullable: true,
+  })
+  update?: Array<CardUpdateWithWhereUniqueWithoutScryfallCardInput>;
 
-    @Field(() => [CardUpdateWithWhereUniqueWithoutScryfallCardInput], {nullable:true})
-    update?: Array<CardUpdateWithWhereUniqueWithoutScryfallCardInput>;
+  @Field(() => [CardUpdateManyWithWhereWithoutScryfallCardInput], {
+    nullable: true,
+  })
+  updateMany?: Array<CardUpdateManyWithWhereWithoutScryfallCardInput>;
 
-    @Field(() => [CardUpdateManyWithWhereWithoutScryfallCardInput], {nullable:true})
-    updateMany?: Array<CardUpdateManyWithWhereWithoutScryfallCardInput>;
-
-    @Field(() => [CardScalarWhereInput], {nullable:true})
-    deleteMany?: Array<CardScalarWhereInput>;
+  @Field(() => [CardScalarWhereInput], { nullable: true })
+  deleteMany?: Array<CardScalarWhereInput>;
 }

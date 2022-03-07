@@ -6,13 +6,12 @@ import { CardsInCollectionCreateWithoutCardInput } from './cards-in-collection-c
 
 @InputType()
 export class CardsInCollectionUpsertWithWhereUniqueWithoutCardInput {
+  @Field(() => CardsInCollectionWhereUniqueInput, { nullable: false })
+  where!: CardsInCollectionWhereUniqueInput;
 
-    @Field(() => CardsInCollectionWhereUniqueInput, {nullable:false})
-    where!: CardsInCollectionWhereUniqueInput;
+  @Field(() => CardsInCollectionUpdateWithoutCardInput, { nullable: false })
+  update!: CardsInCollectionUpdateWithoutCardInput;
 
-    @Field(() => CardsInCollectionUpdateWithoutCardInput, {nullable:false})
-    update!: CardsInCollectionUpdateWithoutCardInput;
-
-    @Field(() => CardsInCollectionCreateWithoutCardInput, {nullable:false})
-    create!: CardsInCollectionCreateWithoutCardInput;
+  @Field(() => CardsInCollectionCreateWithoutCardInput, { nullable: false })
+  create!: CardsInCollectionCreateWithoutCardInput;
 }

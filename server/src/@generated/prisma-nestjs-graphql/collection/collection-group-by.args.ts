@@ -11,31 +11,30 @@ import { CollectionMaxAggregateInput } from './collection-max-aggregate.input';
 
 @ArgsType()
 export class CollectionGroupByArgs {
+  @Field(() => CollectionWhereInput, { nullable: true })
+  where?: CollectionWhereInput;
 
-    @Field(() => CollectionWhereInput, {nullable:true})
-    where?: CollectionWhereInput;
+  @Field(() => [CollectionOrderByWithAggregationInput], { nullable: true })
+  orderBy?: Array<CollectionOrderByWithAggregationInput>;
 
-    @Field(() => [CollectionOrderByWithAggregationInput], {nullable:true})
-    orderBy?: Array<CollectionOrderByWithAggregationInput>;
+  @Field(() => [CollectionScalarFieldEnum], { nullable: false })
+  by!: Array<keyof typeof CollectionScalarFieldEnum>;
 
-    @Field(() => [CollectionScalarFieldEnum], {nullable:false})
-    by!: Array<keyof typeof CollectionScalarFieldEnum>;
+  @Field(() => CollectionScalarWhereWithAggregatesInput, { nullable: true })
+  having?: CollectionScalarWhereWithAggregatesInput;
 
-    @Field(() => CollectionScalarWhereWithAggregatesInput, {nullable:true})
-    having?: CollectionScalarWhereWithAggregatesInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
+  @Field(() => CollectionCountAggregateInput, { nullable: true })
+  _count?: CollectionCountAggregateInput;
 
-    @Field(() => CollectionCountAggregateInput, {nullable:true})
-    _count?: CollectionCountAggregateInput;
+  @Field(() => CollectionMinAggregateInput, { nullable: true })
+  _min?: CollectionMinAggregateInput;
 
-    @Field(() => CollectionMinAggregateInput, {nullable:true})
-    _min?: CollectionMinAggregateInput;
-
-    @Field(() => CollectionMaxAggregateInput, {nullable:true})
-    _max?: CollectionMaxAggregateInput;
+  @Field(() => CollectionMaxAggregateInput, { nullable: true })
+  _max?: CollectionMaxAggregateInput;
 }

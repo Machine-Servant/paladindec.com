@@ -8,25 +8,32 @@ import { ScryfallPriceUpdateWithoutCurrentPriceOfCardInput } from './scryfall-pr
 
 @InputType()
 export class ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput {
+  @Field(() => ScryfallPriceCreateWithoutCurrentPriceOfCardInput, {
+    nullable: true,
+  })
+  create?: ScryfallPriceCreateWithoutCurrentPriceOfCardInput;
 
-    @Field(() => ScryfallPriceCreateWithoutCurrentPriceOfCardInput, {nullable:true})
-    create?: ScryfallPriceCreateWithoutCurrentPriceOfCardInput;
+  @Field(() => ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput, {
+    nullable: true,
+  })
+  connectOrCreate?: ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput;
 
-    @Field(() => ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput, {nullable:true})
-    connectOrCreate?: ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput;
+  @Field(() => ScryfallPriceUpsertWithoutCurrentPriceOfCardInput, {
+    nullable: true,
+  })
+  upsert?: ScryfallPriceUpsertWithoutCurrentPriceOfCardInput;
 
-    @Field(() => ScryfallPriceUpsertWithoutCurrentPriceOfCardInput, {nullable:true})
-    upsert?: ScryfallPriceUpsertWithoutCurrentPriceOfCardInput;
+  @Field(() => Boolean, { nullable: true })
+  disconnect?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    disconnect?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  delete?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    delete?: boolean;
+  @Field(() => ScryfallPriceWhereUniqueInput, { nullable: true })
+  connect?: ScryfallPriceWhereUniqueInput;
 
-    @Field(() => ScryfallPriceWhereUniqueInput, {nullable:true})
-    connect?: ScryfallPriceWhereUniqueInput;
-
-    @Field(() => ScryfallPriceUpdateWithoutCurrentPriceOfCardInput, {nullable:true})
-    update?: ScryfallPriceUpdateWithoutCurrentPriceOfCardInput;
+  @Field(() => ScryfallPriceUpdateWithoutCurrentPriceOfCardInput, {
+    nullable: true,
+  })
+  update?: ScryfallPriceUpdateWithoutCurrentPriceOfCardInput;
 }

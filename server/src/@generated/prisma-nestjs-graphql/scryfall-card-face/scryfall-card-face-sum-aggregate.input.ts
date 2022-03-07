@@ -3,7 +3,6 @@ import { InputType } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallCardFaceSumAggregateInput {
-
-    @Field(() => Boolean, {nullable:true})
-    cmc?: true;
+  @Field(() => Boolean, { nullable: true })
+  cmc?: true;
 }

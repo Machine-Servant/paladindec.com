@@ -6,13 +6,12 @@ import { CardsInCollectionUpdateInput } from './cards-in-collection-update.input
 
 @ArgsType()
 export class UpsertOneCardsInCollectionArgs {
+  @Field(() => CardsInCollectionWhereUniqueInput, { nullable: false })
+  where!: CardsInCollectionWhereUniqueInput;
 
-    @Field(() => CardsInCollectionWhereUniqueInput, {nullable:false})
-    where!: CardsInCollectionWhereUniqueInput;
+  @Field(() => CardsInCollectionCreateInput, { nullable: false })
+  create!: CardsInCollectionCreateInput;
 
-    @Field(() => CardsInCollectionCreateInput, {nullable:false})
-    create!: CardsInCollectionCreateInput;
-
-    @Field(() => CardsInCollectionUpdateInput, {nullable:false})
-    update!: CardsInCollectionUpdateInput;
+  @Field(() => CardsInCollectionUpdateInput, { nullable: false })
+  update!: CardsInCollectionUpdateInput;
 }

@@ -7,16 +7,17 @@ import { ScryfallCardFaceWhereUniqueInput } from './scryfall-card-face-where-uni
 
 @InputType()
 export class ScryfallCardFaceUncheckedCreateNestedManyWithoutCardInput {
+  @Field(() => [ScryfallCardFaceCreateWithoutCardInput], { nullable: true })
+  create?: Array<ScryfallCardFaceCreateWithoutCardInput>;
 
-    @Field(() => [ScryfallCardFaceCreateWithoutCardInput], {nullable:true})
-    create?: Array<ScryfallCardFaceCreateWithoutCardInput>;
+  @Field(() => [ScryfallCardFaceCreateOrConnectWithoutCardInput], {
+    nullable: true,
+  })
+  connectOrCreate?: Array<ScryfallCardFaceCreateOrConnectWithoutCardInput>;
 
-    @Field(() => [ScryfallCardFaceCreateOrConnectWithoutCardInput], {nullable:true})
-    connectOrCreate?: Array<ScryfallCardFaceCreateOrConnectWithoutCardInput>;
+  @Field(() => ScryfallCardFaceCreateManyCardInputEnvelope, { nullable: true })
+  createMany?: ScryfallCardFaceCreateManyCardInputEnvelope;
 
-    @Field(() => ScryfallCardFaceCreateManyCardInputEnvelope, {nullable:true})
-    createMany?: ScryfallCardFaceCreateManyCardInputEnvelope;
-
-    @Field(() => [ScryfallCardFaceWhereUniqueInput], {nullable:true})
-    connect?: Array<ScryfallCardFaceWhereUniqueInput>;
+  @Field(() => [ScryfallCardFaceWhereUniqueInput], { nullable: true })
+  connect?: Array<ScryfallCardFaceWhereUniqueInput>;
 }

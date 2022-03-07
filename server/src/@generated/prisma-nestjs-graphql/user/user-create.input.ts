@@ -4,16 +4,15 @@ import { CollectionCreateNestedManyWithoutUserInput } from '../collection/collec
 
 @InputType()
 export class UserCreateInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
 
-    @Field(() => String, {nullable:true})
-    id?: string;
+  @Field(() => String, { nullable: false })
+  externalAuthId!: string;
 
-    @Field(() => String, {nullable:false})
-    externalAuthId!: string;
+  @Field(() => String, { nullable: false })
+  email!: string;
 
-    @Field(() => String, {nullable:false})
-    email!: string;
-
-    @Field(() => CollectionCreateNestedManyWithoutUserInput, {nullable:true})
-    collections?: CollectionCreateNestedManyWithoutUserInput;
+  @Field(() => CollectionCreateNestedManyWithoutUserInput, { nullable: true })
+  collections?: CollectionCreateNestedManyWithoutUserInput;
 }

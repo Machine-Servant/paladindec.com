@@ -11,37 +11,44 @@ import { CardsInCollectionScalarWhereInput } from './cards-in-collection-scalar-
 
 @InputType()
 export class CardsInCollectionUpdateManyWithoutCardInput {
+  @Field(() => [CardsInCollectionCreateWithoutCardInput], { nullable: true })
+  create?: Array<CardsInCollectionCreateWithoutCardInput>;
 
-    @Field(() => [CardsInCollectionCreateWithoutCardInput], {nullable:true})
-    create?: Array<CardsInCollectionCreateWithoutCardInput>;
+  @Field(() => [CardsInCollectionCreateOrConnectWithoutCardInput], {
+    nullable: true,
+  })
+  connectOrCreate?: Array<CardsInCollectionCreateOrConnectWithoutCardInput>;
 
-    @Field(() => [CardsInCollectionCreateOrConnectWithoutCardInput], {nullable:true})
-    connectOrCreate?: Array<CardsInCollectionCreateOrConnectWithoutCardInput>;
+  @Field(() => [CardsInCollectionUpsertWithWhereUniqueWithoutCardInput], {
+    nullable: true,
+  })
+  upsert?: Array<CardsInCollectionUpsertWithWhereUniqueWithoutCardInput>;
 
-    @Field(() => [CardsInCollectionUpsertWithWhereUniqueWithoutCardInput], {nullable:true})
-    upsert?: Array<CardsInCollectionUpsertWithWhereUniqueWithoutCardInput>;
+  @Field(() => CardsInCollectionCreateManyCardInputEnvelope, { nullable: true })
+  createMany?: CardsInCollectionCreateManyCardInputEnvelope;
 
-    @Field(() => CardsInCollectionCreateManyCardInputEnvelope, {nullable:true})
-    createMany?: CardsInCollectionCreateManyCardInputEnvelope;
+  @Field(() => [CardsInCollectionWhereUniqueInput], { nullable: true })
+  set?: Array<CardsInCollectionWhereUniqueInput>;
 
-    @Field(() => [CardsInCollectionWhereUniqueInput], {nullable:true})
-    set?: Array<CardsInCollectionWhereUniqueInput>;
+  @Field(() => [CardsInCollectionWhereUniqueInput], { nullable: true })
+  disconnect?: Array<CardsInCollectionWhereUniqueInput>;
 
-    @Field(() => [CardsInCollectionWhereUniqueInput], {nullable:true})
-    disconnect?: Array<CardsInCollectionWhereUniqueInput>;
+  @Field(() => [CardsInCollectionWhereUniqueInput], { nullable: true })
+  delete?: Array<CardsInCollectionWhereUniqueInput>;
 
-    @Field(() => [CardsInCollectionWhereUniqueInput], {nullable:true})
-    delete?: Array<CardsInCollectionWhereUniqueInput>;
+  @Field(() => [CardsInCollectionWhereUniqueInput], { nullable: true })
+  connect?: Array<CardsInCollectionWhereUniqueInput>;
 
-    @Field(() => [CardsInCollectionWhereUniqueInput], {nullable:true})
-    connect?: Array<CardsInCollectionWhereUniqueInput>;
+  @Field(() => [CardsInCollectionUpdateWithWhereUniqueWithoutCardInput], {
+    nullable: true,
+  })
+  update?: Array<CardsInCollectionUpdateWithWhereUniqueWithoutCardInput>;
 
-    @Field(() => [CardsInCollectionUpdateWithWhereUniqueWithoutCardInput], {nullable:true})
-    update?: Array<CardsInCollectionUpdateWithWhereUniqueWithoutCardInput>;
+  @Field(() => [CardsInCollectionUpdateManyWithWhereWithoutCardInput], {
+    nullable: true,
+  })
+  updateMany?: Array<CardsInCollectionUpdateManyWithWhereWithoutCardInput>;
 
-    @Field(() => [CardsInCollectionUpdateManyWithWhereWithoutCardInput], {nullable:true})
-    updateMany?: Array<CardsInCollectionUpdateManyWithWhereWithoutCardInput>;
-
-    @Field(() => [CardsInCollectionScalarWhereInput], {nullable:true})
-    deleteMany?: Array<CardsInCollectionScalarWhereInput>;
+  @Field(() => [CardsInCollectionScalarWhereInput], { nullable: true })
+  deleteMany?: Array<CardsInCollectionScalarWhereInput>;
 }

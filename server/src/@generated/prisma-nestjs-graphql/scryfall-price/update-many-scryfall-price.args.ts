@@ -5,10 +5,9 @@ import { ScryfallPriceWhereInput } from './scryfall-price-where.input';
 
 @ArgsType()
 export class UpdateManyScryfallPriceArgs {
+  @Field(() => ScryfallPriceUpdateManyMutationInput, { nullable: false })
+  data!: ScryfallPriceUpdateManyMutationInput;
 
-    @Field(() => ScryfallPriceUpdateManyMutationInput, {nullable:false})
-    data!: ScryfallPriceUpdateManyMutationInput;
-
-    @Field(() => ScryfallPriceWhereInput, {nullable:true})
-    where?: ScryfallPriceWhereInput;
+  @Field(() => ScryfallPriceWhereInput, { nullable: true })
+  where?: ScryfallPriceWhereInput;
 }

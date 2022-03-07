@@ -4,7 +4,6 @@ import { ScryfallRelatedCardCreateInput } from './scryfall-related-card-create.i
 
 @ArgsType()
 export class CreateOneScryfallRelatedCardArgs {
-
-    @Field(() => ScryfallRelatedCardCreateInput, {nullable:false})
-    data!: ScryfallRelatedCardCreateInput;
+  @Field(() => ScryfallRelatedCardCreateInput, { nullable: false })
+  data!: ScryfallRelatedCardCreateInput;
 }

@@ -4,7 +4,6 @@ import { ScryfallRelatedCardWhereUniqueInput } from './scryfall-related-card-whe
 
 @ArgsType()
 export class DeleteOneScryfallRelatedCardArgs {
-
-    @Field(() => ScryfallRelatedCardWhereUniqueInput, {nullable:false})
-    where!: ScryfallRelatedCardWhereUniqueInput;
+  @Field(() => ScryfallRelatedCardWhereUniqueInput, { nullable: false })
+  where!: ScryfallRelatedCardWhereUniqueInput;
 }

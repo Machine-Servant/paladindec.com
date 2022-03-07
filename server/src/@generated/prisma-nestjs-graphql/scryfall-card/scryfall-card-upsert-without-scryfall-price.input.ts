@@ -5,10 +5,9 @@ import { ScryfallCardCreateWithoutScryfallPriceInput } from './scryfall-card-cre
 
 @InputType()
 export class ScryfallCardUpsertWithoutScryfallPriceInput {
+  @Field(() => ScryfallCardUpdateWithoutScryfallPriceInput, { nullable: false })
+  update!: ScryfallCardUpdateWithoutScryfallPriceInput;
 
-    @Field(() => ScryfallCardUpdateWithoutScryfallPriceInput, {nullable:false})
-    update!: ScryfallCardUpdateWithoutScryfallPriceInput;
-
-    @Field(() => ScryfallCardCreateWithoutScryfallPriceInput, {nullable:false})
-    create!: ScryfallCardCreateWithoutScryfallPriceInput;
+  @Field(() => ScryfallCardCreateWithoutScryfallPriceInput, { nullable: false })
+  create!: ScryfallCardCreateWithoutScryfallPriceInput;
 }

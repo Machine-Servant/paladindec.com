@@ -4,10 +4,9 @@ import { CardWhereInput } from './card-where.input';
 
 @InputType()
 export class CardRelationFilter {
+  @Field(() => CardWhereInput, { nullable: true })
+  is?: CardWhereInput;
 
-    @Field(() => CardWhereInput, {nullable:true})
-    is?: CardWhereInput;
-
-    @Field(() => CardWhereInput, {nullable:true})
-    isNot?: CardWhereInput;
+  @Field(() => CardWhereInput, { nullable: true })
+  isNot?: CardWhereInput;
 }

@@ -4,7 +4,6 @@ import { ScryfallRelatedCardWhereInput } from './scryfall-related-card-where.inp
 
 @ArgsType()
 export class DeleteManyScryfallRelatedCardArgs {
-
-    @Field(() => ScryfallRelatedCardWhereInput, {nullable:true})
-    where?: ScryfallRelatedCardWhereInput;
+  @Field(() => ScryfallRelatedCardWhereInput, { nullable: true })
+  where?: ScryfallRelatedCardWhereInput;
 }

@@ -6,16 +6,17 @@ import { CardsInCollectionUpdateManyWithoutCollectionInput } from '../cards-in-c
 
 @InputType()
 export class CollectionUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    id?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  name?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    name?: StringFieldUpdateOperationsInput;
+  @Field(() => UserUpdateOneRequiredWithoutCollectionsInput, { nullable: true })
+  user?: UserUpdateOneRequiredWithoutCollectionsInput;
 
-    @Field(() => UserUpdateOneRequiredWithoutCollectionsInput, {nullable:true})
-    user?: UserUpdateOneRequiredWithoutCollectionsInput;
-
-    @Field(() => CardsInCollectionUpdateManyWithoutCollectionInput, {nullable:true})
-    cards?: CardsInCollectionUpdateManyWithoutCollectionInput;
+  @Field(() => CardsInCollectionUpdateManyWithoutCollectionInput, {
+    nullable: true,
+  })
+  cards?: CardsInCollectionUpdateManyWithoutCollectionInput;
 }

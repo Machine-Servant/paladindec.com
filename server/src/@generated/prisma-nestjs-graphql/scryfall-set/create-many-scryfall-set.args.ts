@@ -4,10 +4,9 @@ import { ScryfallSetCreateManyInput } from './scryfall-set-create-many.input';
 
 @ArgsType()
 export class CreateManyScryfallSetArgs {
+  @Field(() => [ScryfallSetCreateManyInput], { nullable: false })
+  data!: Array<ScryfallSetCreateManyInput>;
 
-    @Field(() => [ScryfallSetCreateManyInput], {nullable:false})
-    data!: Array<ScryfallSetCreateManyInput>;
-
-    @Field(() => Boolean, {nullable:true})
-    skipDuplicates?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
 }

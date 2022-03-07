@@ -5,22 +5,23 @@ import { ScryfallCardUpdateOneRequiredWithoutRelatedToInput } from '../scryfall-
 
 @InputType()
 export class ScryfallRelatedCardUpdateWithoutReferenceInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    id?: StringFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdateOneRequiredWithoutRelatedToInput, {
+    nullable: true,
+  })
+  card?: ScryfallCardUpdateOneRequiredWithoutRelatedToInput;
 
-    @Field(() => ScryfallCardUpdateOneRequiredWithoutRelatedToInput, {nullable:true})
-    card?: ScryfallCardUpdateOneRequiredWithoutRelatedToInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  component?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    component?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  name?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    name?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  typeLine?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    typeLine?: StringFieldUpdateOperationsInput;
-
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    uri?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  uri?: StringFieldUpdateOperationsInput;
 }

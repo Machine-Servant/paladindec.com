@@ -5,10 +5,9 @@ import { CollectionUpdateManyMutationInput } from './collection-update-many-muta
 
 @InputType()
 export class CollectionUpdateManyWithWhereWithoutUserInput {
+  @Field(() => CollectionScalarWhereInput, { nullable: false })
+  where!: CollectionScalarWhereInput;
 
-    @Field(() => CollectionScalarWhereInput, {nullable:false})
-    where!: CollectionScalarWhereInput;
-
-    @Field(() => CollectionUpdateManyMutationInput, {nullable:false})
-    data!: CollectionUpdateManyMutationInput;
+  @Field(() => CollectionUpdateManyMutationInput, { nullable: false })
+  data!: CollectionUpdateManyMutationInput;
 }

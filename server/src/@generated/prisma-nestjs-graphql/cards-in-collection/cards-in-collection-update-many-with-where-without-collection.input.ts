@@ -5,10 +5,9 @@ import { CardsInCollectionUpdateManyMutationInput } from './cards-in-collection-
 
 @InputType()
 export class CardsInCollectionUpdateManyWithWhereWithoutCollectionInput {
+  @Field(() => CardsInCollectionScalarWhereInput, { nullable: false })
+  where!: CardsInCollectionScalarWhereInput;
 
-    @Field(() => CardsInCollectionScalarWhereInput, {nullable:false})
-    where!: CardsInCollectionScalarWhereInput;
-
-    @Field(() => CardsInCollectionUpdateManyMutationInput, {nullable:false})
-    data!: CardsInCollectionUpdateManyMutationInput;
+  @Field(() => CardsInCollectionUpdateManyMutationInput, { nullable: false })
+  data!: CardsInCollectionUpdateManyMutationInput;
 }

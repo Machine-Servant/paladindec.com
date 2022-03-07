@@ -4,7 +4,6 @@ import { CardsInCollectionCreateInput } from './cards-in-collection-create.input
 
 @ArgsType()
 export class CreateOneCardsInCollectionArgs {
-
-    @Field(() => CardsInCollectionCreateInput, {nullable:false})
-    data!: CardsInCollectionCreateInput;
+  @Field(() => CardsInCollectionCreateInput, { nullable: false })
+  data!: CardsInCollectionCreateInput;
 }

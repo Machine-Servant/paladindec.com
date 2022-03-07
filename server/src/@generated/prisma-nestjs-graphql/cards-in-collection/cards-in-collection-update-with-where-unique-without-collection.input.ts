@@ -5,10 +5,11 @@ import { CardsInCollectionUpdateWithoutCollectionInput } from './cards-in-collec
 
 @InputType()
 export class CardsInCollectionUpdateWithWhereUniqueWithoutCollectionInput {
+  @Field(() => CardsInCollectionWhereUniqueInput, { nullable: false })
+  where!: CardsInCollectionWhereUniqueInput;
 
-    @Field(() => CardsInCollectionWhereUniqueInput, {nullable:false})
-    where!: CardsInCollectionWhereUniqueInput;
-
-    @Field(() => CardsInCollectionUpdateWithoutCollectionInput, {nullable:false})
-    data!: CardsInCollectionUpdateWithoutCollectionInput;
+  @Field(() => CardsInCollectionUpdateWithoutCollectionInput, {
+    nullable: false,
+  })
+  data!: CardsInCollectionUpdateWithoutCollectionInput;
 }

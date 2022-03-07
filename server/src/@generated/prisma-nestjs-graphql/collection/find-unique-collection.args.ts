@@ -4,7 +4,6 @@ import { CollectionWhereUniqueInput } from './collection-where-unique.input';
 
 @ArgsType()
 export class FindUniqueCollectionArgs {
-
-    @Field(() => CollectionWhereUniqueInput, {nullable:false})
-    where!: CollectionWhereUniqueInput;
+  @Field(() => CollectionWhereUniqueInput, { nullable: false })
+  where!: CollectionWhereUniqueInput;
 }

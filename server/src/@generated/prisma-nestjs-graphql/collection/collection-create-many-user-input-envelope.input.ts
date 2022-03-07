@@ -4,10 +4,9 @@ import { CollectionCreateManyUserInput } from './collection-create-many-user.inp
 
 @InputType()
 export class CollectionCreateManyUserInputEnvelope {
+  @Field(() => [CollectionCreateManyUserInput], { nullable: false })
+  data!: Array<CollectionCreateManyUserInput>;
 
-    @Field(() => [CollectionCreateManyUserInput], {nullable:false})
-    data!: Array<CollectionCreateManyUserInput>;
-
-    @Field(() => Boolean, {nullable:true})
-    skipDuplicates?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
 }

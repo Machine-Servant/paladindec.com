@@ -8,22 +8,21 @@ import { CardScalarFieldEnum } from './card-scalar-field.enum';
 
 @ArgsType()
 export class FindFirstCardArgs {
+  @Field(() => CardWhereInput, { nullable: true })
+  where?: CardWhereInput;
 
-    @Field(() => CardWhereInput, {nullable:true})
-    where?: CardWhereInput;
+  @Field(() => [CardOrderByWithRelationInput], { nullable: true })
+  orderBy?: Array<CardOrderByWithRelationInput>;
 
-    @Field(() => [CardOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<CardOrderByWithRelationInput>;
+  @Field(() => CardWhereUniqueInput, { nullable: true })
+  cursor?: CardWhereUniqueInput;
 
-    @Field(() => CardWhereUniqueInput, {nullable:true})
-    cursor?: CardWhereUniqueInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
-
-    @Field(() => [CardScalarFieldEnum], {nullable:true})
-    distinct?: Array<keyof typeof CardScalarFieldEnum>;
+  @Field(() => [CardScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof CardScalarFieldEnum>;
 }

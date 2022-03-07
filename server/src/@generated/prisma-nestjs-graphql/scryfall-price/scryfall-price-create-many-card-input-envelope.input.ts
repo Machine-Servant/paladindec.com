@@ -4,10 +4,9 @@ import { ScryfallPriceCreateManyCardInput } from './scryfall-price-create-many-c
 
 @InputType()
 export class ScryfallPriceCreateManyCardInputEnvelope {
+  @Field(() => [ScryfallPriceCreateManyCardInput], { nullable: false })
+  data!: Array<ScryfallPriceCreateManyCardInput>;
 
-    @Field(() => [ScryfallPriceCreateManyCardInput], {nullable:false})
-    data!: Array<ScryfallPriceCreateManyCardInput>;
-
-    @Field(() => Boolean, {nullable:true})
-    skipDuplicates?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
 }

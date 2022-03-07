@@ -572,7 +572,6 @@ type Query {
   allScryfallCards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
   allScryfallPrices(cursor: ScryfallPriceWhereUniqueInput, distinct: [ScryfallPriceScalarFieldEnum!], orderBy: [ScryfallPriceOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPrice!]!
   allScryfallSets(cursor: ScryfallSetWhereUniqueInput, distinct: [ScryfallSetScalarFieldEnum!], orderBy: [ScryfallSetOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallSetWhereInput): [ScryfallSet!]!
-  getString: String!
 }
 
 enum QueryMode {

@@ -7,43 +7,48 @@ import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-wi
 
 @InputType()
 export class ScryfallPriceScalarWhereWithAggregatesInput {
+  @Field(() => [ScryfallPriceScalarWhereWithAggregatesInput], {
+    nullable: true,
+  })
+  AND?: Array<ScryfallPriceScalarWhereWithAggregatesInput>;
 
-    @Field(() => [ScryfallPriceScalarWhereWithAggregatesInput], {nullable:true})
-    AND?: Array<ScryfallPriceScalarWhereWithAggregatesInput>;
+  @Field(() => [ScryfallPriceScalarWhereWithAggregatesInput], {
+    nullable: true,
+  })
+  OR?: Array<ScryfallPriceScalarWhereWithAggregatesInput>;
 
-    @Field(() => [ScryfallPriceScalarWhereWithAggregatesInput], {nullable:true})
-    OR?: Array<ScryfallPriceScalarWhereWithAggregatesInput>;
+  @Field(() => [ScryfallPriceScalarWhereWithAggregatesInput], {
+    nullable: true,
+  })
+  NOT?: Array<ScryfallPriceScalarWhereWithAggregatesInput>;
 
-    @Field(() => [ScryfallPriceScalarWhereWithAggregatesInput], {nullable:true})
-    NOT?: Array<ScryfallPriceScalarWhereWithAggregatesInput>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  id?: StringWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    id?: StringWithAggregatesFilter;
+  @Field(() => DateTimeWithAggregatesFilter, { nullable: true })
+  date?: DateTimeWithAggregatesFilter;
 
-    @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
-    date?: DateTimeWithAggregatesFilter;
+  @Field(() => FloatNullableWithAggregatesFilter, { nullable: true })
+  eur?: FloatNullableWithAggregatesFilter;
 
-    @Field(() => FloatNullableWithAggregatesFilter, {nullable:true})
-    eur?: FloatNullableWithAggregatesFilter;
+  @Field(() => FloatNullableWithAggregatesFilter, { nullable: true })
+  tix?: FloatNullableWithAggregatesFilter;
 
-    @Field(() => FloatNullableWithAggregatesFilter, {nullable:true})
-    tix?: FloatNullableWithAggregatesFilter;
+  @Field(() => FloatNullableWithAggregatesFilter, { nullable: true })
+  usd?: FloatNullableWithAggregatesFilter;
 
-    @Field(() => FloatNullableWithAggregatesFilter, {nullable:true})
-    usd?: FloatNullableWithAggregatesFilter;
+  @Field(() => FloatNullableWithAggregatesFilter, { nullable: true })
+  eurFoil?: FloatNullableWithAggregatesFilter;
 
-    @Field(() => FloatNullableWithAggregatesFilter, {nullable:true})
-    eurFoil?: FloatNullableWithAggregatesFilter;
+  @Field(() => FloatNullableWithAggregatesFilter, { nullable: true })
+  usdFoil?: FloatNullableWithAggregatesFilter;
 
-    @Field(() => FloatNullableWithAggregatesFilter, {nullable:true})
-    usdFoil?: FloatNullableWithAggregatesFilter;
+  @Field(() => FloatNullableWithAggregatesFilter, { nullable: true })
+  usdEtched?: FloatNullableWithAggregatesFilter;
 
-    @Field(() => FloatNullableWithAggregatesFilter, {nullable:true})
-    usdEtched?: FloatNullableWithAggregatesFilter;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  cardId?: StringWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    cardId?: StringWithAggregatesFilter;
-
-    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
-    currentPriceOfCardId?: StringNullableWithAggregatesFilter;
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  currentPriceOfCardId?: StringNullableWithAggregatesFilter;
 }

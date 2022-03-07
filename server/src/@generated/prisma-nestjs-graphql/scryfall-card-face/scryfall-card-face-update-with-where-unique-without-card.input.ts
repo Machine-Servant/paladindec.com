@@ -5,10 +5,9 @@ import { ScryfallCardFaceUpdateWithoutCardInput } from './scryfall-card-face-upd
 
 @InputType()
 export class ScryfallCardFaceUpdateWithWhereUniqueWithoutCardInput {
+  @Field(() => ScryfallCardFaceWhereUniqueInput, { nullable: false })
+  where!: ScryfallCardFaceWhereUniqueInput;
 
-    @Field(() => ScryfallCardFaceWhereUniqueInput, {nullable:false})
-    where!: ScryfallCardFaceWhereUniqueInput;
-
-    @Field(() => ScryfallCardFaceUpdateWithoutCardInput, {nullable:false})
-    data!: ScryfallCardFaceUpdateWithoutCardInput;
+  @Field(() => ScryfallCardFaceUpdateWithoutCardInput, { nullable: false })
+  data!: ScryfallCardFaceUpdateWithoutCardInput;
 }

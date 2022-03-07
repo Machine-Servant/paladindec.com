@@ -5,10 +5,9 @@ import { ScryfallCardUpdateManyMutationInput } from './scryfall-card-update-many
 
 @InputType()
 export class ScryfallCardUpdateManyWithWhereWithoutSetInput {
+  @Field(() => ScryfallCardScalarWhereInput, { nullable: false })
+  where!: ScryfallCardScalarWhereInput;
 
-    @Field(() => ScryfallCardScalarWhereInput, {nullable:false})
-    where!: ScryfallCardScalarWhereInput;
-
-    @Field(() => ScryfallCardUpdateManyMutationInput, {nullable:false})
-    data!: ScryfallCardUpdateManyMutationInput;
+  @Field(() => ScryfallCardUpdateManyMutationInput, { nullable: false })
+  data!: ScryfallCardUpdateManyMutationInput;
 }

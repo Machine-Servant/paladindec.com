@@ -7,16 +7,17 @@ import { CardsInCollectionWhereUniqueInput } from './cards-in-collection-where-u
 
 @InputType()
 export class CardsInCollectionCreateNestedManyWithoutCardInput {
+  @Field(() => [CardsInCollectionCreateWithoutCardInput], { nullable: true })
+  create?: Array<CardsInCollectionCreateWithoutCardInput>;
 
-    @Field(() => [CardsInCollectionCreateWithoutCardInput], {nullable:true})
-    create?: Array<CardsInCollectionCreateWithoutCardInput>;
+  @Field(() => [CardsInCollectionCreateOrConnectWithoutCardInput], {
+    nullable: true,
+  })
+  connectOrCreate?: Array<CardsInCollectionCreateOrConnectWithoutCardInput>;
 
-    @Field(() => [CardsInCollectionCreateOrConnectWithoutCardInput], {nullable:true})
-    connectOrCreate?: Array<CardsInCollectionCreateOrConnectWithoutCardInput>;
+  @Field(() => CardsInCollectionCreateManyCardInputEnvelope, { nullable: true })
+  createMany?: CardsInCollectionCreateManyCardInputEnvelope;
 
-    @Field(() => CardsInCollectionCreateManyCardInputEnvelope, {nullable:true})
-    createMany?: CardsInCollectionCreateManyCardInputEnvelope;
-
-    @Field(() => [CardsInCollectionWhereUniqueInput], {nullable:true})
-    connect?: Array<CardsInCollectionWhereUniqueInput>;
+  @Field(() => [CardsInCollectionWhereUniqueInput], { nullable: true })
+  connect?: Array<CardsInCollectionWhereUniqueInput>;
 }

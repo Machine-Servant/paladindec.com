@@ -6,13 +6,12 @@ import { CardWhereUniqueInput } from './card-where-unique.input';
 
 @InputType()
 export class CardCreateNestedOneWithoutCurrentPriceInput {
+  @Field(() => CardCreateWithoutCurrentPriceInput, { nullable: true })
+  create?: CardCreateWithoutCurrentPriceInput;
 
-    @Field(() => CardCreateWithoutCurrentPriceInput, {nullable:true})
-    create?: CardCreateWithoutCurrentPriceInput;
+  @Field(() => CardCreateOrConnectWithoutCurrentPriceInput, { nullable: true })
+  connectOrCreate?: CardCreateOrConnectWithoutCurrentPriceInput;
 
-    @Field(() => CardCreateOrConnectWithoutCurrentPriceInput, {nullable:true})
-    connectOrCreate?: CardCreateOrConnectWithoutCurrentPriceInput;
-
-    @Field(() => CardWhereUniqueInput, {nullable:true})
-    connect?: CardWhereUniqueInput;
+  @Field(() => CardWhereUniqueInput, { nullable: true })
+  connect?: CardWhereUniqueInput;
 }

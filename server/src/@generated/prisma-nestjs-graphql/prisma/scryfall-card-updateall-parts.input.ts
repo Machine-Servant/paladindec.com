@@ -4,10 +4,9 @@ import { GraphQLJSON } from 'graphql-type-json';
 
 @InputType()
 export class ScryfallCardUpdateallPartsInput {
+  @Field(() => [GraphQLJSON], { nullable: true })
+  set?: Array<any>;
 
-    @Field(() => [GraphQLJSON], {nullable:true})
-    set?: Array<any>;
-
-    @Field(() => [GraphQLJSON], {nullable:true})
-    push?: Array<any>;
+  @Field(() => [GraphQLJSON], { nullable: true })
+  push?: Array<any>;
 }

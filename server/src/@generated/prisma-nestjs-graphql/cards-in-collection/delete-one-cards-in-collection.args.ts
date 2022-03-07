@@ -4,7 +4,6 @@ import { CardsInCollectionWhereUniqueInput } from './cards-in-collection-where-u
 
 @ArgsType()
 export class DeleteOneCardsInCollectionArgs {
-
-    @Field(() => CardsInCollectionWhereUniqueInput, {nullable:false})
-    where!: CardsInCollectionWhereUniqueInput;
+  @Field(() => CardsInCollectionWhereUniqueInput, { nullable: false })
+  where!: CardsInCollectionWhereUniqueInput;
 }

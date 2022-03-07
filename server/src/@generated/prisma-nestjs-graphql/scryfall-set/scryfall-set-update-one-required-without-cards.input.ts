@@ -8,19 +8,18 @@ import { ScryfallSetUpdateWithoutCardsInput } from './scryfall-set-update-withou
 
 @InputType()
 export class ScryfallSetUpdateOneRequiredWithoutCardsInput {
+  @Field(() => ScryfallSetCreateWithoutCardsInput, { nullable: true })
+  create?: ScryfallSetCreateWithoutCardsInput;
 
-    @Field(() => ScryfallSetCreateWithoutCardsInput, {nullable:true})
-    create?: ScryfallSetCreateWithoutCardsInput;
+  @Field(() => ScryfallSetCreateOrConnectWithoutCardsInput, { nullable: true })
+  connectOrCreate?: ScryfallSetCreateOrConnectWithoutCardsInput;
 
-    @Field(() => ScryfallSetCreateOrConnectWithoutCardsInput, {nullable:true})
-    connectOrCreate?: ScryfallSetCreateOrConnectWithoutCardsInput;
+  @Field(() => ScryfallSetUpsertWithoutCardsInput, { nullable: true })
+  upsert?: ScryfallSetUpsertWithoutCardsInput;
 
-    @Field(() => ScryfallSetUpsertWithoutCardsInput, {nullable:true})
-    upsert?: ScryfallSetUpsertWithoutCardsInput;
+  @Field(() => ScryfallSetWhereUniqueInput, { nullable: true })
+  connect?: ScryfallSetWhereUniqueInput;
 
-    @Field(() => ScryfallSetWhereUniqueInput, {nullable:true})
-    connect?: ScryfallSetWhereUniqueInput;
-
-    @Field(() => ScryfallSetUpdateWithoutCardsInput, {nullable:true})
-    update?: ScryfallSetUpdateWithoutCardsInput;
+  @Field(() => ScryfallSetUpdateWithoutCardsInput, { nullable: true })
+  update?: ScryfallSetUpdateWithoutCardsInput;
 }

@@ -1,53 +1,30 @@
+import {
+  CompleteMultipartUploadCommandInput,
+  CreateMultipartUploadCommandOutput,
+  S3,
+  UploadPartCommandInput,
+} from '@aws-sdk/client-s3';
 import { InjectQueue, Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Job, Queue } from 'bull';
-import * as fs from 'fs';
 import { chunk, flatten } from 'lodash';
-import {
-  ScryfallCard,
-  ScryfallCardFace,
-  ScryfallRelatedCard,
-} from 'prisma/prisma-client';
+import { ScryfallCard } from 'prisma/prisma-client';
 import * as stream from 'stream';
 import Chain, { chain } from 'stream-chain';
 import { parser } from 'stream-json/Parser';
 import { streamArray } from 'stream-json/streamers/StreamArray';
-import { promisify } from 'util';
+import { ScryfallCardFaceCreateManyInput } from '../../../@generated/prisma-nestjs-graphql/scryfall-card-face/scryfall-card-face-create-many.input';
 import { ScryfallCardFaceService } from '../services/scryfall-card-face.service';
 import { ScryfallCardService } from '../services/scryfall-card.service';
-import { ScryfallRelatedCardService } from '../services/scryfall-related-card.service';
 import { SetDataService } from '../services/set-data.service';
-import { ScryfallCardDataType } from '../types/scryfall.types';
+import {
+  ScryfallCardDataType,
+  ScryfallCardFaceDataType,
+} from '../types/scryfall.types';
 import { toCardObjectType } from '../utils/to-prisma-card';
 import { toCardFaceObjectType } from '../utils/to-prisma-scryfall-card-face';
-import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
-import {
-  CompleteMultipartUploadCommandInput,
-  CreateMultipartUploadCommandOutput,
-  Part,
-  PutObjectCommandOutput,
-  S3,
-  UploadPartCommandInput,
-} from '@aws-sdk/client-s3';
-
-const finished = promisify(stream.finished);
-
-type BulkScryfallRelatedCard = Omit<ScryfallRelatedCard, 'id'>;
-type BulkScryfallCardFace = Omit<ScryfallCardFace, 'id'>;
-
-function isBulkScryfallRelatedCard(
-  input: Partial<BulkScryfallRelatedCard>,
-): input is BulkScryfallRelatedCard {
-  return !!input.cardId && !!input.referenceId;
-}
-
-function isBulkScryfallCardFace(
-  input: Partial<BulkScryfallCardFace>,
-): input is BulkScryfallCardFace {
-  return !!input.cardId;
-}
 
 @Processor('bulk-data')
 export class BulkDownloadConsumer {
@@ -55,7 +32,6 @@ export class BulkDownloadConsumer {
     private readonly configService: ConfigService,
     private readonly scryfallCardService: ScryfallCardService,
     private readonly scryfallCardFaceService: ScryfallCardFaceService,
-    private readonly scryfallRelatedCardService: ScryfallRelatedCardService,
     private readonly setDataService: SetDataService,
     @InjectQueue('bulk-data') private readonly bulkDataQueue: Queue,
     @InjectQueue('price-data') private readonly priceDataQueue: Queue,
@@ -81,18 +57,18 @@ export class BulkDownloadConsumer {
     await setProcess.finished();
     this.logger.debug(`Done processing sets`);
 
-    // try {
-    //   this.logger.debug(`Downloading bulk data`);
-    //   const download = await this.bulkDataQueue.add('download', job.data, {
-    //     removeOnComplete: true,
-    //   });
-    //   await download.finished();
-    //   this.logger.debug(`Done downloading data`);
-    // } catch (err) {
-    //   this.logger.error(err);
-    //   job.moveToFailed(err);
-    //   throw err;
-    // }
+    try {
+      this.logger.debug(`Downloading bulk data`);
+      const download = await this.bulkDataQueue.add('download', job.data, {
+        removeOnComplete: true,
+      });
+      await download.finished();
+      this.logger.debug(`Done downloading data`);
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
 
     try {
       this.logger.debug(`Processing bulk data`);
@@ -115,6 +91,15 @@ export class BulkDownloadConsumer {
     });
     await processPriceData.finished();
     this.logger.debug(`Done processing price data`);
+
+    this.logger.debug(`Processing card face data`);
+    const processCardFaceData = await this.bulkDataQueue.add(
+      'process-card-faces',
+      null,
+      { removeOnComplete: true },
+    );
+    await processCardFaceData.finished();
+    this.logger.debug(`Done processing card face data`);
 
     this.logger.debug(`Updating PaladinDeck cards`);
     const processPaladinDeckCards = await this.cardQueue.add(
@@ -186,7 +171,7 @@ export class BulkDownloadConsumer {
     const completeMultipartUpload = (
       doneParams: CompleteMultipartUploadCommandInput,
     ) => {
-      s3.completeMultipartUpload(doneParams, (err, data) => {
+      s3.completeMultipartUpload(doneParams, (err) => {
         if (err) {
           this.logger.error(err);
           job.moveToFailed(err);
@@ -194,7 +179,6 @@ export class BulkDownloadConsumer {
         }
 
         this.logger.debug(`Completed upload`);
-        // job.moveToCompleted('done', true);
       });
     };
 
@@ -277,134 +261,6 @@ export class BulkDownloadConsumer {
         }
       },
     );
-
-    /*
-        const buffer = Buffer.from(fileResponse.data)
-        const results = await s3.createMultipartUpload({
-          Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
-          Key: `${this.configService.get<string>(
-            'DOWNLOADS_DIR',
-          )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}.json`,
-          ContentType: fileResponse.headers['content-type'],
-        }, (err, multipart) => {
-          fileResponse
-        })
-    */
-
-    // const uploadFromStream = (
-    //   fileResponse: AxiosResponse<stream.Stream>,
-    // ): {
-    //   passthrough: stream.PassThrough;
-    //   promise: Promise<PutObjectCommandOutput>;
-    // } => {
-    //   this.logger.debug(`Uploading data to S3`);
-    //   const passthrough = new stream.PassThrough();
-    //   try {
-    //     const results = s3.putObject({
-    //       Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
-    //       Key: `${this.configService.get<string>(
-    //         'DOWNLOADS_DIR',
-    //       )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}.json`,
-    //       ContentType: fileResponse.headers['content-type'],
-    //       Body: passthrough,
-    //     });
-    //     return { passthrough, promise: results };
-    //   } catch (err) {
-    //     this.logger.error(err);
-    //     throw err;
-    //   }
-    // };
-
-    // this.logger.debug(`Downloading file ${uri}`);
-    // const responseStream = await downloadFile(uri);
-    // this.logger.debug(`Done with downloadFile`);
-    // this.logger.debug(`Beginning upload to S3`);
-    // try {
-    //   const { passthrough, promise } = uploadFromStream(responseStream);
-    //   responseStream.data.pipe(passthrough);
-    //   await promise;
-    //   job.moveToCompleted('done', true);
-    //   this.logger.debug(`Done uploading to S3`);
-    // } catch (err) {
-    //   this.logger.error(err);
-    //   job.moveToFailed(err);
-    //   throw err;
-    // }
-
-    // this.logger.debug(`Downloadindg ${uri}`);
-    // let results: AxiosResponse<any>;
-    // try {
-    //   results = await axios.get(uri, { responseType: 'stream' });
-    //   this.logger.debug(`Done downloading data`, `status: ${results.status}`);
-    // } catch (err) {
-    //   this.logger.error(err);
-    //   job.moveToFailed(err);
-    //   throw err;
-    // }
-
-    // if (results.status !== 200) {
-    //   const err = new Error(`Got ${results.status} when downloading`);
-    //   this.logger.error(err);
-    //   job.moveToFailed(err);
-    //   throw err;
-    // }
-
-    // this.logger.debug(`Beginning upload to s3`);
-    // await new Promise((resolve, reject) => {
-    //   s3.putObject(
-    //     {
-    //       Bucket: this.configService.get<string>('BUCKETEER_BUCKET_NAME'),
-    //       Body: results.data,
-    //       Key: `${this.configService.get<string>(
-    //         'DOWNLOADS_DIR',
-    //       )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}`,
-    //     },
-    //     (err, data) => {
-    //       this.logger.debug(`Upload to s3 complete`);
-    //       if (err) {
-    //         this.logger.error(err);
-    //         job.moveToFailed(err);
-    //         reject(err);
-    //         throw err;
-    //       }
-    //       this.logger.debug(`Successfully downloaded bulk data to S3`);
-    //       job.moveToCompleted('done', true);
-    //       resolve(true);
-    //     },
-    //   );
-    // });
-
-    // const outputFilePath = `${this.configService.get<string>(
-    //   'DOWNLOADS_DIR',
-    // )}/${this.configService.get<string>('BULK_DATA_FILE_NAME')}_${
-    //   job.data.typeName
-    // }.json`;
-    // const writer = fs.createWriteStream(outputFilePath);
-
-    // this.logger.debug(`Starting download of: ${job.data.uri}`);
-
-    // const response = await axios.get(uri, {
-    //   method: 'get',
-    //   responseType: 'stream',
-    // });
-
-    // writer.on('finish', () => {
-    //   this.logger.debug('Download complete');
-    // });
-
-    // response.data.pipe(writer);
-
-    // await finished(writer);
-
-    // const results = { filePath: outputFilePath };
-
-    // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // // @ts-expect-error
-    // job.moveToCompleted(results, true);
-
-    // return
-
-    // return { filePath: outputFilePath };
   }
 
   @Process('process-bulk-data')
@@ -454,10 +310,7 @@ export class BulkDownloadConsumer {
 
     this.logger.debug(`Doing stuff`);
     const results = await new Promise((resolve, reject) => {
-      // const buffer = [];
       let cards: ScryfallCard[] = [];
-      // let cardFaceData: BulkScryfallCardFace[] = [];
-      // let relatedCardData: BulkScryfallRelatedCard[] = [];
 
       pipeline.on(
         'data',
@@ -469,8 +322,6 @@ export class BulkDownloadConsumer {
           key: number;
           value: ScryfallCardDataType;
         }) => {
-          // buffer.push(value);
-          // this.logger.debug(`Processing ${value.id}`);
           if (cards.length < 1000) {
             cards.push(toCardObjectType(value));
           } else {
@@ -490,36 +341,6 @@ export class BulkDownloadConsumer {
             cards = [];
             pipeline.resume();
           }
-          // cards.push(toCardObjectType(value));
-          // if (value.card_faces?.length) {
-          //   const cardFaces = value.card_faces.map((input) => {
-          //     const cardFace = toCardFaceObjectType(input);
-          //     cardFace.cardId = value.id;
-          //     if (!isBulkScryfallCardFace(cardFace)) {
-          //       this.logger.error('Invalid BulkScryfallCardFace', cardFace);
-          //       throw new Error('Invalid BulkScryfallCardFace');
-          //     }
-          //     return cardFace;
-          //   });
-          //   cardFaceData = cardFaceData.concat(cardFaces);
-          // }
-          // if (value.all_parts?.length) {
-          //   const relatedCards = value.all_parts.map((input) => {
-          //     const relatedCard = toPrismaScryfallRelatedCard(input);
-          //     relatedCard.id = undefined;
-          //     relatedCard.cardId = value.id;
-          //     relatedCard.referenceId = input.id;
-          //     if (!isBulkScryfallRelatedCard(relatedCard)) {
-          //       this.logger.error(
-          //         `Invalid BulkScryfallRelatedCard`,
-          //         relatedCard,
-          //       );
-          //       throw new Error('Invalid BulkScryfallRelatedCard.');
-          //     }
-          //     return relatedCard;
-          //   });
-          //   relatedCardData = relatedCardData.concat(relatedCards);
-          // }
         },
       );
 
@@ -535,11 +356,6 @@ export class BulkDownloadConsumer {
           await processScryfallCards.finished();
         }
         this.logger.debug(`Done processing all cards`);
-
-        // await this.processCards(cards);
-        // await this.processCardFaces(cardFaceData);
-        // await this.processAllParts(relatedCardData);
-
         resolve(true);
       });
 
@@ -586,80 +402,67 @@ export class BulkDownloadConsumer {
     }
   }
 
-  // async processCardFaces(cardFaceData: BulkScryfallCardFace[]) {
-  //   this.logger.debug(`Processing CardFace objects`);
+  @Process('process-card-faces')
+  async processCardFaces(job: Job) {
+    this.logger.debug(`Processing card faces`);
 
-  //   try {
-  //     this.logger.debug(`Deleting old references`);
-  //     const countDeleted = await this.scryfallCardFaceService.drop();
-  //     this.logger.debug(`Deleted #${countDeleted} CardFace records`);
-  //   } catch (err) {
-  //     this.logger.error(err);
-  //     throw err;
-  //   }
+    this.logger.debug(`Deleting old CardFace data`);
+    const deletedCount = await this.scryfallCardFaceService.drop();
+    this.logger.debug(`Deleted #${deletedCount} CardFace records`);
 
-  //   try {
-  //     let batchCount = 0;
-  //     const batches = chunk(cardFaceData, 100);
-  //     const results: ScryfallCardFace[][] = [];
+    const cardsWithCardFaceDataCount = await this.scryfallCardService.count({
+      cardFacesRaw: { isEmpty: false },
+    });
+    this.logger.debug(
+      `Found #${cardsWithCardFaceDataCount} ScryfallCard records with card faces data`,
+    );
 
-  //     while (batches.length) {
-  //       this.logger.debug(`Processing batch #${++batchCount}`);
-  //       const batch = batches.shift();
-  //       const result = await Promise.all(
-  //         batch.map(
-  //           async (cardFace) =>
-  //             // TODO: FIX THIS ANY
-  //             await this.scryfallCardFaceService.create(cardFace as any),
-  //         ),
-  //       );
-  //       results.push(result);
-  //     }
-  //     const flatResults = flatten(results);
-  //     this.logger.debug(`Processed ${flatResults.length} CardFace records`);
+    const batchSize = 100;
+    const totalBatches = Math.ceil(cardsWithCardFaceDataCount / batchSize);
 
-  //     return flatResults;
-  //   } catch (err) {
-  //     this.logger.error(err);
-  //     throw err;
-  //   }
-  // }
+    try {
+      for (let i = 0; i < totalBatches; i++) {
+        this.logger.debug(`Processing #${i + 1} of ${totalBatches}`);
+        const batch = await this.scryfallCardService.findMany({
+          take: batchSize,
+          skip: i * batchSize,
+          orderBy: [{ id: 'asc' }],
+          where: { cardFacesRaw: { isEmpty: false } },
+        });
+        const cardFaceInputs = flatten(
+          batch.map((card) =>
+            card.cardFacesRaw.map((cardFaceData) => {
+              const parsedCardFaceData = toCardFaceObjectType(
+                cardFaceData as ScryfallCardFaceDataType,
+              );
+              const cardFaceInput: ScryfallCardFaceCreateManyInput = {
+                ...parsedCardFaceData,
+                name: parsedCardFaceData.name,
+                cardId: card.id,
+                colorIndicator: {
+                  set: parsedCardFaceData.colorIndicator || [],
+                },
+                colors: { set: parsedCardFaceData.colors || [] },
+              };
+              return cardFaceInput;
+            }),
+          ),
+        );
 
-  // async processAllParts(allPartsData: BulkScryfallRelatedCard[]) {
-  //   this.logger.debug(`Processing RelatedCard objects`);
-
-  //   try {
-  //     this.logger.debug(`Deleting old references`);
-  //     const countDeleted = await this.scryfallRelatedCardService.drop();
-  //     this.logger.debug(`Deleted #${countDeleted} RelatedCard records`);
-  //   } catch (err) {
-  //     this.logger.error(err);
-  //     throw err;
-  //   }
-
-  //   try {
-  //     let batchCount = 0;
-  //     const batches = chunk(allPartsData, 100);
-  //     const results: ScryfallRelatedCard[][] = [];
-
-  //     while (batches.length) {
-  //       this.logger.debug(`Processing batch ${++batchCount}`);
-  //       const batch = batches.shift();
-  //       const result = await Promise.all(
-  //         batch.map(
-  //           async (relatedCard) =>
-  //             await this.scryfallRelatedCardService.create(relatedCard),
-  //         ),
-  //       );
-  //       results.push(result);
-  //     }
-  //     const flatResults = flatten(results);
-  //     this.logger.debug(`Processed ${flatResults.length} RelatedCard records`);
-
-  //     return flatResults;
-  //   } catch (err) {
-  //     this.logger.error(err);
-  //     throw err;
-  //   }
-  // }
+        this.logger.debug(`Creating #${cardFaceInputs.length} records`);
+        const cardFacesCreatedCount =
+          await this.scryfallCardFaceService.createMany(cardFaceInputs);
+        this.logger.debug(
+          `Inserted #${cardFacesCreatedCount} ScryfallCardFace records`,
+        );
+        this.logger.debug(`Finished #${i + 1} of ${totalBatches}`);
+      }
+      this.logger.debug(`Finished processing card face data`);
+    } catch (err) {
+      this.logger.error(err);
+      job.moveToFailed(err);
+      throw err;
+    }
+    job.moveToCompleted('done', true);
+  }
 }

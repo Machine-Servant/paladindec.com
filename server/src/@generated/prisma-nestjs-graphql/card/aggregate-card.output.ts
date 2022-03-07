@@ -6,13 +6,12 @@ import { CardMaxAggregate } from './card-max-aggregate.output';
 
 @ObjectType()
 export class AggregateCard {
+  @Field(() => CardCountAggregate, { nullable: true })
+  _count?: CardCountAggregate;
 
-    @Field(() => CardCountAggregate, {nullable:true})
-    _count?: CardCountAggregate;
+  @Field(() => CardMinAggregate, { nullable: true })
+  _min?: CardMinAggregate;
 
-    @Field(() => CardMinAggregate, {nullable:true})
-    _min?: CardMinAggregate;
-
-    @Field(() => CardMaxAggregate, {nullable:true})
-    _max?: CardMaxAggregate;
+  @Field(() => CardMaxAggregate, { nullable: true })
+  _max?: CardMaxAggregate;
 }

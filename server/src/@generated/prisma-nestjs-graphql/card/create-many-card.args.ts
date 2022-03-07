@@ -4,10 +4,9 @@ import { CardCreateManyInput } from './card-create-many.input';
 
 @ArgsType()
 export class CreateManyCardArgs {
+  @Field(() => [CardCreateManyInput], { nullable: false })
+  data!: Array<CardCreateManyInput>;
 
-    @Field(() => [CardCreateManyInput], {nullable:false})
-    data!: Array<CardCreateManyInput>;
-
-    @Field(() => Boolean, {nullable:true})
-    skipDuplicates?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
 }

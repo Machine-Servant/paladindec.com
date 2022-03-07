@@ -24,6 +24,7 @@ import Redis from 'ioredis';
       sortSchema: true,
       context: ({ req }) => ({ req }),
       driver: ApolloDriver,
+      introspection: true,
     }),
     ConfigModule.forRoot(),
     BullModule.forRootAsync({

@@ -5,10 +5,9 @@ import { ScryfallCardWhereUniqueInput } from './scryfall-card-where-unique.input
 
 @ArgsType()
 export class UpdateOneScryfallCardArgs {
+  @Field(() => ScryfallCardUpdateInput, { nullable: false })
+  data!: ScryfallCardUpdateInput;
 
-    @Field(() => ScryfallCardUpdateInput, {nullable:false})
-    data!: ScryfallCardUpdateInput;
-
-    @Field(() => ScryfallCardWhereUniqueInput, {nullable:false})
-    where!: ScryfallCardWhereUniqueInput;
+  @Field(() => ScryfallCardWhereUniqueInput, { nullable: false })
+  where!: ScryfallCardWhereUniqueInput;
 }

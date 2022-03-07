@@ -4,7 +4,6 @@ import { ScryfallPriceWhereInput } from './scryfall-price-where.input';
 
 @ArgsType()
 export class DeleteManyScryfallPriceArgs {
-
-    @Field(() => ScryfallPriceWhereInput, {nullable:true})
-    where?: ScryfallPriceWhereInput;
+  @Field(() => ScryfallPriceWhereInput, { nullable: true })
+  where?: ScryfallPriceWhereInput;
 }

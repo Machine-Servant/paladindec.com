@@ -8,22 +8,23 @@ import { ScryfallRelatedCardScalarFieldEnum } from './scryfall-related-card-scal
 
 @ArgsType()
 export class FindManyScryfallRelatedCardArgs {
+  @Field(() => ScryfallRelatedCardWhereInput, { nullable: true })
+  where?: ScryfallRelatedCardWhereInput;
 
-    @Field(() => ScryfallRelatedCardWhereInput, {nullable:true})
-    where?: ScryfallRelatedCardWhereInput;
+  @Field(() => [ScryfallRelatedCardOrderByWithRelationInput], {
+    nullable: true,
+  })
+  orderBy?: Array<ScryfallRelatedCardOrderByWithRelationInput>;
 
-    @Field(() => [ScryfallRelatedCardOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<ScryfallRelatedCardOrderByWithRelationInput>;
+  @Field(() => ScryfallRelatedCardWhereUniqueInput, { nullable: true })
+  cursor?: ScryfallRelatedCardWhereUniqueInput;
 
-    @Field(() => ScryfallRelatedCardWhereUniqueInput, {nullable:true})
-    cursor?: ScryfallRelatedCardWhereUniqueInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
-
-    @Field(() => [ScryfallRelatedCardScalarFieldEnum], {nullable:true})
-    distinct?: Array<keyof typeof ScryfallRelatedCardScalarFieldEnum>;
+  @Field(() => [ScryfallRelatedCardScalarFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ScryfallRelatedCardScalarFieldEnum>;
 }

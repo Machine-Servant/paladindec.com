@@ -13,37 +13,36 @@ import { ScryfallSetMaxAggregateInput } from './scryfall-set-max-aggregate.input
 
 @ArgsType()
 export class ScryfallSetGroupByArgs {
+  @Field(() => ScryfallSetWhereInput, { nullable: true })
+  where?: ScryfallSetWhereInput;
 
-    @Field(() => ScryfallSetWhereInput, {nullable:true})
-    where?: ScryfallSetWhereInput;
+  @Field(() => [ScryfallSetOrderByWithAggregationInput], { nullable: true })
+  orderBy?: Array<ScryfallSetOrderByWithAggregationInput>;
 
-    @Field(() => [ScryfallSetOrderByWithAggregationInput], {nullable:true})
-    orderBy?: Array<ScryfallSetOrderByWithAggregationInput>;
+  @Field(() => [ScryfallSetScalarFieldEnum], { nullable: false })
+  by!: Array<keyof typeof ScryfallSetScalarFieldEnum>;
 
-    @Field(() => [ScryfallSetScalarFieldEnum], {nullable:false})
-    by!: Array<keyof typeof ScryfallSetScalarFieldEnum>;
+  @Field(() => ScryfallSetScalarWhereWithAggregatesInput, { nullable: true })
+  having?: ScryfallSetScalarWhereWithAggregatesInput;
 
-    @Field(() => ScryfallSetScalarWhereWithAggregatesInput, {nullable:true})
-    having?: ScryfallSetScalarWhereWithAggregatesInput;
+  @Field(() => Int, { nullable: true })
+  take?: number;
 
-    @Field(() => Int, {nullable:true})
-    take?: number;
+  @Field(() => Int, { nullable: true })
+  skip?: number;
 
-    @Field(() => Int, {nullable:true})
-    skip?: number;
+  @Field(() => ScryfallSetCountAggregateInput, { nullable: true })
+  _count?: ScryfallSetCountAggregateInput;
 
-    @Field(() => ScryfallSetCountAggregateInput, {nullable:true})
-    _count?: ScryfallSetCountAggregateInput;
+  @Field(() => ScryfallSetAvgAggregateInput, { nullable: true })
+  _avg?: ScryfallSetAvgAggregateInput;
 
-    @Field(() => ScryfallSetAvgAggregateInput, {nullable:true})
-    _avg?: ScryfallSetAvgAggregateInput;
+  @Field(() => ScryfallSetSumAggregateInput, { nullable: true })
+  _sum?: ScryfallSetSumAggregateInput;
 
-    @Field(() => ScryfallSetSumAggregateInput, {nullable:true})
-    _sum?: ScryfallSetSumAggregateInput;
+  @Field(() => ScryfallSetMinAggregateInput, { nullable: true })
+  _min?: ScryfallSetMinAggregateInput;
 
-    @Field(() => ScryfallSetMinAggregateInput, {nullable:true})
-    _min?: ScryfallSetMinAggregateInput;
-
-    @Field(() => ScryfallSetMaxAggregateInput, {nullable:true})
-    _max?: ScryfallSetMaxAggregateInput;
+  @Field(() => ScryfallSetMaxAggregateInput, { nullable: true })
+  _max?: ScryfallSetMaxAggregateInput;
 }

@@ -4,10 +4,9 @@ import { CardsInCollectionCreateManyCardInput } from './cards-in-collection-crea
 
 @InputType()
 export class CardsInCollectionCreateManyCardInputEnvelope {
+  @Field(() => [CardsInCollectionCreateManyCardInput], { nullable: false })
+  data!: Array<CardsInCollectionCreateManyCardInput>;
 
-    @Field(() => [CardsInCollectionCreateManyCardInput], {nullable:false})
-    data!: Array<CardsInCollectionCreateManyCardInput>;
-
-    @Field(() => Boolean, {nullable:true})
-    skipDuplicates?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
 }

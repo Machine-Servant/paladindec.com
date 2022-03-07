@@ -22,247 +22,255 @@ import { ScryfallPriceUncheckedCreateNestedManyWithoutCardInput } from '../scryf
 
 @InputType()
 export class ScryfallCardUncheckedCreateWithoutCardInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
 
-    @Field(() => String, {nullable:true})
-    id?: string;
+  @Field(() => Int, { nullable: true })
+  arenaId?: number;
 
-    @Field(() => Int, {nullable:true})
-    arenaId?: number;
+  @Field(() => String, { nullable: false })
+  lang!: string;
 
-    @Field(() => String, {nullable:false})
-    lang!: string;
+  @Field(() => Int, { nullable: true })
+  mtgoId?: number;
 
-    @Field(() => Int, {nullable:true})
-    mtgoId?: number;
+  @Field(() => Int, { nullable: true })
+  mtgoFoilId?: number;
 
-    @Field(() => Int, {nullable:true})
-    mtgoFoilId?: number;
+  @Field(() => ScryfallCardCreatemultiverseIdsInput, { nullable: true })
+  multiverseIds?: ScryfallCardCreatemultiverseIdsInput;
 
-    @Field(() => ScryfallCardCreatemultiverseIdsInput, {nullable:true})
-    multiverseIds?: ScryfallCardCreatemultiverseIdsInput;
+  @Field(() => Int, { nullable: true })
+  tcgplayerId?: number;
 
-    @Field(() => Int, {nullable:true})
-    tcgplayerId?: number;
+  @Field(() => Int, { nullable: true })
+  tcgplayerEtchedId?: number;
 
-    @Field(() => Int, {nullable:true})
-    tcgplayerEtchedId?: number;
+  @Field(() => Int, { nullable: true })
+  cardmarketId?: number;
 
-    @Field(() => Int, {nullable:true})
-    cardmarketId?: number;
+  @Field(() => String, { nullable: true })
+  oracleId?: string;
 
-    @Field(() => String, {nullable:true})
-    oracleId?: string;
+  @Field(() => String, { nullable: false })
+  printsSearchUri!: string;
 
-    @Field(() => String, {nullable:false})
-    printsSearchUri!: string;
+  @Field(() => String, { nullable: true })
+  rulingUri?: string;
 
-    @Field(() => String, {nullable:true})
-    rulingUri?: string;
+  @Field(() => String, { nullable: false })
+  scryfallUri!: string;
 
-    @Field(() => String, {nullable:false})
-    scryfallUri!: string;
+  @Field(() => String, { nullable: false })
+  uri!: string;
 
-    @Field(() => String, {nullable:false})
-    uri!: string;
+  @Field(() => ScryfallCardCreateallPartsInput, { nullable: true })
+  allParts?: ScryfallCardCreateallPartsInput;
 
-    @Field(() => ScryfallCardCreateallPartsInput, {nullable:true})
-    allParts?: ScryfallCardCreateallPartsInput;
+  @Field(() => ScryfallCardCreatecardFacesRawInput, { nullable: true })
+  cardFacesRaw?: ScryfallCardCreatecardFacesRawInput;
 
-    @Field(() => ScryfallCardCreatecardFacesRawInput, {nullable:true})
-    cardFacesRaw?: ScryfallCardCreatecardFacesRawInput;
+  @Field(() => Float, { nullable: true })
+  cmc?: number;
 
-    @Field(() => Float, {nullable:true})
-    cmc?: number;
+  @Field(() => ScryfallCardCreatecolorIdentityInput, { nullable: true })
+  colorIdentity?: ScryfallCardCreatecolorIdentityInput;
 
-    @Field(() => ScryfallCardCreatecolorIdentityInput, {nullable:true})
-    colorIdentity?: ScryfallCardCreatecolorIdentityInput;
+  @Field(() => ScryfallCardCreatecolorIndicatorInput, { nullable: true })
+  colorIndicator?: ScryfallCardCreatecolorIndicatorInput;
 
-    @Field(() => ScryfallCardCreatecolorIndicatorInput, {nullable:true})
-    colorIndicator?: ScryfallCardCreatecolorIndicatorInput;
+  @Field(() => ScryfallCardCreatecolorsInput, { nullable: true })
+  colors?: ScryfallCardCreatecolorsInput;
 
-    @Field(() => ScryfallCardCreatecolorsInput, {nullable:true})
-    colors?: ScryfallCardCreatecolorsInput;
+  @Field(() => Int, { nullable: true })
+  edhrecRank?: number;
 
-    @Field(() => Int, {nullable:true})
-    edhrecRank?: number;
+  @Field(() => String, { nullable: true })
+  handModifier?: string;
 
-    @Field(() => String, {nullable:true})
-    handModifier?: string;
+  @Field(() => ScryfallCardCreatekeywordsInput, { nullable: true })
+  keywords?: ScryfallCardCreatekeywordsInput;
 
-    @Field(() => ScryfallCardCreatekeywordsInput, {nullable:true})
-    keywords?: ScryfallCardCreatekeywordsInput;
+  @Field(() => String, { nullable: false })
+  layout!: string;
 
-    @Field(() => String, {nullable:false})
-    layout!: string;
+  @Field(() => GraphQLJSON, { nullable: false })
+  legalities!: any;
 
-    @Field(() => GraphQLJSON, {nullable:false})
-    legalities!: any;
+  @Field(() => String, { nullable: true })
+  lifeModifier?: string;
 
-    @Field(() => String, {nullable:true})
-    lifeModifier?: string;
+  @Field(() => String, { nullable: true })
+  loyalty?: string;
 
-    @Field(() => String, {nullable:true})
-    loyalty?: string;
+  @Field(() => String, { nullable: true })
+  manaCost?: string;
 
-    @Field(() => String, {nullable:true})
-    manaCost?: string;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-    @Field(() => String, {nullable:false})
-    name!: string;
+  @Field(() => String, { nullable: true })
+  oracleText?: string;
 
-    @Field(() => String, {nullable:true})
-    oracleText?: string;
+  @Field(() => Boolean, { nullable: false })
+  oversized!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    oversized!: boolean;
+  @Field(() => String, { nullable: true })
+  power?: string;
 
-    @Field(() => String, {nullable:true})
-    power?: string;
+  @Field(() => ScryfallCardCreateproducedManaInput, { nullable: true })
+  producedMana?: ScryfallCardCreateproducedManaInput;
 
-    @Field(() => ScryfallCardCreateproducedManaInput, {nullable:true})
-    producedMana?: ScryfallCardCreateproducedManaInput;
+  @Field(() => Boolean, { nullable: false })
+  reserved!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    reserved!: boolean;
+  @Field(() => String, { nullable: true })
+  toughness?: string;
 
-    @Field(() => String, {nullable:true})
-    toughness?: string;
+  @Field(() => String, { nullable: true })
+  typeLine?: string;
 
-    @Field(() => String, {nullable:true})
-    typeLine?: string;
+  @Field(() => String, { nullable: true })
+  artist?: string;
 
-    @Field(() => String, {nullable:true})
-    artist?: string;
+  @Field(() => Boolean, { nullable: false })
+  booster!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    booster!: boolean;
+  @Field(() => String, { nullable: false })
+  borderColor!: string;
 
-    @Field(() => String, {nullable:false})
-    borderColor!: string;
+  @Field(() => String, { nullable: true })
+  cardBackId?: string;
 
-    @Field(() => String, {nullable:true})
-    cardBackId?: string;
+  @Field(() => String, { nullable: false })
+  collectorNumber!: string;
 
-    @Field(() => String, {nullable:false})
-    collectorNumber!: string;
+  @Field(() => Boolean, { nullable: true })
+  contentWarning?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    contentWarning?: boolean;
+  @Field(() => Boolean, { nullable: false })
+  digital!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    digital!: boolean;
+  @Field(() => ScryfallCardCreatefinishesInput, { nullable: true })
+  finishes?: ScryfallCardCreatefinishesInput;
 
-    @Field(() => ScryfallCardCreatefinishesInput, {nullable:true})
-    finishes?: ScryfallCardCreatefinishesInput;
+  @Field(() => String, { nullable: true })
+  flavorName?: string;
 
-    @Field(() => String, {nullable:true})
-    flavorName?: string;
+  @Field(() => ScryfallCardCreateframeEffectsInput, { nullable: true })
+  frameEffects?: ScryfallCardCreateframeEffectsInput;
 
-    @Field(() => ScryfallCardCreateframeEffectsInput, {nullable:true})
-    frameEffects?: ScryfallCardCreateframeEffectsInput;
+  @Field(() => String, { nullable: false })
+  frame!: string;
 
-    @Field(() => String, {nullable:false})
-    frame!: string;
+  @Field(() => Boolean, { nullable: false })
+  fullArt!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    fullArt!: boolean;
+  @Field(() => ScryfallCardCreategamesInput, { nullable: true })
+  games?: ScryfallCardCreategamesInput;
 
-    @Field(() => ScryfallCardCreategamesInput, {nullable:true})
-    games?: ScryfallCardCreategamesInput;
+  @Field(() => Boolean, { nullable: false })
+  highresImage!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    highresImage!: boolean;
+  @Field(() => String, { nullable: true })
+  illustrationId?: string;
 
-    @Field(() => String, {nullable:true})
-    illustrationId?: string;
+  @Field(() => String, { nullable: false })
+  imageStatus!: string;
 
-    @Field(() => String, {nullable:false})
-    imageStatus!: string;
+  @Field(() => GraphQLJSON, { nullable: true })
+  imageUris?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    imageUris?: any;
+  @Field(() => GraphQLJSON, { nullable: false })
+  prices!: any;
 
-    @Field(() => GraphQLJSON, {nullable:false})
-    prices!: any;
+  @Field(() => String, { nullable: true })
+  printedName?: string;
 
-    @Field(() => String, {nullable:true})
-    printedName?: string;
+  @Field(() => String, { nullable: true })
+  printedText?: string;
 
-    @Field(() => String, {nullable:true})
-    printedText?: string;
+  @Field(() => String, { nullable: true })
+  printedTypeLine?: string;
 
-    @Field(() => String, {nullable:true})
-    printedTypeLine?: string;
+  @Field(() => Boolean, { nullable: false })
+  promo!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    promo!: boolean;
+  @Field(() => ScryfallCardCreatepromoTypesInput, { nullable: true })
+  promoTypes?: ScryfallCardCreatepromoTypesInput;
 
-    @Field(() => ScryfallCardCreatepromoTypesInput, {nullable:true})
-    promoTypes?: ScryfallCardCreatepromoTypesInput;
+  @Field(() => GraphQLJSON, { nullable: true })
+  purchaseUris?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    purchaseUris?: any;
+  @Field(() => String, { nullable: false })
+  rarity!: string;
 
-    @Field(() => String, {nullable:false})
-    rarity!: string;
+  @Field(() => GraphQLJSON, { nullable: false })
+  relatedUris!: any;
 
-    @Field(() => GraphQLJSON, {nullable:false})
-    relatedUris!: any;
+  @Field(() => Date, { nullable: false })
+  releasedAt!: Date | string;
 
-    @Field(() => Date, {nullable:false})
-    releasedAt!: Date | string;
+  @Field(() => Boolean, { nullable: false })
+  reprint!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    reprint!: boolean;
+  @Field(() => String, { nullable: false })
+  scryfallSetUri!: string;
 
-    @Field(() => String, {nullable:false})
-    scryfallSetUri!: string;
+  @Field(() => String, { nullable: false })
+  setCode!: string;
 
-    @Field(() => String, {nullable:false})
-    setCode!: string;
+  @Field(() => String, { nullable: false })
+  setName!: string;
 
-    @Field(() => String, {nullable:false})
-    setName!: string;
+  @Field(() => String, { nullable: false })
+  setSearchUri!: string;
 
-    @Field(() => String, {nullable:false})
-    setSearchUri!: string;
+  @Field(() => String, { nullable: false })
+  setType!: string;
 
-    @Field(() => String, {nullable:false})
-    setType!: string;
+  @Field(() => String, { nullable: false })
+  setUri!: string;
 
-    @Field(() => String, {nullable:false})
-    setUri!: string;
+  @Field(() => Boolean, { nullable: false })
+  storySpotlight!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    storySpotlight!: boolean;
+  @Field(() => Boolean, { nullable: false })
+  textless!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    textless!: boolean;
+  @Field(() => Boolean, { nullable: false })
+  variation!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    variation!: boolean;
+  @Field(() => String, { nullable: true })
+  varationOf?: string;
 
-    @Field(() => String, {nullable:true})
-    varationOf?: string;
+  @Field(() => String, { nullable: true })
+  securityStamp?: string;
 
-    @Field(() => String, {nullable:true})
-    securityStamp?: string;
+  @Field(() => String, { nullable: true })
+  watermark?: string;
 
-    @Field(() => String, {nullable:true})
-    watermark?: string;
+  @Field(() => String, { nullable: false })
+  setId!: string;
 
-    @Field(() => String, {nullable:false})
-    setId!: string;
+  @Field(() => ScryfallRelatedCardUncheckedCreateNestedManyWithoutCardInput, {
+    nullable: true,
+  })
+  relatedTo?: ScryfallRelatedCardUncheckedCreateNestedManyWithoutCardInput;
 
-    @Field(() => ScryfallRelatedCardUncheckedCreateNestedManyWithoutCardInput, {nullable:true})
-    relatedTo?: ScryfallRelatedCardUncheckedCreateNestedManyWithoutCardInput;
+  @Field(
+    () => ScryfallRelatedCardUncheckedCreateNestedManyWithoutReferenceInput,
+    { nullable: true },
+  )
+  referencedBy?: ScryfallRelatedCardUncheckedCreateNestedManyWithoutReferenceInput;
 
-    @Field(() => ScryfallRelatedCardUncheckedCreateNestedManyWithoutReferenceInput, {nullable:true})
-    referencedBy?: ScryfallRelatedCardUncheckedCreateNestedManyWithoutReferenceInput;
+  @Field(() => ScryfallCardFaceUncheckedCreateNestedManyWithoutCardInput, {
+    nullable: true,
+  })
+  cardFaces?: ScryfallCardFaceUncheckedCreateNestedManyWithoutCardInput;
 
-    @Field(() => ScryfallCardFaceUncheckedCreateNestedManyWithoutCardInput, {nullable:true})
-    cardFaces?: ScryfallCardFaceUncheckedCreateNestedManyWithoutCardInput;
-
-    @Field(() => ScryfallPriceUncheckedCreateNestedManyWithoutCardInput, {nullable:true})
-    scryfallPrice?: ScryfallPriceUncheckedCreateNestedManyWithoutCardInput;
+  @Field(() => ScryfallPriceUncheckedCreateNestedManyWithoutCardInput, {
+    nullable: true,
+  })
+  scryfallPrice?: ScryfallPriceUncheckedCreateNestedManyWithoutCardInput;
 }

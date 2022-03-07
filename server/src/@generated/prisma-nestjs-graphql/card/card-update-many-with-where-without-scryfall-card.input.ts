@@ -5,10 +5,9 @@ import { CardUpdateManyMutationInput } from './card-update-many-mutation.input';
 
 @InputType()
 export class CardUpdateManyWithWhereWithoutScryfallCardInput {
+  @Field(() => CardScalarWhereInput, { nullable: false })
+  where!: CardScalarWhereInput;
 
-    @Field(() => CardScalarWhereInput, {nullable:false})
-    where!: CardScalarWhereInput;
-
-    @Field(() => CardUpdateManyMutationInput, {nullable:false})
-    data!: CardUpdateManyMutationInput;
+  @Field(() => CardUpdateManyMutationInput, { nullable: false })
+  data!: CardUpdateManyMutationInput;
 }

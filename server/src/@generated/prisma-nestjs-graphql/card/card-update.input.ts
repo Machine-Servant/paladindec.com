@@ -9,31 +9,34 @@ import { CardsInCollectionUpdateManyWithoutCardInput } from '../cards-in-collect
 
 @InputType()
 export class CardUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    id?: StringFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdateOneRequiredWithoutCardInput, {
+    nullable: true,
+  })
+  scryfallCard?: ScryfallCardUpdateOneRequiredWithoutCardInput;
 
-    @Field(() => ScryfallCardUpdateOneRequiredWithoutCardInput, {nullable:true})
-    scryfallCard?: ScryfallCardUpdateOneRequiredWithoutCardInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  collectorNumber?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    collectorNumber?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isBorderless?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    isBorderless?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isShowcase?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    isShowcase?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isPaper?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    isPaper?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  canBeFoil?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    canBeFoil?: BoolFieldUpdateOperationsInput;
+  @Field(() => ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput, {
+    nullable: true,
+  })
+  currentPrice?: ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput;
 
-    @Field(() => ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput, {nullable:true})
-    currentPrice?: ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput;
-
-    @Field(() => CardsInCollectionUpdateManyWithoutCardInput, {nullable:true})
-    collections?: CardsInCollectionUpdateManyWithoutCardInput;
+  @Field(() => CardsInCollectionUpdateManyWithoutCardInput, { nullable: true })
+  collections?: CardsInCollectionUpdateManyWithoutCardInput;
 }

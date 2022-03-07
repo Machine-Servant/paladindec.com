@@ -6,19 +6,18 @@ import { NestedJsonFilter } from './nested-json-filter.input';
 
 @InputType()
 export class JsonWithAggregatesFilter {
+  @Field(() => GraphQLJSON, { nullable: true })
+  equals?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    equals?: any;
+  @Field(() => GraphQLJSON, { nullable: true })
+  not?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    not?: any;
+  @Field(() => NestedIntFilter, { nullable: true })
+  _count?: NestedIntFilter;
 
-    @Field(() => NestedIntFilter, {nullable:true})
-    _count?: NestedIntFilter;
+  @Field(() => NestedJsonFilter, { nullable: true })
+  _min?: NestedJsonFilter;
 
-    @Field(() => NestedJsonFilter, {nullable:true})
-    _min?: NestedJsonFilter;
-
-    @Field(() => NestedJsonFilter, {nullable:true})
-    _max?: NestedJsonFilter;
+  @Field(() => NestedJsonFilter, { nullable: true })
+  _max?: NestedJsonFilter;
 }

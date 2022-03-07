@@ -8,19 +8,18 @@ import { ScryfallSetMaxAggregate } from './scryfall-set-max-aggregate.output';
 
 @ObjectType()
 export class AggregateScryfallSet {
+  @Field(() => ScryfallSetCountAggregate, { nullable: true })
+  _count?: ScryfallSetCountAggregate;
 
-    @Field(() => ScryfallSetCountAggregate, {nullable:true})
-    _count?: ScryfallSetCountAggregate;
+  @Field(() => ScryfallSetAvgAggregate, { nullable: true })
+  _avg?: ScryfallSetAvgAggregate;
 
-    @Field(() => ScryfallSetAvgAggregate, {nullable:true})
-    _avg?: ScryfallSetAvgAggregate;
+  @Field(() => ScryfallSetSumAggregate, { nullable: true })
+  _sum?: ScryfallSetSumAggregate;
 
-    @Field(() => ScryfallSetSumAggregate, {nullable:true})
-    _sum?: ScryfallSetSumAggregate;
+  @Field(() => ScryfallSetMinAggregate, { nullable: true })
+  _min?: ScryfallSetMinAggregate;
 
-    @Field(() => ScryfallSetMinAggregate, {nullable:true})
-    _min?: ScryfallSetMinAggregate;
-
-    @Field(() => ScryfallSetMaxAggregate, {nullable:true})
-    _max?: ScryfallSetMaxAggregate;
+  @Field(() => ScryfallSetMaxAggregate, { nullable: true })
+  _max?: ScryfallSetMaxAggregate;
 }

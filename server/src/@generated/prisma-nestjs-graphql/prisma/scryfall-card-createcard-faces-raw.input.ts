@@ -4,7 +4,6 @@ import { GraphQLJSON } from 'graphql-type-json';
 
 @InputType()
 export class ScryfallCardCreatecardFacesRawInput {
-
-    @Field(() => [GraphQLJSON], {nullable:false})
-    set!: Array<any>;
+  @Field(() => [GraphQLJSON], { nullable: false })
+  set!: Array<any>;
 }

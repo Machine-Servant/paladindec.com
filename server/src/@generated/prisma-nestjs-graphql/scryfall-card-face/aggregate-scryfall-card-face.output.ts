@@ -8,19 +8,18 @@ import { ScryfallCardFaceMaxAggregate } from './scryfall-card-face-max-aggregate
 
 @ObjectType()
 export class AggregateScryfallCardFace {
+  @Field(() => ScryfallCardFaceCountAggregate, { nullable: true })
+  _count?: ScryfallCardFaceCountAggregate;
 
-    @Field(() => ScryfallCardFaceCountAggregate, {nullable:true})
-    _count?: ScryfallCardFaceCountAggregate;
+  @Field(() => ScryfallCardFaceAvgAggregate, { nullable: true })
+  _avg?: ScryfallCardFaceAvgAggregate;
 
-    @Field(() => ScryfallCardFaceAvgAggregate, {nullable:true})
-    _avg?: ScryfallCardFaceAvgAggregate;
+  @Field(() => ScryfallCardFaceSumAggregate, { nullable: true })
+  _sum?: ScryfallCardFaceSumAggregate;
 
-    @Field(() => ScryfallCardFaceSumAggregate, {nullable:true})
-    _sum?: ScryfallCardFaceSumAggregate;
+  @Field(() => ScryfallCardFaceMinAggregate, { nullable: true })
+  _min?: ScryfallCardFaceMinAggregate;
 
-    @Field(() => ScryfallCardFaceMinAggregate, {nullable:true})
-    _min?: ScryfallCardFaceMinAggregate;
-
-    @Field(() => ScryfallCardFaceMaxAggregate, {nullable:true})
-    _max?: ScryfallCardFaceMaxAggregate;
+  @Field(() => ScryfallCardFaceMaxAggregate, { nullable: true })
+  _max?: ScryfallCardFaceMaxAggregate;
 }

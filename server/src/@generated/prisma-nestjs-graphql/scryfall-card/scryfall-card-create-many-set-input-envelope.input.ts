@@ -4,10 +4,9 @@ import { ScryfallCardCreateManySetInput } from './scryfall-card-create-many-set.
 
 @InputType()
 export class ScryfallCardCreateManySetInputEnvelope {
+  @Field(() => [ScryfallCardCreateManySetInput], { nullable: false })
+  data!: Array<ScryfallCardCreateManySetInput>;
 
-    @Field(() => [ScryfallCardCreateManySetInput], {nullable:false})
-    data!: Array<ScryfallCardCreateManySetInput>;
-
-    @Field(() => Boolean, {nullable:true})
-    skipDuplicates?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  skipDuplicates?: boolean;
 }

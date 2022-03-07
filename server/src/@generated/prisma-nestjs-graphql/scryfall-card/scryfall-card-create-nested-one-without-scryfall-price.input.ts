@@ -6,13 +6,14 @@ import { ScryfallCardWhereUniqueInput } from './scryfall-card-where-unique.input
 
 @InputType()
 export class ScryfallCardCreateNestedOneWithoutScryfallPriceInput {
+  @Field(() => ScryfallCardCreateWithoutScryfallPriceInput, { nullable: true })
+  create?: ScryfallCardCreateWithoutScryfallPriceInput;
 
-    @Field(() => ScryfallCardCreateWithoutScryfallPriceInput, {nullable:true})
-    create?: ScryfallCardCreateWithoutScryfallPriceInput;
+  @Field(() => ScryfallCardCreateOrConnectWithoutScryfallPriceInput, {
+    nullable: true,
+  })
+  connectOrCreate?: ScryfallCardCreateOrConnectWithoutScryfallPriceInput;
 
-    @Field(() => ScryfallCardCreateOrConnectWithoutScryfallPriceInput, {nullable:true})
-    connectOrCreate?: ScryfallCardCreateOrConnectWithoutScryfallPriceInput;
-
-    @Field(() => ScryfallCardWhereUniqueInput, {nullable:true})
-    connect?: ScryfallCardWhereUniqueInput;
+  @Field(() => ScryfallCardWhereUniqueInput, { nullable: true })
+  connect?: ScryfallCardWhereUniqueInput;
 }

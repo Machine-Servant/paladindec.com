@@ -5,10 +5,9 @@ import { UserCreateWithoutCollectionsInput } from './user-create-without-collect
 
 @InputType()
 export class UserUpsertWithoutCollectionsInput {
+  @Field(() => UserUpdateWithoutCollectionsInput, { nullable: false })
+  update!: UserUpdateWithoutCollectionsInput;
 
-    @Field(() => UserUpdateWithoutCollectionsInput, {nullable:false})
-    update!: UserUpdateWithoutCollectionsInput;
-
-    @Field(() => UserCreateWithoutCollectionsInput, {nullable:false})
-    create!: UserCreateWithoutCollectionsInput;
+  @Field(() => UserCreateWithoutCollectionsInput, { nullable: false })
+  create!: UserCreateWithoutCollectionsInput;
 }

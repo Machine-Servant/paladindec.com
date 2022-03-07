@@ -4,13 +4,14 @@ import { CardsInCollectionCreateNestedManyWithoutCollectionInput } from '../card
 
 @InputType()
 export class CollectionCreateWithoutUserInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
 
-    @Field(() => String, {nullable:true})
-    id?: string;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-    @Field(() => String, {nullable:false})
-    name!: string;
-
-    @Field(() => CardsInCollectionCreateNestedManyWithoutCollectionInput, {nullable:true})
-    cards?: CardsInCollectionCreateNestedManyWithoutCollectionInput;
+  @Field(() => CardsInCollectionCreateNestedManyWithoutCollectionInput, {
+    nullable: true,
+  })
+  cards?: CardsInCollectionCreateNestedManyWithoutCollectionInput;
 }

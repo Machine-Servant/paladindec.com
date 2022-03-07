@@ -5,16 +5,15 @@ import { CollectionUpdateManyWithoutUserInput } from '../collection/collection-u
 
 @InputType()
 export class UserUpdateInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    id?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  externalAuthId?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    externalAuthId?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  email?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    email?: StringFieldUpdateOperationsInput;
-
-    @Field(() => CollectionUpdateManyWithoutUserInput, {nullable:true})
-    collections?: CollectionUpdateManyWithoutUserInput;
+  @Field(() => CollectionUpdateManyWithoutUserInput, { nullable: true })
+  collections?: CollectionUpdateManyWithoutUserInput;
 }

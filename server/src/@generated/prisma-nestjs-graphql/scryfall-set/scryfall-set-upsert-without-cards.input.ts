@@ -5,10 +5,9 @@ import { ScryfallSetCreateWithoutCardsInput } from './scryfall-set-create-withou
 
 @InputType()
 export class ScryfallSetUpsertWithoutCardsInput {
+  @Field(() => ScryfallSetUpdateWithoutCardsInput, { nullable: false })
+  update!: ScryfallSetUpdateWithoutCardsInput;
 
-    @Field(() => ScryfallSetUpdateWithoutCardsInput, {nullable:false})
-    update!: ScryfallSetUpdateWithoutCardsInput;
-
-    @Field(() => ScryfallSetCreateWithoutCardsInput, {nullable:false})
-    create!: ScryfallSetCreateWithoutCardsInput;
+  @Field(() => ScryfallSetCreateWithoutCardsInput, { nullable: false })
+  create!: ScryfallSetCreateWithoutCardsInput;
 }

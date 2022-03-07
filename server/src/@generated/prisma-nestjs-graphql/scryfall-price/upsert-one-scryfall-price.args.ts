@@ -6,13 +6,12 @@ import { ScryfallPriceUpdateInput } from './scryfall-price-update.input';
 
 @ArgsType()
 export class UpsertOneScryfallPriceArgs {
+  @Field(() => ScryfallPriceWhereUniqueInput, { nullable: false })
+  where!: ScryfallPriceWhereUniqueInput;
 
-    @Field(() => ScryfallPriceWhereUniqueInput, {nullable:false})
-    where!: ScryfallPriceWhereUniqueInput;
+  @Field(() => ScryfallPriceCreateInput, { nullable: false })
+  create!: ScryfallPriceCreateInput;
 
-    @Field(() => ScryfallPriceCreateInput, {nullable:false})
-    create!: ScryfallPriceCreateInput;
-
-    @Field(() => ScryfallPriceUpdateInput, {nullable:false})
-    update!: ScryfallPriceUpdateInput;
+  @Field(() => ScryfallPriceUpdateInput, { nullable: false })
+  update!: ScryfallPriceUpdateInput;
 }

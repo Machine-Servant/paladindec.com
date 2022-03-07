@@ -4,10 +4,9 @@ import { Int } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallCardUpdatemultiverseIdsInput {
+  @Field(() => [Int], { nullable: true })
+  set?: Array<number>;
 
-    @Field(() => [Int], {nullable:true})
-    set?: Array<number>;
-
-    @Field(() => [Int], {nullable:true})
-    push?: Array<number>;
+  @Field(() => [Int], { nullable: true })
+  push?: Array<number>;
 }

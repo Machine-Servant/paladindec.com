@@ -6,13 +6,12 @@ import { CardCreateWithoutScryfallCardInput } from './card-create-without-scryfa
 
 @InputType()
 export class CardUpsertWithWhereUniqueWithoutScryfallCardInput {
+  @Field(() => CardWhereUniqueInput, { nullable: false })
+  where!: CardWhereUniqueInput;
 
-    @Field(() => CardWhereUniqueInput, {nullable:false})
-    where!: CardWhereUniqueInput;
+  @Field(() => CardUpdateWithoutScryfallCardInput, { nullable: false })
+  update!: CardUpdateWithoutScryfallCardInput;
 
-    @Field(() => CardUpdateWithoutScryfallCardInput, {nullable:false})
-    update!: CardUpdateWithoutScryfallCardInput;
-
-    @Field(() => CardCreateWithoutScryfallCardInput, {nullable:false})
-    create!: CardCreateWithoutScryfallCardInput;
+  @Field(() => CardCreateWithoutScryfallCardInput, { nullable: false })
+  create!: CardCreateWithoutScryfallCardInput;
 }

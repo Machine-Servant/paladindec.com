@@ -4,13 +4,12 @@ import { ScryfallPriceWhereInput } from './scryfall-price-where.input';
 
 @InputType()
 export class ScryfallPriceListRelationFilter {
+  @Field(() => ScryfallPriceWhereInput, { nullable: true })
+  every?: ScryfallPriceWhereInput;
 
-    @Field(() => ScryfallPriceWhereInput, {nullable:true})
-    every?: ScryfallPriceWhereInput;
+  @Field(() => ScryfallPriceWhereInput, { nullable: true })
+  some?: ScryfallPriceWhereInput;
 
-    @Field(() => ScryfallPriceWhereInput, {nullable:true})
-    some?: ScryfallPriceWhereInput;
-
-    @Field(() => ScryfallPriceWhereInput, {nullable:true})
-    none?: ScryfallPriceWhereInput;
+  @Field(() => ScryfallPriceWhereInput, { nullable: true })
+  none?: ScryfallPriceWhereInput;
 }

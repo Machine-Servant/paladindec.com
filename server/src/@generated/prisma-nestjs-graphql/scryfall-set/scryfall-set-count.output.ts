@@ -4,7 +4,6 @@ import { Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class ScryfallSetCount {
-
-    @Field(() => Int, {nullable:false})
-    cards?: number;
+  @Field(() => Int, { nullable: false })
+  cards?: number;
 }

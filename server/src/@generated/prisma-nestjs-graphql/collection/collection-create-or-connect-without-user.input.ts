@@ -5,10 +5,9 @@ import { CollectionCreateWithoutUserInput } from './collection-create-without-us
 
 @InputType()
 export class CollectionCreateOrConnectWithoutUserInput {
+  @Field(() => CollectionWhereUniqueInput, { nullable: false })
+  where!: CollectionWhereUniqueInput;
 
-    @Field(() => CollectionWhereUniqueInput, {nullable:false})
-    where!: CollectionWhereUniqueInput;
-
-    @Field(() => CollectionCreateWithoutUserInput, {nullable:false})
-    create!: CollectionCreateWithoutUserInput;
+  @Field(() => CollectionCreateWithoutUserInput, { nullable: false })
+  create!: CollectionCreateWithoutUserInput;
 }
