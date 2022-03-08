@@ -8,31 +8,28 @@ import { ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput } from '../scryfal
 
 @InputType()
 export class CardUpdateWithoutCollectionsInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => ScryfallCardUpdateOneRequiredWithoutCardInput, {
-    nullable: true,
-  })
-  scryfallCard?: ScryfallCardUpdateOneRequiredWithoutCardInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  collectorNumber?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => ScryfallCardUpdateOneRequiredWithoutCardInput, {nullable:true})
+    scryfallCard?: ScryfallCardUpdateOneRequiredWithoutCardInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isBorderless?: BoolFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    collectorNumber?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isShowcase?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isBorderless?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isPaper?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isShowcase?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  canBeFoil?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isPaper?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput, {
-    nullable: true,
-  })
-  currentPrice?: ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    canBeFoil?: BoolFieldUpdateOperationsInput;
+
+    @Field(() => ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput, {nullable:true})
+    currentPrice?: ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput;
 }

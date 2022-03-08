@@ -8,20 +8,19 @@ import { ScryfallCardUpdateWithoutReferencedByInput } from './scryfall-card-upda
 
 @InputType()
 export class ScryfallCardUpdateOneRequiredWithoutReferencedByInput {
-  @Field(() => ScryfallCardCreateWithoutReferencedByInput, { nullable: true })
-  create?: ScryfallCardCreateWithoutReferencedByInput;
 
-  @Field(() => ScryfallCardCreateOrConnectWithoutReferencedByInput, {
-    nullable: true,
-  })
-  connectOrCreate?: ScryfallCardCreateOrConnectWithoutReferencedByInput;
+    @Field(() => ScryfallCardCreateWithoutReferencedByInput, {nullable:true})
+    create?: ScryfallCardCreateWithoutReferencedByInput;
 
-  @Field(() => ScryfallCardUpsertWithoutReferencedByInput, { nullable: true })
-  upsert?: ScryfallCardUpsertWithoutReferencedByInput;
+    @Field(() => ScryfallCardCreateOrConnectWithoutReferencedByInput, {nullable:true})
+    connectOrCreate?: ScryfallCardCreateOrConnectWithoutReferencedByInput;
 
-  @Field(() => ScryfallCardWhereUniqueInput, { nullable: true })
-  connect?: ScryfallCardWhereUniqueInput;
+    @Field(() => ScryfallCardUpsertWithoutReferencedByInput, {nullable:true})
+    upsert?: ScryfallCardUpsertWithoutReferencedByInput;
 
-  @Field(() => ScryfallCardUpdateWithoutReferencedByInput, { nullable: true })
-  update?: ScryfallCardUpdateWithoutReferencedByInput;
+    @Field(() => ScryfallCardWhereUniqueInput, {nullable:true})
+    connect?: ScryfallCardWhereUniqueInput;
+
+    @Field(() => ScryfallCardUpdateWithoutReferencedByInput, {nullable:true})
+    update?: ScryfallCardUpdateWithoutReferencedByInput;
 }

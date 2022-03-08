@@ -4,6 +4,7 @@ import { CollectionCreateInput } from './collection-create.input';
 
 @ArgsType()
 export class CreateOneCollectionArgs {
-  @Field(() => CollectionCreateInput, { nullable: false })
-  data!: CollectionCreateInput;
+
+    @Field(() => CollectionCreateInput, {nullable:false})
+    data!: CollectionCreateInput;
 }

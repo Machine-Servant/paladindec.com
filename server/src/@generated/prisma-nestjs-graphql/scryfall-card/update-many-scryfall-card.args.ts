@@ -5,9 +5,10 @@ import { ScryfallCardWhereInput } from './scryfall-card-where.input';
 
 @ArgsType()
 export class UpdateManyScryfallCardArgs {
-  @Field(() => ScryfallCardUpdateManyMutationInput, { nullable: false })
-  data!: ScryfallCardUpdateManyMutationInput;
 
-  @Field(() => ScryfallCardWhereInput, { nullable: true })
-  where?: ScryfallCardWhereInput;
+    @Field(() => ScryfallCardUpdateManyMutationInput, {nullable:false})
+    data!: ScryfallCardUpdateManyMutationInput;
+
+    @Field(() => ScryfallCardWhereInput, {nullable:true})
+    where?: ScryfallCardWhereInput;
 }

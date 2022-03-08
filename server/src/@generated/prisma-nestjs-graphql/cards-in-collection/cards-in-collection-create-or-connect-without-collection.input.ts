@@ -5,11 +5,10 @@ import { CardsInCollectionCreateWithoutCollectionInput } from './cards-in-collec
 
 @InputType()
 export class CardsInCollectionCreateOrConnectWithoutCollectionInput {
-  @Field(() => CardsInCollectionWhereUniqueInput, { nullable: false })
-  where!: CardsInCollectionWhereUniqueInput;
 
-  @Field(() => CardsInCollectionCreateWithoutCollectionInput, {
-    nullable: false,
-  })
-  create!: CardsInCollectionCreateWithoutCollectionInput;
+    @Field(() => CardsInCollectionWhereUniqueInput, {nullable:false})
+    where!: CardsInCollectionWhereUniqueInput;
+
+    @Field(() => CardsInCollectionCreateWithoutCollectionInput, {nullable:false})
+    create!: CardsInCollectionCreateWithoutCollectionInput;
 }

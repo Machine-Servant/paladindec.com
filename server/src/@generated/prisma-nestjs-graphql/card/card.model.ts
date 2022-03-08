@@ -8,36 +8,37 @@ import { CardCount } from './card-count.output';
 
 @ObjectType()
 export class Card {
-  @Field(() => ID, { nullable: false })
-  id!: string;
 
-  @Field(() => ScryfallCard, { nullable: false })
-  scryfallCard?: ScryfallCard;
+    @Field(() => ID, {nullable:false})
+    id!: string;
 
-  @Field(() => String, { nullable: false })
-  scryfallCardId!: string;
+    @Field(() => ScryfallCard, {nullable:false})
+    scryfallCard?: ScryfallCard;
 
-  @Field(() => String, { nullable: true })
-  collectorNumber!: string | null;
+    @Field(() => String, {nullable:false})
+    scryfallCardId!: string;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  isBorderless!: boolean;
+    @Field(() => String, {nullable:true})
+    collectorNumber!: string | null;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  isShowcase!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isBorderless!: boolean;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  isPaper!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isShowcase!: boolean;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  canBeFoil!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isPaper!: boolean;
 
-  @Field(() => ScryfallPrice, { nullable: true })
-  currentPrice?: ScryfallPrice | null;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    canBeFoil!: boolean;
 
-  @Field(() => [CardsInCollection], { nullable: true })
-  collections?: Array<CardsInCollection>;
+    @Field(() => ScryfallPrice, {nullable:true})
+    currentPrice?: ScryfallPrice | null;
 
-  @Field(() => CardCount, { nullable: false })
-  _count?: CardCount;
+    @Field(() => [CardsInCollection], {nullable:true})
+    collections?: Array<CardsInCollection>;
+
+    @Field(() => CardCount, {nullable:false})
+    _count?: CardCount;
 }

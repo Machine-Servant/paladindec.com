@@ -8,24 +8,25 @@ import { CardUpdateWithoutCurrentPriceInput } from './card-update-without-curren
 
 @InputType()
 export class CardUpdateOneWithoutCurrentPriceInput {
-  @Field(() => CardCreateWithoutCurrentPriceInput, { nullable: true })
-  create?: CardCreateWithoutCurrentPriceInput;
 
-  @Field(() => CardCreateOrConnectWithoutCurrentPriceInput, { nullable: true })
-  connectOrCreate?: CardCreateOrConnectWithoutCurrentPriceInput;
+    @Field(() => CardCreateWithoutCurrentPriceInput, {nullable:true})
+    create?: CardCreateWithoutCurrentPriceInput;
 
-  @Field(() => CardUpsertWithoutCurrentPriceInput, { nullable: true })
-  upsert?: CardUpsertWithoutCurrentPriceInput;
+    @Field(() => CardCreateOrConnectWithoutCurrentPriceInput, {nullable:true})
+    connectOrCreate?: CardCreateOrConnectWithoutCurrentPriceInput;
 
-  @Field(() => Boolean, { nullable: true })
-  disconnect?: boolean;
+    @Field(() => CardUpsertWithoutCurrentPriceInput, {nullable:true})
+    upsert?: CardUpsertWithoutCurrentPriceInput;
 
-  @Field(() => Boolean, { nullable: true })
-  delete?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    disconnect?: boolean;
 
-  @Field(() => CardWhereUniqueInput, { nullable: true })
-  connect?: CardWhereUniqueInput;
+    @Field(() => Boolean, {nullable:true})
+    delete?: boolean;
 
-  @Field(() => CardUpdateWithoutCurrentPriceInput, { nullable: true })
-  update?: CardUpdateWithoutCurrentPriceInput;
+    @Field(() => CardWhereUniqueInput, {nullable:true})
+    connect?: CardWhereUniqueInput;
+
+    @Field(() => CardUpdateWithoutCurrentPriceInput, {nullable:true})
+    update?: CardUpdateWithoutCurrentPriceInput;
 }

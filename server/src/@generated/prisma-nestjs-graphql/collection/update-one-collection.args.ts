@@ -5,9 +5,10 @@ import { CollectionWhereUniqueInput } from './collection-where-unique.input';
 
 @ArgsType()
 export class UpdateOneCollectionArgs {
-  @Field(() => CollectionUpdateInput, { nullable: false })
-  data!: CollectionUpdateInput;
 
-  @Field(() => CollectionWhereUniqueInput, { nullable: false })
-  where!: CollectionWhereUniqueInput;
+    @Field(() => CollectionUpdateInput, {nullable:false})
+    data!: CollectionUpdateInput;
+
+    @Field(() => CollectionWhereUniqueInput, {nullable:false})
+    where!: CollectionWhereUniqueInput;
 }

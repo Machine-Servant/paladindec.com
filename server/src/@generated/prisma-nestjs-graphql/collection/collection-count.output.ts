@@ -4,6 +4,7 @@ import { Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class CollectionCount {
-  @Field(() => Int, { nullable: false })
-  cards?: number;
+
+    @Field(() => Int, {nullable:false})
+    cards?: number;
 }

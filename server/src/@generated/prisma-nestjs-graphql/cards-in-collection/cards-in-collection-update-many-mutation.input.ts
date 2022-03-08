@@ -5,12 +5,13 @@ import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operat
 
 @InputType()
 export class CardsInCollectionUpdateManyMutationInput {
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isFoil?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isEtched?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isFoil?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => IntFieldUpdateOperationsInput, { nullable: true })
-  count?: IntFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isEtched?: BoolFieldUpdateOperationsInput;
+
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    count?: IntFieldUpdateOperationsInput;
 }

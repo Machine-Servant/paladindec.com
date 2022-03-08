@@ -8,21 +8,22 @@ import { CollectionScalarFieldEnum } from './collection-scalar-field.enum';
 
 @ArgsType()
 export class FindManyCollectionArgs {
-  @Field(() => CollectionWhereInput, { nullable: true })
-  where?: CollectionWhereInput;
 
-  @Field(() => [CollectionOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<CollectionOrderByWithRelationInput>;
+    @Field(() => CollectionWhereInput, {nullable:true})
+    where?: CollectionWhereInput;
 
-  @Field(() => CollectionWhereUniqueInput, { nullable: true })
-  cursor?: CollectionWhereUniqueInput;
+    @Field(() => [CollectionOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<CollectionOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => CollectionWhereUniqueInput, {nullable:true})
+    cursor?: CollectionWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => [CollectionScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof CollectionScalarFieldEnum>;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
+
+    @Field(() => [CollectionScalarFieldEnum], {nullable:true})
+    distinct?: Array<keyof typeof CollectionScalarFieldEnum>;
 }

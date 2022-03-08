@@ -5,9 +5,10 @@ import { CardCreateWithoutCollectionsInput } from './card-create-without-collect
 
 @InputType()
 export class CardUpsertWithoutCollectionsInput {
-  @Field(() => CardUpdateWithoutCollectionsInput, { nullable: false })
-  update!: CardUpdateWithoutCollectionsInput;
 
-  @Field(() => CardCreateWithoutCollectionsInput, { nullable: false })
-  create!: CardCreateWithoutCollectionsInput;
+    @Field(() => CardUpdateWithoutCollectionsInput, {nullable:false})
+    update!: CardUpdateWithoutCollectionsInput;
+
+    @Field(() => CardCreateWithoutCollectionsInput, {nullable:false})
+    create!: CardCreateWithoutCollectionsInput;
 }

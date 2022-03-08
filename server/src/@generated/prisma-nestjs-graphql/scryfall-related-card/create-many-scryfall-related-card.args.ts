@@ -4,9 +4,10 @@ import { ScryfallRelatedCardCreateManyInput } from './scryfall-related-card-crea
 
 @ArgsType()
 export class CreateManyScryfallRelatedCardArgs {
-  @Field(() => [ScryfallRelatedCardCreateManyInput], { nullable: false })
-  data!: Array<ScryfallRelatedCardCreateManyInput>;
 
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
+    @Field(() => [ScryfallRelatedCardCreateManyInput], {nullable:false})
+    data!: Array<ScryfallRelatedCardCreateManyInput>;
+
+    @Field(() => Boolean, {nullable:true})
+    skipDuplicates?: boolean;
 }

@@ -6,21 +6,22 @@ import { CollectionMaxAggregate } from './collection-max-aggregate.output';
 
 @ObjectType()
 export class CollectionGroupBy {
-  @Field(() => String, { nullable: false })
-  id!: string;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => String, {nullable:false})
+    id!: string;
 
-  @Field(() => String, { nullable: false })
-  userId!: string;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => CollectionCountAggregate, { nullable: true })
-  _count?: CollectionCountAggregate;
+    @Field(() => String, {nullable:false})
+    userId!: string;
 
-  @Field(() => CollectionMinAggregate, { nullable: true })
-  _min?: CollectionMinAggregate;
+    @Field(() => CollectionCountAggregate, {nullable:true})
+    _count?: CollectionCountAggregate;
 
-  @Field(() => CollectionMaxAggregate, { nullable: true })
-  _max?: CollectionMaxAggregate;
+    @Field(() => CollectionMinAggregate, {nullable:true})
+    _min?: CollectionMinAggregate;
+
+    @Field(() => CollectionMaxAggregate, {nullable:true})
+    _max?: CollectionMaxAggregate;
 }

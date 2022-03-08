@@ -5,9 +5,10 @@ import { ScryfallCardCreateWithoutRelatedToInput } from './scryfall-card-create-
 
 @InputType()
 export class ScryfallCardCreateOrConnectWithoutRelatedToInput {
-  @Field(() => ScryfallCardWhereUniqueInput, { nullable: false })
-  where!: ScryfallCardWhereUniqueInput;
 
-  @Field(() => ScryfallCardCreateWithoutRelatedToInput, { nullable: false })
-  create!: ScryfallCardCreateWithoutRelatedToInput;
+    @Field(() => ScryfallCardWhereUniqueInput, {nullable:false})
+    where!: ScryfallCardWhereUniqueInput;
+
+    @Field(() => ScryfallCardCreateWithoutRelatedToInput, {nullable:false})
+    create!: ScryfallCardCreateWithoutRelatedToInput;
 }

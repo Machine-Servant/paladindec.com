@@ -6,16 +6,13 @@ import { ScryfallRelatedCardCreateWithoutReferenceInput } from './scryfall-relat
 
 @InputType()
 export class ScryfallRelatedCardUpsertWithWhereUniqueWithoutReferenceInput {
-  @Field(() => ScryfallRelatedCardWhereUniqueInput, { nullable: false })
-  where!: ScryfallRelatedCardWhereUniqueInput;
 
-  @Field(() => ScryfallRelatedCardUpdateWithoutReferenceInput, {
-    nullable: false,
-  })
-  update!: ScryfallRelatedCardUpdateWithoutReferenceInput;
+    @Field(() => ScryfallRelatedCardWhereUniqueInput, {nullable:false})
+    where!: ScryfallRelatedCardWhereUniqueInput;
 
-  @Field(() => ScryfallRelatedCardCreateWithoutReferenceInput, {
-    nullable: false,
-  })
-  create!: ScryfallRelatedCardCreateWithoutReferenceInput;
+    @Field(() => ScryfallRelatedCardUpdateWithoutReferenceInput, {nullable:false})
+    update!: ScryfallRelatedCardUpdateWithoutReferenceInput;
+
+    @Field(() => ScryfallRelatedCardCreateWithoutReferenceInput, {nullable:false})
+    create!: ScryfallRelatedCardCreateWithoutReferenceInput;
 }

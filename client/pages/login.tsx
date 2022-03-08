@@ -1,9 +1,9 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { auth } from '../app/firebase.app';
+import { BasicLayout } from '../components/basic-layout';
 import { firebaseAuthUIConfig } from '../config/firebase-authui.config';
 
 const Login: React.FC = () => {
@@ -22,21 +22,20 @@ const Login: React.FC = () => {
   }
 
   if (user) {
-    router.push('/');
+    router.push('/user-home');
   }
 
   return (
-    <>
-      <Head>
-        <title>Login</title>
-      </Head>
-      <div>
-        <StyledFirebaseAuth
-          uiConfig={firebaseAuthUIConfig}
-          firebaseAuth={auth}
-        />
+    <BasicLayout title="login">
+      <div className="absolute flex items-center justify-center w-screen h-screen from-blue-500 to-blue-50 bg-gradient-to-b">
+        <div className="rounded-lg shadow-lg sm:p-8 bg-white-50 shadow-black-800">
+          <StyledFirebaseAuth
+            uiConfig={firebaseAuthUIConfig}
+            firebaseAuth={auth}
+          />
+        </div>
       </div>
-    </>
+    </BasicLayout>
   );
 };
 

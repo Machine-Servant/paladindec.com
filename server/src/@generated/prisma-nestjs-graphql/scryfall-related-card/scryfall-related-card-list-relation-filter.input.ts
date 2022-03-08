@@ -4,12 +4,13 @@ import { ScryfallRelatedCardWhereInput } from './scryfall-related-card-where.inp
 
 @InputType()
 export class ScryfallRelatedCardListRelationFilter {
-  @Field(() => ScryfallRelatedCardWhereInput, { nullable: true })
-  every?: ScryfallRelatedCardWhereInput;
 
-  @Field(() => ScryfallRelatedCardWhereInput, { nullable: true })
-  some?: ScryfallRelatedCardWhereInput;
+    @Field(() => ScryfallRelatedCardWhereInput, {nullable:true})
+    every?: ScryfallRelatedCardWhereInput;
 
-  @Field(() => ScryfallRelatedCardWhereInput, { nullable: true })
-  none?: ScryfallRelatedCardWhereInput;
+    @Field(() => ScryfallRelatedCardWhereInput, {nullable:true})
+    some?: ScryfallRelatedCardWhereInput;
+
+    @Field(() => ScryfallRelatedCardWhereInput, {nullable:true})
+    none?: ScryfallRelatedCardWhereInput;
 }

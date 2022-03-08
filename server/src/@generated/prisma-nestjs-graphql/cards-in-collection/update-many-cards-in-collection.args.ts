@@ -5,9 +5,10 @@ import { CardsInCollectionWhereInput } from './cards-in-collection-where.input';
 
 @ArgsType()
 export class UpdateManyCardsInCollectionArgs {
-  @Field(() => CardsInCollectionUpdateManyMutationInput, { nullable: false })
-  data!: CardsInCollectionUpdateManyMutationInput;
 
-  @Field(() => CardsInCollectionWhereInput, { nullable: true })
-  where?: CardsInCollectionWhereInput;
+    @Field(() => CardsInCollectionUpdateManyMutationInput, {nullable:false})
+    data!: CardsInCollectionUpdateManyMutationInput;
+
+    @Field(() => CardsInCollectionWhereInput, {nullable:true})
+    where?: CardsInCollectionWhereInput;
 }

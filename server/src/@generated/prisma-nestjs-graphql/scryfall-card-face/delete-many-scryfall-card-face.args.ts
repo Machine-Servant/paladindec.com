@@ -4,6 +4,7 @@ import { ScryfallCardFaceWhereInput } from './scryfall-card-face-where.input';
 
 @ArgsType()
 export class DeleteManyScryfallCardFaceArgs {
-  @Field(() => ScryfallCardFaceWhereInput, { nullable: true })
-  where?: ScryfallCardFaceWhereInput;
+
+    @Field(() => ScryfallCardFaceWhereInput, {nullable:true})
+    where?: ScryfallCardFaceWhereInput;
 }

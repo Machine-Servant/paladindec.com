@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallCardCreatefinishesInput {
-  @Field(() => [String], { nullable: false })
-  set!: Array<string>;
+
+    @Field(() => [String], {nullable:false})
+    set!: Array<string>;
 }

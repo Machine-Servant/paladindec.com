@@ -5,9 +5,10 @@ import { CollectionCreateWithoutCardsInput } from './collection-create-without-c
 
 @InputType()
 export class CollectionUpsertWithoutCardsInput {
-  @Field(() => CollectionUpdateWithoutCardsInput, { nullable: false })
-  update!: CollectionUpdateWithoutCardsInput;
 
-  @Field(() => CollectionCreateWithoutCardsInput, { nullable: false })
-  create!: CollectionCreateWithoutCardsInput;
+    @Field(() => CollectionUpdateWithoutCardsInput, {nullable:false})
+    update!: CollectionUpdateWithoutCardsInput;
+
+    @Field(() => CollectionCreateWithoutCardsInput, {nullable:false})
+    create!: CollectionCreateWithoutCardsInput;
 }

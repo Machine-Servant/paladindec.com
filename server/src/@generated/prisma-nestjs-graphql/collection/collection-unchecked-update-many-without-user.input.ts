@@ -11,42 +11,37 @@ import { CollectionScalarWhereInput } from './collection-scalar-where.input';
 
 @InputType()
 export class CollectionUncheckedUpdateManyWithoutUserInput {
-  @Field(() => [CollectionCreateWithoutUserInput], { nullable: true })
-  create?: Array<CollectionCreateWithoutUserInput>;
 
-  @Field(() => [CollectionCreateOrConnectWithoutUserInput], { nullable: true })
-  connectOrCreate?: Array<CollectionCreateOrConnectWithoutUserInput>;
+    @Field(() => [CollectionCreateWithoutUserInput], {nullable:true})
+    create?: Array<CollectionCreateWithoutUserInput>;
 
-  @Field(() => [CollectionUpsertWithWhereUniqueWithoutUserInput], {
-    nullable: true,
-  })
-  upsert?: Array<CollectionUpsertWithWhereUniqueWithoutUserInput>;
+    @Field(() => [CollectionCreateOrConnectWithoutUserInput], {nullable:true})
+    connectOrCreate?: Array<CollectionCreateOrConnectWithoutUserInput>;
 
-  @Field(() => CollectionCreateManyUserInputEnvelope, { nullable: true })
-  createMany?: CollectionCreateManyUserInputEnvelope;
+    @Field(() => [CollectionUpsertWithWhereUniqueWithoutUserInput], {nullable:true})
+    upsert?: Array<CollectionUpsertWithWhereUniqueWithoutUserInput>;
 
-  @Field(() => [CollectionWhereUniqueInput], { nullable: true })
-  set?: Array<CollectionWhereUniqueInput>;
+    @Field(() => CollectionCreateManyUserInputEnvelope, {nullable:true})
+    createMany?: CollectionCreateManyUserInputEnvelope;
 
-  @Field(() => [CollectionWhereUniqueInput], { nullable: true })
-  disconnect?: Array<CollectionWhereUniqueInput>;
+    @Field(() => [CollectionWhereUniqueInput], {nullable:true})
+    set?: Array<CollectionWhereUniqueInput>;
 
-  @Field(() => [CollectionWhereUniqueInput], { nullable: true })
-  delete?: Array<CollectionWhereUniqueInput>;
+    @Field(() => [CollectionWhereUniqueInput], {nullable:true})
+    disconnect?: Array<CollectionWhereUniqueInput>;
 
-  @Field(() => [CollectionWhereUniqueInput], { nullable: true })
-  connect?: Array<CollectionWhereUniqueInput>;
+    @Field(() => [CollectionWhereUniqueInput], {nullable:true})
+    delete?: Array<CollectionWhereUniqueInput>;
 
-  @Field(() => [CollectionUpdateWithWhereUniqueWithoutUserInput], {
-    nullable: true,
-  })
-  update?: Array<CollectionUpdateWithWhereUniqueWithoutUserInput>;
+    @Field(() => [CollectionWhereUniqueInput], {nullable:true})
+    connect?: Array<CollectionWhereUniqueInput>;
 
-  @Field(() => [CollectionUpdateManyWithWhereWithoutUserInput], {
-    nullable: true,
-  })
-  updateMany?: Array<CollectionUpdateManyWithWhereWithoutUserInput>;
+    @Field(() => [CollectionUpdateWithWhereUniqueWithoutUserInput], {nullable:true})
+    update?: Array<CollectionUpdateWithWhereUniqueWithoutUserInput>;
 
-  @Field(() => [CollectionScalarWhereInput], { nullable: true })
-  deleteMany?: Array<CollectionScalarWhereInput>;
+    @Field(() => [CollectionUpdateManyWithWhereWithoutUserInput], {nullable:true})
+    updateMany?: Array<CollectionUpdateManyWithWhereWithoutUserInput>;
+
+    @Field(() => [CollectionScalarWhereInput], {nullable:true})
+    deleteMany?: Array<CollectionScalarWhereInput>;
 }

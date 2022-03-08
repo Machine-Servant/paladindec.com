@@ -4,6 +4,9 @@ const nextConfig = {
   eslint: {
     dirs: ['pages'],
   },
+  images: {
+    domains: ['lh3.googleusercontent.com'],
+  },
 };
 
 module.exports = nextConfig;

@@ -4,12 +4,13 @@ import { ScryfallCardWhereInput } from './scryfall-card-where.input';
 
 @InputType()
 export class ScryfallCardListRelationFilter {
-  @Field(() => ScryfallCardWhereInput, { nullable: true })
-  every?: ScryfallCardWhereInput;
 
-  @Field(() => ScryfallCardWhereInput, { nullable: true })
-  some?: ScryfallCardWhereInput;
+    @Field(() => ScryfallCardWhereInput, {nullable:true})
+    every?: ScryfallCardWhereInput;
 
-  @Field(() => ScryfallCardWhereInput, { nullable: true })
-  none?: ScryfallCardWhereInput;
+    @Field(() => ScryfallCardWhereInput, {nullable:true})
+    some?: ScryfallCardWhereInput;
+
+    @Field(() => ScryfallCardWhereInput, {nullable:true})
+    none?: ScryfallCardWhereInput;
 }

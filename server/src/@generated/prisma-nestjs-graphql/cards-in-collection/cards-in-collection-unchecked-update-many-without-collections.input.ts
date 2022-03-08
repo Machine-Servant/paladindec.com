@@ -6,15 +6,16 @@ import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operat
 
 @InputType()
 export class CardsInCollectionUncheckedUpdateManyWithoutCollectionsInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  collectionId?: StringFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isFoil?: BoolFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    collectionId?: StringFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isEtched?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isFoil?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => IntFieldUpdateOperationsInput, { nullable: true })
-  count?: IntFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isEtched?: BoolFieldUpdateOperationsInput;
+
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    count?: IntFieldUpdateOperationsInput;
 }

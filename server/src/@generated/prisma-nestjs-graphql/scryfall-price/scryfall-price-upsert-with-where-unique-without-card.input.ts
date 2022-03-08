@@ -6,12 +6,13 @@ import { ScryfallPriceCreateWithoutCardInput } from './scryfall-price-create-wit
 
 @InputType()
 export class ScryfallPriceUpsertWithWhereUniqueWithoutCardInput {
-  @Field(() => ScryfallPriceWhereUniqueInput, { nullable: false })
-  where!: ScryfallPriceWhereUniqueInput;
 
-  @Field(() => ScryfallPriceUpdateWithoutCardInput, { nullable: false })
-  update!: ScryfallPriceUpdateWithoutCardInput;
+    @Field(() => ScryfallPriceWhereUniqueInput, {nullable:false})
+    where!: ScryfallPriceWhereUniqueInput;
 
-  @Field(() => ScryfallPriceCreateWithoutCardInput, { nullable: false })
-  create!: ScryfallPriceCreateWithoutCardInput;
+    @Field(() => ScryfallPriceUpdateWithoutCardInput, {nullable:false})
+    update!: ScryfallPriceUpdateWithoutCardInput;
+
+    @Field(() => ScryfallPriceCreateWithoutCardInput, {nullable:false})
+    create!: ScryfallPriceCreateWithoutCardInput;
 }

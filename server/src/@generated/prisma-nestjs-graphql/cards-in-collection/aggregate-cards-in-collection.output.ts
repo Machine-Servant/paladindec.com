@@ -8,18 +8,19 @@ import { CardsInCollectionMaxAggregate } from './cards-in-collection-max-aggrega
 
 @ObjectType()
 export class AggregateCardsInCollection {
-  @Field(() => CardsInCollectionCountAggregate, { nullable: true })
-  _count?: CardsInCollectionCountAggregate;
 
-  @Field(() => CardsInCollectionAvgAggregate, { nullable: true })
-  _avg?: CardsInCollectionAvgAggregate;
+    @Field(() => CardsInCollectionCountAggregate, {nullable:true})
+    _count?: CardsInCollectionCountAggregate;
 
-  @Field(() => CardsInCollectionSumAggregate, { nullable: true })
-  _sum?: CardsInCollectionSumAggregate;
+    @Field(() => CardsInCollectionAvgAggregate, {nullable:true})
+    _avg?: CardsInCollectionAvgAggregate;
 
-  @Field(() => CardsInCollectionMinAggregate, { nullable: true })
-  _min?: CardsInCollectionMinAggregate;
+    @Field(() => CardsInCollectionSumAggregate, {nullable:true})
+    _sum?: CardsInCollectionSumAggregate;
 
-  @Field(() => CardsInCollectionMaxAggregate, { nullable: true })
-  _max?: CardsInCollectionMaxAggregate;
+    @Field(() => CardsInCollectionMinAggregate, {nullable:true})
+    _min?: CardsInCollectionMinAggregate;
+
+    @Field(() => CardsInCollectionMaxAggregate, {nullable:true})
+    _max?: CardsInCollectionMaxAggregate;
 }

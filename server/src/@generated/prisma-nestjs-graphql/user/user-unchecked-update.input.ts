@@ -5,17 +5,16 @@ import { CollectionUncheckedUpdateManyWithoutUserInput } from '../collection/col
 
 @InputType()
 export class UserUncheckedUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  externalAuthId?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  email?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    externalAuthId?: StringFieldUpdateOperationsInput;
 
-  @Field(() => CollectionUncheckedUpdateManyWithoutUserInput, {
-    nullable: true,
-  })
-  collections?: CollectionUncheckedUpdateManyWithoutUserInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    email?: StringFieldUpdateOperationsInput;
+
+    @Field(() => CollectionUncheckedUpdateManyWithoutUserInput, {nullable:true})
+    collections?: CollectionUncheckedUpdateManyWithoutUserInput;
 }

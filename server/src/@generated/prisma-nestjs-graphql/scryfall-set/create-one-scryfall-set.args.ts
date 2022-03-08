@@ -4,6 +4,7 @@ import { ScryfallSetCreateInput } from './scryfall-set-create.input';
 
 @ArgsType()
 export class CreateOneScryfallSetArgs {
-  @Field(() => ScryfallSetCreateInput, { nullable: false })
-  data!: ScryfallSetCreateInput;
+
+    @Field(() => ScryfallSetCreateInput, {nullable:false})
+    data!: ScryfallSetCreateInput;
 }

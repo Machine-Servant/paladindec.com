@@ -4,6 +4,7 @@ import { ScryfallSetWhereInput } from './scryfall-set-where.input';
 
 @ArgsType()
 export class DeleteManyScryfallSetArgs {
-  @Field(() => ScryfallSetWhereInput, { nullable: true })
-  where?: ScryfallSetWhereInput;
+
+    @Field(() => ScryfallSetWhereInput, {nullable:true})
+    where?: ScryfallSetWhereInput;
 }
