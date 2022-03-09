@@ -4,11 +4,10 @@ import { ScryfallRelatedCardCreateManyReferenceInput } from './scryfall-related-
 
 @InputType()
 export class ScryfallRelatedCardCreateManyReferenceInputEnvelope {
-  @Field(() => [ScryfallRelatedCardCreateManyReferenceInput], {
-    nullable: false,
-  })
-  data!: Array<ScryfallRelatedCardCreateManyReferenceInput>;
 
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
+    @Field(() => [ScryfallRelatedCardCreateManyReferenceInput], {nullable:false})
+    data!: Array<ScryfallRelatedCardCreateManyReferenceInput>;
+
+    @Field(() => Boolean, {nullable:true})
+    skipDuplicates?: boolean;
 }

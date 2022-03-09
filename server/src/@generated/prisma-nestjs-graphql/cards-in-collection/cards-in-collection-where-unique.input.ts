@@ -4,8 +4,7 @@ import { CardsInCollectionCardIdCollectionIdCompoundUniqueInput } from './cards-
 
 @InputType()
 export class CardsInCollectionWhereUniqueInput {
-  @Field(() => CardsInCollectionCardIdCollectionIdCompoundUniqueInput, {
-    nullable: true,
-  })
-  cardId_collectionId?: CardsInCollectionCardIdCollectionIdCompoundUniqueInput;
+
+    @Field(() => CardsInCollectionCardIdCollectionIdCompoundUniqueInput, {nullable:true})
+    cardId_collectionId?: CardsInCollectionCardIdCollectionIdCompoundUniqueInput;
 }

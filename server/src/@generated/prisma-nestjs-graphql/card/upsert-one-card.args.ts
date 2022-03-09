@@ -6,12 +6,13 @@ import { CardUpdateInput } from './card-update.input';
 
 @ArgsType()
 export class UpsertOneCardArgs {
-  @Field(() => CardWhereUniqueInput, { nullable: false })
-  where!: CardWhereUniqueInput;
 
-  @Field(() => CardCreateInput, { nullable: false })
-  create!: CardCreateInput;
+    @Field(() => CardWhereUniqueInput, {nullable:false})
+    where!: CardWhereUniqueInput;
 
-  @Field(() => CardUpdateInput, { nullable: false })
-  update!: CardUpdateInput;
+    @Field(() => CardCreateInput, {nullable:false})
+    create!: CardCreateInput;
+
+    @Field(() => CardUpdateInput, {nullable:false})
+    update!: CardUpdateInput;
 }

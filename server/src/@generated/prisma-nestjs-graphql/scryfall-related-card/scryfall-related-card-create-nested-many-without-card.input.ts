@@ -7,19 +7,16 @@ import { ScryfallRelatedCardWhereUniqueInput } from './scryfall-related-card-whe
 
 @InputType()
 export class ScryfallRelatedCardCreateNestedManyWithoutCardInput {
-  @Field(() => [ScryfallRelatedCardCreateWithoutCardInput], { nullable: true })
-  create?: Array<ScryfallRelatedCardCreateWithoutCardInput>;
 
-  @Field(() => [ScryfallRelatedCardCreateOrConnectWithoutCardInput], {
-    nullable: true,
-  })
-  connectOrCreate?: Array<ScryfallRelatedCardCreateOrConnectWithoutCardInput>;
+    @Field(() => [ScryfallRelatedCardCreateWithoutCardInput], {nullable:true})
+    create?: Array<ScryfallRelatedCardCreateWithoutCardInput>;
 
-  @Field(() => ScryfallRelatedCardCreateManyCardInputEnvelope, {
-    nullable: true,
-  })
-  createMany?: ScryfallRelatedCardCreateManyCardInputEnvelope;
+    @Field(() => [ScryfallRelatedCardCreateOrConnectWithoutCardInput], {nullable:true})
+    connectOrCreate?: Array<ScryfallRelatedCardCreateOrConnectWithoutCardInput>;
 
-  @Field(() => [ScryfallRelatedCardWhereUniqueInput], { nullable: true })
-  connect?: Array<ScryfallRelatedCardWhereUniqueInput>;
+    @Field(() => ScryfallRelatedCardCreateManyCardInputEnvelope, {nullable:true})
+    createMany?: ScryfallRelatedCardCreateManyCardInputEnvelope;
+
+    @Field(() => [ScryfallRelatedCardWhereUniqueInput], {nullable:true})
+    connect?: Array<ScryfallRelatedCardWhereUniqueInput>;
 }

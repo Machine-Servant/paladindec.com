@@ -7,42 +7,43 @@ import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 
 @InputType()
 export class ScryfallPriceScalarWhereInput {
-  @Field(() => [ScryfallPriceScalarWhereInput], { nullable: true })
-  AND?: Array<ScryfallPriceScalarWhereInput>;
 
-  @Field(() => [ScryfallPriceScalarWhereInput], { nullable: true })
-  OR?: Array<ScryfallPriceScalarWhereInput>;
+    @Field(() => [ScryfallPriceScalarWhereInput], {nullable:true})
+    AND?: Array<ScryfallPriceScalarWhereInput>;
 
-  @Field(() => [ScryfallPriceScalarWhereInput], { nullable: true })
-  NOT?: Array<ScryfallPriceScalarWhereInput>;
+    @Field(() => [ScryfallPriceScalarWhereInput], {nullable:true})
+    OR?: Array<ScryfallPriceScalarWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  id?: StringFilter;
+    @Field(() => [ScryfallPriceScalarWhereInput], {nullable:true})
+    NOT?: Array<ScryfallPriceScalarWhereInput>;
 
-  @Field(() => DateTimeFilter, { nullable: true })
-  date?: DateTimeFilter;
+    @Field(() => StringFilter, {nullable:true})
+    id?: StringFilter;
 
-  @Field(() => FloatNullableFilter, { nullable: true })
-  eur?: FloatNullableFilter;
+    @Field(() => DateTimeFilter, {nullable:true})
+    date?: DateTimeFilter;
 
-  @Field(() => FloatNullableFilter, { nullable: true })
-  tix?: FloatNullableFilter;
+    @Field(() => FloatNullableFilter, {nullable:true})
+    eur?: FloatNullableFilter;
 
-  @Field(() => FloatNullableFilter, { nullable: true })
-  usd?: FloatNullableFilter;
+    @Field(() => FloatNullableFilter, {nullable:true})
+    tix?: FloatNullableFilter;
 
-  @Field(() => FloatNullableFilter, { nullable: true })
-  eurFoil?: FloatNullableFilter;
+    @Field(() => FloatNullableFilter, {nullable:true})
+    usd?: FloatNullableFilter;
 
-  @Field(() => FloatNullableFilter, { nullable: true })
-  usdFoil?: FloatNullableFilter;
+    @Field(() => FloatNullableFilter, {nullable:true})
+    eurFoil?: FloatNullableFilter;
 
-  @Field(() => FloatNullableFilter, { nullable: true })
-  usdEtched?: FloatNullableFilter;
+    @Field(() => FloatNullableFilter, {nullable:true})
+    usdFoil?: FloatNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  cardId?: StringFilter;
+    @Field(() => FloatNullableFilter, {nullable:true})
+    usdEtched?: FloatNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  currentPriceOfCardId?: StringNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    cardId?: StringFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    currentPriceOfCardId?: StringNullableFilter;
 }

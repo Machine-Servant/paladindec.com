@@ -11,6 +11,9 @@ export class CardCountAggregate {
   scryfallCardId!: number;
 
   @Field(() => Int, { nullable: false })
+  name!: number;
+
+  @Field(() => Int, { nullable: false })
   collectorNumber!: number;
 
   @Field(() => Int, { nullable: false })
@@ -21,6 +24,9 @@ export class CardCountAggregate {
 
   @Field(() => Int, { nullable: false })
   isPaper!: number;
+
+  @Field(() => Int, { nullable: false })
+  isEtched!: number;
 
   @Field(() => Int, { nullable: false })
   canBeFoil!: number;

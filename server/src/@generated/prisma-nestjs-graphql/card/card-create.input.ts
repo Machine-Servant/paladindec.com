@@ -12,6 +12,9 @@ export class CardCreateInput {
   @Field(() => ScryfallCardCreateNestedOneWithoutCardInput, { nullable: false })
   scryfallCard!: ScryfallCardCreateNestedOneWithoutCardInput;
 
+  @Field(() => String, { nullable: false })
+  name!: string;
+
   @Field(() => String, { nullable: true })
   collectorNumber?: string;
 
@@ -23,6 +26,9 @@ export class CardCreateInput {
 
   @Field(() => Boolean, { nullable: true })
   isPaper?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: boolean;
 
   @Field(() => Boolean, { nullable: true })
   canBeFoil?: boolean;

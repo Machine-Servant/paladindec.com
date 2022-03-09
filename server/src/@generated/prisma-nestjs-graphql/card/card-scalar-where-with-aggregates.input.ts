@@ -21,6 +21,9 @@ export class CardScalarWhereWithAggregatesInput {
   @Field(() => StringWithAggregatesFilter, { nullable: true })
   scryfallCardId?: StringWithAggregatesFilter;
 
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  name?: StringWithAggregatesFilter;
+
   @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
   collectorNumber?: StringNullableWithAggregatesFilter;
 
@@ -32,6 +35,9 @@ export class CardScalarWhereWithAggregatesInput {
 
   @Field(() => BoolWithAggregatesFilter, { nullable: true })
   isPaper?: BoolWithAggregatesFilter;
+
+  @Field(() => BoolWithAggregatesFilter, { nullable: true })
+  isEtched?: BoolWithAggregatesFilter;
 
   @Field(() => BoolWithAggregatesFilter, { nullable: true })
   canBeFoil?: BoolWithAggregatesFilter;

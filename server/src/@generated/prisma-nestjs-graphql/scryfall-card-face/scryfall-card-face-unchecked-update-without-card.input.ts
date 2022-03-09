@@ -9,66 +9,67 @@ import { GraphQLJSON } from 'graphql-type-json';
 
 @InputType()
 export class ScryfallCardFaceUncheckedUpdateWithoutCardInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  artist?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => NullableFloatFieldUpdateOperationsInput, { nullable: true })
-  cmc?: NullableFloatFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    artist?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => ScryfallCardFaceUpdatecolorIndicatorInput, { nullable: true })
-  colorIndicator?: ScryfallCardFaceUpdatecolorIndicatorInput;
+    @Field(() => NullableFloatFieldUpdateOperationsInput, {nullable:true})
+    cmc?: NullableFloatFieldUpdateOperationsInput;
 
-  @Field(() => ScryfallCardFaceUpdatecolorsInput, { nullable: true })
-  colors?: ScryfallCardFaceUpdatecolorsInput;
+    @Field(() => ScryfallCardFaceUpdatecolorIndicatorInput, {nullable:true})
+    colorIndicator?: ScryfallCardFaceUpdatecolorIndicatorInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  flavorText?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => ScryfallCardFaceUpdatecolorsInput, {nullable:true})
+    colors?: ScryfallCardFaceUpdatecolorsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  illustrationId?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    flavorText?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => GraphQLJSON, { nullable: true })
-  imageUris?: any;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    illustrationId?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  layout?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => GraphQLJSON, {nullable:true})
+    imageUris?: any;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  loyalty?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    layout?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  manaCost?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    loyalty?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  name?: StringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    manaCost?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  oracleId?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    name?: StringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  oracleText?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    oracleId?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  power?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    oracleText?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  printedName?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    power?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  printedText?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    printedName?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  printedTypeLine?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    printedText?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  toughness?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    printedTypeLine?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  typeLine?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    toughness?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  watermark?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    typeLine?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    watermark?: NullableStringFieldUpdateOperationsInput;
 }

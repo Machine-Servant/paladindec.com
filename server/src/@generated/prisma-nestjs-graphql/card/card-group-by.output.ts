@@ -12,6 +12,9 @@ export class CardGroupBy {
   @Field(() => String, { nullable: false })
   scryfallCardId!: string;
 
+  @Field(() => String, { nullable: false })
+  name!: string;
+
   @Field(() => String, { nullable: true })
   collectorNumber?: string;
 
@@ -23,6 +26,9 @@ export class CardGroupBy {
 
   @Field(() => Boolean, { nullable: false })
   isPaper!: boolean;
+
+  @Field(() => Boolean, { nullable: false })
+  isEtched!: boolean;
 
   @Field(() => Boolean, { nullable: false })
   canBeFoil!: boolean;

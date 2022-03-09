@@ -6,33 +6,34 @@ import { ScryfallRelatedCardMaxAggregate } from './scryfall-related-card-max-agg
 
 @ObjectType()
 export class ScryfallRelatedCardGroupBy {
-  @Field(() => String, { nullable: false })
-  id!: string;
 
-  @Field(() => String, { nullable: false })
-  referenceId!: string;
+    @Field(() => String, {nullable:false})
+    id!: string;
 
-  @Field(() => String, { nullable: false })
-  cardId!: string;
+    @Field(() => String, {nullable:false})
+    referenceId!: string;
 
-  @Field(() => String, { nullable: false })
-  component!: string;
+    @Field(() => String, {nullable:false})
+    cardId!: string;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => String, {nullable:false})
+    component!: string;
 
-  @Field(() => String, { nullable: false })
-  typeLine!: string;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => String, { nullable: false })
-  uri!: string;
+    @Field(() => String, {nullable:false})
+    typeLine!: string;
 
-  @Field(() => ScryfallRelatedCardCountAggregate, { nullable: true })
-  _count?: ScryfallRelatedCardCountAggregate;
+    @Field(() => String, {nullable:false})
+    uri!: string;
 
-  @Field(() => ScryfallRelatedCardMinAggregate, { nullable: true })
-  _min?: ScryfallRelatedCardMinAggregate;
+    @Field(() => ScryfallRelatedCardCountAggregate, {nullable:true})
+    _count?: ScryfallRelatedCardCountAggregate;
 
-  @Field(() => ScryfallRelatedCardMaxAggregate, { nullable: true })
-  _max?: ScryfallRelatedCardMaxAggregate;
+    @Field(() => ScryfallRelatedCardMinAggregate, {nullable:true})
+    _min?: ScryfallRelatedCardMinAggregate;
+
+    @Field(() => ScryfallRelatedCardMaxAggregate, {nullable:true})
+    _max?: ScryfallRelatedCardMaxAggregate;
 }

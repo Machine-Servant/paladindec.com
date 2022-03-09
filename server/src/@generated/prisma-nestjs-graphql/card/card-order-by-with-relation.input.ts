@@ -17,6 +17,9 @@ export class CardOrderByWithRelationInput {
   scryfallCardId?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
+  name?: keyof typeof SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
   collectorNumber?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
@@ -27,6 +30,9 @@ export class CardOrderByWithRelationInput {
 
   @Field(() => SortOrder, { nullable: true })
   isPaper?: keyof typeof SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
+  isEtched?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
   canBeFoil?: keyof typeof SortOrder;

@@ -5,9 +5,10 @@ import { ScryfallPriceWhereUniqueInput } from './scryfall-price-where-unique.inp
 
 @ArgsType()
 export class UpdateOneScryfallPriceArgs {
-  @Field(() => ScryfallPriceUpdateInput, { nullable: false })
-  data!: ScryfallPriceUpdateInput;
 
-  @Field(() => ScryfallPriceWhereUniqueInput, { nullable: false })
-  where!: ScryfallPriceWhereUniqueInput;
+    @Field(() => ScryfallPriceUpdateInput, {nullable:false})
+    data!: ScryfallPriceUpdateInput;
+
+    @Field(() => ScryfallPriceWhereUniqueInput, {nullable:false})
+    where!: ScryfallPriceWhereUniqueInput;
 }

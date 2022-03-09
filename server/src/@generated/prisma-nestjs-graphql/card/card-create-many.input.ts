@@ -9,6 +9,9 @@ export class CardCreateManyInput {
   @Field(() => String, { nullable: false })
   scryfallCardId!: string;
 
+  @Field(() => String, { nullable: false })
+  name!: string;
+
   @Field(() => String, { nullable: true })
   collectorNumber?: string;
 
@@ -20,6 +23,9 @@ export class CardCreateManyInput {
 
   @Field(() => Boolean, { nullable: true })
   isPaper?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: boolean;
 
   @Field(() => Boolean, { nullable: true })
   canBeFoil?: boolean;

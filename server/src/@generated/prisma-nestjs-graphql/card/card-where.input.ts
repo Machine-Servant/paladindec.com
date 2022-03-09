@@ -27,6 +27,9 @@ export class CardWhereInput {
   @Field(() => StringFilter, { nullable: true })
   scryfallCardId?: StringFilter;
 
+  @Field(() => StringFilter, { nullable: true })
+  name?: StringFilter;
+
   @Field(() => StringNullableFilter, { nullable: true })
   collectorNumber?: StringNullableFilter;
 
@@ -38,6 +41,9 @@ export class CardWhereInput {
 
   @Field(() => BoolFilter, { nullable: true })
   isPaper?: BoolFilter;
+
+  @Field(() => BoolFilter, { nullable: true })
+  isEtched?: BoolFilter;
 
   @Field(() => BoolFilter, { nullable: true })
   canBeFoil?: BoolFilter;

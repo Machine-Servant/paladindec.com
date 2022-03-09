@@ -16,6 +16,9 @@ export class CardUpdateWithoutCollectionsInput {
   })
   scryfallCard?: ScryfallCardUpdateOneRequiredWithoutCardInput;
 
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  name?: StringFieldUpdateOperationsInput;
+
   @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
   collectorNumber?: NullableStringFieldUpdateOperationsInput;
 
@@ -27,6 +30,9 @@ export class CardUpdateWithoutCollectionsInput {
 
   @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
   isPaper?: BoolFieldUpdateOperationsInput;
+
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isEtched?: BoolFieldUpdateOperationsInput;
 
   @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
   canBeFoil?: BoolFieldUpdateOperationsInput;

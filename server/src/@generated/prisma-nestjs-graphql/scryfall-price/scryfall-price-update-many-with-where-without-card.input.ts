@@ -5,9 +5,10 @@ import { ScryfallPriceUpdateManyMutationInput } from './scryfall-price-update-ma
 
 @InputType()
 export class ScryfallPriceUpdateManyWithWhereWithoutCardInput {
-  @Field(() => ScryfallPriceScalarWhereInput, { nullable: false })
-  where!: ScryfallPriceScalarWhereInput;
 
-  @Field(() => ScryfallPriceUpdateManyMutationInput, { nullable: false })
-  data!: ScryfallPriceUpdateManyMutationInput;
+    @Field(() => ScryfallPriceScalarWhereInput, {nullable:false})
+    where!: ScryfallPriceScalarWhereInput;
+
+    @Field(() => ScryfallPriceUpdateManyMutationInput, {nullable:false})
+    data!: ScryfallPriceUpdateManyMutationInput;
 }

@@ -4,18 +4,19 @@ import { Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class CardsInCollectionMaxAggregate {
-  @Field(() => String, { nullable: true })
-  cardId?: string;
 
-  @Field(() => String, { nullable: true })
-  collectionId?: string;
+    @Field(() => String, {nullable:true})
+    cardId?: string;
 
-  @Field(() => Boolean, { nullable: true })
-  isFoil?: boolean;
+    @Field(() => String, {nullable:true})
+    collectionId?: string;
 
-  @Field(() => Boolean, { nullable: true })
-  isEtched?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    isFoil?: boolean;
 
-  @Field(() => Int, { nullable: true })
-  count?: number;
+    @Field(() => Boolean, {nullable:true})
+    isEtched?: boolean;
+
+    @Field(() => Int, {nullable:true})
+    count?: number;
 }

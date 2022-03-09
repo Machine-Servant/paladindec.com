@@ -6,20 +6,19 @@ import { CardsInCollectionOrderByRelationAggregateInput } from '../cards-in-coll
 
 @InputType()
 export class CollectionOrderByWithRelationInput {
-  @Field(() => SortOrder, { nullable: true })
-  id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  name?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    id?: keyof typeof SortOrder;
 
-  @Field(() => UserOrderByWithRelationInput, { nullable: true })
-  user?: UserOrderByWithRelationInput;
+    @Field(() => SortOrder, {nullable:true})
+    name?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  userId?: keyof typeof SortOrder;
+    @Field(() => UserOrderByWithRelationInput, {nullable:true})
+    user?: UserOrderByWithRelationInput;
 
-  @Field(() => CardsInCollectionOrderByRelationAggregateInput, {
-    nullable: true,
-  })
-  cards?: CardsInCollectionOrderByRelationAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    userId?: keyof typeof SortOrder;
+
+    @Field(() => CardsInCollectionOrderByRelationAggregateInput, {nullable:true})
+    cards?: CardsInCollectionOrderByRelationAggregateInput;
 }

@@ -8,21 +8,22 @@ import { ScryfallPriceScalarFieldEnum } from './scryfall-price-scalar-field.enum
 
 @ArgsType()
 export class FindManyScryfallPriceArgs {
-  @Field(() => ScryfallPriceWhereInput, { nullable: true })
-  where?: ScryfallPriceWhereInput;
 
-  @Field(() => [ScryfallPriceOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<ScryfallPriceOrderByWithRelationInput>;
+    @Field(() => ScryfallPriceWhereInput, {nullable:true})
+    where?: ScryfallPriceWhereInput;
 
-  @Field(() => ScryfallPriceWhereUniqueInput, { nullable: true })
-  cursor?: ScryfallPriceWhereUniqueInput;
+    @Field(() => [ScryfallPriceOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<ScryfallPriceOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => ScryfallPriceWhereUniqueInput, {nullable:true})
+    cursor?: ScryfallPriceWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => [ScryfallPriceScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof ScryfallPriceScalarFieldEnum>;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
+
+    @Field(() => [ScryfallPriceScalarFieldEnum], {nullable:true})
+    distinct?: Array<keyof typeof ScryfallPriceScalarFieldEnum>;
 }

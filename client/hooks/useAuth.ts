@@ -33,6 +33,12 @@ export const useAuth = () => {
     return () => unsubscribe();
   }, [handleIdTokenChanged]);
 
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('paladindeck:token', token);
+    }
+  }, [token]);
+
   return {
     user,
     loading,

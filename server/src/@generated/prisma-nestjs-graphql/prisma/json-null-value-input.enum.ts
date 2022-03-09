@@ -1,10 +1,8 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum JsonNullValueInput {
-  JsonNull = 'JsonNull',
+    JsonNull = "JsonNull"
 }
 
-registerEnumType(JsonNullValueInput, {
-  name: 'JsonNullValueInput',
-  description: undefined,
-});
+
+registerEnumType(JsonNullValueInput, { name: 'JsonNullValueInput', description: undefined })

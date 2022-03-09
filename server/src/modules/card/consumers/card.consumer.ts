@@ -43,6 +43,7 @@ export class CardConsumer {
                 );
               if (currentPrice) {
                 return await this.cardService.upsert({
+                  name: card.name,
                   scryfallCard: { connect: { id: card.id } },
                   currentPrice: { connect: { id: currentPrice.id } },
                   isBorderless: card.frameEffects.includes('borderless'),
@@ -50,6 +51,7 @@ export class CardConsumer {
                   isPaper: card.games.includes('paper'),
                   collectorNumber: card.collectorNumber,
                   canBeFoil: card.finishes.includes('foil'),
+                  isEtched: card.finishes.includes('etched'),
                 });
               }
               return;

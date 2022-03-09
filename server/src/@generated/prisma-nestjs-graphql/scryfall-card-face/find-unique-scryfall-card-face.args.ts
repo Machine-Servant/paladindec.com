@@ -4,6 +4,7 @@ import { ScryfallCardFaceWhereUniqueInput } from './scryfall-card-face-where-uni
 
 @ArgsType()
 export class FindUniqueScryfallCardFaceArgs {
-  @Field(() => ScryfallCardFaceWhereUniqueInput, { nullable: false })
-  where!: ScryfallCardFaceWhereUniqueInput;
+
+    @Field(() => ScryfallCardFaceWhereUniqueInput, {nullable:false})
+    where!: ScryfallCardFaceWhereUniqueInput;
 }

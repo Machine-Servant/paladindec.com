@@ -8,18 +8,19 @@ import { CardUpdateWithoutCollectionsInput } from './card-update-without-collect
 
 @InputType()
 export class CardUpdateOneRequiredWithoutCollectionsInput {
-  @Field(() => CardCreateWithoutCollectionsInput, { nullable: true })
-  create?: CardCreateWithoutCollectionsInput;
 
-  @Field(() => CardCreateOrConnectWithoutCollectionsInput, { nullable: true })
-  connectOrCreate?: CardCreateOrConnectWithoutCollectionsInput;
+    @Field(() => CardCreateWithoutCollectionsInput, {nullable:true})
+    create?: CardCreateWithoutCollectionsInput;
 
-  @Field(() => CardUpsertWithoutCollectionsInput, { nullable: true })
-  upsert?: CardUpsertWithoutCollectionsInput;
+    @Field(() => CardCreateOrConnectWithoutCollectionsInput, {nullable:true})
+    connectOrCreate?: CardCreateOrConnectWithoutCollectionsInput;
 
-  @Field(() => CardWhereUniqueInput, { nullable: true })
-  connect?: CardWhereUniqueInput;
+    @Field(() => CardUpsertWithoutCollectionsInput, {nullable:true})
+    upsert?: CardUpsertWithoutCollectionsInput;
 
-  @Field(() => CardUpdateWithoutCollectionsInput, { nullable: true })
-  update?: CardUpdateWithoutCollectionsInput;
+    @Field(() => CardWhereUniqueInput, {nullable:true})
+    connect?: CardWhereUniqueInput;
+
+    @Field(() => CardUpdateWithoutCollectionsInput, {nullable:true})
+    update?: CardUpdateWithoutCollectionsInput;
 }

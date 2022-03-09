@@ -4,9 +4,10 @@ import { CardsInCollectionCreateManyInput } from './cards-in-collection-create-m
 
 @ArgsType()
 export class CreateManyCardsInCollectionArgs {
-  @Field(() => [CardsInCollectionCreateManyInput], { nullable: false })
-  data!: Array<CardsInCollectionCreateManyInput>;
 
-  @Field(() => Boolean, { nullable: true })
-  skipDuplicates?: boolean;
+    @Field(() => [CardsInCollectionCreateManyInput], {nullable:false})
+    data!: Array<CardsInCollectionCreateManyInput>;
+
+    @Field(() => Boolean, {nullable:true})
+    skipDuplicates?: boolean;
 }

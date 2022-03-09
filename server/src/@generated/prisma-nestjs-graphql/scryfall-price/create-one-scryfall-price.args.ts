@@ -4,6 +4,7 @@ import { ScryfallPriceCreateInput } from './scryfall-price-create.input';
 
 @ArgsType()
 export class CreateOneScryfallPriceArgs {
-  @Field(() => ScryfallPriceCreateInput, { nullable: false })
-  data!: ScryfallPriceCreateInput;
+
+    @Field(() => ScryfallPriceCreateInput, {nullable:false})
+    data!: ScryfallPriceCreateInput;
 }

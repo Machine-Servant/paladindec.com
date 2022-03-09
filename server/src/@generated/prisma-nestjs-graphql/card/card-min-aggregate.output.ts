@@ -10,6 +10,9 @@ export class CardMinAggregate {
   scryfallCardId?: string;
 
   @Field(() => String, { nullable: true })
+  name?: string;
+
+  @Field(() => String, { nullable: true })
   collectorNumber?: string;
 
   @Field(() => Boolean, { nullable: true })
@@ -20,6 +23,9 @@ export class CardMinAggregate {
 
   @Field(() => Boolean, { nullable: true })
   isPaper?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: boolean;
 
   @Field(() => Boolean, { nullable: true })
   canBeFoil?: boolean;

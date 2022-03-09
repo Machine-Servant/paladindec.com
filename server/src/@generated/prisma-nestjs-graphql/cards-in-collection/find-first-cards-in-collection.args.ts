@@ -8,21 +8,22 @@ import { CardsInCollectionScalarFieldEnum } from './cards-in-collection-scalar-f
 
 @ArgsType()
 export class FindFirstCardsInCollectionArgs {
-  @Field(() => CardsInCollectionWhereInput, { nullable: true })
-  where?: CardsInCollectionWhereInput;
 
-  @Field(() => [CardsInCollectionOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<CardsInCollectionOrderByWithRelationInput>;
+    @Field(() => CardsInCollectionWhereInput, {nullable:true})
+    where?: CardsInCollectionWhereInput;
 
-  @Field(() => CardsInCollectionWhereUniqueInput, { nullable: true })
-  cursor?: CardsInCollectionWhereUniqueInput;
+    @Field(() => [CardsInCollectionOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<CardsInCollectionOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => CardsInCollectionWhereUniqueInput, {nullable:true})
+    cursor?: CardsInCollectionWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => [CardsInCollectionScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof CardsInCollectionScalarFieldEnum>;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
+
+    @Field(() => [CardsInCollectionScalarFieldEnum], {nullable:true})
+    distinct?: Array<keyof typeof CardsInCollectionScalarFieldEnum>;
 }

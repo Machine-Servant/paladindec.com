@@ -4,9 +4,10 @@ import { ScryfallSetWhereInput } from './scryfall-set-where.input';
 
 @InputType()
 export class ScryfallSetRelationFilter {
-  @Field(() => ScryfallSetWhereInput, { nullable: true })
-  is?: ScryfallSetWhereInput;
 
-  @Field(() => ScryfallSetWhereInput, { nullable: true })
-  isNot?: ScryfallSetWhereInput;
+    @Field(() => ScryfallSetWhereInput, {nullable:true})
+    is?: ScryfallSetWhereInput;
+
+    @Field(() => ScryfallSetWhereInput, {nullable:true})
+    isNot?: ScryfallSetWhereInput;
 }

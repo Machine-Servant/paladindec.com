@@ -8,18 +8,19 @@ import { ScryfallPriceMaxAggregate } from './scryfall-price-max-aggregate.output
 
 @ObjectType()
 export class AggregateScryfallPrice {
-  @Field(() => ScryfallPriceCountAggregate, { nullable: true })
-  _count?: ScryfallPriceCountAggregate;
 
-  @Field(() => ScryfallPriceAvgAggregate, { nullable: true })
-  _avg?: ScryfallPriceAvgAggregate;
+    @Field(() => ScryfallPriceCountAggregate, {nullable:true})
+    _count?: ScryfallPriceCountAggregate;
 
-  @Field(() => ScryfallPriceSumAggregate, { nullable: true })
-  _sum?: ScryfallPriceSumAggregate;
+    @Field(() => ScryfallPriceAvgAggregate, {nullable:true})
+    _avg?: ScryfallPriceAvgAggregate;
 
-  @Field(() => ScryfallPriceMinAggregate, { nullable: true })
-  _min?: ScryfallPriceMinAggregate;
+    @Field(() => ScryfallPriceSumAggregate, {nullable:true})
+    _sum?: ScryfallPriceSumAggregate;
 
-  @Field(() => ScryfallPriceMaxAggregate, { nullable: true })
-  _max?: ScryfallPriceMaxAggregate;
+    @Field(() => ScryfallPriceMinAggregate, {nullable:true})
+    _min?: ScryfallPriceMinAggregate;
+
+    @Field(() => ScryfallPriceMaxAggregate, {nullable:true})
+    _max?: ScryfallPriceMaxAggregate;
 }

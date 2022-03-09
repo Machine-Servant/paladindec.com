@@ -5,11 +5,10 @@ import { ScryfallPriceCreateWithoutCurrentPriceOfCardInput } from './scryfall-pr
 
 @InputType()
 export class ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput {
-  @Field(() => ScryfallPriceWhereUniqueInput, { nullable: false })
-  where!: ScryfallPriceWhereUniqueInput;
 
-  @Field(() => ScryfallPriceCreateWithoutCurrentPriceOfCardInput, {
-    nullable: false,
-  })
-  create!: ScryfallPriceCreateWithoutCurrentPriceOfCardInput;
+    @Field(() => ScryfallPriceWhereUniqueInput, {nullable:false})
+    where!: ScryfallPriceWhereUniqueInput;
+
+    @Field(() => ScryfallPriceCreateWithoutCurrentPriceOfCardInput, {nullable:false})
+    create!: ScryfallPriceCreateWithoutCurrentPriceOfCardInput;
 }

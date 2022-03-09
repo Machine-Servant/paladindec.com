@@ -11,46 +11,37 @@ import { ScryfallRelatedCardScalarWhereInput } from './scryfall-related-card-sca
 
 @InputType()
 export class ScryfallRelatedCardUpdateManyWithoutCardInput {
-  @Field(() => [ScryfallRelatedCardCreateWithoutCardInput], { nullable: true })
-  create?: Array<ScryfallRelatedCardCreateWithoutCardInput>;
 
-  @Field(() => [ScryfallRelatedCardCreateOrConnectWithoutCardInput], {
-    nullable: true,
-  })
-  connectOrCreate?: Array<ScryfallRelatedCardCreateOrConnectWithoutCardInput>;
+    @Field(() => [ScryfallRelatedCardCreateWithoutCardInput], {nullable:true})
+    create?: Array<ScryfallRelatedCardCreateWithoutCardInput>;
 
-  @Field(() => [ScryfallRelatedCardUpsertWithWhereUniqueWithoutCardInput], {
-    nullable: true,
-  })
-  upsert?: Array<ScryfallRelatedCardUpsertWithWhereUniqueWithoutCardInput>;
+    @Field(() => [ScryfallRelatedCardCreateOrConnectWithoutCardInput], {nullable:true})
+    connectOrCreate?: Array<ScryfallRelatedCardCreateOrConnectWithoutCardInput>;
 
-  @Field(() => ScryfallRelatedCardCreateManyCardInputEnvelope, {
-    nullable: true,
-  })
-  createMany?: ScryfallRelatedCardCreateManyCardInputEnvelope;
+    @Field(() => [ScryfallRelatedCardUpsertWithWhereUniqueWithoutCardInput], {nullable:true})
+    upsert?: Array<ScryfallRelatedCardUpsertWithWhereUniqueWithoutCardInput>;
 
-  @Field(() => [ScryfallRelatedCardWhereUniqueInput], { nullable: true })
-  set?: Array<ScryfallRelatedCardWhereUniqueInput>;
+    @Field(() => ScryfallRelatedCardCreateManyCardInputEnvelope, {nullable:true})
+    createMany?: ScryfallRelatedCardCreateManyCardInputEnvelope;
 
-  @Field(() => [ScryfallRelatedCardWhereUniqueInput], { nullable: true })
-  disconnect?: Array<ScryfallRelatedCardWhereUniqueInput>;
+    @Field(() => [ScryfallRelatedCardWhereUniqueInput], {nullable:true})
+    set?: Array<ScryfallRelatedCardWhereUniqueInput>;
 
-  @Field(() => [ScryfallRelatedCardWhereUniqueInput], { nullable: true })
-  delete?: Array<ScryfallRelatedCardWhereUniqueInput>;
+    @Field(() => [ScryfallRelatedCardWhereUniqueInput], {nullable:true})
+    disconnect?: Array<ScryfallRelatedCardWhereUniqueInput>;
 
-  @Field(() => [ScryfallRelatedCardWhereUniqueInput], { nullable: true })
-  connect?: Array<ScryfallRelatedCardWhereUniqueInput>;
+    @Field(() => [ScryfallRelatedCardWhereUniqueInput], {nullable:true})
+    delete?: Array<ScryfallRelatedCardWhereUniqueInput>;
 
-  @Field(() => [ScryfallRelatedCardUpdateWithWhereUniqueWithoutCardInput], {
-    nullable: true,
-  })
-  update?: Array<ScryfallRelatedCardUpdateWithWhereUniqueWithoutCardInput>;
+    @Field(() => [ScryfallRelatedCardWhereUniqueInput], {nullable:true})
+    connect?: Array<ScryfallRelatedCardWhereUniqueInput>;
 
-  @Field(() => [ScryfallRelatedCardUpdateManyWithWhereWithoutCardInput], {
-    nullable: true,
-  })
-  updateMany?: Array<ScryfallRelatedCardUpdateManyWithWhereWithoutCardInput>;
+    @Field(() => [ScryfallRelatedCardUpdateWithWhereUniqueWithoutCardInput], {nullable:true})
+    update?: Array<ScryfallRelatedCardUpdateWithWhereUniqueWithoutCardInput>;
 
-  @Field(() => [ScryfallRelatedCardScalarWhereInput], { nullable: true })
-  deleteMany?: Array<ScryfallRelatedCardScalarWhereInput>;
+    @Field(() => [ScryfallRelatedCardUpdateManyWithWhereWithoutCardInput], {nullable:true})
+    updateMany?: Array<ScryfallRelatedCardUpdateManyWithWhereWithoutCardInput>;
+
+    @Field(() => [ScryfallRelatedCardScalarWhereInput], {nullable:true})
+    deleteMany?: Array<ScryfallRelatedCardScalarWhereInput>;
 }

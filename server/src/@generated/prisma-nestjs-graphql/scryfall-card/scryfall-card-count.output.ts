@@ -4,18 +4,19 @@ import { Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class ScryfallCardCount {
-  @Field(() => Int, { nullable: false })
-  relatedTo?: number;
 
-  @Field(() => Int, { nullable: false })
-  referencedBy?: number;
+    @Field(() => Int, {nullable:false})
+    relatedTo?: number;
 
-  @Field(() => Int, { nullable: false })
-  cardFaces?: number;
+    @Field(() => Int, {nullable:false})
+    referencedBy?: number;
 
-  @Field(() => Int, { nullable: false })
-  scryfallPrice?: number;
+    @Field(() => Int, {nullable:false})
+    cardFaces?: number;
 
-  @Field(() => Int, { nullable: false })
-  card?: number;
+    @Field(() => Int, {nullable:false})
+    scryfallPrice?: number;
+
+    @Field(() => Int, {nullable:false})
+    card?: number;
 }

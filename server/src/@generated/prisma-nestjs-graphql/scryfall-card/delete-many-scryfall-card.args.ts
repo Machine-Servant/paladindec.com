@@ -4,6 +4,7 @@ import { ScryfallCardWhereInput } from './scryfall-card-where.input';
 
 @ArgsType()
 export class DeleteManyScryfallCardArgs {
-  @Field(() => ScryfallCardWhereInput, { nullable: true })
-  where?: ScryfallCardWhereInput;
+
+    @Field(() => ScryfallCardWhereInput, {nullable:true})
+    where?: ScryfallCardWhereInput;
 }

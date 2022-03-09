@@ -61,8 +61,10 @@ type Card {
   currentPrice: ScryfallPrice!
   id: ID!
   isBorderless: Boolean!
+  isEtched: Boolean!
   isPaper: Boolean!
   isShowcase: Boolean!
+  name: String!
   scryfallCard: ScryfallCard!
   scryfallCardId: String!
 }
@@ -88,8 +90,10 @@ input CardOrderByWithRelationInput {
   currentPrice: ScryfallPriceOrderByWithRelationInput
   id: SortOrder
   isBorderless: SortOrder
+  isEtched: SortOrder
   isPaper: SortOrder
   isShowcase: SortOrder
+  name: SortOrder
   scryfallCard: ScryfallCardOrderByWithRelationInput
   scryfallCardId: SortOrder
 }
@@ -104,8 +108,10 @@ enum CardScalarFieldEnum {
   collectorNumber
   id
   isBorderless
+  isEtched
   isPaper
   isShowcase
+  name
   scryfallCardId
 }
 
@@ -119,8 +125,10 @@ input CardWhereInput {
   currentPrice: ScryfallPriceRelationFilter
   id: StringFilter
   isBorderless: BoolFilter
+  isEtched: BoolFilter
   isPaper: BoolFilter
   isShowcase: BoolFilter
+  name: StringFilter
   scryfallCard: ScryfallCardRelationFilter
   scryfallCardId: StringFilter
 }
@@ -401,6 +409,7 @@ type Mutation {
   processAllParts: Boolean!
   processBulkData: Boolean!
   processCardFaces: Boolean!
+  processCardNames: Boolean!
   processDaily: Boolean!
   processPriceData: Boolean!
   processSetData: Boolean!
@@ -569,6 +578,7 @@ type Query {
   allBulkData: [BulkDataObjectType!]!
   allCards(cursor: CardWhereUniqueInput, distinct: [CardScalarFieldEnum!], orderBy: [CardOrderByWithRelationInput!], skip: Int, take: Int, where: CardWhereInput): [Card!]!
   allCollections(cursor: CollectionWhereUniqueInput, distinct: [CollectionScalarFieldEnum!], orderBy: [CollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CollectionWhereInput): [Collection!]!
+  allScryfallCardNames(cursor: ScryfallCardNameWhereUniqueInput, distinct: [ScryfallCardNameScalarFieldEnum!], orderBy: [ScryfallCardNameOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardNameWhereInput): [ScryfallCardName!]!
   allScryfallCards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
   allScryfallPrices(cursor: ScryfallPriceWhereUniqueInput, distinct: [ScryfallPriceScalarFieldEnum!], orderBy: [ScryfallPriceOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPrice!]!
   allScryfallSets(cursor: ScryfallSetWhereUniqueInput, distinct: [ScryfallSetScalarFieldEnum!], orderBy: [ScryfallSetOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallSetWhereInput): [ScryfallSet!]!
@@ -745,6 +755,34 @@ input ScryfallCardListRelationFilter {
   every: ScryfallCardWhereInput
   none: ScryfallCardWhereInput
   some: ScryfallCardWhereInput
+}
+
+type ScryfallCardName {
+  id: ID!
+  name: String!
+}
+
+input ScryfallCardNameOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+}
+
+enum ScryfallCardNameScalarFieldEnum {
+  id
+  name
+}
+
+input ScryfallCardNameWhereInput {
+  AND: [ScryfallCardNameWhereInput!]
+  NOT: [ScryfallCardNameWhereInput!]
+  OR: [ScryfallCardNameWhereInput!]
+  id: StringFilter
+  name: StringFilter
+}
+
+input ScryfallCardNameWhereUniqueInput {
+  id: String
+  name: String
 }
 
 input ScryfallCardOrderByRelationAggregateInput {

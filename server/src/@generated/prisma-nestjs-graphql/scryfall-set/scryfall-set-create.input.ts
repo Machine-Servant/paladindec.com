@@ -5,66 +5,67 @@ import { ScryfallCardCreateNestedManyWithoutSetInput } from '../scryfall-card/sc
 
 @InputType()
 export class ScryfallSetCreateInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => String, { nullable: false })
-  code!: string;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => String, { nullable: true })
-  mtgoCode?: string;
+    @Field(() => String, {nullable:false})
+    code!: string;
 
-  @Field(() => String, { nullable: true })
-  arenaCode?: string;
+    @Field(() => String, {nullable:true})
+    mtgoCode?: string;
 
-  @Field(() => Int, { nullable: true })
-  tcgPlayerId?: number;
+    @Field(() => String, {nullable:true})
+    arenaCode?: string;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => Int, {nullable:true})
+    tcgPlayerId?: number;
 
-  @Field(() => String, { nullable: false })
-  setType!: string;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => Date, { nullable: true })
-  releasedAt?: Date | string;
+    @Field(() => String, {nullable:false})
+    setType!: string;
 
-  @Field(() => String, { nullable: true })
-  blockCode?: string;
+    @Field(() => Date, {nullable:true})
+    releasedAt?: Date | string;
 
-  @Field(() => String, { nullable: true })
-  block?: string;
+    @Field(() => String, {nullable:true})
+    blockCode?: string;
 
-  @Field(() => String, { nullable: true })
-  parentSetCode?: string;
+    @Field(() => String, {nullable:true})
+    block?: string;
 
-  @Field(() => Int, { nullable: false })
-  cardCount!: number;
+    @Field(() => String, {nullable:true})
+    parentSetCode?: string;
 
-  @Field(() => Int, { nullable: true })
-  printedSize?: number;
+    @Field(() => Int, {nullable:false})
+    cardCount!: number;
 
-  @Field(() => Boolean, { nullable: false })
-  isDigital!: boolean;
+    @Field(() => Int, {nullable:true})
+    printedSize?: number;
 
-  @Field(() => Boolean, { nullable: false })
-  isFoilOnly!: boolean;
+    @Field(() => Boolean, {nullable:false})
+    isDigital!: boolean;
 
-  @Field(() => Boolean, { nullable: false })
-  isNonFoilOnly!: boolean;
+    @Field(() => Boolean, {nullable:false})
+    isFoilOnly!: boolean;
 
-  @Field(() => String, { nullable: false })
-  scryfallUri!: string;
+    @Field(() => Boolean, {nullable:false})
+    isNonFoilOnly!: boolean;
 
-  @Field(() => String, { nullable: false })
-  uri!: string;
+    @Field(() => String, {nullable:false})
+    scryfallUri!: string;
 
-  @Field(() => String, { nullable: false })
-  iconSvgUri!: string;
+    @Field(() => String, {nullable:false})
+    uri!: string;
 
-  @Field(() => String, { nullable: false })
-  searchUri!: string;
+    @Field(() => String, {nullable:false})
+    iconSvgUri!: string;
 
-  @Field(() => ScryfallCardCreateNestedManyWithoutSetInput, { nullable: true })
-  cards?: ScryfallCardCreateNestedManyWithoutSetInput;
+    @Field(() => String, {nullable:false})
+    searchUri!: string;
+
+    @Field(() => ScryfallCardCreateNestedManyWithoutSetInput, {nullable:true})
+    cards?: ScryfallCardCreateNestedManyWithoutSetInput;
 }

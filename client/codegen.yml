@@ -1,0 +1,17 @@
+schema: ${SCHEMA_PATH}
+documents:
+  - './components/**/*.graphql'
+  - './fragments/**/*.graphql'
+generates:
+  ./@types/codegen/fragments.ts:
+    plugins:
+      - fragment-matcher
+    config:
+      useExplicitTyping: true
+  ./@types/codegen/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      withHooks: true

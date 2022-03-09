@@ -17,6 +17,9 @@ export class Card {
   @Field(() => String, { nullable: false })
   scryfallCardId!: string;
 
+  @Field(() => String, { nullable: false })
+  name!: string;
+
   @Field(() => String, { nullable: true })
   collectorNumber!: string | null;
 
@@ -28,6 +31,9 @@ export class Card {
 
   @Field(() => Boolean, { nullable: false, defaultValue: false })
   isPaper!: boolean;
+
+  @Field(() => Boolean, { nullable: false, defaultValue: false })
+  isEtched!: boolean;
 
   @Field(() => Boolean, { nullable: false, defaultValue: false })
   canBeFoil!: boolean;

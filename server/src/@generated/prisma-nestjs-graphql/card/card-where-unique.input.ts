@@ -3,9 +3,10 @@ import { InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CardWhereUniqueInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => String, { nullable: true })
-  scryfallCardId?: string;
+    @Field(() => String, {nullable:true})
+    id?: string;
+
+    @Field(() => String, {nullable:true})
+    scryfallCardId?: string;
 }

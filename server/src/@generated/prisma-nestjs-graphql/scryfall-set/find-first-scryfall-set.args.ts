@@ -8,21 +8,22 @@ import { ScryfallSetScalarFieldEnum } from './scryfall-set-scalar-field.enum';
 
 @ArgsType()
 export class FindFirstScryfallSetArgs {
-  @Field(() => ScryfallSetWhereInput, { nullable: true })
-  where?: ScryfallSetWhereInput;
 
-  @Field(() => [ScryfallSetOrderByWithRelationInput], { nullable: true })
-  orderBy?: Array<ScryfallSetOrderByWithRelationInput>;
+    @Field(() => ScryfallSetWhereInput, {nullable:true})
+    where?: ScryfallSetWhereInput;
 
-  @Field(() => ScryfallSetWhereUniqueInput, { nullable: true })
-  cursor?: ScryfallSetWhereUniqueInput;
+    @Field(() => [ScryfallSetOrderByWithRelationInput], {nullable:true})
+    orderBy?: Array<ScryfallSetOrderByWithRelationInput>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => ScryfallSetWhereUniqueInput, {nullable:true})
+    cursor?: ScryfallSetWhereUniqueInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => [ScryfallSetScalarFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof ScryfallSetScalarFieldEnum>;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
+
+    @Field(() => [ScryfallSetScalarFieldEnum], {nullable:true})
+    distinct?: Array<keyof typeof ScryfallSetScalarFieldEnum>;
 }

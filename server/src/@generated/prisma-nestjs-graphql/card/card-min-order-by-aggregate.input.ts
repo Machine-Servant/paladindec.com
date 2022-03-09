@@ -11,6 +11,9 @@ export class CardMinOrderByAggregateInput {
   scryfallCardId?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
+  name?: keyof typeof SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
   collectorNumber?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
@@ -21,6 +24,9 @@ export class CardMinOrderByAggregateInput {
 
   @Field(() => SortOrder, { nullable: true })
   isPaper?: keyof typeof SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
+  isEtched?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
   canBeFoil?: keyof typeof SortOrder;

@@ -5,17 +5,16 @@ import { CardsInCollectionUncheckedUpdateManyWithoutCollectionInput } from '../c
 
 @InputType()
 export class CollectionUncheckedUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  name?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  userId?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    name?: StringFieldUpdateOperationsInput;
 
-  @Field(() => CardsInCollectionUncheckedUpdateManyWithoutCollectionInput, {
-    nullable: true,
-  })
-  cards?: CardsInCollectionUncheckedUpdateManyWithoutCollectionInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    userId?: StringFieldUpdateOperationsInput;
+
+    @Field(() => CardsInCollectionUncheckedUpdateManyWithoutCollectionInput, {nullable:true})
+    cards?: CardsInCollectionUncheckedUpdateManyWithoutCollectionInput;
 }

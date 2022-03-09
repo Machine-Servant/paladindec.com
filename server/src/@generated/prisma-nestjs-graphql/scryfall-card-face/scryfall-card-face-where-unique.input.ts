@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallCardFaceWhereUniqueInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
+
+    @Field(() => String, {nullable:true})
+    id?: string;
 }

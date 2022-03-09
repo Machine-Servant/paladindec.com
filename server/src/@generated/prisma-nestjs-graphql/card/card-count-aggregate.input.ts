@@ -10,6 +10,9 @@ export class CardCountAggregateInput {
   scryfallCardId?: true;
 
   @Field(() => Boolean, { nullable: true })
+  name?: true;
+
+  @Field(() => Boolean, { nullable: true })
   collectorNumber?: true;
 
   @Field(() => Boolean, { nullable: true })
@@ -20,6 +23,9 @@ export class CardCountAggregateInput {
 
   @Field(() => Boolean, { nullable: true })
   isPaper?: true;
+
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: true;
 
   @Field(() => Boolean, { nullable: true })
   canBeFoil?: true;

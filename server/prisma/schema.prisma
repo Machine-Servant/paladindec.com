@@ -217,6 +217,18 @@ model ScryfallPrice {
   currentPriceOfCardId String?      @unique @db.Uuid
 }
 
+model ScryfallCardName {
+  id   String @id @default(uuid()) @db.Uuid
+  name String @unique
+
+  /// @HideField({ output: false, input: true })
+  createdAt DateTime @default(now()) @ignore
+  /// @HideField({ output: false, input: true })
+  updatedAt DateTime @default(now()) @updatedAt @ignore
+
+  @@index([name])
+}
+
 model User {
   id             String @id @default(uuid()) @db.Uuid
   externalAuthId String @unique
@@ -239,10 +251,12 @@ model Card {
 
   scryfallCard    ScryfallCard @relation(fields: [scryfallCardId], references: [id], onDelete: Cascade)
   scryfallCardId  String       @unique @db.Uuid
+  name            String
   collectorNumber String?
   isBorderless    Boolean      @default(false)
   isShowcase      Boolean      @default(false)
   isPaper         Boolean      @default(false)
+  isEtched        Boolean      @default(false)
   canBeFoil       Boolean      @default(false)
 
   // Relations

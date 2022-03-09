@@ -5,9 +5,10 @@ import { CardsInCollectionWhereUniqueInput } from './cards-in-collection-where-u
 
 @ArgsType()
 export class UpdateOneCardsInCollectionArgs {
-  @Field(() => CardsInCollectionUpdateInput, { nullable: false })
-  data!: CardsInCollectionUpdateInput;
 
-  @Field(() => CardsInCollectionWhereUniqueInput, { nullable: false })
-  where!: CardsInCollectionWhereUniqueInput;
+    @Field(() => CardsInCollectionUpdateInput, {nullable:false})
+    data!: CardsInCollectionUpdateInput;
+
+    @Field(() => CardsInCollectionWhereUniqueInput, {nullable:false})
+    where!: CardsInCollectionWhereUniqueInput;
 }

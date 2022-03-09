@@ -10,75 +10,76 @@ import { ScryfallCardListRelationFilter } from '../scryfall-card/scryfall-card-l
 
 @InputType()
 export class ScryfallSetWhereInput {
-  @Field(() => [ScryfallSetWhereInput], { nullable: true })
-  AND?: Array<ScryfallSetWhereInput>;
 
-  @Field(() => [ScryfallSetWhereInput], { nullable: true })
-  OR?: Array<ScryfallSetWhereInput>;
+    @Field(() => [ScryfallSetWhereInput], {nullable:true})
+    AND?: Array<ScryfallSetWhereInput>;
 
-  @Field(() => [ScryfallSetWhereInput], { nullable: true })
-  NOT?: Array<ScryfallSetWhereInput>;
+    @Field(() => [ScryfallSetWhereInput], {nullable:true})
+    OR?: Array<ScryfallSetWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  id?: StringFilter;
+    @Field(() => [ScryfallSetWhereInput], {nullable:true})
+    NOT?: Array<ScryfallSetWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  code?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    id?: StringFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  mtgoCode?: StringNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    code?: StringFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  arenaCode?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    mtgoCode?: StringNullableFilter;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  tcgPlayerId?: IntNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    arenaCode?: StringNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    tcgPlayerId?: IntNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  setType?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
 
-  @Field(() => DateTimeNullableFilter, { nullable: true })
-  releasedAt?: DateTimeNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    setType?: StringFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  blockCode?: StringNullableFilter;
+    @Field(() => DateTimeNullableFilter, {nullable:true})
+    releasedAt?: DateTimeNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  block?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    blockCode?: StringNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  parentSetCode?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    block?: StringNullableFilter;
 
-  @Field(() => IntFilter, { nullable: true })
-  cardCount?: IntFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    parentSetCode?: StringNullableFilter;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  printedSize?: IntNullableFilter;
+    @Field(() => IntFilter, {nullable:true})
+    cardCount?: IntFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isDigital?: BoolFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    printedSize?: IntNullableFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isFoilOnly?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isDigital?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isNonFoilOnly?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isFoilOnly?: BoolFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  scryfallUri?: StringFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isNonFoilOnly?: BoolFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  uri?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    scryfallUri?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  iconSvgUri?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    uri?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  searchUri?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    iconSvgUri?: StringFilter;
 
-  @Field(() => ScryfallCardListRelationFilter, { nullable: true })
-  cards?: ScryfallCardListRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    searchUri?: StringFilter;
+
+    @Field(() => ScryfallCardListRelationFilter, {nullable:true})
+    cards?: ScryfallCardListRelationFilter;
 }

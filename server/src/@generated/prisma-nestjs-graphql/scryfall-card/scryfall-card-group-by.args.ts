@@ -13,36 +13,37 @@ import { ScryfallCardMaxAggregateInput } from './scryfall-card-max-aggregate.inp
 
 @ArgsType()
 export class ScryfallCardGroupByArgs {
-  @Field(() => ScryfallCardWhereInput, { nullable: true })
-  where?: ScryfallCardWhereInput;
 
-  @Field(() => [ScryfallCardOrderByWithAggregationInput], { nullable: true })
-  orderBy?: Array<ScryfallCardOrderByWithAggregationInput>;
+    @Field(() => ScryfallCardWhereInput, {nullable:true})
+    where?: ScryfallCardWhereInput;
 
-  @Field(() => [ScryfallCardScalarFieldEnum], { nullable: false })
-  by!: Array<keyof typeof ScryfallCardScalarFieldEnum>;
+    @Field(() => [ScryfallCardOrderByWithAggregationInput], {nullable:true})
+    orderBy?: Array<ScryfallCardOrderByWithAggregationInput>;
 
-  @Field(() => ScryfallCardScalarWhereWithAggregatesInput, { nullable: true })
-  having?: ScryfallCardScalarWhereWithAggregatesInput;
+    @Field(() => [ScryfallCardScalarFieldEnum], {nullable:false})
+    by!: Array<keyof typeof ScryfallCardScalarFieldEnum>;
 
-  @Field(() => Int, { nullable: true })
-  take?: number;
+    @Field(() => ScryfallCardScalarWhereWithAggregatesInput, {nullable:true})
+    having?: ScryfallCardScalarWhereWithAggregatesInput;
 
-  @Field(() => Int, { nullable: true })
-  skip?: number;
+    @Field(() => Int, {nullable:true})
+    take?: number;
 
-  @Field(() => ScryfallCardCountAggregateInput, { nullable: true })
-  _count?: ScryfallCardCountAggregateInput;
+    @Field(() => Int, {nullable:true})
+    skip?: number;
 
-  @Field(() => ScryfallCardAvgAggregateInput, { nullable: true })
-  _avg?: ScryfallCardAvgAggregateInput;
+    @Field(() => ScryfallCardCountAggregateInput, {nullable:true})
+    _count?: ScryfallCardCountAggregateInput;
 
-  @Field(() => ScryfallCardSumAggregateInput, { nullable: true })
-  _sum?: ScryfallCardSumAggregateInput;
+    @Field(() => ScryfallCardAvgAggregateInput, {nullable:true})
+    _avg?: ScryfallCardAvgAggregateInput;
 
-  @Field(() => ScryfallCardMinAggregateInput, { nullable: true })
-  _min?: ScryfallCardMinAggregateInput;
+    @Field(() => ScryfallCardSumAggregateInput, {nullable:true})
+    _sum?: ScryfallCardSumAggregateInput;
 
-  @Field(() => ScryfallCardMaxAggregateInput, { nullable: true })
-  _max?: ScryfallCardMaxAggregateInput;
+    @Field(() => ScryfallCardMinAggregateInput, {nullable:true})
+    _min?: ScryfallCardMinAggregateInput;
+
+    @Field(() => ScryfallCardMaxAggregateInput, {nullable:true})
+    _max?: ScryfallCardMaxAggregateInput;
 }

@@ -3,7 +3,7 @@ import { Props } from 'react-firebaseui';
 
 export const firebaseAuthUIConfig: Props['uiConfig'] = {
   signInFlow: 'popup',
-  signInSuccessUrl: '/protected',
+  signInSuccessUrl: '/user-home',
   tosUrl: '/terms-of-service',
   privacyPolicyUrl: '/privacy-policy',
   signInOptions: [

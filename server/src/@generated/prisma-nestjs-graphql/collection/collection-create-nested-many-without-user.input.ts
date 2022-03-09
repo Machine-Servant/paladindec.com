@@ -7,15 +7,16 @@ import { CollectionWhereUniqueInput } from './collection-where-unique.input';
 
 @InputType()
 export class CollectionCreateNestedManyWithoutUserInput {
-  @Field(() => [CollectionCreateWithoutUserInput], { nullable: true })
-  create?: Array<CollectionCreateWithoutUserInput>;
 
-  @Field(() => [CollectionCreateOrConnectWithoutUserInput], { nullable: true })
-  connectOrCreate?: Array<CollectionCreateOrConnectWithoutUserInput>;
+    @Field(() => [CollectionCreateWithoutUserInput], {nullable:true})
+    create?: Array<CollectionCreateWithoutUserInput>;
 
-  @Field(() => CollectionCreateManyUserInputEnvelope, { nullable: true })
-  createMany?: CollectionCreateManyUserInputEnvelope;
+    @Field(() => [CollectionCreateOrConnectWithoutUserInput], {nullable:true})
+    connectOrCreate?: Array<CollectionCreateOrConnectWithoutUserInput>;
 
-  @Field(() => [CollectionWhereUniqueInput], { nullable: true })
-  connect?: Array<CollectionWhereUniqueInput>;
+    @Field(() => CollectionCreateManyUserInputEnvelope, {nullable:true})
+    createMany?: CollectionCreateManyUserInputEnvelope;
+
+    @Field(() => [CollectionWhereUniqueInput], {nullable:true})
+    connect?: Array<CollectionWhereUniqueInput>;
 }
