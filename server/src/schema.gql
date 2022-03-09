@@ -61,8 +61,10 @@ type Card {
   currentPrice: ScryfallPrice!
   id: ID!
   isBorderless: Boolean!
+  isEtched: Boolean!
   isPaper: Boolean!
   isShowcase: Boolean!
+  name: String!
   scryfallCard: ScryfallCard!
   scryfallCardId: String!
 }
@@ -88,8 +90,10 @@ input CardOrderByWithRelationInput {
   currentPrice: ScryfallPriceOrderByWithRelationInput
   id: SortOrder
   isBorderless: SortOrder
+  isEtched: SortOrder
   isPaper: SortOrder
   isShowcase: SortOrder
+  name: SortOrder
   scryfallCard: ScryfallCardOrderByWithRelationInput
   scryfallCardId: SortOrder
 }
@@ -104,8 +108,10 @@ enum CardScalarFieldEnum {
   collectorNumber
   id
   isBorderless
+  isEtched
   isPaper
   isShowcase
+  name
   scryfallCardId
 }
 
@@ -119,8 +125,10 @@ input CardWhereInput {
   currentPrice: ScryfallPriceRelationFilter
   id: StringFilter
   isBorderless: BoolFilter
+  isEtched: BoolFilter
   isPaper: BoolFilter
   isShowcase: BoolFilter
+  name: StringFilter
   scryfallCard: ScryfallCardRelationFilter
   scryfallCardId: StringFilter
 }

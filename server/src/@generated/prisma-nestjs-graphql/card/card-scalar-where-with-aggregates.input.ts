@@ -6,34 +6,39 @@ import { BoolWithAggregatesFilter } from '../prisma/bool-with-aggregates-filter.
 
 @InputType()
 export class CardScalarWhereWithAggregatesInput {
+  @Field(() => [CardScalarWhereWithAggregatesInput], { nullable: true })
+  AND?: Array<CardScalarWhereWithAggregatesInput>;
 
-    @Field(() => [CardScalarWhereWithAggregatesInput], {nullable:true})
-    AND?: Array<CardScalarWhereWithAggregatesInput>;
+  @Field(() => [CardScalarWhereWithAggregatesInput], { nullable: true })
+  OR?: Array<CardScalarWhereWithAggregatesInput>;
 
-    @Field(() => [CardScalarWhereWithAggregatesInput], {nullable:true})
-    OR?: Array<CardScalarWhereWithAggregatesInput>;
+  @Field(() => [CardScalarWhereWithAggregatesInput], { nullable: true })
+  NOT?: Array<CardScalarWhereWithAggregatesInput>;
 
-    @Field(() => [CardScalarWhereWithAggregatesInput], {nullable:true})
-    NOT?: Array<CardScalarWhereWithAggregatesInput>;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  id?: StringWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    id?: StringWithAggregatesFilter;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  scryfallCardId?: StringWithAggregatesFilter;
 
-    @Field(() => StringWithAggregatesFilter, {nullable:true})
-    scryfallCardId?: StringWithAggregatesFilter;
+  @Field(() => StringWithAggregatesFilter, { nullable: true })
+  name?: StringWithAggregatesFilter;
 
-    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
-    collectorNumber?: StringNullableWithAggregatesFilter;
+  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
+  collectorNumber?: StringNullableWithAggregatesFilter;
 
-    @Field(() => BoolWithAggregatesFilter, {nullable:true})
-    isBorderless?: BoolWithAggregatesFilter;
+  @Field(() => BoolWithAggregatesFilter, { nullable: true })
+  isBorderless?: BoolWithAggregatesFilter;
 
-    @Field(() => BoolWithAggregatesFilter, {nullable:true})
-    isShowcase?: BoolWithAggregatesFilter;
+  @Field(() => BoolWithAggregatesFilter, { nullable: true })
+  isShowcase?: BoolWithAggregatesFilter;
 
-    @Field(() => BoolWithAggregatesFilter, {nullable:true})
-    isPaper?: BoolWithAggregatesFilter;
+  @Field(() => BoolWithAggregatesFilter, { nullable: true })
+  isPaper?: BoolWithAggregatesFilter;
 
-    @Field(() => BoolWithAggregatesFilter, {nullable:true})
-    canBeFoil?: BoolWithAggregatesFilter;
+  @Field(() => BoolWithAggregatesFilter, { nullable: true })
+  isEtched?: BoolWithAggregatesFilter;
+
+  @Field(() => BoolWithAggregatesFilter, { nullable: true })
+  canBeFoil?: BoolWithAggregatesFilter;
 }

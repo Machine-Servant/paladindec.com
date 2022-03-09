@@ -1,6 +1,7 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { apolloConfig } from '../config/apollo.config';
+import generatedIntrospection from '../@types/codegen/fragments';
 
 const httpLink = createHttpLink({
   uri: apolloConfig.uri,
@@ -18,5 +19,7 @@ const authLink = setContext((_, { headers }) => {
 
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    possibleTypes: generatedIntrospection.possibleTypes,
+  }),
 });

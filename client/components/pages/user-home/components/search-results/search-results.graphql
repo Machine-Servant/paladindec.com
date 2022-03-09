@@ -1,0 +1,23 @@
+query SearchCardResults($name: String!) {
+  allCards(
+    where: {
+      isPaper: { equals: true }
+      scryfallCard: { is: { name: { equals: $name } } }
+    }
+  ) {
+    id
+    canBeFoil
+    collectorNumber
+    isBorderless
+    isShowcase
+    isEtched
+    currentPrice {
+      usd
+      usdFoil
+      usdEtched
+    }
+    scryfallCard {
+      ...ScryfallCardFull
+    }
+  }
+}
