@@ -215,6 +215,9 @@ model ScryfallPrice {
   cardId               String       @db.Uuid
   currentPriceOfCard   Card?        @relation(fields: [currentPriceOfCardId], references: [id])
   currentPriceOfCardId String?      @unique @db.Uuid
+
+  @@index([date])
+  @@index([date, id])
 }
 
 model ScryfallCardName {

@@ -6,40 +6,37 @@ import { CardsInCollectionCreateNestedManyWithoutCardInput } from '../cards-in-c
 
 @InputType()
 export class CardCreateInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => ScryfallCardCreateNestedOneWithoutCardInput, { nullable: false })
-  scryfallCard!: ScryfallCardCreateNestedOneWithoutCardInput;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => ScryfallCardCreateNestedOneWithoutCardInput, {nullable:false})
+    scryfallCard!: ScryfallCardCreateNestedOneWithoutCardInput;
 
-  @Field(() => String, { nullable: true })
-  collectorNumber?: string;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => Boolean, { nullable: true })
-  isBorderless?: boolean;
+    @Field(() => String, {nullable:true})
+    collectorNumber?: string;
 
-  @Field(() => Boolean, { nullable: true })
-  isShowcase?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    isBorderless?: boolean;
 
-  @Field(() => Boolean, { nullable: true })
-  isPaper?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    isShowcase?: boolean;
 
-  @Field(() => Boolean, { nullable: true })
-  isEtched?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    isPaper?: boolean;
 
-  @Field(() => Boolean, { nullable: true })
-  canBeFoil?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    isEtched?: boolean;
 
-  @Field(() => ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput, {
-    nullable: true,
-  })
-  currentPrice?: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput;
+    @Field(() => Boolean, {nullable:true})
+    canBeFoil?: boolean;
 
-  @Field(() => CardsInCollectionCreateNestedManyWithoutCardInput, {
-    nullable: true,
-  })
-  collections?: CardsInCollectionCreateNestedManyWithoutCardInput;
+    @Field(() => ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput, {nullable:true})
+    currentPrice?: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput;
+
+    @Field(() => CardsInCollectionCreateNestedManyWithoutCardInput, {nullable:true})
+    collections?: CardsInCollectionCreateNestedManyWithoutCardInput;
 }
