@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { SearchCardResultsQuery } from '../../../../../../../@types/codegen/graphql';
+import { SetIcon } from '../../../../../../set-icon';
 import { Container } from './CardResult.styles';
 
 type CardResultProps = {
@@ -8,6 +9,11 @@ type CardResultProps = {
 };
 
 export const CardResult: React.FC<CardResultProps> = (props) => {
+  const dollar = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
   return (
     <Container>
       <div className="flex flex-row items-start justify-center">
@@ -17,23 +23,26 @@ export const CardResult: React.FC<CardResultProps> = (props) => {
           </div>
           <div className="flex flex-row items-center mb-4">
             <div className="relative w-6 h-6 mr-2">
-              <Image
-                loader={() => props.card.scryfallCard.set.iconSvgUri}
+              <SetIcon
+                className="w-6 h-6"
                 src={props.card.scryfallCard.set.iconSvgUri}
-                alt={props.card.scryfallCard.setName}
-                unoptimized
-                layout="fill"
+                rarity={props.card.scryfallCard.rarity}
+                title={props.card.scryfallCard.setName}
               />
             </div>
             <div>{props.card.scryfallCard.setName}</div>
           </div>
-          {props.card.isEtched ? (
-            <div>USD (etched): ${props.card.currentPrice.usdEtched}</div>
-          ) : (
-            <>
-              <div>USD: ${props.card.currentPrice.usd}</div>
-              <div>USD (foil): ${props.card.currentPrice.usdFoil}</div>
-            </>
+          <div>
+            Non-foil: {dollar.format(Number(props.card.currentPrice.usd))}
+          </div>
+          <div>
+            Foil: {dollar.format(Number(props.card.currentPrice.usdFoil))}
+          </div>
+          {props.card.isEtched && (
+            <div>
+              Foil Etched:
+              {dollar.format(Number(props.card.currentPrice.usdEtched))}
+            </div>
           )}
         </div>
         <div className="relative flex flex-row items-end flex-1 h-64">

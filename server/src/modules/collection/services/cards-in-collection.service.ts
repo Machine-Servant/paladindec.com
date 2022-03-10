@@ -27,4 +27,10 @@ export class CardsInCollectionService {
   ): Promise<CardsInCollection[]> {
     return this.prismaService.cardsInCollection.findMany(args);
   }
+
+  async count(collectionId: string): Promise<number> {
+    return this.prismaService.cardsInCollection.count({
+      where: { collectionId: { equals: collectionId } },
+    });
+  }
 }

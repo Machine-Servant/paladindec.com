@@ -7,11 +7,7 @@ import { useProtectedRoute } from '../hooks/useProtectedRoute';
 const UserHomePage: React.FC = () => {
   const { loading } = useProtectedRoute();
 
-  const handleSignout = async () => {
-    await auth.signOut();
-  };
-
-  return <UserHome loading={loading} onSignout={handleSignout} />;
+  return <UserHome loading={loading} />;
 };
 
 export default UserHomePage;
