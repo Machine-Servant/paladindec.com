@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
 export const ResultsContainer = styled.div<{ isHidden: boolean }>`
-  ${tw`left-0 w-full border shadow-xl border-black-50 top-12`}
+  ${tw`left-0 z-10 w-full border shadow-xl border-black-50 top-12 bg-white-50`}
   ${({ isHidden }) => (isHidden ? tw`hidden` : tw`absolute`)}
 `;
 

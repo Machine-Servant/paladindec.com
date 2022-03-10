@@ -1,0 +1,5 @@
+mutation AddCollection($input: CollectionCreateWithoutUserInput!) {
+  addCollection(input: $input) {
+    id
+  }
+}

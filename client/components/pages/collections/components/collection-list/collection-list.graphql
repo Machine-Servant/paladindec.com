@@ -1,0 +1,9 @@
+query CollectionList {
+  allCollections {
+    id
+    name
+    _count {
+      cards
+    }
+  }
+}

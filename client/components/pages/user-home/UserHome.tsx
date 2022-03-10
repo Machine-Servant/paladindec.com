@@ -6,7 +6,6 @@ import { SearchResults } from './components/search-results';
 
 type UserHomeProps = {
   loading: boolean;
-  onSignout: () => void;
 };
 
 export const UserHome: React.FC<UserHomeProps> = (props) => {

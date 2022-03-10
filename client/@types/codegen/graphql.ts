@@ -81,6 +81,95 @@ export type CardCount = {
   collections: Scalars['Int'];
 };
 
+export type CardCreateManyScryfallCardInput = {
+  canBeFoil?: InputMaybe<Scalars['Boolean']>;
+  collectorNumber?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  isBorderless?: InputMaybe<Scalars['Boolean']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isPaper?: InputMaybe<Scalars['Boolean']>;
+  isShowcase?: InputMaybe<Scalars['Boolean']>;
+  name: Scalars['String'];
+};
+
+export type CardCreateManyScryfallCardInputEnvelope = {
+  data: Array<CardCreateManyScryfallCardInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CardCreateNestedManyWithoutScryfallCardInput = {
+  connect?: InputMaybe<Array<CardWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CardCreateOrConnectWithoutScryfallCardInput>>;
+  create?: InputMaybe<Array<CardCreateWithoutScryfallCardInput>>;
+  createMany?: InputMaybe<CardCreateManyScryfallCardInputEnvelope>;
+};
+
+export type CardCreateNestedOneWithoutCollectionsInput = {
+  connect?: InputMaybe<CardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CardCreateOrConnectWithoutCollectionsInput>;
+  create?: InputMaybe<CardCreateWithoutCollectionsInput>;
+};
+
+export type CardCreateNestedOneWithoutCurrentPriceInput = {
+  connect?: InputMaybe<CardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CardCreateOrConnectWithoutCurrentPriceInput>;
+  create?: InputMaybe<CardCreateWithoutCurrentPriceInput>;
+};
+
+export type CardCreateOrConnectWithoutCollectionsInput = {
+  create: CardCreateWithoutCollectionsInput;
+  where: CardWhereUniqueInput;
+};
+
+export type CardCreateOrConnectWithoutCurrentPriceInput = {
+  create: CardCreateWithoutCurrentPriceInput;
+  where: CardWhereUniqueInput;
+};
+
+export type CardCreateOrConnectWithoutScryfallCardInput = {
+  create: CardCreateWithoutScryfallCardInput;
+  where: CardWhereUniqueInput;
+};
+
+export type CardCreateWithoutCollectionsInput = {
+  canBeFoil?: InputMaybe<Scalars['Boolean']>;
+  collectorNumber?: InputMaybe<Scalars['String']>;
+  currentPrice?: InputMaybe<ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput>;
+  id?: InputMaybe<Scalars['String']>;
+  isBorderless?: InputMaybe<Scalars['Boolean']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isPaper?: InputMaybe<Scalars['Boolean']>;
+  isShowcase?: InputMaybe<Scalars['Boolean']>;
+  name: Scalars['String'];
+  scryfallCard: ScryfallCardCreateNestedOneWithoutCardInput;
+};
+
+export type CardCreateWithoutCurrentPriceInput = {
+  canBeFoil?: InputMaybe<Scalars['Boolean']>;
+  collections?: InputMaybe<CardsInCollectionCreateNestedManyWithoutCardInput>;
+  collectorNumber?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  isBorderless?: InputMaybe<Scalars['Boolean']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isPaper?: InputMaybe<Scalars['Boolean']>;
+  isShowcase?: InputMaybe<Scalars['Boolean']>;
+  name: Scalars['String'];
+  scryfallCard: ScryfallCardCreateNestedOneWithoutCardInput;
+};
+
+export type CardCreateWithoutScryfallCardInput = {
+  canBeFoil?: InputMaybe<Scalars['Boolean']>;
+  collections?: InputMaybe<CardsInCollectionCreateNestedManyWithoutCardInput>;
+  collectorNumber?: InputMaybe<Scalars['String']>;
+  currentPrice?: InputMaybe<ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput>;
+  id?: InputMaybe<Scalars['String']>;
+  isBorderless?: InputMaybe<Scalars['Boolean']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isPaper?: InputMaybe<Scalars['Boolean']>;
+  isShowcase?: InputMaybe<Scalars['Boolean']>;
+  name: Scalars['String'];
+};
+
 export type CardListRelationFilter = {
   every?: InputMaybe<CardWhereInput>;
   none?: InputMaybe<CardWhereInput>;
@@ -169,6 +258,68 @@ export type CardsInCollectionCardPrice = {
   usd: Scalars['Float'];
 };
 
+export type CardsInCollectionCreateManyCardInput = {
+  collectionId: Scalars['String'];
+  count?: InputMaybe<Scalars['Int']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isFoil?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CardsInCollectionCreateManyCardInputEnvelope = {
+  data: Array<CardsInCollectionCreateManyCardInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CardsInCollectionCreateManyCollectionInput = {
+  cardId: Scalars['String'];
+  count?: InputMaybe<Scalars['Int']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isFoil?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CardsInCollectionCreateManyCollectionInputEnvelope = {
+  data: Array<CardsInCollectionCreateManyCollectionInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CardsInCollectionCreateNestedManyWithoutCardInput = {
+  connect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CardsInCollectionCreateOrConnectWithoutCardInput>>;
+  create?: InputMaybe<Array<CardsInCollectionCreateWithoutCardInput>>;
+  createMany?: InputMaybe<CardsInCollectionCreateManyCardInputEnvelope>;
+};
+
+export type CardsInCollectionCreateNestedManyWithoutCollectionInput = {
+  connect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CardsInCollectionCreateOrConnectWithoutCollectionInput>>;
+  create?: InputMaybe<Array<CardsInCollectionCreateWithoutCollectionInput>>;
+  createMany?: InputMaybe<CardsInCollectionCreateManyCollectionInputEnvelope>;
+};
+
+export type CardsInCollectionCreateOrConnectWithoutCardInput = {
+  create: CardsInCollectionCreateWithoutCardInput;
+  where: CardsInCollectionWhereUniqueInput;
+};
+
+export type CardsInCollectionCreateOrConnectWithoutCollectionInput = {
+  create: CardsInCollectionCreateWithoutCollectionInput;
+  where: CardsInCollectionWhereUniqueInput;
+};
+
+export type CardsInCollectionCreateWithoutCardInput = {
+  collection: CollectionCreateNestedOneWithoutCardsInput;
+  count?: InputMaybe<Scalars['Int']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isFoil?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CardsInCollectionCreateWithoutCollectionInput = {
+  card: CardCreateNestedOneWithoutCollectionsInput;
+  count?: InputMaybe<Scalars['Int']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isFoil?: InputMaybe<Scalars['Boolean']>;
+};
+
 export type CardsInCollectionListRelationFilter = {
   every?: InputMaybe<CardsInCollectionWhereInput>;
   none?: InputMaybe<CardsInCollectionWhereInput>;
@@ -245,6 +396,29 @@ export type CollectionCardsArgs = {
 export type CollectionCount = {
   __typename?: 'CollectionCount';
   cards: Scalars['Int'];
+};
+
+export type CollectionCreateNestedOneWithoutCardsInput = {
+  connect?: InputMaybe<CollectionWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CollectionCreateOrConnectWithoutCardsInput>;
+  create?: InputMaybe<CollectionCreateWithoutCardsInput>;
+};
+
+export type CollectionCreateOrConnectWithoutCardsInput = {
+  create: CollectionCreateWithoutCardsInput;
+  where: CollectionWhereUniqueInput;
+};
+
+export type CollectionCreateWithoutCardsInput = {
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  user: UserCreateNestedOneWithoutCollectionsInput;
+};
+
+export type CollectionCreateWithoutUserInput = {
+  cards?: InputMaybe<CardsInCollectionCreateNestedManyWithoutCollectionInput>;
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 export type CollectionListRelationFilter = {
@@ -418,6 +592,7 @@ export type JsonNullableListFilter = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addCollection: Collection;
   downloadBulkData: Scalars['Boolean'];
   processAllParts: Scalars['Boolean'];
   processBulkData: Scalars['Boolean'];
@@ -428,6 +603,11 @@ export type Mutation = {
   processSetData: Scalars['Boolean'];
   processUpdateCardList: Scalars['Boolean'];
   updateCardsInCollection: CardsInCollection;
+};
+
+
+export type MutationAddCollectionArgs = {
+  input: CollectionCreateWithoutUserInput;
 };
 
 
@@ -796,6 +976,434 @@ export type ScryfallCardCount = {
   scryfallPrice: Scalars['Int'];
 };
 
+export type ScryfallCardCreateNestedOneWithoutCardInput = {
+  connect?: InputMaybe<ScryfallCardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallCardCreateOrConnectWithoutCardInput>;
+  create?: InputMaybe<ScryfallCardCreateWithoutCardInput>;
+};
+
+export type ScryfallCardCreateNestedOneWithoutReferencedByInput = {
+  connect?: InputMaybe<ScryfallCardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallCardCreateOrConnectWithoutReferencedByInput>;
+  create?: InputMaybe<ScryfallCardCreateWithoutReferencedByInput>;
+};
+
+export type ScryfallCardCreateNestedOneWithoutRelatedToInput = {
+  connect?: InputMaybe<ScryfallCardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallCardCreateOrConnectWithoutRelatedToInput>;
+  create?: InputMaybe<ScryfallCardCreateWithoutRelatedToInput>;
+};
+
+export type ScryfallCardCreateNestedOneWithoutScryfallPriceInput = {
+  connect?: InputMaybe<ScryfallCardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallCardCreateOrConnectWithoutScryfallPriceInput>;
+  create?: InputMaybe<ScryfallCardCreateWithoutScryfallPriceInput>;
+};
+
+export type ScryfallCardCreateOrConnectWithoutCardInput = {
+  create: ScryfallCardCreateWithoutCardInput;
+  where: ScryfallCardWhereUniqueInput;
+};
+
+export type ScryfallCardCreateOrConnectWithoutReferencedByInput = {
+  create: ScryfallCardCreateWithoutReferencedByInput;
+  where: ScryfallCardWhereUniqueInput;
+};
+
+export type ScryfallCardCreateOrConnectWithoutRelatedToInput = {
+  create: ScryfallCardCreateWithoutRelatedToInput;
+  where: ScryfallCardWhereUniqueInput;
+};
+
+export type ScryfallCardCreateOrConnectWithoutScryfallPriceInput = {
+  create: ScryfallCardCreateWithoutScryfallPriceInput;
+  where: ScryfallCardWhereUniqueInput;
+};
+
+export type ScryfallCardCreateWithoutCardInput = {
+  allParts?: InputMaybe<ScryfallCardCreateallPartsInput>;
+  arenaId?: InputMaybe<Scalars['Int']>;
+  artist?: InputMaybe<Scalars['String']>;
+  booster: Scalars['Boolean'];
+  borderColor: Scalars['String'];
+  cardBackId?: InputMaybe<Scalars['String']>;
+  cardFaces?: InputMaybe<ScryfallCardFaceCreateNestedManyWithoutCardInput>;
+  cardFacesRaw?: InputMaybe<ScryfallCardCreatecardFacesRawInput>;
+  cardmarketId?: InputMaybe<Scalars['Int']>;
+  cmc?: InputMaybe<Scalars['Float']>;
+  collectorNumber: Scalars['String'];
+  colorIdentity?: InputMaybe<ScryfallCardCreatecolorIdentityInput>;
+  colorIndicator?: InputMaybe<ScryfallCardCreatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardCreatecolorsInput>;
+  contentWarning?: InputMaybe<Scalars['Boolean']>;
+  digital: Scalars['Boolean'];
+  edhrecRank?: InputMaybe<Scalars['Int']>;
+  finishes?: InputMaybe<ScryfallCardCreatefinishesInput>;
+  flavorName?: InputMaybe<Scalars['String']>;
+  frame: Scalars['String'];
+  frameEffects?: InputMaybe<ScryfallCardCreateframeEffectsInput>;
+  fullArt: Scalars['Boolean'];
+  games?: InputMaybe<ScryfallCardCreategamesInput>;
+  handModifier?: InputMaybe<Scalars['String']>;
+  highresImage: Scalars['Boolean'];
+  id?: InputMaybe<Scalars['String']>;
+  illustrationId?: InputMaybe<Scalars['String']>;
+  imageStatus: Scalars['String'];
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  keywords?: InputMaybe<ScryfallCardCreatekeywordsInput>;
+  lang: Scalars['String'];
+  layout: Scalars['String'];
+  legalities: Scalars['JSON'];
+  lifeModifier?: InputMaybe<Scalars['String']>;
+  loyalty?: InputMaybe<Scalars['String']>;
+  manaCost?: InputMaybe<Scalars['String']>;
+  mtgoFoilId?: InputMaybe<Scalars['Int']>;
+  mtgoId?: InputMaybe<Scalars['Int']>;
+  multiverseIds?: InputMaybe<ScryfallCardCreatemultiverseIdsInput>;
+  name: Scalars['String'];
+  oracleId?: InputMaybe<Scalars['String']>;
+  oracleText?: InputMaybe<Scalars['String']>;
+  oversized: Scalars['Boolean'];
+  power?: InputMaybe<Scalars['String']>;
+  prices: Scalars['JSON'];
+  printedName?: InputMaybe<Scalars['String']>;
+  printedText?: InputMaybe<Scalars['String']>;
+  printedTypeLine?: InputMaybe<Scalars['String']>;
+  printsSearchUri: Scalars['String'];
+  producedMana?: InputMaybe<ScryfallCardCreateproducedManaInput>;
+  promo: Scalars['Boolean'];
+  promoTypes?: InputMaybe<ScryfallCardCreatepromoTypesInput>;
+  purchaseUris?: InputMaybe<Scalars['JSON']>;
+  rarity: Scalars['String'];
+  referencedBy?: InputMaybe<ScryfallRelatedCardCreateNestedManyWithoutReferenceInput>;
+  relatedTo?: InputMaybe<ScryfallRelatedCardCreateNestedManyWithoutCardInput>;
+  relatedUris: Scalars['JSON'];
+  releasedAt: Scalars['DateTime'];
+  reprint: Scalars['Boolean'];
+  reserved: Scalars['Boolean'];
+  rulingUri?: InputMaybe<Scalars['String']>;
+  scryfallPrice?: InputMaybe<ScryfallPriceCreateNestedManyWithoutCardInput>;
+  scryfallSetUri: Scalars['String'];
+  scryfallUri: Scalars['String'];
+  securityStamp?: InputMaybe<Scalars['String']>;
+  set: ScryfallSetCreateNestedOneWithoutCardsInput;
+  setCode: Scalars['String'];
+  setName: Scalars['String'];
+  setSearchUri: Scalars['String'];
+  setType: Scalars['String'];
+  setUri: Scalars['String'];
+  storySpotlight: Scalars['Boolean'];
+  tcgplayerEtchedId?: InputMaybe<Scalars['Int']>;
+  tcgplayerId?: InputMaybe<Scalars['Int']>;
+  textless: Scalars['Boolean'];
+  toughness?: InputMaybe<Scalars['String']>;
+  typeLine?: InputMaybe<Scalars['String']>;
+  uri: Scalars['String'];
+  varationOf?: InputMaybe<Scalars['String']>;
+  variation: Scalars['Boolean'];
+  watermark?: InputMaybe<Scalars['String']>;
+};
+
+export type ScryfallCardCreateWithoutReferencedByInput = {
+  allParts?: InputMaybe<ScryfallCardCreateallPartsInput>;
+  arenaId?: InputMaybe<Scalars['Int']>;
+  artist?: InputMaybe<Scalars['String']>;
+  booster: Scalars['Boolean'];
+  borderColor: Scalars['String'];
+  card?: InputMaybe<CardCreateNestedManyWithoutScryfallCardInput>;
+  cardBackId?: InputMaybe<Scalars['String']>;
+  cardFaces?: InputMaybe<ScryfallCardFaceCreateNestedManyWithoutCardInput>;
+  cardFacesRaw?: InputMaybe<ScryfallCardCreatecardFacesRawInput>;
+  cardmarketId?: InputMaybe<Scalars['Int']>;
+  cmc?: InputMaybe<Scalars['Float']>;
+  collectorNumber: Scalars['String'];
+  colorIdentity?: InputMaybe<ScryfallCardCreatecolorIdentityInput>;
+  colorIndicator?: InputMaybe<ScryfallCardCreatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardCreatecolorsInput>;
+  contentWarning?: InputMaybe<Scalars['Boolean']>;
+  digital: Scalars['Boolean'];
+  edhrecRank?: InputMaybe<Scalars['Int']>;
+  finishes?: InputMaybe<ScryfallCardCreatefinishesInput>;
+  flavorName?: InputMaybe<Scalars['String']>;
+  frame: Scalars['String'];
+  frameEffects?: InputMaybe<ScryfallCardCreateframeEffectsInput>;
+  fullArt: Scalars['Boolean'];
+  games?: InputMaybe<ScryfallCardCreategamesInput>;
+  handModifier?: InputMaybe<Scalars['String']>;
+  highresImage: Scalars['Boolean'];
+  id?: InputMaybe<Scalars['String']>;
+  illustrationId?: InputMaybe<Scalars['String']>;
+  imageStatus: Scalars['String'];
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  keywords?: InputMaybe<ScryfallCardCreatekeywordsInput>;
+  lang: Scalars['String'];
+  layout: Scalars['String'];
+  legalities: Scalars['JSON'];
+  lifeModifier?: InputMaybe<Scalars['String']>;
+  loyalty?: InputMaybe<Scalars['String']>;
+  manaCost?: InputMaybe<Scalars['String']>;
+  mtgoFoilId?: InputMaybe<Scalars['Int']>;
+  mtgoId?: InputMaybe<Scalars['Int']>;
+  multiverseIds?: InputMaybe<ScryfallCardCreatemultiverseIdsInput>;
+  name: Scalars['String'];
+  oracleId?: InputMaybe<Scalars['String']>;
+  oracleText?: InputMaybe<Scalars['String']>;
+  oversized: Scalars['Boolean'];
+  power?: InputMaybe<Scalars['String']>;
+  prices: Scalars['JSON'];
+  printedName?: InputMaybe<Scalars['String']>;
+  printedText?: InputMaybe<Scalars['String']>;
+  printedTypeLine?: InputMaybe<Scalars['String']>;
+  printsSearchUri: Scalars['String'];
+  producedMana?: InputMaybe<ScryfallCardCreateproducedManaInput>;
+  promo: Scalars['Boolean'];
+  promoTypes?: InputMaybe<ScryfallCardCreatepromoTypesInput>;
+  purchaseUris?: InputMaybe<Scalars['JSON']>;
+  rarity: Scalars['String'];
+  relatedTo?: InputMaybe<ScryfallRelatedCardCreateNestedManyWithoutCardInput>;
+  relatedUris: Scalars['JSON'];
+  releasedAt: Scalars['DateTime'];
+  reprint: Scalars['Boolean'];
+  reserved: Scalars['Boolean'];
+  rulingUri?: InputMaybe<Scalars['String']>;
+  scryfallPrice?: InputMaybe<ScryfallPriceCreateNestedManyWithoutCardInput>;
+  scryfallSetUri: Scalars['String'];
+  scryfallUri: Scalars['String'];
+  securityStamp?: InputMaybe<Scalars['String']>;
+  set: ScryfallSetCreateNestedOneWithoutCardsInput;
+  setCode: Scalars['String'];
+  setName: Scalars['String'];
+  setSearchUri: Scalars['String'];
+  setType: Scalars['String'];
+  setUri: Scalars['String'];
+  storySpotlight: Scalars['Boolean'];
+  tcgplayerEtchedId?: InputMaybe<Scalars['Int']>;
+  tcgplayerId?: InputMaybe<Scalars['Int']>;
+  textless: Scalars['Boolean'];
+  toughness?: InputMaybe<Scalars['String']>;
+  typeLine?: InputMaybe<Scalars['String']>;
+  uri: Scalars['String'];
+  varationOf?: InputMaybe<Scalars['String']>;
+  variation: Scalars['Boolean'];
+  watermark?: InputMaybe<Scalars['String']>;
+};
+
+export type ScryfallCardCreateWithoutRelatedToInput = {
+  allParts?: InputMaybe<ScryfallCardCreateallPartsInput>;
+  arenaId?: InputMaybe<Scalars['Int']>;
+  artist?: InputMaybe<Scalars['String']>;
+  booster: Scalars['Boolean'];
+  borderColor: Scalars['String'];
+  card?: InputMaybe<CardCreateNestedManyWithoutScryfallCardInput>;
+  cardBackId?: InputMaybe<Scalars['String']>;
+  cardFaces?: InputMaybe<ScryfallCardFaceCreateNestedManyWithoutCardInput>;
+  cardFacesRaw?: InputMaybe<ScryfallCardCreatecardFacesRawInput>;
+  cardmarketId?: InputMaybe<Scalars['Int']>;
+  cmc?: InputMaybe<Scalars['Float']>;
+  collectorNumber: Scalars['String'];
+  colorIdentity?: InputMaybe<ScryfallCardCreatecolorIdentityInput>;
+  colorIndicator?: InputMaybe<ScryfallCardCreatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardCreatecolorsInput>;
+  contentWarning?: InputMaybe<Scalars['Boolean']>;
+  digital: Scalars['Boolean'];
+  edhrecRank?: InputMaybe<Scalars['Int']>;
+  finishes?: InputMaybe<ScryfallCardCreatefinishesInput>;
+  flavorName?: InputMaybe<Scalars['String']>;
+  frame: Scalars['String'];
+  frameEffects?: InputMaybe<ScryfallCardCreateframeEffectsInput>;
+  fullArt: Scalars['Boolean'];
+  games?: InputMaybe<ScryfallCardCreategamesInput>;
+  handModifier?: InputMaybe<Scalars['String']>;
+  highresImage: Scalars['Boolean'];
+  id?: InputMaybe<Scalars['String']>;
+  illustrationId?: InputMaybe<Scalars['String']>;
+  imageStatus: Scalars['String'];
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  keywords?: InputMaybe<ScryfallCardCreatekeywordsInput>;
+  lang: Scalars['String'];
+  layout: Scalars['String'];
+  legalities: Scalars['JSON'];
+  lifeModifier?: InputMaybe<Scalars['String']>;
+  loyalty?: InputMaybe<Scalars['String']>;
+  manaCost?: InputMaybe<Scalars['String']>;
+  mtgoFoilId?: InputMaybe<Scalars['Int']>;
+  mtgoId?: InputMaybe<Scalars['Int']>;
+  multiverseIds?: InputMaybe<ScryfallCardCreatemultiverseIdsInput>;
+  name: Scalars['String'];
+  oracleId?: InputMaybe<Scalars['String']>;
+  oracleText?: InputMaybe<Scalars['String']>;
+  oversized: Scalars['Boolean'];
+  power?: InputMaybe<Scalars['String']>;
+  prices: Scalars['JSON'];
+  printedName?: InputMaybe<Scalars['String']>;
+  printedText?: InputMaybe<Scalars['String']>;
+  printedTypeLine?: InputMaybe<Scalars['String']>;
+  printsSearchUri: Scalars['String'];
+  producedMana?: InputMaybe<ScryfallCardCreateproducedManaInput>;
+  promo: Scalars['Boolean'];
+  promoTypes?: InputMaybe<ScryfallCardCreatepromoTypesInput>;
+  purchaseUris?: InputMaybe<Scalars['JSON']>;
+  rarity: Scalars['String'];
+  referencedBy?: InputMaybe<ScryfallRelatedCardCreateNestedManyWithoutReferenceInput>;
+  relatedUris: Scalars['JSON'];
+  releasedAt: Scalars['DateTime'];
+  reprint: Scalars['Boolean'];
+  reserved: Scalars['Boolean'];
+  rulingUri?: InputMaybe<Scalars['String']>;
+  scryfallPrice?: InputMaybe<ScryfallPriceCreateNestedManyWithoutCardInput>;
+  scryfallSetUri: Scalars['String'];
+  scryfallUri: Scalars['String'];
+  securityStamp?: InputMaybe<Scalars['String']>;
+  set: ScryfallSetCreateNestedOneWithoutCardsInput;
+  setCode: Scalars['String'];
+  setName: Scalars['String'];
+  setSearchUri: Scalars['String'];
+  setType: Scalars['String'];
+  setUri: Scalars['String'];
+  storySpotlight: Scalars['Boolean'];
+  tcgplayerEtchedId?: InputMaybe<Scalars['Int']>;
+  tcgplayerId?: InputMaybe<Scalars['Int']>;
+  textless: Scalars['Boolean'];
+  toughness?: InputMaybe<Scalars['String']>;
+  typeLine?: InputMaybe<Scalars['String']>;
+  uri: Scalars['String'];
+  varationOf?: InputMaybe<Scalars['String']>;
+  variation: Scalars['Boolean'];
+  watermark?: InputMaybe<Scalars['String']>;
+};
+
+export type ScryfallCardCreateWithoutScryfallPriceInput = {
+  allParts?: InputMaybe<ScryfallCardCreateallPartsInput>;
+  arenaId?: InputMaybe<Scalars['Int']>;
+  artist?: InputMaybe<Scalars['String']>;
+  booster: Scalars['Boolean'];
+  borderColor: Scalars['String'];
+  card?: InputMaybe<CardCreateNestedManyWithoutScryfallCardInput>;
+  cardBackId?: InputMaybe<Scalars['String']>;
+  cardFaces?: InputMaybe<ScryfallCardFaceCreateNestedManyWithoutCardInput>;
+  cardFacesRaw?: InputMaybe<ScryfallCardCreatecardFacesRawInput>;
+  cardmarketId?: InputMaybe<Scalars['Int']>;
+  cmc?: InputMaybe<Scalars['Float']>;
+  collectorNumber: Scalars['String'];
+  colorIdentity?: InputMaybe<ScryfallCardCreatecolorIdentityInput>;
+  colorIndicator?: InputMaybe<ScryfallCardCreatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardCreatecolorsInput>;
+  contentWarning?: InputMaybe<Scalars['Boolean']>;
+  digital: Scalars['Boolean'];
+  edhrecRank?: InputMaybe<Scalars['Int']>;
+  finishes?: InputMaybe<ScryfallCardCreatefinishesInput>;
+  flavorName?: InputMaybe<Scalars['String']>;
+  frame: Scalars['String'];
+  frameEffects?: InputMaybe<ScryfallCardCreateframeEffectsInput>;
+  fullArt: Scalars['Boolean'];
+  games?: InputMaybe<ScryfallCardCreategamesInput>;
+  handModifier?: InputMaybe<Scalars['String']>;
+  highresImage: Scalars['Boolean'];
+  id?: InputMaybe<Scalars['String']>;
+  illustrationId?: InputMaybe<Scalars['String']>;
+  imageStatus: Scalars['String'];
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  keywords?: InputMaybe<ScryfallCardCreatekeywordsInput>;
+  lang: Scalars['String'];
+  layout: Scalars['String'];
+  legalities: Scalars['JSON'];
+  lifeModifier?: InputMaybe<Scalars['String']>;
+  loyalty?: InputMaybe<Scalars['String']>;
+  manaCost?: InputMaybe<Scalars['String']>;
+  mtgoFoilId?: InputMaybe<Scalars['Int']>;
+  mtgoId?: InputMaybe<Scalars['Int']>;
+  multiverseIds?: InputMaybe<ScryfallCardCreatemultiverseIdsInput>;
+  name: Scalars['String'];
+  oracleId?: InputMaybe<Scalars['String']>;
+  oracleText?: InputMaybe<Scalars['String']>;
+  oversized: Scalars['Boolean'];
+  power?: InputMaybe<Scalars['String']>;
+  prices: Scalars['JSON'];
+  printedName?: InputMaybe<Scalars['String']>;
+  printedText?: InputMaybe<Scalars['String']>;
+  printedTypeLine?: InputMaybe<Scalars['String']>;
+  printsSearchUri: Scalars['String'];
+  producedMana?: InputMaybe<ScryfallCardCreateproducedManaInput>;
+  promo: Scalars['Boolean'];
+  promoTypes?: InputMaybe<ScryfallCardCreatepromoTypesInput>;
+  purchaseUris?: InputMaybe<Scalars['JSON']>;
+  rarity: Scalars['String'];
+  referencedBy?: InputMaybe<ScryfallRelatedCardCreateNestedManyWithoutReferenceInput>;
+  relatedTo?: InputMaybe<ScryfallRelatedCardCreateNestedManyWithoutCardInput>;
+  relatedUris: Scalars['JSON'];
+  releasedAt: Scalars['DateTime'];
+  reprint: Scalars['Boolean'];
+  reserved: Scalars['Boolean'];
+  rulingUri?: InputMaybe<Scalars['String']>;
+  scryfallSetUri: Scalars['String'];
+  scryfallUri: Scalars['String'];
+  securityStamp?: InputMaybe<Scalars['String']>;
+  set: ScryfallSetCreateNestedOneWithoutCardsInput;
+  setCode: Scalars['String'];
+  setName: Scalars['String'];
+  setSearchUri: Scalars['String'];
+  setType: Scalars['String'];
+  setUri: Scalars['String'];
+  storySpotlight: Scalars['Boolean'];
+  tcgplayerEtchedId?: InputMaybe<Scalars['Int']>;
+  tcgplayerId?: InputMaybe<Scalars['Int']>;
+  textless: Scalars['Boolean'];
+  toughness?: InputMaybe<Scalars['String']>;
+  typeLine?: InputMaybe<Scalars['String']>;
+  uri: Scalars['String'];
+  varationOf?: InputMaybe<Scalars['String']>;
+  variation: Scalars['Boolean'];
+  watermark?: InputMaybe<Scalars['String']>;
+};
+
+export type ScryfallCardCreateallPartsInput = {
+  set: Array<Scalars['JSON']>;
+};
+
+export type ScryfallCardCreatecardFacesRawInput = {
+  set: Array<Scalars['JSON']>;
+};
+
+export type ScryfallCardCreatecolorIdentityInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardCreatecolorIndicatorInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardCreatecolorsInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardCreatefinishesInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardCreateframeEffectsInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardCreategamesInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardCreatekeywordsInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardCreatemultiverseIdsInput = {
+  set: Array<Scalars['Int']>;
+};
+
+export type ScryfallCardCreateproducedManaInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardCreatepromoTypesInput = {
+  set: Array<Scalars['String']>;
+};
+
 export type ScryfallCardFace = {
   __typename?: 'ScryfallCardFace';
   artist?: Maybe<Scalars['String']>;
@@ -821,6 +1429,79 @@ export type ScryfallCardFace = {
   toughness?: Maybe<Scalars['String']>;
   typeLine?: Maybe<Scalars['String']>;
   watermark?: Maybe<Scalars['String']>;
+};
+
+export type ScryfallCardFaceCreateManyCardInput = {
+  artist?: InputMaybe<Scalars['String']>;
+  cmc?: InputMaybe<Scalars['Float']>;
+  colorIndicator?: InputMaybe<ScryfallCardFaceCreatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardFaceCreatecolorsInput>;
+  flavorText?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  illustrationId?: InputMaybe<Scalars['String']>;
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  layout?: InputMaybe<Scalars['String']>;
+  loyalty?: InputMaybe<Scalars['String']>;
+  manaCost?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  oracleId?: InputMaybe<Scalars['String']>;
+  oracleText?: InputMaybe<Scalars['String']>;
+  power?: InputMaybe<Scalars['String']>;
+  printedName?: InputMaybe<Scalars['String']>;
+  printedText?: InputMaybe<Scalars['String']>;
+  printedTypeLine?: InputMaybe<Scalars['String']>;
+  toughness?: InputMaybe<Scalars['String']>;
+  typeLine?: InputMaybe<Scalars['String']>;
+  watermark?: InputMaybe<Scalars['String']>;
+};
+
+export type ScryfallCardFaceCreateManyCardInputEnvelope = {
+  data: Array<ScryfallCardFaceCreateManyCardInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type ScryfallCardFaceCreateNestedManyWithoutCardInput = {
+  connect?: InputMaybe<Array<ScryfallCardFaceWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ScryfallCardFaceCreateOrConnectWithoutCardInput>>;
+  create?: InputMaybe<Array<ScryfallCardFaceCreateWithoutCardInput>>;
+  createMany?: InputMaybe<ScryfallCardFaceCreateManyCardInputEnvelope>;
+};
+
+export type ScryfallCardFaceCreateOrConnectWithoutCardInput = {
+  create: ScryfallCardFaceCreateWithoutCardInput;
+  where: ScryfallCardFaceWhereUniqueInput;
+};
+
+export type ScryfallCardFaceCreateWithoutCardInput = {
+  artist?: InputMaybe<Scalars['String']>;
+  cmc?: InputMaybe<Scalars['Float']>;
+  colorIndicator?: InputMaybe<ScryfallCardFaceCreatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardFaceCreatecolorsInput>;
+  flavorText?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  illustrationId?: InputMaybe<Scalars['String']>;
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  layout?: InputMaybe<Scalars['String']>;
+  loyalty?: InputMaybe<Scalars['String']>;
+  manaCost?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  oracleId?: InputMaybe<Scalars['String']>;
+  oracleText?: InputMaybe<Scalars['String']>;
+  power?: InputMaybe<Scalars['String']>;
+  printedName?: InputMaybe<Scalars['String']>;
+  printedText?: InputMaybe<Scalars['String']>;
+  printedTypeLine?: InputMaybe<Scalars['String']>;
+  toughness?: InputMaybe<Scalars['String']>;
+  typeLine?: InputMaybe<Scalars['String']>;
+  watermark?: InputMaybe<Scalars['String']>;
+};
+
+export type ScryfallCardFaceCreatecolorIndicatorInput = {
+  set: Array<Scalars['String']>;
+};
+
+export type ScryfallCardFaceCreatecolorsInput = {
+  set: Array<Scalars['String']>;
 };
 
 export type ScryfallCardFaceListRelationFilter = {
@@ -860,6 +1541,10 @@ export type ScryfallCardFaceWhereInput = {
   toughness?: InputMaybe<StringNullableFilter>;
   typeLine?: InputMaybe<StringNullableFilter>;
   watermark?: InputMaybe<StringNullableFilter>;
+};
+
+export type ScryfallCardFaceWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
 export type ScryfallCardListRelationFilter = {
@@ -1251,6 +1936,70 @@ export type ScryfallPriceCountOrderByAggregateInput = {
   usdFoil?: InputMaybe<SortOrder>;
 };
 
+export type ScryfallPriceCreateManyCardInput = {
+  currentPriceOfCardId?: InputMaybe<Scalars['String']>;
+  date: Scalars['DateTime'];
+  eur?: InputMaybe<Scalars['Float']>;
+  eurFoil?: InputMaybe<Scalars['Float']>;
+  id?: InputMaybe<Scalars['String']>;
+  tix?: InputMaybe<Scalars['Float']>;
+  usd?: InputMaybe<Scalars['Float']>;
+  usdEtched?: InputMaybe<Scalars['Float']>;
+  usdFoil?: InputMaybe<Scalars['Float']>;
+};
+
+export type ScryfallPriceCreateManyCardInputEnvelope = {
+  data: Array<ScryfallPriceCreateManyCardInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type ScryfallPriceCreateNestedManyWithoutCardInput = {
+  connect?: InputMaybe<Array<ScryfallPriceWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ScryfallPriceCreateOrConnectWithoutCardInput>>;
+  create?: InputMaybe<Array<ScryfallPriceCreateWithoutCardInput>>;
+  createMany?: InputMaybe<ScryfallPriceCreateManyCardInputEnvelope>;
+};
+
+export type ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput = {
+  connect?: InputMaybe<ScryfallPriceWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput>;
+  create?: InputMaybe<ScryfallPriceCreateWithoutCurrentPriceOfCardInput>;
+};
+
+export type ScryfallPriceCreateOrConnectWithoutCardInput = {
+  create: ScryfallPriceCreateWithoutCardInput;
+  where: ScryfallPriceWhereUniqueInput;
+};
+
+export type ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput = {
+  create: ScryfallPriceCreateWithoutCurrentPriceOfCardInput;
+  where: ScryfallPriceWhereUniqueInput;
+};
+
+export type ScryfallPriceCreateWithoutCardInput = {
+  currentPriceOfCard?: InputMaybe<CardCreateNestedOneWithoutCurrentPriceInput>;
+  date: Scalars['DateTime'];
+  eur?: InputMaybe<Scalars['Float']>;
+  eurFoil?: InputMaybe<Scalars['Float']>;
+  id?: InputMaybe<Scalars['String']>;
+  tix?: InputMaybe<Scalars['Float']>;
+  usd?: InputMaybe<Scalars['Float']>;
+  usdEtched?: InputMaybe<Scalars['Float']>;
+  usdFoil?: InputMaybe<Scalars['Float']>;
+};
+
+export type ScryfallPriceCreateWithoutCurrentPriceOfCardInput = {
+  card: ScryfallCardCreateNestedOneWithoutScryfallPriceInput;
+  date: Scalars['DateTime'];
+  eur?: InputMaybe<Scalars['Float']>;
+  eurFoil?: InputMaybe<Scalars['Float']>;
+  id?: InputMaybe<Scalars['String']>;
+  tix?: InputMaybe<Scalars['Float']>;
+  usd?: InputMaybe<Scalars['Float']>;
+  usdEtched?: InputMaybe<Scalars['Float']>;
+  usdFoil?: InputMaybe<Scalars['Float']>;
+};
+
 export type ScryfallPriceGroupBy = {
   __typename?: 'ScryfallPriceGroupBy';
   _avg?: Maybe<ScryfallPriceAvgAggregate>;
@@ -1491,6 +2240,76 @@ export type ScryfallRelatedCard = {
   uri: Scalars['String'];
 };
 
+export type ScryfallRelatedCardCreateManyCardInput = {
+  component: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  referenceId: Scalars['String'];
+  typeLine: Scalars['String'];
+  uri: Scalars['String'];
+};
+
+export type ScryfallRelatedCardCreateManyCardInputEnvelope = {
+  data: Array<ScryfallRelatedCardCreateManyCardInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type ScryfallRelatedCardCreateManyReferenceInput = {
+  cardId: Scalars['String'];
+  component: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  typeLine: Scalars['String'];
+  uri: Scalars['String'];
+};
+
+export type ScryfallRelatedCardCreateManyReferenceInputEnvelope = {
+  data: Array<ScryfallRelatedCardCreateManyReferenceInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type ScryfallRelatedCardCreateNestedManyWithoutCardInput = {
+  connect?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ScryfallRelatedCardCreateOrConnectWithoutCardInput>>;
+  create?: InputMaybe<Array<ScryfallRelatedCardCreateWithoutCardInput>>;
+  createMany?: InputMaybe<ScryfallRelatedCardCreateManyCardInputEnvelope>;
+};
+
+export type ScryfallRelatedCardCreateNestedManyWithoutReferenceInput = {
+  connect?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ScryfallRelatedCardCreateOrConnectWithoutReferenceInput>>;
+  create?: InputMaybe<Array<ScryfallRelatedCardCreateWithoutReferenceInput>>;
+  createMany?: InputMaybe<ScryfallRelatedCardCreateManyReferenceInputEnvelope>;
+};
+
+export type ScryfallRelatedCardCreateOrConnectWithoutCardInput = {
+  create: ScryfallRelatedCardCreateWithoutCardInput;
+  where: ScryfallRelatedCardWhereUniqueInput;
+};
+
+export type ScryfallRelatedCardCreateOrConnectWithoutReferenceInput = {
+  create: ScryfallRelatedCardCreateWithoutReferenceInput;
+  where: ScryfallRelatedCardWhereUniqueInput;
+};
+
+export type ScryfallRelatedCardCreateWithoutCardInput = {
+  component: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  reference: ScryfallCardCreateNestedOneWithoutReferencedByInput;
+  typeLine: Scalars['String'];
+  uri: Scalars['String'];
+};
+
+export type ScryfallRelatedCardCreateWithoutReferenceInput = {
+  card: ScryfallCardCreateNestedOneWithoutRelatedToInput;
+  component: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  typeLine: Scalars['String'];
+  uri: Scalars['String'];
+};
+
 export type ScryfallRelatedCardListRelationFilter = {
   every?: InputMaybe<ScryfallRelatedCardWhereInput>;
   none?: InputMaybe<ScryfallRelatedCardWhereInput>;
@@ -1514,6 +2333,10 @@ export type ScryfallRelatedCardWhereInput = {
   referenceId?: InputMaybe<StringFilter>;
   typeLine?: InputMaybe<StringFilter>;
   uri?: InputMaybe<StringFilter>;
+};
+
+export type ScryfallRelatedCardWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
 };
 
 export type ScryfallSet = {
@@ -1555,6 +2378,40 @@ export type ScryfallSetCardsArgs = {
 export type ScryfallSetCount = {
   __typename?: 'ScryfallSetCount';
   cards: Scalars['Int'];
+};
+
+export type ScryfallSetCreateNestedOneWithoutCardsInput = {
+  connect?: InputMaybe<ScryfallSetWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallSetCreateOrConnectWithoutCardsInput>;
+  create?: InputMaybe<ScryfallSetCreateWithoutCardsInput>;
+};
+
+export type ScryfallSetCreateOrConnectWithoutCardsInput = {
+  create: ScryfallSetCreateWithoutCardsInput;
+  where: ScryfallSetWhereUniqueInput;
+};
+
+export type ScryfallSetCreateWithoutCardsInput = {
+  arenaCode?: InputMaybe<Scalars['String']>;
+  block?: InputMaybe<Scalars['String']>;
+  blockCode?: InputMaybe<Scalars['String']>;
+  cardCount: Scalars['Int'];
+  code: Scalars['String'];
+  iconSvgUri: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  isDigital: Scalars['Boolean'];
+  isFoilOnly: Scalars['Boolean'];
+  isNonFoilOnly: Scalars['Boolean'];
+  mtgoCode?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  parentSetCode?: InputMaybe<Scalars['String']>;
+  printedSize?: InputMaybe<Scalars['Int']>;
+  releasedAt?: InputMaybe<Scalars['DateTime']>;
+  scryfallUri: Scalars['String'];
+  searchUri: Scalars['String'];
+  setType: Scalars['String'];
+  tcgPlayerId?: InputMaybe<Scalars['Int']>;
+  uri: Scalars['String'];
 };
 
 export type ScryfallSetOrderByWithRelationInput = {
@@ -1740,6 +2597,23 @@ export type UserCount = {
   collections: Scalars['Int'];
 };
 
+export type UserCreateNestedOneWithoutCollectionsInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCollectionsInput>;
+  create?: InputMaybe<UserCreateWithoutCollectionsInput>;
+};
+
+export type UserCreateOrConnectWithoutCollectionsInput = {
+  create: UserCreateWithoutCollectionsInput;
+  where: UserWhereUniqueInput;
+};
+
+export type UserCreateWithoutCollectionsInput = {
+  email: Scalars['String'];
+  externalAuthId: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+};
+
 export type UserOrderByWithRelationInput = {
   collections?: InputMaybe<CollectionOrderByRelationAggregateInput>;
   email?: InputMaybe<SortOrder>;
@@ -1761,6 +2635,24 @@ export type UserWhereInput = {
   externalAuthId?: InputMaybe<StringFilter>;
   id?: InputMaybe<StringFilter>;
 };
+
+export type UserWhereUniqueInput = {
+  email?: InputMaybe<Scalars['String']>;
+  externalAuthId?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type AddCollectionMutationVariables = Exact<{
+  input: CollectionCreateWithoutUserInput;
+}>;
+
+
+export type AddCollectionMutation = { __typename?: 'Mutation', addCollection: { __typename?: 'Collection', id: string } };
+
+export type CollectionListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CollectionListQuery = { __typename?: 'Query', allCollections: Array<{ __typename?: 'Collection', id: string, name: string, _count: { __typename?: 'CollectionCount', cards: number } }> };
 
 export type SearchCardResultsQueryVariables = Exact<{
   name: Scalars['String'];
@@ -1912,6 +2804,77 @@ export const ScryfallCardFullFragmentDoc = gql`
   watermark
 }
     `;
+export const AddCollectionDocument = gql`
+    mutation AddCollection($input: CollectionCreateWithoutUserInput!) {
+  addCollection(input: $input) {
+    id
+  }
+}
+    `;
+export type AddCollectionMutationFn = Apollo.MutationFunction<AddCollectionMutation, AddCollectionMutationVariables>;
+
+/**
+ * __useAddCollectionMutation__
+ *
+ * To run a mutation, you first call `useAddCollectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddCollectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addCollectionMutation, { data, loading, error }] = useAddCollectionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAddCollectionMutation(baseOptions?: Apollo.MutationHookOptions<AddCollectionMutation, AddCollectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddCollectionMutation, AddCollectionMutationVariables>(AddCollectionDocument, options);
+      }
+export type AddCollectionMutationHookResult = ReturnType<typeof useAddCollectionMutation>;
+export type AddCollectionMutationResult = Apollo.MutationResult<AddCollectionMutation>;
+export type AddCollectionMutationOptions = Apollo.BaseMutationOptions<AddCollectionMutation, AddCollectionMutationVariables>;
+export const CollectionListDocument = gql`
+    query CollectionList {
+  allCollections {
+    id
+    name
+    _count {
+      cards
+    }
+  }
+}
+    `;
+
+/**
+ * __useCollectionListQuery__
+ *
+ * To run a query within a React component, call `useCollectionListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCollectionListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCollectionListQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCollectionListQuery(baseOptions?: Apollo.QueryHookOptions<CollectionListQuery, CollectionListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CollectionListQuery, CollectionListQueryVariables>(CollectionListDocument, options);
+      }
+export function useCollectionListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CollectionListQuery, CollectionListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CollectionListQuery, CollectionListQueryVariables>(CollectionListDocument, options);
+        }
+export type CollectionListQueryHookResult = ReturnType<typeof useCollectionListQuery>;
+export type CollectionListLazyQueryHookResult = ReturnType<typeof useCollectionListLazyQuery>;
+export type CollectionListQueryResult = Apollo.QueryResult<CollectionListQuery, CollectionListQueryVariables>;
 export const SearchCardResultsDocument = gql`
     query SearchCardResults($name: String!) {
   allCards(

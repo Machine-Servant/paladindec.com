@@ -73,6 +73,95 @@ type CardCount {
   collections: Int!
 }
 
+input CardCreateManyScryfallCardInput {
+  canBeFoil: Boolean
+  collectorNumber: String
+  id: String
+  isBorderless: Boolean
+  isEtched: Boolean
+  isPaper: Boolean
+  isShowcase: Boolean
+  name: String!
+}
+
+input CardCreateManyScryfallCardInputEnvelope {
+  data: [CardCreateManyScryfallCardInput!]!
+  skipDuplicates: Boolean
+}
+
+input CardCreateNestedManyWithoutScryfallCardInput {
+  connect: [CardWhereUniqueInput!]
+  connectOrCreate: [CardCreateOrConnectWithoutScryfallCardInput!]
+  create: [CardCreateWithoutScryfallCardInput!]
+  createMany: CardCreateManyScryfallCardInputEnvelope
+}
+
+input CardCreateNestedOneWithoutCollectionsInput {
+  connect: CardWhereUniqueInput
+  connectOrCreate: CardCreateOrConnectWithoutCollectionsInput
+  create: CardCreateWithoutCollectionsInput
+}
+
+input CardCreateNestedOneWithoutCurrentPriceInput {
+  connect: CardWhereUniqueInput
+  connectOrCreate: CardCreateOrConnectWithoutCurrentPriceInput
+  create: CardCreateWithoutCurrentPriceInput
+}
+
+input CardCreateOrConnectWithoutCollectionsInput {
+  create: CardCreateWithoutCollectionsInput!
+  where: CardWhereUniqueInput!
+}
+
+input CardCreateOrConnectWithoutCurrentPriceInput {
+  create: CardCreateWithoutCurrentPriceInput!
+  where: CardWhereUniqueInput!
+}
+
+input CardCreateOrConnectWithoutScryfallCardInput {
+  create: CardCreateWithoutScryfallCardInput!
+  where: CardWhereUniqueInput!
+}
+
+input CardCreateWithoutCollectionsInput {
+  canBeFoil: Boolean
+  collectorNumber: String
+  currentPrice: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput
+  id: String
+  isBorderless: Boolean
+  isEtched: Boolean
+  isPaper: Boolean
+  isShowcase: Boolean
+  name: String!
+  scryfallCard: ScryfallCardCreateNestedOneWithoutCardInput!
+}
+
+input CardCreateWithoutCurrentPriceInput {
+  canBeFoil: Boolean
+  collections: CardsInCollectionCreateNestedManyWithoutCardInput
+  collectorNumber: String
+  id: String
+  isBorderless: Boolean
+  isEtched: Boolean
+  isPaper: Boolean
+  isShowcase: Boolean
+  name: String!
+  scryfallCard: ScryfallCardCreateNestedOneWithoutCardInput!
+}
+
+input CardCreateWithoutScryfallCardInput {
+  canBeFoil: Boolean
+  collections: CardsInCollectionCreateNestedManyWithoutCardInput
+  collectorNumber: String
+  currentPrice: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput
+  id: String
+  isBorderless: Boolean
+  isEtched: Boolean
+  isPaper: Boolean
+  isShowcase: Boolean
+  name: String!
+}
+
 input CardListRelationFilter {
   every: CardWhereInput
   none: CardWhereInput
@@ -159,6 +248,68 @@ type CardsInCollectionCardPrice {
   usd: Float!
 }
 
+input CardsInCollectionCreateManyCardInput {
+  collectionId: String!
+  count: Int
+  isEtched: Boolean
+  isFoil: Boolean
+}
+
+input CardsInCollectionCreateManyCardInputEnvelope {
+  data: [CardsInCollectionCreateManyCardInput!]!
+  skipDuplicates: Boolean
+}
+
+input CardsInCollectionCreateManyCollectionInput {
+  cardId: String!
+  count: Int
+  isEtched: Boolean
+  isFoil: Boolean
+}
+
+input CardsInCollectionCreateManyCollectionInputEnvelope {
+  data: [CardsInCollectionCreateManyCollectionInput!]!
+  skipDuplicates: Boolean
+}
+
+input CardsInCollectionCreateNestedManyWithoutCardInput {
+  connect: [CardsInCollectionWhereUniqueInput!]
+  connectOrCreate: [CardsInCollectionCreateOrConnectWithoutCardInput!]
+  create: [CardsInCollectionCreateWithoutCardInput!]
+  createMany: CardsInCollectionCreateManyCardInputEnvelope
+}
+
+input CardsInCollectionCreateNestedManyWithoutCollectionInput {
+  connect: [CardsInCollectionWhereUniqueInput!]
+  connectOrCreate: [CardsInCollectionCreateOrConnectWithoutCollectionInput!]
+  create: [CardsInCollectionCreateWithoutCollectionInput!]
+  createMany: CardsInCollectionCreateManyCollectionInputEnvelope
+}
+
+input CardsInCollectionCreateOrConnectWithoutCardInput {
+  create: CardsInCollectionCreateWithoutCardInput!
+  where: CardsInCollectionWhereUniqueInput!
+}
+
+input CardsInCollectionCreateOrConnectWithoutCollectionInput {
+  create: CardsInCollectionCreateWithoutCollectionInput!
+  where: CardsInCollectionWhereUniqueInput!
+}
+
+input CardsInCollectionCreateWithoutCardInput {
+  collection: CollectionCreateNestedOneWithoutCardsInput!
+  count: Int
+  isEtched: Boolean
+  isFoil: Boolean
+}
+
+input CardsInCollectionCreateWithoutCollectionInput {
+  card: CardCreateNestedOneWithoutCollectionsInput!
+  count: Int
+  isEtched: Boolean
+  isFoil: Boolean
+}
+
 input CardsInCollectionListRelationFilter {
   every: CardsInCollectionWhereInput
   none: CardsInCollectionWhereInput
@@ -223,6 +374,29 @@ type Collection {
 
 type CollectionCount {
   cards: Int!
+}
+
+input CollectionCreateNestedOneWithoutCardsInput {
+  connect: CollectionWhereUniqueInput
+  connectOrCreate: CollectionCreateOrConnectWithoutCardsInput
+  create: CollectionCreateWithoutCardsInput
+}
+
+input CollectionCreateOrConnectWithoutCardsInput {
+  create: CollectionCreateWithoutCardsInput!
+  where: CollectionWhereUniqueInput!
+}
+
+input CollectionCreateWithoutCardsInput {
+  id: String
+  name: String!
+  user: UserCreateNestedOneWithoutCollectionsInput!
+}
+
+input CollectionCreateWithoutUserInput {
+  cards: CardsInCollectionCreateNestedManyWithoutCollectionInput
+  id: String
+  name: String!
 }
 
 input CollectionListRelationFilter {
@@ -405,6 +579,7 @@ input JsonNullableListFilter {
 }
 
 type Mutation {
+  addCollection(input: CollectionCreateWithoutUserInput!): Collection!
   downloadBulkData(typeName: String!): Boolean!
   processAllParts: Boolean!
   processBulkData: Boolean!
@@ -686,6 +861,434 @@ type ScryfallCardCount {
   scryfallPrice: Int!
 }
 
+input ScryfallCardCreateNestedOneWithoutCardInput {
+  connect: ScryfallCardWhereUniqueInput
+  connectOrCreate: ScryfallCardCreateOrConnectWithoutCardInput
+  create: ScryfallCardCreateWithoutCardInput
+}
+
+input ScryfallCardCreateNestedOneWithoutReferencedByInput {
+  connect: ScryfallCardWhereUniqueInput
+  connectOrCreate: ScryfallCardCreateOrConnectWithoutReferencedByInput
+  create: ScryfallCardCreateWithoutReferencedByInput
+}
+
+input ScryfallCardCreateNestedOneWithoutRelatedToInput {
+  connect: ScryfallCardWhereUniqueInput
+  connectOrCreate: ScryfallCardCreateOrConnectWithoutRelatedToInput
+  create: ScryfallCardCreateWithoutRelatedToInput
+}
+
+input ScryfallCardCreateNestedOneWithoutScryfallPriceInput {
+  connect: ScryfallCardWhereUniqueInput
+  connectOrCreate: ScryfallCardCreateOrConnectWithoutScryfallPriceInput
+  create: ScryfallCardCreateWithoutScryfallPriceInput
+}
+
+input ScryfallCardCreateOrConnectWithoutCardInput {
+  create: ScryfallCardCreateWithoutCardInput!
+  where: ScryfallCardWhereUniqueInput!
+}
+
+input ScryfallCardCreateOrConnectWithoutReferencedByInput {
+  create: ScryfallCardCreateWithoutReferencedByInput!
+  where: ScryfallCardWhereUniqueInput!
+}
+
+input ScryfallCardCreateOrConnectWithoutRelatedToInput {
+  create: ScryfallCardCreateWithoutRelatedToInput!
+  where: ScryfallCardWhereUniqueInput!
+}
+
+input ScryfallCardCreateOrConnectWithoutScryfallPriceInput {
+  create: ScryfallCardCreateWithoutScryfallPriceInput!
+  where: ScryfallCardWhereUniqueInput!
+}
+
+input ScryfallCardCreateWithoutCardInput {
+  allParts: ScryfallCardCreateallPartsInput
+  arenaId: Int
+  artist: String
+  booster: Boolean!
+  borderColor: String!
+  cardBackId: String
+  cardFaces: ScryfallCardFaceCreateNestedManyWithoutCardInput
+  cardFacesRaw: ScryfallCardCreatecardFacesRawInput
+  cardmarketId: Int
+  cmc: Float
+  collectorNumber: String!
+  colorIdentity: ScryfallCardCreatecolorIdentityInput
+  colorIndicator: ScryfallCardCreatecolorIndicatorInput
+  colors: ScryfallCardCreatecolorsInput
+  contentWarning: Boolean
+  digital: Boolean!
+  edhrecRank: Int
+  finishes: ScryfallCardCreatefinishesInput
+  flavorName: String
+  frame: String!
+  frameEffects: ScryfallCardCreateframeEffectsInput
+  fullArt: Boolean!
+  games: ScryfallCardCreategamesInput
+  handModifier: String
+  highresImage: Boolean!
+  id: String
+  illustrationId: String
+  imageStatus: String!
+  imageUris: JSON
+  keywords: ScryfallCardCreatekeywordsInput
+  lang: String!
+  layout: String!
+  legalities: JSON!
+  lifeModifier: String
+  loyalty: String
+  manaCost: String
+  mtgoFoilId: Int
+  mtgoId: Int
+  multiverseIds: ScryfallCardCreatemultiverseIdsInput
+  name: String!
+  oracleId: String
+  oracleText: String
+  oversized: Boolean!
+  power: String
+  prices: JSON!
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  printsSearchUri: String!
+  producedMana: ScryfallCardCreateproducedManaInput
+  promo: Boolean!
+  promoTypes: ScryfallCardCreatepromoTypesInput
+  purchaseUris: JSON
+  rarity: String!
+  referencedBy: ScryfallRelatedCardCreateNestedManyWithoutReferenceInput
+  relatedTo: ScryfallRelatedCardCreateNestedManyWithoutCardInput
+  relatedUris: JSON!
+  releasedAt: DateTime!
+  reprint: Boolean!
+  reserved: Boolean!
+  rulingUri: String
+  scryfallPrice: ScryfallPriceCreateNestedManyWithoutCardInput
+  scryfallSetUri: String!
+  scryfallUri: String!
+  securityStamp: String
+  set: ScryfallSetCreateNestedOneWithoutCardsInput!
+  setCode: String!
+  setName: String!
+  setSearchUri: String!
+  setType: String!
+  setUri: String!
+  storySpotlight: Boolean!
+  tcgplayerEtchedId: Int
+  tcgplayerId: Int
+  textless: Boolean!
+  toughness: String
+  typeLine: String
+  uri: String!
+  varationOf: String
+  variation: Boolean!
+  watermark: String
+}
+
+input ScryfallCardCreateWithoutReferencedByInput {
+  allParts: ScryfallCardCreateallPartsInput
+  arenaId: Int
+  artist: String
+  booster: Boolean!
+  borderColor: String!
+  card: CardCreateNestedManyWithoutScryfallCardInput
+  cardBackId: String
+  cardFaces: ScryfallCardFaceCreateNestedManyWithoutCardInput
+  cardFacesRaw: ScryfallCardCreatecardFacesRawInput
+  cardmarketId: Int
+  cmc: Float
+  collectorNumber: String!
+  colorIdentity: ScryfallCardCreatecolorIdentityInput
+  colorIndicator: ScryfallCardCreatecolorIndicatorInput
+  colors: ScryfallCardCreatecolorsInput
+  contentWarning: Boolean
+  digital: Boolean!
+  edhrecRank: Int
+  finishes: ScryfallCardCreatefinishesInput
+  flavorName: String
+  frame: String!
+  frameEffects: ScryfallCardCreateframeEffectsInput
+  fullArt: Boolean!
+  games: ScryfallCardCreategamesInput
+  handModifier: String
+  highresImage: Boolean!
+  id: String
+  illustrationId: String
+  imageStatus: String!
+  imageUris: JSON
+  keywords: ScryfallCardCreatekeywordsInput
+  lang: String!
+  layout: String!
+  legalities: JSON!
+  lifeModifier: String
+  loyalty: String
+  manaCost: String
+  mtgoFoilId: Int
+  mtgoId: Int
+  multiverseIds: ScryfallCardCreatemultiverseIdsInput
+  name: String!
+  oracleId: String
+  oracleText: String
+  oversized: Boolean!
+  power: String
+  prices: JSON!
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  printsSearchUri: String!
+  producedMana: ScryfallCardCreateproducedManaInput
+  promo: Boolean!
+  promoTypes: ScryfallCardCreatepromoTypesInput
+  purchaseUris: JSON
+  rarity: String!
+  relatedTo: ScryfallRelatedCardCreateNestedManyWithoutCardInput
+  relatedUris: JSON!
+  releasedAt: DateTime!
+  reprint: Boolean!
+  reserved: Boolean!
+  rulingUri: String
+  scryfallPrice: ScryfallPriceCreateNestedManyWithoutCardInput
+  scryfallSetUri: String!
+  scryfallUri: String!
+  securityStamp: String
+  set: ScryfallSetCreateNestedOneWithoutCardsInput!
+  setCode: String!
+  setName: String!
+  setSearchUri: String!
+  setType: String!
+  setUri: String!
+  storySpotlight: Boolean!
+  tcgplayerEtchedId: Int
+  tcgplayerId: Int
+  textless: Boolean!
+  toughness: String
+  typeLine: String
+  uri: String!
+  varationOf: String
+  variation: Boolean!
+  watermark: String
+}
+
+input ScryfallCardCreateWithoutRelatedToInput {
+  allParts: ScryfallCardCreateallPartsInput
+  arenaId: Int
+  artist: String
+  booster: Boolean!
+  borderColor: String!
+  card: CardCreateNestedManyWithoutScryfallCardInput
+  cardBackId: String
+  cardFaces: ScryfallCardFaceCreateNestedManyWithoutCardInput
+  cardFacesRaw: ScryfallCardCreatecardFacesRawInput
+  cardmarketId: Int
+  cmc: Float
+  collectorNumber: String!
+  colorIdentity: ScryfallCardCreatecolorIdentityInput
+  colorIndicator: ScryfallCardCreatecolorIndicatorInput
+  colors: ScryfallCardCreatecolorsInput
+  contentWarning: Boolean
+  digital: Boolean!
+  edhrecRank: Int
+  finishes: ScryfallCardCreatefinishesInput
+  flavorName: String
+  frame: String!
+  frameEffects: ScryfallCardCreateframeEffectsInput
+  fullArt: Boolean!
+  games: ScryfallCardCreategamesInput
+  handModifier: String
+  highresImage: Boolean!
+  id: String
+  illustrationId: String
+  imageStatus: String!
+  imageUris: JSON
+  keywords: ScryfallCardCreatekeywordsInput
+  lang: String!
+  layout: String!
+  legalities: JSON!
+  lifeModifier: String
+  loyalty: String
+  manaCost: String
+  mtgoFoilId: Int
+  mtgoId: Int
+  multiverseIds: ScryfallCardCreatemultiverseIdsInput
+  name: String!
+  oracleId: String
+  oracleText: String
+  oversized: Boolean!
+  power: String
+  prices: JSON!
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  printsSearchUri: String!
+  producedMana: ScryfallCardCreateproducedManaInput
+  promo: Boolean!
+  promoTypes: ScryfallCardCreatepromoTypesInput
+  purchaseUris: JSON
+  rarity: String!
+  referencedBy: ScryfallRelatedCardCreateNestedManyWithoutReferenceInput
+  relatedUris: JSON!
+  releasedAt: DateTime!
+  reprint: Boolean!
+  reserved: Boolean!
+  rulingUri: String
+  scryfallPrice: ScryfallPriceCreateNestedManyWithoutCardInput
+  scryfallSetUri: String!
+  scryfallUri: String!
+  securityStamp: String
+  set: ScryfallSetCreateNestedOneWithoutCardsInput!
+  setCode: String!
+  setName: String!
+  setSearchUri: String!
+  setType: String!
+  setUri: String!
+  storySpotlight: Boolean!
+  tcgplayerEtchedId: Int
+  tcgplayerId: Int
+  textless: Boolean!
+  toughness: String
+  typeLine: String
+  uri: String!
+  varationOf: String
+  variation: Boolean!
+  watermark: String
+}
+
+input ScryfallCardCreateWithoutScryfallPriceInput {
+  allParts: ScryfallCardCreateallPartsInput
+  arenaId: Int
+  artist: String
+  booster: Boolean!
+  borderColor: String!
+  card: CardCreateNestedManyWithoutScryfallCardInput
+  cardBackId: String
+  cardFaces: ScryfallCardFaceCreateNestedManyWithoutCardInput
+  cardFacesRaw: ScryfallCardCreatecardFacesRawInput
+  cardmarketId: Int
+  cmc: Float
+  collectorNumber: String!
+  colorIdentity: ScryfallCardCreatecolorIdentityInput
+  colorIndicator: ScryfallCardCreatecolorIndicatorInput
+  colors: ScryfallCardCreatecolorsInput
+  contentWarning: Boolean
+  digital: Boolean!
+  edhrecRank: Int
+  finishes: ScryfallCardCreatefinishesInput
+  flavorName: String
+  frame: String!
+  frameEffects: ScryfallCardCreateframeEffectsInput
+  fullArt: Boolean!
+  games: ScryfallCardCreategamesInput
+  handModifier: String
+  highresImage: Boolean!
+  id: String
+  illustrationId: String
+  imageStatus: String!
+  imageUris: JSON
+  keywords: ScryfallCardCreatekeywordsInput
+  lang: String!
+  layout: String!
+  legalities: JSON!
+  lifeModifier: String
+  loyalty: String
+  manaCost: String
+  mtgoFoilId: Int
+  mtgoId: Int
+  multiverseIds: ScryfallCardCreatemultiverseIdsInput
+  name: String!
+  oracleId: String
+  oracleText: String
+  oversized: Boolean!
+  power: String
+  prices: JSON!
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  printsSearchUri: String!
+  producedMana: ScryfallCardCreateproducedManaInput
+  promo: Boolean!
+  promoTypes: ScryfallCardCreatepromoTypesInput
+  purchaseUris: JSON
+  rarity: String!
+  referencedBy: ScryfallRelatedCardCreateNestedManyWithoutReferenceInput
+  relatedTo: ScryfallRelatedCardCreateNestedManyWithoutCardInput
+  relatedUris: JSON!
+  releasedAt: DateTime!
+  reprint: Boolean!
+  reserved: Boolean!
+  rulingUri: String
+  scryfallSetUri: String!
+  scryfallUri: String!
+  securityStamp: String
+  set: ScryfallSetCreateNestedOneWithoutCardsInput!
+  setCode: String!
+  setName: String!
+  setSearchUri: String!
+  setType: String!
+  setUri: String!
+  storySpotlight: Boolean!
+  tcgplayerEtchedId: Int
+  tcgplayerId: Int
+  textless: Boolean!
+  toughness: String
+  typeLine: String
+  uri: String!
+  varationOf: String
+  variation: Boolean!
+  watermark: String
+}
+
+input ScryfallCardCreateallPartsInput {
+  set: [JSON!]!
+}
+
+input ScryfallCardCreatecardFacesRawInput {
+  set: [JSON!]!
+}
+
+input ScryfallCardCreatecolorIdentityInput {
+  set: [String!]!
+}
+
+input ScryfallCardCreatecolorIndicatorInput {
+  set: [String!]!
+}
+
+input ScryfallCardCreatecolorsInput {
+  set: [String!]!
+}
+
+input ScryfallCardCreatefinishesInput {
+  set: [String!]!
+}
+
+input ScryfallCardCreateframeEffectsInput {
+  set: [String!]!
+}
+
+input ScryfallCardCreategamesInput {
+  set: [String!]!
+}
+
+input ScryfallCardCreatekeywordsInput {
+  set: [String!]!
+}
+
+input ScryfallCardCreatemultiverseIdsInput {
+  set: [Int!]!
+}
+
+input ScryfallCardCreateproducedManaInput {
+  set: [String!]!
+}
+
+input ScryfallCardCreatepromoTypesInput {
+  set: [String!]!
+}
+
 type ScryfallCardFace {
   artist: String
   card: ScryfallCard!
@@ -710,6 +1313,79 @@ type ScryfallCardFace {
   toughness: String
   typeLine: String
   watermark: String
+}
+
+input ScryfallCardFaceCreateManyCardInput {
+  artist: String
+  cmc: Float
+  colorIndicator: ScryfallCardFaceCreatecolorIndicatorInput
+  colors: ScryfallCardFaceCreatecolorsInput
+  flavorText: String
+  id: String
+  illustrationId: String
+  imageUris: JSON
+  layout: String
+  loyalty: String
+  manaCost: String
+  name: String!
+  oracleId: String
+  oracleText: String
+  power: String
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  toughness: String
+  typeLine: String
+  watermark: String
+}
+
+input ScryfallCardFaceCreateManyCardInputEnvelope {
+  data: [ScryfallCardFaceCreateManyCardInput!]!
+  skipDuplicates: Boolean
+}
+
+input ScryfallCardFaceCreateNestedManyWithoutCardInput {
+  connect: [ScryfallCardFaceWhereUniqueInput!]
+  connectOrCreate: [ScryfallCardFaceCreateOrConnectWithoutCardInput!]
+  create: [ScryfallCardFaceCreateWithoutCardInput!]
+  createMany: ScryfallCardFaceCreateManyCardInputEnvelope
+}
+
+input ScryfallCardFaceCreateOrConnectWithoutCardInput {
+  create: ScryfallCardFaceCreateWithoutCardInput!
+  where: ScryfallCardFaceWhereUniqueInput!
+}
+
+input ScryfallCardFaceCreateWithoutCardInput {
+  artist: String
+  cmc: Float
+  colorIndicator: ScryfallCardFaceCreatecolorIndicatorInput
+  colors: ScryfallCardFaceCreatecolorsInput
+  flavorText: String
+  id: String
+  illustrationId: String
+  imageUris: JSON
+  layout: String
+  loyalty: String
+  manaCost: String
+  name: String!
+  oracleId: String
+  oracleText: String
+  power: String
+  printedName: String
+  printedText: String
+  printedTypeLine: String
+  toughness: String
+  typeLine: String
+  watermark: String
+}
+
+input ScryfallCardFaceCreatecolorIndicatorInput {
+  set: [String!]!
+}
+
+input ScryfallCardFaceCreatecolorsInput {
+  set: [String!]!
 }
 
 input ScryfallCardFaceListRelationFilter {
@@ -749,6 +1425,10 @@ input ScryfallCardFaceWhereInput {
   toughness: StringNullableFilter
   typeLine: StringNullableFilter
   watermark: StringNullableFilter
+}
+
+input ScryfallCardFaceWhereUniqueInput {
+  id: String
 }
 
 input ScryfallCardListRelationFilter {
@@ -1136,6 +1816,70 @@ input ScryfallPriceCountOrderByAggregateInput {
   usdFoil: SortOrder
 }
 
+input ScryfallPriceCreateManyCardInput {
+  currentPriceOfCardId: String
+  date: DateTime!
+  eur: Float
+  eurFoil: Float
+  id: String
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
+input ScryfallPriceCreateManyCardInputEnvelope {
+  data: [ScryfallPriceCreateManyCardInput!]!
+  skipDuplicates: Boolean
+}
+
+input ScryfallPriceCreateNestedManyWithoutCardInput {
+  connect: [ScryfallPriceWhereUniqueInput!]
+  connectOrCreate: [ScryfallPriceCreateOrConnectWithoutCardInput!]
+  create: [ScryfallPriceCreateWithoutCardInput!]
+  createMany: ScryfallPriceCreateManyCardInputEnvelope
+}
+
+input ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput {
+  connect: ScryfallPriceWhereUniqueInput
+  connectOrCreate: ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput
+  create: ScryfallPriceCreateWithoutCurrentPriceOfCardInput
+}
+
+input ScryfallPriceCreateOrConnectWithoutCardInput {
+  create: ScryfallPriceCreateWithoutCardInput!
+  where: ScryfallPriceWhereUniqueInput!
+}
+
+input ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput {
+  create: ScryfallPriceCreateWithoutCurrentPriceOfCardInput!
+  where: ScryfallPriceWhereUniqueInput!
+}
+
+input ScryfallPriceCreateWithoutCardInput {
+  currentPriceOfCard: CardCreateNestedOneWithoutCurrentPriceInput
+  date: DateTime!
+  eur: Float
+  eurFoil: Float
+  id: String
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
+input ScryfallPriceCreateWithoutCurrentPriceOfCardInput {
+  card: ScryfallCardCreateNestedOneWithoutScryfallPriceInput!
+  date: DateTime!
+  eur: Float
+  eurFoil: Float
+  id: String
+  tix: Float
+  usd: Float
+  usdEtched: Float
+  usdFoil: Float
+}
+
 type ScryfallPriceGroupBy {
   _avg: ScryfallPriceAvgAggregate
   _count: ScryfallPriceCountAggregate
@@ -1371,6 +2115,76 @@ type ScryfallRelatedCard {
   uri: String!
 }
 
+input ScryfallRelatedCardCreateManyCardInput {
+  component: String!
+  id: String
+  name: String!
+  referenceId: String!
+  typeLine: String!
+  uri: String!
+}
+
+input ScryfallRelatedCardCreateManyCardInputEnvelope {
+  data: [ScryfallRelatedCardCreateManyCardInput!]!
+  skipDuplicates: Boolean
+}
+
+input ScryfallRelatedCardCreateManyReferenceInput {
+  cardId: String!
+  component: String!
+  id: String
+  name: String!
+  typeLine: String!
+  uri: String!
+}
+
+input ScryfallRelatedCardCreateManyReferenceInputEnvelope {
+  data: [ScryfallRelatedCardCreateManyReferenceInput!]!
+  skipDuplicates: Boolean
+}
+
+input ScryfallRelatedCardCreateNestedManyWithoutCardInput {
+  connect: [ScryfallRelatedCardWhereUniqueInput!]
+  connectOrCreate: [ScryfallRelatedCardCreateOrConnectWithoutCardInput!]
+  create: [ScryfallRelatedCardCreateWithoutCardInput!]
+  createMany: ScryfallRelatedCardCreateManyCardInputEnvelope
+}
+
+input ScryfallRelatedCardCreateNestedManyWithoutReferenceInput {
+  connect: [ScryfallRelatedCardWhereUniqueInput!]
+  connectOrCreate: [ScryfallRelatedCardCreateOrConnectWithoutReferenceInput!]
+  create: [ScryfallRelatedCardCreateWithoutReferenceInput!]
+  createMany: ScryfallRelatedCardCreateManyReferenceInputEnvelope
+}
+
+input ScryfallRelatedCardCreateOrConnectWithoutCardInput {
+  create: ScryfallRelatedCardCreateWithoutCardInput!
+  where: ScryfallRelatedCardWhereUniqueInput!
+}
+
+input ScryfallRelatedCardCreateOrConnectWithoutReferenceInput {
+  create: ScryfallRelatedCardCreateWithoutReferenceInput!
+  where: ScryfallRelatedCardWhereUniqueInput!
+}
+
+input ScryfallRelatedCardCreateWithoutCardInput {
+  component: String!
+  id: String
+  name: String!
+  reference: ScryfallCardCreateNestedOneWithoutReferencedByInput!
+  typeLine: String!
+  uri: String!
+}
+
+input ScryfallRelatedCardCreateWithoutReferenceInput {
+  card: ScryfallCardCreateNestedOneWithoutRelatedToInput!
+  component: String!
+  id: String
+  name: String!
+  typeLine: String!
+  uri: String!
+}
+
 input ScryfallRelatedCardListRelationFilter {
   every: ScryfallRelatedCardWhereInput
   none: ScryfallRelatedCardWhereInput
@@ -1394,6 +2208,10 @@ input ScryfallRelatedCardWhereInput {
   referenceId: StringFilter
   typeLine: StringFilter
   uri: StringFilter
+}
+
+input ScryfallRelatedCardWhereUniqueInput {
+  id: String
 }
 
 type ScryfallSet {
@@ -1423,6 +2241,40 @@ type ScryfallSet {
 
 type ScryfallSetCount {
   cards: Int!
+}
+
+input ScryfallSetCreateNestedOneWithoutCardsInput {
+  connect: ScryfallSetWhereUniqueInput
+  connectOrCreate: ScryfallSetCreateOrConnectWithoutCardsInput
+  create: ScryfallSetCreateWithoutCardsInput
+}
+
+input ScryfallSetCreateOrConnectWithoutCardsInput {
+  create: ScryfallSetCreateWithoutCardsInput!
+  where: ScryfallSetWhereUniqueInput!
+}
+
+input ScryfallSetCreateWithoutCardsInput {
+  arenaCode: String
+  block: String
+  blockCode: String
+  cardCount: Int!
+  code: String!
+  iconSvgUri: String!
+  id: String
+  isDigital: Boolean!
+  isFoilOnly: Boolean!
+  isNonFoilOnly: Boolean!
+  mtgoCode: String
+  name: String!
+  parentSetCode: String
+  printedSize: Int
+  releasedAt: DateTime
+  scryfallUri: String!
+  searchUri: String!
+  setType: String!
+  tcgPlayerId: Int
+  uri: String!
 }
 
 input ScryfallSetOrderByWithRelationInput {
@@ -1606,6 +2458,23 @@ type UserCount {
   collections: Int!
 }
 
+input UserCreateNestedOneWithoutCollectionsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCollectionsInput
+  create: UserCreateWithoutCollectionsInput
+}
+
+input UserCreateOrConnectWithoutCollectionsInput {
+  create: UserCreateWithoutCollectionsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutCollectionsInput {
+  email: String!
+  externalAuthId: String!
+  id: String
+}
+
 input UserOrderByWithRelationInput {
   collections: CollectionOrderByRelationAggregateInput
   email: SortOrder
@@ -1626,4 +2495,10 @@ input UserWhereInput {
   email: StringFilter
   externalAuthId: StringFilter
   id: StringFilter
+}
+
+input UserWhereUniqueInput {
+  email: String
+  externalAuthId: String
+  id: String
 }

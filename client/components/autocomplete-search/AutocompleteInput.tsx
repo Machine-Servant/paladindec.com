@@ -23,9 +23,15 @@ type AutocompleteInputProps<T> = Omit<
 
 export function AutocompleteInput<T>({
   onSelect,
+  onTextChange,
+  renderItem,
+  items,
+  extractKey,
+  extractLabel,
+  loading,
   ...props
 }: React.PropsWithChildren<AutocompleteInputProps<T>>) {
-  const [term, setTerm] = useState<string>();
+  const [term, setTerm] = useState<string>('');
   const [currentHighlightIndex, setCurrentHighlightIndex] = useState<number>(0);
   const [selection, setSelection] = useState<T>();
   const ref = useRef<HTMLInputElement>(null);
@@ -37,8 +43,8 @@ export function AutocompleteInput<T>({
   );
 
   const debounced = useMemo(
-    () => debounce(props.onTextChange, 300, { leading: true, trailing: true }),
-    [props.onTextChange],
+    () => debounce(onTextChange, 300, { leading: true, trailing: true }),
+    [onTextChange],
   );
 
   useEffect(() => {
@@ -52,34 +58,37 @@ export function AutocompleteInput<T>({
 
   useEffect(() => {
     if (!selection) return;
-    setTerm(props.extractLabel(selection));
-  }, [setTerm, props, selection]);
+    setTerm(extractLabel(selection));
+  }, [setTerm, extractLabel, selection]);
 
-  const handleClick = (idx: number) => {
-    if (!props.items) return;
-    setSelection(props.items[currentHighlightIndex]);
-    onSelect(props.items[idx]);
-  };
+  const handleClick = useCallback(
+    (idx: number) => {
+      if (!items) return;
+      setSelection(items[idx]);
+      onSelect(items[idx]);
+    },
+    [onSelect, setSelection, items],
+  );
 
   const handleKeydown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!props.items) return;
+      if (!items) return;
       if (e.shiftKey) return;
       if (e.key === 'ArrowUp' && currentHighlightIndex > 0) {
         setCurrentHighlightIndex((current) => current - 1);
       } else if (
         e.key === 'ArrowDown' &&
-        currentHighlightIndex < props.items?.length - 1
+        currentHighlightIndex < items?.length - 1
       ) {
         setCurrentHighlightIndex((current) => current + 1);
       } else if (e.key === 'Enter') {
-        setSelection(props.items[currentHighlightIndex]);
-        onSelect(props.items[currentHighlightIndex]);
+        setSelection(items[currentHighlightIndex]);
+        onSelect(items[currentHighlightIndex]);
       } else {
         setSelection(undefined);
       }
     },
-    [currentHighlightIndex, props.items, onSelect],
+    [currentHighlightIndex, items, onSelect],
   );
 
   const handleClearButtonClick = useCallback(() => {
@@ -110,19 +119,19 @@ export function AutocompleteInput<T>({
         </button>
       </div>
       <ResultsContainer isHidden={isHidden}>
-        {props.loading ? (
+        {loading ? (
           <div className="pt-2 text-center">Loading...</div>
         ) : (
           term &&
-          (props.items?.length ? (
+          (items?.length ? (
             <ul>
-              {props.items?.map((item, idx) => (
+              {items?.map((item, idx) => (
                 <Item
-                  key={props.extractKey(item)}
+                  key={extractKey(item)}
                   isActive={currentHighlightIndex === idx}
                   onClick={() => handleClick(idx)}
                 >
-                  {props.renderItem(item)}
+                  {renderItem(item)}
                 </Item>
               ))}
             </ul>

@@ -19,7 +19,7 @@ type SearchInputProps = {
 };
 
 export const SearchInput: React.FC<SearchInputProps> = (props) => {
-  const [findCards, { data, loading, error }] =
+  const [findCards, { data, loading }] =
     useLazyQuery<{ allScryfallCardNames: { name: string; id: string }[] }>(
       QUERY,
     );
