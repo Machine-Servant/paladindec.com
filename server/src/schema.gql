@@ -55,14 +55,18 @@ type BulkDataObjectType {
 
 type Card {
   _count: CardCount!
+  canBeEtched: Boolean!
   canBeFoil: Boolean!
+  canBeNonFoil: Boolean!
   collections: [CardsInCollection!]
   collectorNumber: String
   currentPrice: ScryfallPrice!
   id: ID!
   isBorderless: Boolean!
   isEtched: Boolean!
+  isExtendedArt: Boolean!
   isPaper: Boolean!
+  isRetro: Boolean!
   isShowcase: Boolean!
   name: String!
   scryfallCard: ScryfallCard!
@@ -74,12 +78,16 @@ type CardCount {
 }
 
 input CardCreateManyScryfallCardInput {
+  canBeEtched: Boolean
   canBeFoil: Boolean
+  canBeNonFoil: Boolean
   collectorNumber: String
   id: String
   isBorderless: Boolean
   isEtched: Boolean
+  isExtendedArt: Boolean
   isPaper: Boolean
+  isRetro: Boolean
   isShowcase: Boolean
   name: String!
 }
@@ -124,40 +132,52 @@ input CardCreateOrConnectWithoutScryfallCardInput {
 }
 
 input CardCreateWithoutCollectionsInput {
+  canBeEtched: Boolean
   canBeFoil: Boolean
+  canBeNonFoil: Boolean
   collectorNumber: String
   currentPrice: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput
   id: String
   isBorderless: Boolean
   isEtched: Boolean
+  isExtendedArt: Boolean
   isPaper: Boolean
+  isRetro: Boolean
   isShowcase: Boolean
   name: String!
   scryfallCard: ScryfallCardCreateNestedOneWithoutCardInput!
 }
 
 input CardCreateWithoutCurrentPriceInput {
+  canBeEtched: Boolean
   canBeFoil: Boolean
+  canBeNonFoil: Boolean
   collections: CardsInCollectionCreateNestedManyWithoutCardInput
   collectorNumber: String
   id: String
   isBorderless: Boolean
   isEtched: Boolean
+  isExtendedArt: Boolean
   isPaper: Boolean
+  isRetro: Boolean
   isShowcase: Boolean
   name: String!
   scryfallCard: ScryfallCardCreateNestedOneWithoutCardInput!
 }
 
 input CardCreateWithoutScryfallCardInput {
+  canBeEtched: Boolean
   canBeFoil: Boolean
+  canBeNonFoil: Boolean
   collections: CardsInCollectionCreateNestedManyWithoutCardInput
   collectorNumber: String
   currentPrice: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput
   id: String
   isBorderless: Boolean
   isEtched: Boolean
+  isExtendedArt: Boolean
   isPaper: Boolean
+  isRetro: Boolean
   isShowcase: Boolean
   name: String!
 }
@@ -173,14 +193,18 @@ input CardOrderByRelationAggregateInput {
 }
 
 input CardOrderByWithRelationInput {
+  canBeEtched: SortOrder
   canBeFoil: SortOrder
+  canBeNonFoil: SortOrder
   collections: CardsInCollectionOrderByRelationAggregateInput
   collectorNumber: SortOrder
   currentPrice: ScryfallPriceOrderByWithRelationInput
   id: SortOrder
   isBorderless: SortOrder
   isEtched: SortOrder
+  isExtendedArt: SortOrder
   isPaper: SortOrder
+  isRetro: SortOrder
   isShowcase: SortOrder
   name: SortOrder
   scryfallCard: ScryfallCardOrderByWithRelationInput
@@ -193,12 +217,16 @@ input CardRelationFilter {
 }
 
 enum CardScalarFieldEnum {
+  canBeEtched
   canBeFoil
+  canBeNonFoil
   collectorNumber
   id
   isBorderless
   isEtched
+  isExtendedArt
   isPaper
+  isRetro
   isShowcase
   name
   scryfallCardId
@@ -208,14 +236,18 @@ input CardWhereInput {
   AND: [CardWhereInput!]
   NOT: [CardWhereInput!]
   OR: [CardWhereInput!]
+  canBeEtched: BoolFilter
   canBeFoil: BoolFilter
+  canBeNonFoil: BoolFilter
   collections: CardsInCollectionListRelationFilter
   collectorNumber: StringNullableFilter
   currentPrice: ScryfallPriceRelationFilter
   id: StringFilter
   isBorderless: BoolFilter
   isEtched: BoolFilter
+  isExtendedArt: BoolFilter
   isPaper: BoolFilter
+  isRetro: BoolFilter
   isShowcase: BoolFilter
   name: StringFilter
   scryfallCard: ScryfallCardRelationFilter
@@ -581,6 +613,7 @@ input JsonNullableListFilter {
 type Mutation {
   addCollection(input: CollectionCreateWithoutUserInput!): Collection!
   downloadBulkData(typeName: String!): Boolean!
+  getOrCreateUser(input: UserCreateWithoutCollectionsInput!): User!
   processAllParts: Boolean!
   processBulkData: Boolean!
   processCardFaces: Boolean!
@@ -757,6 +790,7 @@ type Query {
   allScryfallCards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
   allScryfallPrices(cursor: ScryfallPriceWhereUniqueInput, distinct: [ScryfallPriceScalarFieldEnum!], orderBy: [ScryfallPriceOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPrice!]!
   allScryfallSets(cursor: ScryfallSetWhereUniqueInput, distinct: [ScryfallSetScalarFieldEnum!], orderBy: [ScryfallSetOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallSetWhereInput): [ScryfallSet!]!
+  collection(cursor: CollectionWhereUniqueInput, distinct: [CollectionScalarFieldEnum!], orderBy: [CollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CollectionWhereInput): Collection!
 }
 
 enum QueryMode {

@@ -1,6 +1,6 @@
 import { gql, useLazyQuery } from '@apollo/client';
-import React, { useCallback, useEffect } from 'react';
-import { AutocompleteInput } from '../../../../autocomplete-search';
+import React, { useCallback } from 'react';
+import { AutocompleteInput } from '../autocomplete-search';
 
 const QUERY = gql`
   query SearchCards($term: String!) {

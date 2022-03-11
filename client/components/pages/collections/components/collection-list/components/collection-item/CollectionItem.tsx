@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { CollectionListQuery } from '../../../../../../../@types/codegen/graphql';
 import { Container } from './CollectionItem.styles';
@@ -10,10 +11,13 @@ export const CollectionItem: React.FC<CollectionItemProps> = ({
   className,
   ...props
 }) => {
-  console.log(props.collection);
   return (
     <Container className={className} {...props}>
-      {props.collection.name} ({props.collection._count.cards})
+      <Link href={`/collections/${props.collection.id}`} passHref>
+        <a>
+          {props.collection.name} ({props.collection._count.cards})
+        </a>
+      </Link>
     </Container>
   );
 };

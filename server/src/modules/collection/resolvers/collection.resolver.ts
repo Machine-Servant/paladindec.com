@@ -14,7 +14,9 @@ import { CollectionCreateWithoutUserInput } from '../../../@generated/prisma-nes
 import { CollectionCreateInput } from '../../../@generated/prisma-nestjs-graphql/collection/collection-create.input';
 import { Collection } from '../../../@generated/prisma-nestjs-graphql/collection/collection.model';
 import { CreateOneCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/create-one-collection.args';
+import { FindFirstCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-first-collection.args';
 import { FindManyCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-many-collection.args';
+import { FindUniqueCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-unique-collection.args';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { CardsInCollectionService } from '../services/cards-in-collection.service';
 import { CollectionService } from '../services/collection.service';
@@ -28,15 +30,24 @@ export class CollectionResolver {
 
   @Query(() => [Collection])
   async allCollections(
+    @CurrentUser() user: User,
     @Args() args?: FindManyCollectionArgs,
   ): Promise<Collection[]> {
-    return this.collectionService.findMany(args);
+    return this.collectionService.findMany(user.id, args);
+  }
+
+  @Query(() => Collection)
+  async collection(
+    @Args() args: FindFirstCollectionArgs,
+    @CurrentUser() user: User,
+  ): Promise<Collection> {
+    return this.collectionService.findOne(args, user.id);
   }
 
   @Mutation(() => Collection)
   async addCollection(
-    @Args('input') input: CollectionCreateWithoutUserInput,
     @CurrentUser() user: User,
+    @Args('input') input: CollectionCreateWithoutUserInput,
   ): Promise<Collection> {
     return this.collectionService.create(input, user.id);
   }

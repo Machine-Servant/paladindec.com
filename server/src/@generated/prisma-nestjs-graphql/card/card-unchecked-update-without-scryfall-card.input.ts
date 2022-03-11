@@ -8,34 +8,49 @@ import { CardsInCollectionUncheckedUpdateManyWithoutCardInput } from '../cards-i
 
 @InputType()
 export class CardUncheckedUpdateWithoutScryfallCardInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    id?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  name?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    name?: StringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  collectorNumber?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    collectorNumber?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isBorderless?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    isBorderless?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isShowcase?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    isShowcase?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isPaper?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    isPaper?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isEtched?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    isEtched?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isExtendedArt?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    canBeFoil?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  isRetro?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => ScryfallPriceUncheckedUpdateOneWithoutCurrentPriceOfCardInput, {nullable:true})
-    currentPrice?: ScryfallPriceUncheckedUpdateOneWithoutCurrentPriceOfCardInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  canBeNonFoil?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => CardsInCollectionUncheckedUpdateManyWithoutCardInput, {nullable:true})
-    collections?: CardsInCollectionUncheckedUpdateManyWithoutCardInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  canBeFoil?: BoolFieldUpdateOperationsInput;
+
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  canBeEtched?: BoolFieldUpdateOperationsInput;
+
+  @Field(() => ScryfallPriceUncheckedUpdateOneWithoutCurrentPriceOfCardInput, {
+    nullable: true,
+  })
+  currentPrice?: ScryfallPriceUncheckedUpdateOneWithoutCurrentPriceOfCardInput;
+
+  @Field(() => CardsInCollectionUncheckedUpdateManyWithoutCardInput, {
+    nullable: true,
+  })
+  collections?: CardsInCollectionUncheckedUpdateManyWithoutCardInput;
 }

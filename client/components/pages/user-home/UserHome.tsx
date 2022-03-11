@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppLayout } from '../../app-layout';
 import { ClientOnly } from '../../client-only';
-import { SearchInput } from './components/search-input';
+import { SearchInput } from '../../search-input';
 import { SearchResults } from './components/search-results';
 
 type UserHomeProps = {

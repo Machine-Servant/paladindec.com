@@ -48,10 +48,17 @@ export class CardConsumer {
                   currentPrice: { connect: { id: currentPrice.id } },
                   isBorderless: card.frameEffects.includes('borderless'),
                   isShowcase: card.frameEffects.includes('showcase'),
+                  isExtendedArt: card.frameEffects.includes('extendedart'),
                   isPaper: card.games.includes('paper'),
+                  // the card is "retro" if the frame is from 1997 or before but
+                  // the card was released after 1997
+                  isRetro:
+                    card.releasedAt.getFullYear() > 1997 &&
+                    ['1993', '1997'].includes(card.frame),
                   collectorNumber: card.collectorNumber,
                   canBeFoil: card.finishes.includes('foil'),
-                  isEtched: card.finishes.includes('etched'),
+                  canBeEtched: card.finishes.includes('etched'),
+                  canBeNonFoil: card.finishes.includes('nonfoil'),
                 });
               }
               return;

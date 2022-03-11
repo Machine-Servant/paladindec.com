@@ -594,6 +594,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addCollection: Collection;
   downloadBulkData: Scalars['Boolean'];
+  getOrCreateUser: User;
   processAllParts: Scalars['Boolean'];
   processBulkData: Scalars['Boolean'];
   processCardFaces: Scalars['Boolean'];
@@ -613,6 +614,11 @@ export type MutationAddCollectionArgs = {
 
 export type MutationDownloadBulkDataArgs = {
   typeName: Scalars['String'];
+};
+
+
+export type MutationGetOrCreateUserArgs = {
+  input: UserCreateWithoutCollectionsInput;
 };
 
 
@@ -786,6 +792,7 @@ export type Query = {
   allScryfallCards: Array<ScryfallCard>;
   allScryfallPrices: Array<ScryfallPrice>;
   allScryfallSets: Array<ScryfallSet>;
+  collection: Collection;
 };
 
 
@@ -846,6 +853,16 @@ export type QueryAllScryfallSetsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<ScryfallSetWhereInput>;
+};
+
+
+export type QueryCollectionArgs = {
+  cursor?: InputMaybe<CollectionWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CollectionScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CollectionOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CollectionWhereInput>;
 };
 
 export enum QueryMode {
@@ -2642,6 +2659,13 @@ export type UserWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
+export type CollectionManageQueryVariables = Exact<{
+  collectionId: Scalars['String'];
+}>;
+
+
+export type CollectionManageQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', id: string, name: string, cards: Array<{ __typename?: 'CardsInCollection', isEtched: boolean, isFoil: boolean, count: number, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isEtched: boolean, isShowcase: boolean, scryfallCard: { __typename?: 'ScryfallCard', setCode: string, setName: string } } }> } };
+
 export type AddCollectionMutationVariables = Exact<{
   input: CollectionCreateWithoutUserInput;
 }>;
@@ -2804,6 +2828,60 @@ export const ScryfallCardFullFragmentDoc = gql`
   watermark
 }
     `;
+export const CollectionManageDocument = gql`
+    query CollectionManage($collectionId: String!) {
+  collection(where: {id: {equals: $collectionId}}) {
+    id
+    name
+    cards(take: 10) {
+      isEtched
+      isFoil
+      count
+      card {
+        canBeFoil
+        name
+        id
+        collectorNumber
+        isBorderless
+        isEtched
+        isShowcase
+        scryfallCard {
+          setCode
+          setName
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCollectionManageQuery__
+ *
+ * To run a query within a React component, call `useCollectionManageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCollectionManageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCollectionManageQuery({
+ *   variables: {
+ *      collectionId: // value for 'collectionId'
+ *   },
+ * });
+ */
+export function useCollectionManageQuery(baseOptions: Apollo.QueryHookOptions<CollectionManageQuery, CollectionManageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CollectionManageQuery, CollectionManageQueryVariables>(CollectionManageDocument, options);
+      }
+export function useCollectionManageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CollectionManageQuery, CollectionManageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CollectionManageQuery, CollectionManageQueryVariables>(CollectionManageDocument, options);
+        }
+export type CollectionManageQueryHookResult = ReturnType<typeof useCollectionManageQuery>;
+export type CollectionManageLazyQueryHookResult = ReturnType<typeof useCollectionManageLazyQuery>;
+export type CollectionManageQueryResult = Apollo.QueryResult<CollectionManageQuery, CollectionManageQueryVariables>;
 export const AddCollectionDocument = gql`
     mutation AddCollection($input: CollectionCreateWithoutUserInput!) {
   addCollection(input: $input) {

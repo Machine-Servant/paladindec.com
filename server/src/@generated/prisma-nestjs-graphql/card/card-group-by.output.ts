@@ -6,40 +6,51 @@ import { CardMaxAggregate } from './card-max-aggregate.output';
 
 @ObjectType()
 export class CardGroupBy {
+  @Field(() => String, { nullable: false })
+  id!: string;
 
-    @Field(() => String, {nullable:false})
-    id!: string;
+  @Field(() => String, { nullable: false })
+  scryfallCardId!: string;
 
-    @Field(() => String, {nullable:false})
-    scryfallCardId!: string;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-    @Field(() => String, {nullable:false})
-    name!: string;
+  @Field(() => String, { nullable: true })
+  collectorNumber?: string;
 
-    @Field(() => String, {nullable:true})
-    collectorNumber?: string;
+  @Field(() => Boolean, { nullable: false })
+  isBorderless!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    isBorderless!: boolean;
+  @Field(() => Boolean, { nullable: false })
+  isShowcase!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    isShowcase!: boolean;
+  @Field(() => Boolean, { nullable: false })
+  isPaper!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    isPaper!: boolean;
+  @Field(() => Boolean, { nullable: false })
+  isEtched!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    isEtched!: boolean;
+  @Field(() => Boolean, { nullable: false })
+  isExtendedArt!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    canBeFoil!: boolean;
+  @Field(() => Boolean, { nullable: false })
+  isRetro!: boolean;
 
-    @Field(() => CardCountAggregate, {nullable:true})
-    _count?: CardCountAggregate;
+  @Field(() => Boolean, { nullable: false })
+  canBeNonFoil!: boolean;
 
-    @Field(() => CardMinAggregate, {nullable:true})
-    _min?: CardMinAggregate;
+  @Field(() => Boolean, { nullable: false })
+  canBeFoil!: boolean;
 
-    @Field(() => CardMaxAggregate, {nullable:true})
-    _max?: CardMaxAggregate;
+  @Field(() => Boolean, { nullable: false })
+  canBeEtched!: boolean;
+
+  @Field(() => CardCountAggregate, { nullable: true })
+  _count?: CardCountAggregate;
+
+  @Field(() => CardMinAggregate, { nullable: true })
+  _min?: CardMinAggregate;
+
+  @Field(() => CardMaxAggregate, { nullable: true })
+  _max?: CardMaxAggregate;
 }

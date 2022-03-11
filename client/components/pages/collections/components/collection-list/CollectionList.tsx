@@ -21,8 +21,6 @@ export const CollectionList: React.FC<CollectionListProps> = ({
 
   if (loading) return <div>Loading...</div>;
 
-  console.log(data);
-
   return (
     <Container className={className} {...props}>
       <List>

@@ -20,6 +20,7 @@ export class FirebaseGqlAuthGuard
       'isPublic',
       context.getHandler(),
     );
+
     if (isPublic) {
       return true;
     }

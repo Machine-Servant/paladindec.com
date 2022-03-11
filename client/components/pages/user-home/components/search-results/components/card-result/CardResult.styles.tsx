@@ -2,5 +2,5 @@ import styled from '@emotion/styled';
 import tw from 'twin.macro';
 
 export const Container = styled.li`
-  ${tw`p-4 mx-0 my-0 border sm:rounded-lg sm:my-2 border-white-900 sm:w-1/3`};
+  ${tw`w-full p-4 mx-auto mb-2 border shadow-2xl last:mb-0 sm:max-w-4xl sm:rounded-lg border-white-900 `};
 `;

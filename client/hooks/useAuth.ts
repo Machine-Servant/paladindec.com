@@ -9,6 +9,7 @@ export const useAuth = () => {
 
   const handleAuthStateChanged = useCallback(async (authState: unknown) => {
     if (!authState) {
+      localStorage.removeItem('paladindeck:token');
       return auth.signOut();
     }
   }, []);

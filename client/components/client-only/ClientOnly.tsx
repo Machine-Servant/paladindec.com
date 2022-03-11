@@ -10,10 +10,6 @@ export function ClientOnly({
     setIsMounted(true);
   }, []);
 
-  useEffect(() => {
-    console.log('mounted', isMounted);
-  }, [isMounted]);
-
   if (!isMounted) return null;
 
   return <div {...delegated}>{children}</div>;

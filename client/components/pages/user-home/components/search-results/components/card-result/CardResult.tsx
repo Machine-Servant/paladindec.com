@@ -16,42 +16,47 @@ export const CardResult: React.FC<CardResultProps> = (props) => {
   });
   return (
     <Container>
-      <div className="flex flex-row items-start justify-center">
-        <div className="w-3/5">
-          <div className="text-xl font-bold">
-            {props.card.scryfallCard.name}
-          </div>
-          <div className="flex flex-row items-center mb-4">
-            <div className="relative w-6 h-6 mr-2">
-              <SetIcon
-                className="w-6 h-6"
-                src={props.card.scryfallCard.set.iconSvgUri}
-                rarity={props.card.scryfallCard.rarity}
-                title={props.card.scryfallCard.setName}
-              />
+      <div className="flex flex-row items-stretch justify-between">
+        <div className="flex flex-col justify-between flex-1 w-3/5 sm:w-auto">
+          <div className="">
+            <div className="text-xl font-bold">
+              {props.card.scryfallCard.name}
             </div>
-            <div>{props.card.scryfallCard.setName}</div>
-          </div>
-          <div>
-            Non-foil: {dollar.format(Number(props.card.currentPrice.usd))}
-          </div>
-          <div>
-            Foil: {dollar.format(Number(props.card.currentPrice.usdFoil))}
-          </div>
-          {props.card.isEtched && (
+            <div className="flex flex-row mb-4">
+              <div className="relative w-6 h-6 mr-2">
+                <SetIcon
+                  className="w-6 h-6"
+                  src={props.card.scryfallCard.set.iconSvgUri}
+                  rarity={props.card.scryfallCard.rarity}
+                  title={props.card.scryfallCard.setName}
+                />
+              </div>
+              <div>{props.card.scryfallCard.setName}</div>
+            </div>
             <div>
-              Foil Etched:
-              {dollar.format(Number(props.card.currentPrice.usdEtched))}
+              Non-foil: {dollar.format(Number(props.card.currentPrice.usd))}
             </div>
-          )}
+            <div>
+              Foil: {dollar.format(Number(props.card.currentPrice.usdFoil))}
+            </div>
+            {props.card.isEtched && (
+              <div>
+                Foil Etched:
+                {dollar.format(Number(props.card.currentPrice.usdEtched))}
+              </div>
+            )}
+          </div>
+          <div className="">Foo</div>
         </div>
-        <div className="relative flex flex-row items-end flex-1 h-64">
-          <Image
-            src={props.card.scryfallCard.imageUris.small}
-            alt="foo"
-            layout="fill"
-            objectFit="contain"
-          />
+        <div className="w-20 h-32 sm:w-48 sm:h-64">
+          <div className="relative h-32 sm:h-64">
+            <Image
+              src={props.card.scryfallCard.imageUris.small}
+              alt={props.card.scryfallCard.name}
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
         </div>
       </div>
     </Container>

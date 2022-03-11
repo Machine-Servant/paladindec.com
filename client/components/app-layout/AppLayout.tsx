@@ -27,7 +27,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, ...props }) => {
               setIsSidebarHidden((current) => !current)
             }
           />
-          <div className="h-screen pt-16">
+          <div className="w-screen h-screen pt-16">
             <div className="p-4">{children}</div>
           </div>
         </Main>

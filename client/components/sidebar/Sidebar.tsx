@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import React from 'react';
 import { auth } from '../../app/firebase.app';
+import { useAuth } from '../../hooks/useAuth';
 import { HamburgerButton } from '../hamburger-button';
 import { Container, NavLink } from './Sidebar.styles';
 
@@ -9,6 +11,7 @@ type SidebarProps = {
 };
 
 export const Sidebar: React.FC<SidebarProps> = (props) => {
+  const { user } = useAuth();
   return (
     <Container isHidden={!!props.isHidden}>
       <div className="flex flex-col">
@@ -39,6 +42,18 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
       </div>
       {!props.isHidden && (
         <div className="px-4 py-8 border-t border-white-900">
+          <div className="flex flex-row items-center justify-between">
+            <h3 className="font-bold">{user?.email}</h3>
+            <div className="relative w-8 h-8 overflow-hidden border border-green-800 rounded-full">
+              {user?.photoURL && (
+                <Image
+                  src={user?.photoURL}
+                  alt={user?.email || ''}
+                  layout="fill"
+                />
+              )}
+            </div>
+          </div>
           <button onClick={() => auth.signOut()}>Sign out</button>
         </div>
       )}

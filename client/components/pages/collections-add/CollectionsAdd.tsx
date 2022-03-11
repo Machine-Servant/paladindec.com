@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import {
   CollectionCreateWithoutUserInput,
@@ -14,13 +15,20 @@ export const CollectionsAdd: React.FC<CollectionsManageProps> = ({
   loading,
   ...props
 }) => {
+  const router = useRouter();
   const [addCollection, { loading: addLoading }] = useAddCollectionMutation();
 
   const handleAddCollection = async (
     input: CollectionCreateWithoutUserInput,
   ) => {
-    const results = await addCollection({ variables: { input } });
-    console.log('added', results.data?.addCollection.id);
+    try {
+      const results = await addCollection({ variables: { input } });
+      console.log('added', results.data?.addCollection.id);
+      router.push('/collections');
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   };
 
   return (
