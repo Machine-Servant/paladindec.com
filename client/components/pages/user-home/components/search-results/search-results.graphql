@@ -10,7 +10,6 @@ query SearchCardResults($name: String!) {
     collectorNumber
     isBorderless
     isShowcase
-    isEtched
     currentPrice {
       usd
       usdFoil

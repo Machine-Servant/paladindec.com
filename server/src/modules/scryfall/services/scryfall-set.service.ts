@@ -13,14 +13,12 @@ export class ScryfallSetService {
     this.logger.debug(`Upserting ${data.length} entries`);
     const results: ScryfallSet[] = [];
     for (const input of data) {
-      this.logger.debug(`Processing ${input.id}`);
       try {
         const result = await this.prismaService.scryfallSet.upsert({
           where: { id: input.id },
           create: input,
           update: input,
         });
-        this.logger.debug(`Finished processing ${input.id}`);
         results.push(Object.assign({}, new Set(), result));
       } catch (err) {
         console.log(err);

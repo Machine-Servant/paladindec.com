@@ -62,14 +62,17 @@ export type BulkDataObjectType = {
 export type Card = {
   __typename?: 'Card';
   _count: CardCount;
+  canBeEtched: Scalars['Boolean'];
   canBeFoil: Scalars['Boolean'];
+  canBeNonFoil: Scalars['Boolean'];
   collections?: Maybe<Array<CardsInCollection>>;
   collectorNumber?: Maybe<Scalars['String']>;
   currentPrice: ScryfallPrice;
   id: Scalars['ID'];
   isBorderless: Scalars['Boolean'];
-  isEtched: Scalars['Boolean'];
+  isExtendedArt: Scalars['Boolean'];
   isPaper: Scalars['Boolean'];
+  isRetro: Scalars['Boolean'];
   isShowcase: Scalars['Boolean'];
   name: Scalars['String'];
   scryfallCard: ScryfallCard;
@@ -82,12 +85,15 @@ export type CardCount = {
 };
 
 export type CardCreateManyScryfallCardInput = {
+  canBeEtched?: InputMaybe<Scalars['Boolean']>;
   canBeFoil?: InputMaybe<Scalars['Boolean']>;
+  canBeNonFoil?: InputMaybe<Scalars['Boolean']>;
   collectorNumber?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   isBorderless?: InputMaybe<Scalars['Boolean']>;
-  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isExtendedArt?: InputMaybe<Scalars['Boolean']>;
   isPaper?: InputMaybe<Scalars['Boolean']>;
+  isRetro?: InputMaybe<Scalars['Boolean']>;
   isShowcase?: InputMaybe<Scalars['Boolean']>;
   name: Scalars['String'];
 };
@@ -132,40 +138,49 @@ export type CardCreateOrConnectWithoutScryfallCardInput = {
 };
 
 export type CardCreateWithoutCollectionsInput = {
+  canBeEtched?: InputMaybe<Scalars['Boolean']>;
   canBeFoil?: InputMaybe<Scalars['Boolean']>;
+  canBeNonFoil?: InputMaybe<Scalars['Boolean']>;
   collectorNumber?: InputMaybe<Scalars['String']>;
   currentPrice?: InputMaybe<ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput>;
   id?: InputMaybe<Scalars['String']>;
   isBorderless?: InputMaybe<Scalars['Boolean']>;
-  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isExtendedArt?: InputMaybe<Scalars['Boolean']>;
   isPaper?: InputMaybe<Scalars['Boolean']>;
+  isRetro?: InputMaybe<Scalars['Boolean']>;
   isShowcase?: InputMaybe<Scalars['Boolean']>;
   name: Scalars['String'];
   scryfallCard: ScryfallCardCreateNestedOneWithoutCardInput;
 };
 
 export type CardCreateWithoutCurrentPriceInput = {
+  canBeEtched?: InputMaybe<Scalars['Boolean']>;
   canBeFoil?: InputMaybe<Scalars['Boolean']>;
+  canBeNonFoil?: InputMaybe<Scalars['Boolean']>;
   collections?: InputMaybe<CardsInCollectionCreateNestedManyWithoutCardInput>;
   collectorNumber?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
   isBorderless?: InputMaybe<Scalars['Boolean']>;
-  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isExtendedArt?: InputMaybe<Scalars['Boolean']>;
   isPaper?: InputMaybe<Scalars['Boolean']>;
+  isRetro?: InputMaybe<Scalars['Boolean']>;
   isShowcase?: InputMaybe<Scalars['Boolean']>;
   name: Scalars['String'];
   scryfallCard: ScryfallCardCreateNestedOneWithoutCardInput;
 };
 
 export type CardCreateWithoutScryfallCardInput = {
+  canBeEtched?: InputMaybe<Scalars['Boolean']>;
   canBeFoil?: InputMaybe<Scalars['Boolean']>;
+  canBeNonFoil?: InputMaybe<Scalars['Boolean']>;
   collections?: InputMaybe<CardsInCollectionCreateNestedManyWithoutCardInput>;
   collectorNumber?: InputMaybe<Scalars['String']>;
   currentPrice?: InputMaybe<ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput>;
   id?: InputMaybe<Scalars['String']>;
   isBorderless?: InputMaybe<Scalars['Boolean']>;
-  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isExtendedArt?: InputMaybe<Scalars['Boolean']>;
   isPaper?: InputMaybe<Scalars['Boolean']>;
+  isRetro?: InputMaybe<Scalars['Boolean']>;
   isShowcase?: InputMaybe<Scalars['Boolean']>;
   name: Scalars['String'];
 };
@@ -181,14 +196,17 @@ export type CardOrderByRelationAggregateInput = {
 };
 
 export type CardOrderByWithRelationInput = {
+  canBeEtched?: InputMaybe<SortOrder>;
   canBeFoil?: InputMaybe<SortOrder>;
+  canBeNonFoil?: InputMaybe<SortOrder>;
   collections?: InputMaybe<CardsInCollectionOrderByRelationAggregateInput>;
   collectorNumber?: InputMaybe<SortOrder>;
   currentPrice?: InputMaybe<ScryfallPriceOrderByWithRelationInput>;
   id?: InputMaybe<SortOrder>;
   isBorderless?: InputMaybe<SortOrder>;
-  isEtched?: InputMaybe<SortOrder>;
+  isExtendedArt?: InputMaybe<SortOrder>;
   isPaper?: InputMaybe<SortOrder>;
+  isRetro?: InputMaybe<SortOrder>;
   isShowcase?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   scryfallCard?: InputMaybe<ScryfallCardOrderByWithRelationInput>;
@@ -201,12 +219,15 @@ export type CardRelationFilter = {
 };
 
 export enum CardScalarFieldEnum {
+  CanBeEtched = 'canBeEtched',
   CanBeFoil = 'canBeFoil',
+  CanBeNonFoil = 'canBeNonFoil',
   CollectorNumber = 'collectorNumber',
   Id = 'id',
   IsBorderless = 'isBorderless',
-  IsEtched = 'isEtched',
+  IsExtendedArt = 'isExtendedArt',
   IsPaper = 'isPaper',
+  IsRetro = 'isRetro',
   IsShowcase = 'isShowcase',
   Name = 'name',
   ScryfallCardId = 'scryfallCardId'
@@ -216,14 +237,17 @@ export type CardWhereInput = {
   AND?: InputMaybe<Array<CardWhereInput>>;
   NOT?: InputMaybe<Array<CardWhereInput>>;
   OR?: InputMaybe<Array<CardWhereInput>>;
+  canBeEtched?: InputMaybe<BoolFilter>;
   canBeFoil?: InputMaybe<BoolFilter>;
+  canBeNonFoil?: InputMaybe<BoolFilter>;
   collections?: InputMaybe<CardsInCollectionListRelationFilter>;
   collectorNumber?: InputMaybe<StringNullableFilter>;
   currentPrice?: InputMaybe<ScryfallPriceRelationFilter>;
   id?: InputMaybe<StringFilter>;
   isBorderless?: InputMaybe<BoolFilter>;
-  isEtched?: InputMaybe<BoolFilter>;
+  isExtendedArt?: InputMaybe<BoolFilter>;
   isPaper?: InputMaybe<BoolFilter>;
+  isRetro?: InputMaybe<BoolFilter>;
   isShowcase?: InputMaybe<BoolFilter>;
   name?: InputMaybe<StringFilter>;
   scryfallCard?: InputMaybe<ScryfallCardRelationFilter>;
@@ -2664,7 +2688,7 @@ export type CollectionManageQueryVariables = Exact<{
 }>;
 
 
-export type CollectionManageQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', id: string, name: string, cards: Array<{ __typename?: 'CardsInCollection', isEtched: boolean, isFoil: boolean, count: number, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isEtched: boolean, isShowcase: boolean, scryfallCard: { __typename?: 'ScryfallCard', setCode: string, setName: string } } }> } };
+export type CollectionManageQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', id: string, name: string, cards: Array<{ __typename?: 'CardsInCollection', isFoil: boolean, count: number, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, scryfallCard: { __typename?: 'ScryfallCard', setCode: string, setName: string } } }> } };
 
 export type AddCollectionMutationVariables = Exact<{
   input: CollectionCreateWithoutUserInput;
@@ -2683,7 +2707,7 @@ export type SearchCardResultsQueryVariables = Exact<{
 }>;
 
 
-export type SearchCardResultsQuery = { __typename?: 'Query', allCards: Array<{ __typename?: 'Card', id: string, canBeFoil: boolean, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, isEtched: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', allParts?: Array<any> | null, arenaId?: number | null, artist?: string | null, booster: boolean, borderColor: string, cardBackId?: string | null, cardFacesRaw?: Array<any> | null, cardmarketId?: number | null, cmc?: number | null, collectorNumber: string, colorIdentity?: Array<string> | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, contentWarning?: boolean | null, digital: boolean, edhrecRank?: number | null, finishes?: Array<string> | null, flavorName?: string | null, frame: string, frameEffects?: Array<string> | null, fullArt: boolean, games?: Array<string> | null, handModifier?: string | null, highresImage: boolean, id: string, illustrationId?: string | null, imageStatus: string, imageUris?: any | null, keywords?: Array<string> | null, lang: string, layout: string, legalities: any, lifeModifier?: string | null, loyalty?: string | null, manaCost?: string | null, mtgoFoilId?: number | null, mtgoId?: number | null, multiverseIds?: Array<number> | null, name: string, oracleId?: string | null, oracleText?: string | null, oversized: boolean, power?: string | null, prices: any, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, printsSearchUri: string, producedMana?: Array<string> | null, promo: boolean, promoTypes?: Array<string> | null, purchaseUris?: any | null, rarity: string, relatedUris: any, releasedAt: any, reprint: boolean, reserved: boolean, rulingUri?: string | null, scryfallSetUri: string, scryfallUri: string, securityStamp?: string | null, setCode: string, setId: string, setUri: string, setName: string, setSearchUri: string, setType: string, storySpotlight: boolean, tcgplayerEtchedId?: number | null, textless: boolean, typeLine?: string | null, uri: string, varationOf?: string | null, variation: boolean, watermark?: string | null, cardFaces: Array<{ __typename?: 'ScryfallCardFace', artist?: string | null, cardId: string, cmc?: number | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, flavorText?: string | null, id: string, illustrationId?: string | null, imageUris?: any | null, layout?: string | null, loyalty?: string | null, manaCost?: string | null, name: string, oracleId?: string | null, oracleText?: string | null, power?: string | null, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, toughness?: string | null, typeLine?: string | null, watermark?: string | null }>, referencedBy: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, relatedTo: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, scryfallMostRecentPrice?: { __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null } | null, scryfallPrice: Array<{ __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null }>, set: { __typename?: 'ScryfallSet', id: string, code: string, name: string, iconSvgUri: string } } }> };
+export type SearchCardResultsQuery = { __typename?: 'Query', allCards: Array<{ __typename?: 'Card', id: string, canBeFoil: boolean, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', allParts?: Array<any> | null, arenaId?: number | null, artist?: string | null, booster: boolean, borderColor: string, cardBackId?: string | null, cardFacesRaw?: Array<any> | null, cardmarketId?: number | null, cmc?: number | null, collectorNumber: string, colorIdentity?: Array<string> | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, contentWarning?: boolean | null, digital: boolean, edhrecRank?: number | null, finishes?: Array<string> | null, flavorName?: string | null, frame: string, frameEffects?: Array<string> | null, fullArt: boolean, games?: Array<string> | null, handModifier?: string | null, highresImage: boolean, id: string, illustrationId?: string | null, imageStatus: string, imageUris?: any | null, keywords?: Array<string> | null, lang: string, layout: string, legalities: any, lifeModifier?: string | null, loyalty?: string | null, manaCost?: string | null, mtgoFoilId?: number | null, mtgoId?: number | null, multiverseIds?: Array<number> | null, name: string, oracleId?: string | null, oracleText?: string | null, oversized: boolean, power?: string | null, prices: any, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, printsSearchUri: string, producedMana?: Array<string> | null, promo: boolean, promoTypes?: Array<string> | null, purchaseUris?: any | null, rarity: string, relatedUris: any, releasedAt: any, reprint: boolean, reserved: boolean, rulingUri?: string | null, scryfallSetUri: string, scryfallUri: string, securityStamp?: string | null, setCode: string, setId: string, setUri: string, setName: string, setSearchUri: string, setType: string, storySpotlight: boolean, tcgplayerEtchedId?: number | null, textless: boolean, typeLine?: string | null, uri: string, varationOf?: string | null, variation: boolean, watermark?: string | null, cardFaces: Array<{ __typename?: 'ScryfallCardFace', artist?: string | null, cardId: string, cmc?: number | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, flavorText?: string | null, id: string, illustrationId?: string | null, imageUris?: any | null, layout?: string | null, loyalty?: string | null, manaCost?: string | null, name: string, oracleId?: string | null, oracleText?: string | null, power?: string | null, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, toughness?: string | null, typeLine?: string | null, watermark?: string | null }>, referencedBy: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, relatedTo: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, scryfallMostRecentPrice?: { __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null } | null, scryfallPrice: Array<{ __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null }>, set: { __typename?: 'ScryfallSet', id: string, code: string, name: string, iconSvgUri: string } } }> };
 
 export type ScryfallCardFullFragment = { __typename?: 'ScryfallCard', allParts?: Array<any> | null, arenaId?: number | null, artist?: string | null, booster: boolean, borderColor: string, cardBackId?: string | null, cardFacesRaw?: Array<any> | null, cardmarketId?: number | null, cmc?: number | null, collectorNumber: string, colorIdentity?: Array<string> | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, contentWarning?: boolean | null, digital: boolean, edhrecRank?: number | null, finishes?: Array<string> | null, flavorName?: string | null, frame: string, frameEffects?: Array<string> | null, fullArt: boolean, games?: Array<string> | null, handModifier?: string | null, highresImage: boolean, id: string, illustrationId?: string | null, imageStatus: string, imageUris?: any | null, keywords?: Array<string> | null, lang: string, layout: string, legalities: any, lifeModifier?: string | null, loyalty?: string | null, manaCost?: string | null, mtgoFoilId?: number | null, mtgoId?: number | null, multiverseIds?: Array<number> | null, name: string, oracleId?: string | null, oracleText?: string | null, oversized: boolean, power?: string | null, prices: any, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, printsSearchUri: string, producedMana?: Array<string> | null, promo: boolean, promoTypes?: Array<string> | null, purchaseUris?: any | null, rarity: string, relatedUris: any, releasedAt: any, reprint: boolean, reserved: boolean, rulingUri?: string | null, scryfallSetUri: string, scryfallUri: string, securityStamp?: string | null, setCode: string, setId: string, setUri: string, setName: string, setSearchUri: string, setType: string, storySpotlight: boolean, tcgplayerEtchedId?: number | null, textless: boolean, typeLine?: string | null, uri: string, varationOf?: string | null, variation: boolean, watermark?: string | null, cardFaces: Array<{ __typename?: 'ScryfallCardFace', artist?: string | null, cardId: string, cmc?: number | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, flavorText?: string | null, id: string, illustrationId?: string | null, imageUris?: any | null, layout?: string | null, loyalty?: string | null, manaCost?: string | null, name: string, oracleId?: string | null, oracleText?: string | null, power?: string | null, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, toughness?: string | null, typeLine?: string | null, watermark?: string | null }>, referencedBy: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, relatedTo: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, scryfallMostRecentPrice?: { __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null } | null, scryfallPrice: Array<{ __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null }>, set: { __typename?: 'ScryfallSet', id: string, code: string, name: string, iconSvgUri: string } };
 
@@ -2834,7 +2858,6 @@ export const CollectionManageDocument = gql`
     id
     name
     cards(take: 10) {
-      isEtched
       isFoil
       count
       card {
@@ -2843,7 +2866,6 @@ export const CollectionManageDocument = gql`
         id
         collectorNumber
         isBorderless
-        isEtched
         isShowcase
         scryfallCard {
           setCode
@@ -2963,7 +2985,6 @@ export const SearchCardResultsDocument = gql`
     collectorNumber
     isBorderless
     isShowcase
-    isEtched
     currentPrice {
       usd
       usdFoil
