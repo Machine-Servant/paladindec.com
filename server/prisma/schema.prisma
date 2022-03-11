@@ -259,7 +259,6 @@ model Card {
   isBorderless    Boolean      @default(false)
   isShowcase      Boolean      @default(false)
   isPaper         Boolean      @default(false)
-  isEtched        Boolean      @default(false)
   isExtendedArt   Boolean      @default(false)
   isRetro         Boolean      @default(false)
   canBeNonFoil    Boolean      @default(false)

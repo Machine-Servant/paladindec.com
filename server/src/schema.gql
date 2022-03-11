@@ -63,7 +63,6 @@ type Card {
   currentPrice: ScryfallPrice!
   id: ID!
   isBorderless: Boolean!
-  isEtched: Boolean!
   isExtendedArt: Boolean!
   isPaper: Boolean!
   isRetro: Boolean!
@@ -84,7 +83,6 @@ input CardCreateManyScryfallCardInput {
   collectorNumber: String
   id: String
   isBorderless: Boolean
-  isEtched: Boolean
   isExtendedArt: Boolean
   isPaper: Boolean
   isRetro: Boolean
@@ -139,7 +137,6 @@ input CardCreateWithoutCollectionsInput {
   currentPrice: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput
   id: String
   isBorderless: Boolean
-  isEtched: Boolean
   isExtendedArt: Boolean
   isPaper: Boolean
   isRetro: Boolean
@@ -156,7 +153,6 @@ input CardCreateWithoutCurrentPriceInput {
   collectorNumber: String
   id: String
   isBorderless: Boolean
-  isEtched: Boolean
   isExtendedArt: Boolean
   isPaper: Boolean
   isRetro: Boolean
@@ -174,7 +170,6 @@ input CardCreateWithoutScryfallCardInput {
   currentPrice: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput
   id: String
   isBorderless: Boolean
-  isEtched: Boolean
   isExtendedArt: Boolean
   isPaper: Boolean
   isRetro: Boolean
@@ -201,7 +196,6 @@ input CardOrderByWithRelationInput {
   currentPrice: ScryfallPriceOrderByWithRelationInput
   id: SortOrder
   isBorderless: SortOrder
-  isEtched: SortOrder
   isExtendedArt: SortOrder
   isPaper: SortOrder
   isRetro: SortOrder
@@ -223,7 +217,6 @@ enum CardScalarFieldEnum {
   collectorNumber
   id
   isBorderless
-  isEtched
   isExtendedArt
   isPaper
   isRetro
@@ -244,7 +237,6 @@ input CardWhereInput {
   currentPrice: ScryfallPriceRelationFilter
   id: StringFilter
   isBorderless: BoolFilter
-  isEtched: BoolFilter
   isExtendedArt: BoolFilter
   isPaper: BoolFilter
   isRetro: BoolFilter

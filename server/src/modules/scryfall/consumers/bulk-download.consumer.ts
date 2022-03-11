@@ -37,6 +37,7 @@ export class BulkDownloadConsumer {
     @InjectQueue('price-data') private readonly priceDataQueue: Queue,
     @InjectQueue('set-data') private readonly setDataQueue: Queue,
     @InjectQueue('card') private readonly cardQueue: Queue,
+    @InjectQueue('card-name') private readonly cardNameQueue: Queue,
   ) {}
 
   private readonly logger = new Logger(BulkDownloadConsumer.name);
@@ -56,6 +57,13 @@ export class BulkDownloadConsumer {
     );
     await setProcess.finished();
     this.logger.debug(`Done processing sets`);
+
+    this.logger.debug(`Processing card names`);
+    const processCardNames = await this.cardNameQueue.add('process', null, {
+      removeOnComplete: true,
+    });
+    await processCardNames.finished();
+    this.logger.debug(`Done processing card names`);
 
     try {
       this.logger.debug(`Downloading bulk data`);
