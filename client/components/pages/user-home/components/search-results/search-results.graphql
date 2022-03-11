@@ -7,6 +7,8 @@ query SearchCardResults($name: String!) {
   ) {
     id
     canBeFoil
+    canBeEtched
+    canBeNonFoil
     collectorNumber
     isBorderless
     isShowcase

@@ -33,13 +33,17 @@ export const CardResult: React.FC<CardResultProps> = (props) => {
               </div>
               <div>{props.card.scryfallCard.setName}</div>
             </div>
-            <div>
-              Non-foil: {dollar.format(Number(props.card.currentPrice.usd))}
-            </div>
-            <div>
-              Foil: {dollar.format(Number(props.card.currentPrice.usdFoil))}
-            </div>
-            {props.card.isEtched && (
+            {props.card.canBeNonFoil && (
+              <div>
+                Non-foil: {dollar.format(Number(props.card.currentPrice.usd))}
+              </div>
+            )}
+            {props.card.canBeFoil && (
+              <div>
+                Foil: {dollar.format(Number(props.card.currentPrice.usdFoil))}
+              </div>
+            )}
+            {props.card.canBeEtched && (
               <div>
                 Foil Etched:
                 {dollar.format(Number(props.card.currentPrice.usdEtched))}
