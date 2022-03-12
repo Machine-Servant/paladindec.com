@@ -1,0 +1,7 @@
+mutation AddCardToCollection($input: AddCardToCollectionInput!) {
+  addCardToCollection(input: $input) {
+    cardId
+    collectionId
+    count
+  }
+}

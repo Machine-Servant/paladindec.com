@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Collection } from '@prisma/client';
+import { Card, Collection } from '@prisma/client';
 import { CollectionCreateWithoutUserInput } from '../../../@generated/prisma-nestjs-graphql/collection/collection-create-without-user.input';
 import { CollectionCreateInput } from '../../../@generated/prisma-nestjs-graphql/collection/collection-create.input';
 import { CreateOneCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/create-one-collection.args';
@@ -38,6 +38,7 @@ export class CollectionService {
         ...args.where,
         userId: { equals: userId },
       },
+      rejectOnNotFound: false,
     });
   }
 

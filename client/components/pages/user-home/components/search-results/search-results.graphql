@@ -21,4 +21,8 @@ query SearchCardResults($name: String!) {
       ...ScryfallCardFull
     }
   }
+  allCollections {
+    id
+    name
+  }
 }

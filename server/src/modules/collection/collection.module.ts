@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { CollectionService } from './services/collection.service';
 import { CollectionResolver } from './resolvers/collection.resolver';
 import { PrismaModule } from '../prisma/prisma.module';
@@ -8,12 +8,13 @@ import { CardsInCollectionResolver } from './resolvers/cards-in-collection.resol
 import { ScryfallModule } from '../scryfall/scryfall.module';
 
 @Module({
-  imports: [PrismaModule, CardModule, ScryfallModule],
+  imports: [PrismaModule, forwardRef(() => CardModule), ScryfallModule],
   providers: [
     CollectionService,
     CollectionResolver,
     CardsInCollectionService,
     CardsInCollectionResolver,
   ],
+  exports: [CollectionService, CardsInCollectionService],
 })
 export class CollectionModule {}

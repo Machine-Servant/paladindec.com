@@ -19,6 +19,14 @@ export type Scalars = {
   JSON: any;
 };
 
+export type AddCardToCollectionInput = {
+  cardId: Scalars['String'];
+  collectionId: Scalars['String'];
+  count?: InputMaybe<Scalars['Int']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isFoil?: InputMaybe<Scalars['Boolean']>;
+};
+
 export type BoolFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['Boolean']>;
 };
@@ -65,7 +73,7 @@ export type Card = {
   canBeEtched: Scalars['Boolean'];
   canBeFoil: Scalars['Boolean'];
   canBeNonFoil: Scalars['Boolean'];
-  collections?: Maybe<Array<CardsInCollection>>;
+  collections: Array<CardsInCollection>;
   collectorNumber?: Maybe<Scalars['String']>;
   currentPrice: ScryfallPrice;
   id: Scalars['ID'];
@@ -77,6 +85,16 @@ export type Card = {
   name: Scalars['String'];
   scryfallCard: ScryfallCard;
   scryfallCardId: Scalars['String'];
+};
+
+
+export type CardCollectionsArgs = {
+  cursor?: InputMaybe<CardsInCollectionWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CardsInCollectionScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CardsInCollectionOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CardsInCollectionWhereInput>;
 };
 
 export type CardCount = {
@@ -616,6 +634,7 @@ export type JsonNullableListFilter = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addCardToCollection: CardsInCollection;
   addCollection: Collection;
   downloadBulkData: Scalars['Boolean'];
   getOrCreateUser: User;
@@ -628,6 +647,11 @@ export type Mutation = {
   processSetData: Scalars['Boolean'];
   processUpdateCardList: Scalars['Boolean'];
   updateCardsInCollection: CardsInCollection;
+};
+
+
+export type MutationAddCardToCollectionArgs = {
+  input: AddCardToCollectionInput;
 };
 
 
@@ -2702,12 +2726,19 @@ export type CollectionListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CollectionListQuery = { __typename?: 'Query', allCollections: Array<{ __typename?: 'Collection', id: string, name: string, _count: { __typename?: 'CollectionCount', cards: number } }> };
 
+export type AddCardToCollectionMutationVariables = Exact<{
+  input: AddCardToCollectionInput;
+}>;
+
+
+export type AddCardToCollectionMutation = { __typename?: 'Mutation', addCardToCollection: { __typename?: 'CardsInCollection', cardId: string, collectionId: string, count: number } };
+
 export type SearchCardResultsQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
 
 
-export type SearchCardResultsQuery = { __typename?: 'Query', allCards: Array<{ __typename?: 'Card', id: string, canBeFoil: boolean, canBeEtched: boolean, canBeNonFoil: boolean, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', allParts?: Array<any> | null, arenaId?: number | null, artist?: string | null, booster: boolean, borderColor: string, cardBackId?: string | null, cardFacesRaw?: Array<any> | null, cardmarketId?: number | null, cmc?: number | null, collectorNumber: string, colorIdentity?: Array<string> | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, contentWarning?: boolean | null, digital: boolean, edhrecRank?: number | null, finishes?: Array<string> | null, flavorName?: string | null, frame: string, frameEffects?: Array<string> | null, fullArt: boolean, games?: Array<string> | null, handModifier?: string | null, highresImage: boolean, id: string, illustrationId?: string | null, imageStatus: string, imageUris?: any | null, keywords?: Array<string> | null, lang: string, layout: string, legalities: any, lifeModifier?: string | null, loyalty?: string | null, manaCost?: string | null, mtgoFoilId?: number | null, mtgoId?: number | null, multiverseIds?: Array<number> | null, name: string, oracleId?: string | null, oracleText?: string | null, oversized: boolean, power?: string | null, prices: any, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, printsSearchUri: string, producedMana?: Array<string> | null, promo: boolean, promoTypes?: Array<string> | null, purchaseUris?: any | null, rarity: string, relatedUris: any, releasedAt: any, reprint: boolean, reserved: boolean, rulingUri?: string | null, scryfallSetUri: string, scryfallUri: string, securityStamp?: string | null, setCode: string, setId: string, setUri: string, setName: string, setSearchUri: string, setType: string, storySpotlight: boolean, tcgplayerEtchedId?: number | null, textless: boolean, typeLine?: string | null, uri: string, varationOf?: string | null, variation: boolean, watermark?: string | null, cardFaces: Array<{ __typename?: 'ScryfallCardFace', artist?: string | null, cardId: string, cmc?: number | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, flavorText?: string | null, id: string, illustrationId?: string | null, imageUris?: any | null, layout?: string | null, loyalty?: string | null, manaCost?: string | null, name: string, oracleId?: string | null, oracleText?: string | null, power?: string | null, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, toughness?: string | null, typeLine?: string | null, watermark?: string | null }>, referencedBy: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, relatedTo: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, scryfallMostRecentPrice?: { __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null } | null, scryfallPrice: Array<{ __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null }>, set: { __typename?: 'ScryfallSet', id: string, code: string, name: string, iconSvgUri: string } } }> };
+export type SearchCardResultsQuery = { __typename?: 'Query', allCards: Array<{ __typename?: 'Card', id: string, canBeFoil: boolean, canBeEtched: boolean, canBeNonFoil: boolean, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', allParts?: Array<any> | null, arenaId?: number | null, artist?: string | null, booster: boolean, borderColor: string, cardBackId?: string | null, cardFacesRaw?: Array<any> | null, cardmarketId?: number | null, cmc?: number | null, collectorNumber: string, colorIdentity?: Array<string> | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, contentWarning?: boolean | null, digital: boolean, edhrecRank?: number | null, finishes?: Array<string> | null, flavorName?: string | null, frame: string, frameEffects?: Array<string> | null, fullArt: boolean, games?: Array<string> | null, handModifier?: string | null, highresImage: boolean, id: string, illustrationId?: string | null, imageStatus: string, imageUris?: any | null, keywords?: Array<string> | null, lang: string, layout: string, legalities: any, lifeModifier?: string | null, loyalty?: string | null, manaCost?: string | null, mtgoFoilId?: number | null, mtgoId?: number | null, multiverseIds?: Array<number> | null, name: string, oracleId?: string | null, oracleText?: string | null, oversized: boolean, power?: string | null, prices: any, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, printsSearchUri: string, producedMana?: Array<string> | null, promo: boolean, promoTypes?: Array<string> | null, purchaseUris?: any | null, rarity: string, relatedUris: any, releasedAt: any, reprint: boolean, reserved: boolean, rulingUri?: string | null, scryfallSetUri: string, scryfallUri: string, securityStamp?: string | null, setCode: string, setId: string, setUri: string, setName: string, setSearchUri: string, setType: string, storySpotlight: boolean, tcgplayerEtchedId?: number | null, textless: boolean, typeLine?: string | null, uri: string, varationOf?: string | null, variation: boolean, watermark?: string | null, cardFaces: Array<{ __typename?: 'ScryfallCardFace', artist?: string | null, cardId: string, cmc?: number | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, flavorText?: string | null, id: string, illustrationId?: string | null, imageUris?: any | null, layout?: string | null, loyalty?: string | null, manaCost?: string | null, name: string, oracleId?: string | null, oracleText?: string | null, power?: string | null, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, toughness?: string | null, typeLine?: string | null, watermark?: string | null }>, referencedBy: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, relatedTo: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, scryfallMostRecentPrice?: { __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null } | null, scryfallPrice: Array<{ __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null }>, set: { __typename?: 'ScryfallSet', id: string, code: string, name: string, iconSvgUri: string } } }>, allCollections: Array<{ __typename?: 'Collection', id: string, name: string }> };
 
 export type ScryfallCardFullFragment = { __typename?: 'ScryfallCard', allParts?: Array<any> | null, arenaId?: number | null, artist?: string | null, booster: boolean, borderColor: string, cardBackId?: string | null, cardFacesRaw?: Array<any> | null, cardmarketId?: number | null, cmc?: number | null, collectorNumber: string, colorIdentity?: Array<string> | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, contentWarning?: boolean | null, digital: boolean, edhrecRank?: number | null, finishes?: Array<string> | null, flavorName?: string | null, frame: string, frameEffects?: Array<string> | null, fullArt: boolean, games?: Array<string> | null, handModifier?: string | null, highresImage: boolean, id: string, illustrationId?: string | null, imageStatus: string, imageUris?: any | null, keywords?: Array<string> | null, lang: string, layout: string, legalities: any, lifeModifier?: string | null, loyalty?: string | null, manaCost?: string | null, mtgoFoilId?: number | null, mtgoId?: number | null, multiverseIds?: Array<number> | null, name: string, oracleId?: string | null, oracleText?: string | null, oversized: boolean, power?: string | null, prices: any, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, printsSearchUri: string, producedMana?: Array<string> | null, promo: boolean, promoTypes?: Array<string> | null, purchaseUris?: any | null, rarity: string, relatedUris: any, releasedAt: any, reprint: boolean, reserved: boolean, rulingUri?: string | null, scryfallSetUri: string, scryfallUri: string, securityStamp?: string | null, setCode: string, setId: string, setUri: string, setName: string, setSearchUri: string, setType: string, storySpotlight: boolean, tcgplayerEtchedId?: number | null, textless: boolean, typeLine?: string | null, uri: string, varationOf?: string | null, variation: boolean, watermark?: string | null, cardFaces: Array<{ __typename?: 'ScryfallCardFace', artist?: string | null, cardId: string, cmc?: number | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, flavorText?: string | null, id: string, illustrationId?: string | null, imageUris?: any | null, layout?: string | null, loyalty?: string | null, manaCost?: string | null, name: string, oracleId?: string | null, oracleText?: string | null, power?: string | null, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, toughness?: string | null, typeLine?: string | null, watermark?: string | null }>, referencedBy: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, relatedTo: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, scryfallMostRecentPrice?: { __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null } | null, scryfallPrice: Array<{ __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null }>, set: { __typename?: 'ScryfallSet', id: string, code: string, name: string, iconSvgUri: string } };
 
@@ -2975,6 +3006,41 @@ export function useCollectionListLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type CollectionListQueryHookResult = ReturnType<typeof useCollectionListQuery>;
 export type CollectionListLazyQueryHookResult = ReturnType<typeof useCollectionListLazyQuery>;
 export type CollectionListQueryResult = Apollo.QueryResult<CollectionListQuery, CollectionListQueryVariables>;
+export const AddCardToCollectionDocument = gql`
+    mutation AddCardToCollection($input: AddCardToCollectionInput!) {
+  addCardToCollection(input: $input) {
+    cardId
+    collectionId
+    count
+  }
+}
+    `;
+export type AddCardToCollectionMutationFn = Apollo.MutationFunction<AddCardToCollectionMutation, AddCardToCollectionMutationVariables>;
+
+/**
+ * __useAddCardToCollectionMutation__
+ *
+ * To run a mutation, you first call `useAddCardToCollectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddCardToCollectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addCardToCollectionMutation, { data, loading, error }] = useAddCardToCollectionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useAddCardToCollectionMutation(baseOptions?: Apollo.MutationHookOptions<AddCardToCollectionMutation, AddCardToCollectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddCardToCollectionMutation, AddCardToCollectionMutationVariables>(AddCardToCollectionDocument, options);
+      }
+export type AddCardToCollectionMutationHookResult = ReturnType<typeof useAddCardToCollectionMutation>;
+export type AddCardToCollectionMutationResult = Apollo.MutationResult<AddCardToCollectionMutation>;
+export type AddCardToCollectionMutationOptions = Apollo.BaseMutationOptions<AddCardToCollectionMutation, AddCardToCollectionMutationVariables>;
 export const SearchCardResultsDocument = gql`
     query SearchCardResults($name: String!) {
   allCards(
@@ -2995,6 +3061,10 @@ export const SearchCardResultsDocument = gql`
     scryfallCard {
       ...ScryfallCardFull
     }
+  }
+  allCollections {
+    id
+    name
   }
 }
     ${ScryfallCardFullFragmentDoc}`;

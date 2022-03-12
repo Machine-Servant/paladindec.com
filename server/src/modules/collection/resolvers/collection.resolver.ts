@@ -55,9 +55,10 @@ export class CollectionResolver {
   @ResolveField('cards', () => [CardsInCollection])
   async getCardsInCollection(
     @Parent() collection: Collection,
+    @CurrentUser() user: User,
     @Args() args?: FindManyCardsInCollectionArgs,
   ): Promise<CardsInCollection[]> {
-    return this.cardsInCollectionService.findMany({
+    return this.cardsInCollectionService.findMany(user.id, {
       ...args,
       where: { ...args.where, collectionId: { equals: collection.id } },
     });

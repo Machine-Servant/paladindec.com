@@ -2,6 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AddCardToCollectionInput {
+  cardId: String!
+  collectionId: String!
+  count: Int
+  isEtched: Boolean
+  isFoil: Boolean
+}
+
 input BoolFieldUpdateOperationsInput {
   set: Boolean
 }
@@ -58,7 +66,7 @@ type Card {
   canBeEtched: Boolean!
   canBeFoil: Boolean!
   canBeNonFoil: Boolean!
-  collections: [CardsInCollection!]
+  collections(cursor: CardsInCollectionWhereUniqueInput, distinct: [CardsInCollectionScalarFieldEnum!], orderBy: [CardsInCollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CardsInCollectionWhereInput): [CardsInCollection!]!
   collectorNumber: String
   currentPrice: ScryfallPrice!
   id: ID!
@@ -262,9 +270,11 @@ type CardsInCollection {
   price: CardsInCollectionCardPrice
 }
 
-input CardsInCollectionCardIdCollectionIdCompoundUniqueInput {
+input CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput {
   cardId: String!
   collectionId: String!
+  isEtched: Boolean!
+  isFoil: Boolean!
 }
 
 type CardsInCollectionCardPrice {
@@ -384,7 +394,7 @@ input CardsInCollectionWhereInput {
 }
 
 input CardsInCollectionWhereUniqueInput {
-  cardId_collectionId: CardsInCollectionCardIdCollectionIdCompoundUniqueInput
+  cardId_collectionId_isFoil_isEtched: CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput
 }
 
 type Collection {
@@ -603,6 +613,7 @@ input JsonNullableListFilter {
 }
 
 type Mutation {
+  addCardToCollection(input: AddCardToCollectionInput!): CardsInCollection!
   addCollection(input: CollectionCreateWithoutUserInput!): Collection!
   downloadBulkData(typeName: String!): Boolean!
   getOrCreateUser(input: UserCreateWithoutCollectionsInput!): User!

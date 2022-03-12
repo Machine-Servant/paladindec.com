@@ -311,5 +311,5 @@ model CardsInCollection {
   /// @HideField({ output: false, input: true })
   updatedAt DateTime @default(now()) @updatedAt @ignore
 
-  @@id([cardId, collectionId])
+  @@id([cardId, collectionId, isFoil, isEtched])
 }

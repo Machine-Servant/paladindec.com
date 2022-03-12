@@ -26,7 +26,11 @@ export const SearchResults: React.FC<SearchResultsProps> = (props) => {
   return (
     <Container className={props.className}>
       {data?.allCards.map((card) => (
-        <CardResult key={card.id} card={card} />
+        <CardResult
+          key={card.id}
+          card={card}
+          collections={data.allCollections}
+        />
       ))}
     </Container>
   );
