@@ -6,27 +6,28 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CollectionScalarWhereWithAggregatesInput {
-  @Field(() => [CollectionScalarWhereWithAggregatesInput], { nullable: true })
-  AND?: Array<CollectionScalarWhereWithAggregatesInput>;
 
-  @Field(() => [CollectionScalarWhereWithAggregatesInput], { nullable: true })
-  OR?: Array<CollectionScalarWhereWithAggregatesInput>;
+    @Field(() => [CollectionScalarWhereWithAggregatesInput], {nullable:true})
+    AND?: Array<CollectionScalarWhereWithAggregatesInput>;
 
-  @Field(() => [CollectionScalarWhereWithAggregatesInput], { nullable: true })
-  NOT?: Array<CollectionScalarWhereWithAggregatesInput>;
+    @Field(() => [CollectionScalarWhereWithAggregatesInput], {nullable:true})
+    OR?: Array<CollectionScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  id?: StringWithAggregatesFilter;
+    @Field(() => [CollectionScalarWhereWithAggregatesInput], {nullable:true})
+    NOT?: Array<CollectionScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  name?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    id?: StringWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  userId?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    name?: StringWithAggregatesFilter;
 
-  @HideField()
-  createdAt?: DateTimeWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    userId?: StringWithAggregatesFilter;
 
-  @HideField()
-  updatedAt?: DateTimeWithAggregatesFilter;
+    @HideField()
+    createdAt?: DateTimeWithAggregatesFilter;
+
+    @HideField()
+    updatedAt?: DateTimeWithAggregatesFilter;
 }

@@ -10,39 +10,40 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CardsInCollectionWhereInput {
-  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
-  AND?: Array<CardsInCollectionWhereInput>;
 
-  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
-  OR?: Array<CardsInCollectionWhereInput>;
+    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
+    AND?: Array<CardsInCollectionWhereInput>;
 
-  @Field(() => [CardsInCollectionWhereInput], { nullable: true })
-  NOT?: Array<CardsInCollectionWhereInput>;
+    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
+    OR?: Array<CardsInCollectionWhereInput>;
 
-  @Field(() => CardRelationFilter, { nullable: true })
-  card?: CardRelationFilter;
+    @Field(() => [CardsInCollectionWhereInput], {nullable:true})
+    NOT?: Array<CardsInCollectionWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  cardId?: StringFilter;
+    @Field(() => CardRelationFilter, {nullable:true})
+    card?: CardRelationFilter;
 
-  @Field(() => CollectionRelationFilter, { nullable: true })
-  collection?: CollectionRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    cardId?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  collectionId?: StringFilter;
+    @Field(() => CollectionRelationFilter, {nullable:true})
+    collection?: CollectionRelationFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isFoil?: BoolFilter;
+    @Field(() => StringFilter, {nullable:true})
+    collectionId?: StringFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isEtched?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isFoil?: BoolFilter;
 
-  @Field(() => IntFilter, { nullable: true })
-  count?: IntFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isEtched?: BoolFilter;
 
-  @HideField()
-  createdAt?: DateTimeFilter;
+    @Field(() => IntFilter, {nullable:true})
+    count?: IntFilter;
 
-  @HideField()
-  updatedAt?: DateTimeFilter;
+    @HideField()
+    createdAt?: DateTimeFilter;
+
+    @HideField()
+    updatedAt?: DateTimeFilter;
 }

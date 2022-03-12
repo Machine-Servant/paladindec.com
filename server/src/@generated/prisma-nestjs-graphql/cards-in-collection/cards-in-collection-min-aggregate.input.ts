@@ -4,24 +4,25 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CardsInCollectionMinAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  cardId?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  collectionId?: true;
+    @Field(() => Boolean, {nullable:true})
+    cardId?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  isFoil?: true;
+    @Field(() => Boolean, {nullable:true})
+    collectionId?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  isEtched?: true;
+    @Field(() => Boolean, {nullable:true})
+    isFoil?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  count?: true;
+    @Field(() => Boolean, {nullable:true})
+    isEtched?: true;
 
-  @HideField()
-  createdAt?: true;
+    @Field(() => Boolean, {nullable:true})
+    count?: true;
 
-  @HideField()
-  updatedAt?: true;
+    @HideField()
+    createdAt?: true;
+
+    @HideField()
+    updatedAt?: true;
 }

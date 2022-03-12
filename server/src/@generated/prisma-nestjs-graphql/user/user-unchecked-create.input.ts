@@ -5,23 +5,22 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserUncheckedCreateInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => String, { nullable: false })
-  externalAuthId!: string;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => String, { nullable: false })
-  email!: string;
+    @Field(() => String, {nullable:false})
+    externalAuthId!: string;
 
-  @Field(() => CollectionUncheckedCreateNestedManyWithoutUserInput, {
-    nullable: true,
-  })
-  collections?: CollectionUncheckedCreateNestedManyWithoutUserInput;
+    @Field(() => String, {nullable:false})
+    email!: string;
 
-  @HideField()
-  createdAt?: Date | string;
+    @Field(() => CollectionUncheckedCreateNestedManyWithoutUserInput, {nullable:true})
+    collections?: CollectionUncheckedCreateNestedManyWithoutUserInput;
 
-  @HideField()
-  updatedAt?: Date | string;
+    @HideField()
+    createdAt?: Date | string;
+
+    @HideField()
+    updatedAt?: Date | string;
 }

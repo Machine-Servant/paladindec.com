@@ -8,33 +8,34 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CollectionWhereInput {
-  @Field(() => [CollectionWhereInput], { nullable: true })
-  AND?: Array<CollectionWhereInput>;
 
-  @Field(() => [CollectionWhereInput], { nullable: true })
-  OR?: Array<CollectionWhereInput>;
+    @Field(() => [CollectionWhereInput], {nullable:true})
+    AND?: Array<CollectionWhereInput>;
 
-  @Field(() => [CollectionWhereInput], { nullable: true })
-  NOT?: Array<CollectionWhereInput>;
+    @Field(() => [CollectionWhereInput], {nullable:true})
+    OR?: Array<CollectionWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  id?: StringFilter;
+    @Field(() => [CollectionWhereInput], {nullable:true})
+    NOT?: Array<CollectionWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    id?: StringFilter;
 
-  @Field(() => UserRelationFilter, { nullable: true })
-  user?: UserRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  userId?: StringFilter;
+    @Field(() => UserRelationFilter, {nullable:true})
+    user?: UserRelationFilter;
 
-  @Field(() => CardsInCollectionListRelationFilter, { nullable: true })
-  cards?: CardsInCollectionListRelationFilter;
+    @Field(() => StringFilter, {nullable:true})
+    userId?: StringFilter;
 
-  @HideField()
-  createdAt?: DateTimeFilter;
+    @Field(() => CardsInCollectionListRelationFilter, {nullable:true})
+    cards?: CardsInCollectionListRelationFilter;
 
-  @HideField()
-  updatedAt?: DateTimeFilter;
+    @HideField()
+    createdAt?: DateTimeFilter;
+
+    @HideField()
+    updatedAt?: DateTimeFilter;
 }

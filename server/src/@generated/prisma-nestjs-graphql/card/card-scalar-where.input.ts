@@ -8,54 +8,55 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CardScalarWhereInput {
-  @Field(() => [CardScalarWhereInput], { nullable: true })
-  AND?: Array<CardScalarWhereInput>;
 
-  @Field(() => [CardScalarWhereInput], { nullable: true })
-  OR?: Array<CardScalarWhereInput>;
+    @Field(() => [CardScalarWhereInput], {nullable:true})
+    AND?: Array<CardScalarWhereInput>;
 
-  @Field(() => [CardScalarWhereInput], { nullable: true })
-  NOT?: Array<CardScalarWhereInput>;
+    @Field(() => [CardScalarWhereInput], {nullable:true})
+    OR?: Array<CardScalarWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  id?: StringFilter;
+    @Field(() => [CardScalarWhereInput], {nullable:true})
+    NOT?: Array<CardScalarWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  scryfallCardId?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    id?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    scryfallCardId?: StringFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  collectorNumber?: StringNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isBorderless?: BoolFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    collectorNumber?: StringNullableFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isShowcase?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isBorderless?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isPaper?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isShowcase?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isExtendedArt?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isPaper?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isRetro?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isExtendedArt?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  canBeNonFoil?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    isRetro?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  canBeFoil?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    canBeNonFoil?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  canBeEtched?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    canBeFoil?: BoolFilter;
 
-  @HideField()
-  createdAt?: DateTimeFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    canBeEtched?: BoolFilter;
 
-  @HideField()
-  updatedAt?: DateTimeFilter;
+    @HideField()
+    createdAt?: DateTimeFilter;
+
+    @HideField()
+    updatedAt?: DateTimeFilter;
 }

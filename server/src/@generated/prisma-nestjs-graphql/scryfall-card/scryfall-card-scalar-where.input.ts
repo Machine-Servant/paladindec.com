@@ -16,249 +16,250 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallCardScalarWhereInput {
-  @Field(() => [ScryfallCardScalarWhereInput], { nullable: true })
-  AND?: Array<ScryfallCardScalarWhereInput>;
 
-  @Field(() => [ScryfallCardScalarWhereInput], { nullable: true })
-  OR?: Array<ScryfallCardScalarWhereInput>;
+    @Field(() => [ScryfallCardScalarWhereInput], {nullable:true})
+    AND?: Array<ScryfallCardScalarWhereInput>;
 
-  @Field(() => [ScryfallCardScalarWhereInput], { nullable: true })
-  NOT?: Array<ScryfallCardScalarWhereInput>;
+    @Field(() => [ScryfallCardScalarWhereInput], {nullable:true})
+    OR?: Array<ScryfallCardScalarWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  id?: StringFilter;
+    @Field(() => [ScryfallCardScalarWhereInput], {nullable:true})
+    NOT?: Array<ScryfallCardScalarWhereInput>;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  arenaId?: IntNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    id?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  lang?: StringFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    arenaId?: IntNullableFilter;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  mtgoId?: IntNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    lang?: StringFilter;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  mtgoFoilId?: IntNullableFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    mtgoId?: IntNullableFilter;
 
-  @Field(() => IntNullableListFilter, { nullable: true })
-  multiverseIds?: IntNullableListFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    mtgoFoilId?: IntNullableFilter;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  tcgplayerId?: IntNullableFilter;
+    @Field(() => IntNullableListFilter, {nullable:true})
+    multiverseIds?: IntNullableListFilter;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  tcgplayerEtchedId?: IntNullableFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    tcgplayerId?: IntNullableFilter;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  cardmarketId?: IntNullableFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    tcgplayerEtchedId?: IntNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  oracleId?: StringNullableFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    cardmarketId?: IntNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  printsSearchUri?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    oracleId?: StringNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  rulingUri?: StringNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    printsSearchUri?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  scryfallUri?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    rulingUri?: StringNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  uri?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    scryfallUri?: StringFilter;
 
-  @Field(() => JsonNullableListFilter, { nullable: true })
-  allParts?: JsonNullableListFilter;
+    @Field(() => StringFilter, {nullable:true})
+    uri?: StringFilter;
 
-  @Field(() => JsonNullableListFilter, { nullable: true })
-  cardFacesRaw?: JsonNullableListFilter;
+    @Field(() => JsonNullableListFilter, {nullable:true})
+    allParts?: JsonNullableListFilter;
 
-  @Field(() => FloatNullableFilter, { nullable: true })
-  cmc?: FloatNullableFilter;
+    @Field(() => JsonNullableListFilter, {nullable:true})
+    cardFacesRaw?: JsonNullableListFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  colorIdentity?: StringNullableListFilter;
+    @Field(() => FloatNullableFilter, {nullable:true})
+    cmc?: FloatNullableFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  colorIndicator?: StringNullableListFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    colorIdentity?: StringNullableListFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  colors?: StringNullableListFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    colorIndicator?: StringNullableListFilter;
 
-  @Field(() => IntNullableFilter, { nullable: true })
-  edhrecRank?: IntNullableFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    colors?: StringNullableListFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  handModifier?: StringNullableFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    edhrecRank?: IntNullableFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  keywords?: StringNullableListFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    handModifier?: StringNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  layout?: StringFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    keywords?: StringNullableListFilter;
 
-  @Field(() => JsonFilter, { nullable: true })
-  legalities?: JsonFilter;
+    @Field(() => StringFilter, {nullable:true})
+    layout?: StringFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  lifeModifier?: StringNullableFilter;
+    @Field(() => JsonFilter, {nullable:true})
+    legalities?: JsonFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  loyalty?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    lifeModifier?: StringNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  manaCost?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    loyalty?: StringNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    manaCost?: StringNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  oracleText?: StringNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  oversized?: BoolFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    oracleText?: StringNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  power?: StringNullableFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    oversized?: BoolFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  producedMana?: StringNullableListFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    power?: StringNullableFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  reserved?: BoolFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    producedMana?: StringNullableListFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  toughness?: StringNullableFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    reserved?: BoolFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  typeLine?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    toughness?: StringNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  artist?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    typeLine?: StringNullableFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  booster?: BoolFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    artist?: StringNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  borderColor?: StringFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    booster?: BoolFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  cardBackId?: StringNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    borderColor?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  collectorNumber?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    cardBackId?: StringNullableFilter;
 
-  @Field(() => BoolNullableFilter, { nullable: true })
-  contentWarning?: BoolNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    collectorNumber?: StringFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  digital?: BoolFilter;
+    @Field(() => BoolNullableFilter, {nullable:true})
+    contentWarning?: BoolNullableFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  finishes?: StringNullableListFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    digital?: BoolFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  flavorName?: StringNullableFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    finishes?: StringNullableListFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  frameEffects?: StringNullableListFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    flavorName?: StringNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  frame?: StringFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    frameEffects?: StringNullableListFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  fullArt?: BoolFilter;
+    @Field(() => StringFilter, {nullable:true})
+    frame?: StringFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  games?: StringNullableListFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    fullArt?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  highresImage?: BoolFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    games?: StringNullableListFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  illustrationId?: StringNullableFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    highresImage?: BoolFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  imageStatus?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    illustrationId?: StringNullableFilter;
 
-  @Field(() => JsonNullableFilter, { nullable: true })
-  imageUris?: JsonNullableFilter;
+    @Field(() => StringFilter, {nullable:true})
+    imageStatus?: StringFilter;
 
-  @Field(() => JsonFilter, { nullable: true })
-  prices?: JsonFilter;
+    @Field(() => JsonNullableFilter, {nullable:true})
+    imageUris?: JsonNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  printedName?: StringNullableFilter;
+    @Field(() => JsonFilter, {nullable:true})
+    prices?: JsonFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  printedText?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    printedName?: StringNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  printedTypeLine?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    printedText?: StringNullableFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  promo?: BoolFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    printedTypeLine?: StringNullableFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  promoTypes?: StringNullableListFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    promo?: BoolFilter;
 
-  @Field(() => JsonNullableFilter, { nullable: true })
-  purchaseUris?: JsonNullableFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    promoTypes?: StringNullableListFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  rarity?: StringFilter;
+    @Field(() => JsonNullableFilter, {nullable:true})
+    purchaseUris?: JsonNullableFilter;
 
-  @Field(() => JsonFilter, { nullable: true })
-  relatedUris?: JsonFilter;
+    @Field(() => StringFilter, {nullable:true})
+    rarity?: StringFilter;
 
-  @Field(() => DateTimeFilter, { nullable: true })
-  releasedAt?: DateTimeFilter;
+    @Field(() => JsonFilter, {nullable:true})
+    relatedUris?: JsonFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  reprint?: BoolFilter;
+    @Field(() => DateTimeFilter, {nullable:true})
+    releasedAt?: DateTimeFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  scryfallSetUri?: StringFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    reprint?: BoolFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  setCode?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    scryfallSetUri?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  setName?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    setCode?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  setSearchUri?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    setName?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  setType?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    setSearchUri?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  setUri?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    setType?: StringFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  storySpotlight?: BoolFilter;
+    @Field(() => StringFilter, {nullable:true})
+    setUri?: StringFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  textless?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    storySpotlight?: BoolFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  variation?: BoolFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    textless?: BoolFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  varationOf?: StringNullableFilter;
+    @Field(() => BoolFilter, {nullable:true})
+    variation?: BoolFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  securityStamp?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    varationOf?: StringNullableFilter;
 
-  @Field(() => StringNullableFilter, { nullable: true })
-  watermark?: StringNullableFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    securityStamp?: StringNullableFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  setId?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    watermark?: StringNullableFilter;
 
-  @HideField()
-  createdAt?: DateTimeFilter;
+    @Field(() => StringFilter, {nullable:true})
+    setId?: StringFilter;
 
-  @HideField()
-  updatedAt?: DateTimeFilter;
+    @HideField()
+    createdAt?: DateTimeFilter;
+
+    @HideField()
+    updatedAt?: DateTimeFilter;
 }

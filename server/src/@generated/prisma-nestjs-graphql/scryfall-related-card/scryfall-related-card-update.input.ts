@@ -8,34 +8,31 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallRelatedCardUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => ScryfallCardUpdateOneRequiredWithoutReferencedByInput, {
-    nullable: true,
-  })
-  reference?: ScryfallCardUpdateOneRequiredWithoutReferencedByInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => ScryfallCardUpdateOneRequiredWithoutRelatedToInput, {
-    nullable: true,
-  })
-  card?: ScryfallCardUpdateOneRequiredWithoutRelatedToInput;
+    @Field(() => ScryfallCardUpdateOneRequiredWithoutReferencedByInput, {nullable:true})
+    reference?: ScryfallCardUpdateOneRequiredWithoutReferencedByInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  component?: StringFieldUpdateOperationsInput;
+    @Field(() => ScryfallCardUpdateOneRequiredWithoutRelatedToInput, {nullable:true})
+    card?: ScryfallCardUpdateOneRequiredWithoutRelatedToInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  name?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    component?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  typeLine?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    name?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  uri?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    typeLine?: StringFieldUpdateOperationsInput;
 
-  @HideField()
-  createdAt?: DateTimeFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    uri?: StringFieldUpdateOperationsInput;
 
-  @HideField()
-  updatedAt?: DateTimeFieldUpdateOperationsInput;
+    @HideField()
+    createdAt?: DateTimeFieldUpdateOperationsInput;
+
+    @HideField()
+    updatedAt?: DateTimeFieldUpdateOperationsInput;
 }

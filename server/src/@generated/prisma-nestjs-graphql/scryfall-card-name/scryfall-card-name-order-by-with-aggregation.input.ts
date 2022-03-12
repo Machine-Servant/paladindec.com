@@ -8,24 +8,25 @@ import { ScryfallCardNameMinOrderByAggregateInput } from './scryfall-card-name-m
 
 @InputType()
 export class ScryfallCardNameOrderByWithAggregationInput {
-  @Field(() => SortOrder, { nullable: true })
-  id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  name?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    id?: keyof typeof SortOrder;
 
-  @HideField()
-  createdAt?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    name?: keyof typeof SortOrder;
 
-  @HideField()
-  updatedAt?: keyof typeof SortOrder;
+    @HideField()
+    createdAt?: keyof typeof SortOrder;
 
-  @Field(() => ScryfallCardNameCountOrderByAggregateInput, { nullable: true })
-  _count?: ScryfallCardNameCountOrderByAggregateInput;
+    @HideField()
+    updatedAt?: keyof typeof SortOrder;
 
-  @Field(() => ScryfallCardNameMaxOrderByAggregateInput, { nullable: true })
-  _max?: ScryfallCardNameMaxOrderByAggregateInput;
+    @Field(() => ScryfallCardNameCountOrderByAggregateInput, {nullable:true})
+    _count?: ScryfallCardNameCountOrderByAggregateInput;
 
-  @Field(() => ScryfallCardNameMinOrderByAggregateInput, { nullable: true })
-  _min?: ScryfallCardNameMinOrderByAggregateInput;
+    @Field(() => ScryfallCardNameMaxOrderByAggregateInput, {nullable:true})
+    _max?: ScryfallCardNameMaxOrderByAggregateInput;
+
+    @Field(() => ScryfallCardNameMinOrderByAggregateInput, {nullable:true})
+    _min?: ScryfallCardNameMinOrderByAggregateInput;
 }

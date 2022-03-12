@@ -8,23 +8,22 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CollectionUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  name?: StringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => UserUpdateOneRequiredWithoutCollectionsInput, { nullable: true })
-  user?: UserUpdateOneRequiredWithoutCollectionsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    name?: StringFieldUpdateOperationsInput;
 
-  @Field(() => CardsInCollectionUpdateManyWithoutCollectionInput, {
-    nullable: true,
-  })
-  cards?: CardsInCollectionUpdateManyWithoutCollectionInput;
+    @Field(() => UserUpdateOneRequiredWithoutCollectionsInput, {nullable:true})
+    user?: UserUpdateOneRequiredWithoutCollectionsInput;
 
-  @HideField()
-  createdAt?: DateTimeFieldUpdateOperationsInput;
+    @Field(() => CardsInCollectionUpdateManyWithoutCollectionInput, {nullable:true})
+    cards?: CardsInCollectionUpdateManyWithoutCollectionInput;
 
-  @HideField()
-  updatedAt?: DateTimeFieldUpdateOperationsInput;
+    @HideField()
+    createdAt?: DateTimeFieldUpdateOperationsInput;
+
+    @HideField()
+    updatedAt?: DateTimeFieldUpdateOperationsInput;
 }

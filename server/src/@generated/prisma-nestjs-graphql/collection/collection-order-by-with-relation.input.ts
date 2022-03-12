@@ -7,26 +7,25 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CollectionOrderByWithRelationInput {
-  @Field(() => SortOrder, { nullable: true })
-  id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  name?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    id?: keyof typeof SortOrder;
 
-  @Field(() => UserOrderByWithRelationInput, { nullable: true })
-  user?: UserOrderByWithRelationInput;
+    @Field(() => SortOrder, {nullable:true})
+    name?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  userId?: keyof typeof SortOrder;
+    @Field(() => UserOrderByWithRelationInput, {nullable:true})
+    user?: UserOrderByWithRelationInput;
 
-  @Field(() => CardsInCollectionOrderByRelationAggregateInput, {
-    nullable: true,
-  })
-  cards?: CardsInCollectionOrderByRelationAggregateInput;
+    @Field(() => SortOrder, {nullable:true})
+    userId?: keyof typeof SortOrder;
 
-  @HideField()
-  createdAt?: keyof typeof SortOrder;
+    @Field(() => CardsInCollectionOrderByRelationAggregateInput, {nullable:true})
+    cards?: CardsInCollectionOrderByRelationAggregateInput;
 
-  @HideField()
-  updatedAt?: keyof typeof SortOrder;
+    @HideField()
+    createdAt?: keyof typeof SortOrder;
+
+    @HideField()
+    updatedAt?: keyof typeof SortOrder;
 }

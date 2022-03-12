@@ -4,15 +4,16 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallCardNameCreateInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @HideField()
-  createdAt?: Date | string;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @HideField()
-  updatedAt?: Date | string;
+    @HideField()
+    createdAt?: Date | string;
+
+    @HideField()
+    updatedAt?: Date | string;
 }

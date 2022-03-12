@@ -8,57 +8,58 @@ import { CardCount } from './card-count.output';
 
 @ObjectType()
 export class Card {
-  @Field(() => ID, { nullable: false })
-  id!: string;
 
-  @Field(() => ScryfallCard, { nullable: false })
-  scryfallCard?: ScryfallCard;
+    @Field(() => ID, {nullable:false})
+    id!: string;
 
-  @Field(() => String, { nullable: false })
-  scryfallCardId!: string;
+    @Field(() => ScryfallCard, {nullable:false})
+    scryfallCard?: ScryfallCard;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => String, {nullable:false})
+    scryfallCardId!: string;
 
-  @Field(() => String, { nullable: true })
-  collectorNumber!: string | null;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  isBorderless!: boolean;
+    @Field(() => String, {nullable:true})
+    collectorNumber!: string | null;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  isShowcase!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isBorderless!: boolean;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  isPaper!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isShowcase!: boolean;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  isExtendedArt!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isPaper!: boolean;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  isRetro!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isExtendedArt!: boolean;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  canBeNonFoil!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    isRetro!: boolean;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  canBeFoil!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    canBeNonFoil!: boolean;
 
-  @Field(() => Boolean, { nullable: false, defaultValue: false })
-  canBeEtched!: boolean;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    canBeFoil!: boolean;
 
-  @Field(() => ScryfallPrice, { nullable: true })
-  currentPrice?: ScryfallPrice | null;
+    @Field(() => Boolean, {nullable:false,defaultValue:false})
+    canBeEtched!: boolean;
 
-  @Field(() => [CardsInCollection], { nullable: true })
-  collections?: Array<CardsInCollection>;
+    @Field(() => ScryfallPrice, {nullable:true})
+    currentPrice?: ScryfallPrice | null;
 
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date;
+    @Field(() => [CardsInCollection], {nullable:true})
+    collections?: Array<CardsInCollection>;
 
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date;
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
 
-  @Field(() => CardCount, { nullable: false })
-  _count?: CardCount;
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date;
+
+    @Field(() => CardCount, {nullable:false})
+    _count?: CardCount;
 }

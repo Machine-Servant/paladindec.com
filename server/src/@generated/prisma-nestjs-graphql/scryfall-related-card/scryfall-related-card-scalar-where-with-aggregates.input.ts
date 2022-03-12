@@ -6,45 +6,40 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallRelatedCardScalarWhereWithAggregatesInput {
-  @Field(() => [ScryfallRelatedCardScalarWhereWithAggregatesInput], {
-    nullable: true,
-  })
-  AND?: Array<ScryfallRelatedCardScalarWhereWithAggregatesInput>;
 
-  @Field(() => [ScryfallRelatedCardScalarWhereWithAggregatesInput], {
-    nullable: true,
-  })
-  OR?: Array<ScryfallRelatedCardScalarWhereWithAggregatesInput>;
+    @Field(() => [ScryfallRelatedCardScalarWhereWithAggregatesInput], {nullable:true})
+    AND?: Array<ScryfallRelatedCardScalarWhereWithAggregatesInput>;
 
-  @Field(() => [ScryfallRelatedCardScalarWhereWithAggregatesInput], {
-    nullable: true,
-  })
-  NOT?: Array<ScryfallRelatedCardScalarWhereWithAggregatesInput>;
+    @Field(() => [ScryfallRelatedCardScalarWhereWithAggregatesInput], {nullable:true})
+    OR?: Array<ScryfallRelatedCardScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  id?: StringWithAggregatesFilter;
+    @Field(() => [ScryfallRelatedCardScalarWhereWithAggregatesInput], {nullable:true})
+    NOT?: Array<ScryfallRelatedCardScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  referenceId?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    id?: StringWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  cardId?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    referenceId?: StringWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  component?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    cardId?: StringWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  name?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    component?: StringWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  typeLine?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    name?: StringWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  uri?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    typeLine?: StringWithAggregatesFilter;
 
-  @HideField()
-  createdAt?: DateTimeWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    uri?: StringWithAggregatesFilter;
 
-  @HideField()
-  updatedAt?: DateTimeWithAggregatesFilter;
+    @HideField()
+    createdAt?: DateTimeWithAggregatesFilter;
+
+    @HideField()
+    updatedAt?: DateTimeWithAggregatesFilter;
 }

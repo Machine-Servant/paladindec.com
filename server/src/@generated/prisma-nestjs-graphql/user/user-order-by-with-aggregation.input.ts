@@ -8,27 +8,28 @@ import { UserMinOrderByAggregateInput } from './user-min-order-by-aggregate.inpu
 
 @InputType()
 export class UserOrderByWithAggregationInput {
-  @Field(() => SortOrder, { nullable: true })
-  id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  externalAuthId?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    id?: keyof typeof SortOrder;
 
-  @Field(() => SortOrder, { nullable: true })
-  email?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    externalAuthId?: keyof typeof SortOrder;
 
-  @HideField()
-  createdAt?: keyof typeof SortOrder;
+    @Field(() => SortOrder, {nullable:true})
+    email?: keyof typeof SortOrder;
 
-  @HideField()
-  updatedAt?: keyof typeof SortOrder;
+    @HideField()
+    createdAt?: keyof typeof SortOrder;
 
-  @Field(() => UserCountOrderByAggregateInput, { nullable: true })
-  _count?: UserCountOrderByAggregateInput;
+    @HideField()
+    updatedAt?: keyof typeof SortOrder;
 
-  @Field(() => UserMaxOrderByAggregateInput, { nullable: true })
-  _max?: UserMaxOrderByAggregateInput;
+    @Field(() => UserCountOrderByAggregateInput, {nullable:true})
+    _count?: UserCountOrderByAggregateInput;
 
-  @Field(() => UserMinOrderByAggregateInput, { nullable: true })
-  _min?: UserMinOrderByAggregateInput;
+    @Field(() => UserMaxOrderByAggregateInput, {nullable:true})
+    _max?: UserMaxOrderByAggregateInput;
+
+    @Field(() => UserMinOrderByAggregateInput, {nullable:true})
+    _min?: UserMinOrderByAggregateInput;
 }

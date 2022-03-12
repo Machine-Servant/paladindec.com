@@ -6,24 +6,25 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallCardNameWhereInput {
-  @Field(() => [ScryfallCardNameWhereInput], { nullable: true })
-  AND?: Array<ScryfallCardNameWhereInput>;
 
-  @Field(() => [ScryfallCardNameWhereInput], { nullable: true })
-  OR?: Array<ScryfallCardNameWhereInput>;
+    @Field(() => [ScryfallCardNameWhereInput], {nullable:true})
+    AND?: Array<ScryfallCardNameWhereInput>;
 
-  @Field(() => [ScryfallCardNameWhereInput], { nullable: true })
-  NOT?: Array<ScryfallCardNameWhereInput>;
+    @Field(() => [ScryfallCardNameWhereInput], {nullable:true})
+    OR?: Array<ScryfallCardNameWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  id?: StringFilter;
+    @Field(() => [ScryfallCardNameWhereInput], {nullable:true})
+    NOT?: Array<ScryfallCardNameWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    id?: StringFilter;
 
-  @HideField()
-  createdAt?: DateTimeFilter;
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
 
-  @HideField()
-  updatedAt?: DateTimeFilter;
+    @HideField()
+    createdAt?: DateTimeFilter;
+
+    @HideField()
+    updatedAt?: DateTimeFilter;
 }

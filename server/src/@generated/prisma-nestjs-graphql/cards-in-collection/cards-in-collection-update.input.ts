@@ -9,24 +9,25 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CardsInCollectionUpdateInput {
-  @Field(() => CardUpdateOneRequiredWithoutCollectionsInput, { nullable: true })
-  card?: CardUpdateOneRequiredWithoutCollectionsInput;
 
-  @Field(() => CollectionUpdateOneRequiredWithoutCardsInput, { nullable: true })
-  collection?: CollectionUpdateOneRequiredWithoutCardsInput;
+    @Field(() => CardUpdateOneRequiredWithoutCollectionsInput, {nullable:true})
+    card?: CardUpdateOneRequiredWithoutCollectionsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isFoil?: BoolFieldUpdateOperationsInput;
+    @Field(() => CollectionUpdateOneRequiredWithoutCardsInput, {nullable:true})
+    collection?: CollectionUpdateOneRequiredWithoutCardsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isEtched?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isFoil?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => IntFieldUpdateOperationsInput, { nullable: true })
-  count?: IntFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isEtched?: BoolFieldUpdateOperationsInput;
 
-  @HideField()
-  createdAt?: DateTimeFieldUpdateOperationsInput;
+    @Field(() => IntFieldUpdateOperationsInput, {nullable:true})
+    count?: IntFieldUpdateOperationsInput;
 
-  @HideField()
-  updatedAt?: DateTimeFieldUpdateOperationsInput;
+    @HideField()
+    createdAt?: DateTimeFieldUpdateOperationsInput;
+
+    @HideField()
+    updatedAt?: DateTimeFieldUpdateOperationsInput;
 }

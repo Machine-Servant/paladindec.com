@@ -11,55 +11,52 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CardUpdateInput {
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => ScryfallCardUpdateOneRequiredWithoutCardInput, {
-    nullable: true,
-  })
-  scryfallCard?: ScryfallCardUpdateOneRequiredWithoutCardInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    id?: StringFieldUpdateOperationsInput;
 
-  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
-  name?: StringFieldUpdateOperationsInput;
+    @Field(() => ScryfallCardUpdateOneRequiredWithoutCardInput, {nullable:true})
+    scryfallCard?: ScryfallCardUpdateOneRequiredWithoutCardInput;
 
-  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
-  collectorNumber?: NullableStringFieldUpdateOperationsInput;
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    name?: StringFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isBorderless?: BoolFieldUpdateOperationsInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    collectorNumber?: NullableStringFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isShowcase?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isBorderless?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isPaper?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isShowcase?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isExtendedArt?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isPaper?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  isRetro?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isExtendedArt?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  canBeNonFoil?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    isRetro?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  canBeFoil?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    canBeNonFoil?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
-  canBeEtched?: BoolFieldUpdateOperationsInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    canBeFoil?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput, {
-    nullable: true,
-  })
-  currentPrice?: ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput;
+    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
+    canBeEtched?: BoolFieldUpdateOperationsInput;
 
-  @Field(() => CardsInCollectionUpdateManyWithoutCardInput, { nullable: true })
-  collections?: CardsInCollectionUpdateManyWithoutCardInput;
+    @Field(() => ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput, {nullable:true})
+    currentPrice?: ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput;
 
-  @HideField()
-  createdAt?: DateTimeFieldUpdateOperationsInput;
+    @Field(() => CardsInCollectionUpdateManyWithoutCardInput, {nullable:true})
+    collections?: CardsInCollectionUpdateManyWithoutCardInput;
 
-  @HideField()
-  updatedAt?: DateTimeFieldUpdateOperationsInput;
+    @HideField()
+    createdAt?: DateTimeFieldUpdateOperationsInput;
+
+    @HideField()
+    updatedAt?: DateTimeFieldUpdateOperationsInput;
 }

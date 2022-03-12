@@ -11,78 +11,79 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallSetScalarWhereWithAggregatesInput {
-  @Field(() => [ScryfallSetScalarWhereWithAggregatesInput], { nullable: true })
-  AND?: Array<ScryfallSetScalarWhereWithAggregatesInput>;
 
-  @Field(() => [ScryfallSetScalarWhereWithAggregatesInput], { nullable: true })
-  OR?: Array<ScryfallSetScalarWhereWithAggregatesInput>;
+    @Field(() => [ScryfallSetScalarWhereWithAggregatesInput], {nullable:true})
+    AND?: Array<ScryfallSetScalarWhereWithAggregatesInput>;
 
-  @Field(() => [ScryfallSetScalarWhereWithAggregatesInput], { nullable: true })
-  NOT?: Array<ScryfallSetScalarWhereWithAggregatesInput>;
+    @Field(() => [ScryfallSetScalarWhereWithAggregatesInput], {nullable:true})
+    OR?: Array<ScryfallSetScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  id?: StringWithAggregatesFilter;
+    @Field(() => [ScryfallSetScalarWhereWithAggregatesInput], {nullable:true})
+    NOT?: Array<ScryfallSetScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  code?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    id?: StringWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  mtgoCode?: StringNullableWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    code?: StringWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  arenaCode?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    mtgoCode?: StringNullableWithAggregatesFilter;
 
-  @Field(() => IntNullableWithAggregatesFilter, { nullable: true })
-  tcgPlayerId?: IntNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    arenaCode?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  name?: StringWithAggregatesFilter;
+    @Field(() => IntNullableWithAggregatesFilter, {nullable:true})
+    tcgPlayerId?: IntNullableWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  setType?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    name?: StringWithAggregatesFilter;
 
-  @Field(() => DateTimeNullableWithAggregatesFilter, { nullable: true })
-  releasedAt?: DateTimeNullableWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    setType?: StringWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  blockCode?: StringNullableWithAggregatesFilter;
+    @Field(() => DateTimeNullableWithAggregatesFilter, {nullable:true})
+    releasedAt?: DateTimeNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  block?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    blockCode?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  parentSetCode?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    block?: StringNullableWithAggregatesFilter;
 
-  @Field(() => IntWithAggregatesFilter, { nullable: true })
-  cardCount?: IntWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    parentSetCode?: StringNullableWithAggregatesFilter;
 
-  @Field(() => IntNullableWithAggregatesFilter, { nullable: true })
-  printedSize?: IntNullableWithAggregatesFilter;
+    @Field(() => IntWithAggregatesFilter, {nullable:true})
+    cardCount?: IntWithAggregatesFilter;
 
-  @Field(() => BoolWithAggregatesFilter, { nullable: true })
-  isDigital?: BoolWithAggregatesFilter;
+    @Field(() => IntNullableWithAggregatesFilter, {nullable:true})
+    printedSize?: IntNullableWithAggregatesFilter;
 
-  @Field(() => BoolWithAggregatesFilter, { nullable: true })
-  isFoilOnly?: BoolWithAggregatesFilter;
+    @Field(() => BoolWithAggregatesFilter, {nullable:true})
+    isDigital?: BoolWithAggregatesFilter;
 
-  @Field(() => BoolWithAggregatesFilter, { nullable: true })
-  isNonFoilOnly?: BoolWithAggregatesFilter;
+    @Field(() => BoolWithAggregatesFilter, {nullable:true})
+    isFoilOnly?: BoolWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  scryfallUri?: StringWithAggregatesFilter;
+    @Field(() => BoolWithAggregatesFilter, {nullable:true})
+    isNonFoilOnly?: BoolWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  uri?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    scryfallUri?: StringWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  iconSvgUri?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    uri?: StringWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  searchUri?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    iconSvgUri?: StringWithAggregatesFilter;
 
-  @HideField()
-  createdAt?: DateTimeWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    searchUri?: StringWithAggregatesFilter;
 
-  @HideField()
-  updatedAt?: DateTimeWithAggregatesFilter;
+    @HideField()
+    createdAt?: DateTimeWithAggregatesFilter;
+
+    @HideField()
+    updatedAt?: DateTimeWithAggregatesFilter;
 }

@@ -5,29 +5,28 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallRelatedCardCreateWithoutReferenceInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => ScryfallCardCreateNestedOneWithoutRelatedToInput, {
-    nullable: false,
-  })
-  card!: ScryfallCardCreateNestedOneWithoutRelatedToInput;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => String, { nullable: false })
-  component!: string;
+    @Field(() => ScryfallCardCreateNestedOneWithoutRelatedToInput, {nullable:false})
+    card!: ScryfallCardCreateNestedOneWithoutRelatedToInput;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => String, {nullable:false})
+    component!: string;
 
-  @Field(() => String, { nullable: false })
-  typeLine!: string;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => String, { nullable: false })
-  uri!: string;
+    @Field(() => String, {nullable:false})
+    typeLine!: string;
 
-  @HideField()
-  createdAt?: Date | string;
+    @Field(() => String, {nullable:false})
+    uri!: string;
 
-  @HideField()
-  updatedAt?: Date | string;
+    @HideField()
+    createdAt?: Date | string;
+
+    @HideField()
+    updatedAt?: Date | string;
 }

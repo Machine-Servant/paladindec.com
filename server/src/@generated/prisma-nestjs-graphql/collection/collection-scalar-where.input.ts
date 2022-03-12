@@ -6,27 +6,28 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CollectionScalarWhereInput {
-  @Field(() => [CollectionScalarWhereInput], { nullable: true })
-  AND?: Array<CollectionScalarWhereInput>;
 
-  @Field(() => [CollectionScalarWhereInput], { nullable: true })
-  OR?: Array<CollectionScalarWhereInput>;
+    @Field(() => [CollectionScalarWhereInput], {nullable:true})
+    AND?: Array<CollectionScalarWhereInput>;
 
-  @Field(() => [CollectionScalarWhereInput], { nullable: true })
-  NOT?: Array<CollectionScalarWhereInput>;
+    @Field(() => [CollectionScalarWhereInput], {nullable:true})
+    OR?: Array<CollectionScalarWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  id?: StringFilter;
+    @Field(() => [CollectionScalarWhereInput], {nullable:true})
+    NOT?: Array<CollectionScalarWhereInput>;
 
-  @Field(() => StringFilter, { nullable: true })
-  name?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    id?: StringFilter;
 
-  @Field(() => StringFilter, { nullable: true })
-  userId?: StringFilter;
+    @Field(() => StringFilter, {nullable:true})
+    name?: StringFilter;
 
-  @HideField()
-  createdAt?: DateTimeFilter;
+    @Field(() => StringFilter, {nullable:true})
+    userId?: StringFilter;
 
-  @HideField()
-  updatedAt?: DateTimeFilter;
+    @HideField()
+    createdAt?: DateTimeFilter;
+
+    @HideField()
+    updatedAt?: DateTimeFilter;
 }

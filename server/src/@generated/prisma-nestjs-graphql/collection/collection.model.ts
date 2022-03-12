@@ -7,27 +7,28 @@ import { CollectionCount } from './collection-count.output';
 
 @ObjectType()
 export class Collection {
-  @Field(() => ID, { nullable: false })
-  id!: string;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => ID, {nullable:false})
+    id!: string;
 
-  @Field(() => User, { nullable: false })
-  user?: User;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => String, { nullable: false })
-  userId!: string;
+    @Field(() => User, {nullable:false})
+    user?: User;
 
-  @Field(() => [CardsInCollection], { nullable: true })
-  cards?: Array<CardsInCollection>;
+    @Field(() => String, {nullable:false})
+    userId!: string;
 
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date;
+    @Field(() => [CardsInCollection], {nullable:true})
+    cards?: Array<CardsInCollection>;
 
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date;
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date;
 
-  @Field(() => CollectionCount, { nullable: false })
-  _count?: CollectionCount;
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date;
+
+    @Field(() => CollectionCount, {nullable:false})
+    _count?: CollectionCount;
 }

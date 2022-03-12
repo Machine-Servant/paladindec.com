@@ -6,36 +6,37 @@ import { CardCreateNestedOneWithoutCurrentPriceInput } from '../card/card-create
 
 @InputType()
 export class ScryfallPriceCreateWithoutCardInput {
-  @Field(() => String, { nullable: true })
-  id?: string;
 
-  @Field(() => Date, { nullable: false })
-  date!: Date | string;
+    @Field(() => String, {nullable:true})
+    id?: string;
 
-  @Field(() => Float, { nullable: true })
-  eur?: number;
+    @Field(() => Date, {nullable:false})
+    date!: Date | string;
 
-  @Field(() => Float, { nullable: true })
-  tix?: number;
+    @Field(() => Float, {nullable:true})
+    eur?: number;
 
-  @Field(() => Float, { nullable: true })
-  usd?: number;
+    @Field(() => Float, {nullable:true})
+    tix?: number;
 
-  @Field(() => Float, { nullable: true })
-  eurFoil?: number;
+    @Field(() => Float, {nullable:true})
+    usd?: number;
 
-  @Field(() => Float, { nullable: true })
-  usdFoil?: number;
+    @Field(() => Float, {nullable:true})
+    eurFoil?: number;
 
-  @Field(() => Float, { nullable: true })
-  usdEtched?: number;
+    @Field(() => Float, {nullable:true})
+    usdFoil?: number;
 
-  @HideField()
-  createdAt?: Date | string;
+    @Field(() => Float, {nullable:true})
+    usdEtched?: number;
 
-  @HideField()
-  updatedAt?: Date | string;
+    @HideField()
+    createdAt?: Date | string;
 
-  @Field(() => CardCreateNestedOneWithoutCurrentPriceInput, { nullable: true })
-  currentPriceOfCard?: CardCreateNestedOneWithoutCurrentPriceInput;
+    @HideField()
+    updatedAt?: Date | string;
+
+    @Field(() => CardCreateNestedOneWithoutCurrentPriceInput, {nullable:true})
+    currentPriceOfCard?: CardCreateNestedOneWithoutCurrentPriceInput;
 }

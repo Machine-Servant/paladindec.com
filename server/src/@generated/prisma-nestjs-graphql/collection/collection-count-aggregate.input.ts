@@ -4,21 +4,22 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CollectionCountAggregateInput {
-  @Field(() => Boolean, { nullable: true })
-  id?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  name?: true;
+    @Field(() => Boolean, {nullable:true})
+    id?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  userId?: true;
+    @Field(() => Boolean, {nullable:true})
+    name?: true;
 
-  @HideField()
-  createdAt?: true;
+    @Field(() => Boolean, {nullable:true})
+    userId?: true;
 
-  @HideField()
-  updatedAt?: true;
+    @HideField()
+    createdAt?: true;
 
-  @Field(() => Boolean, { nullable: true })
-  _all?: true;
+    @HideField()
+    updatedAt?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    _all?: true;
 }

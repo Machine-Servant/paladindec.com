@@ -10,90 +10,85 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallCardFaceScalarWhereWithAggregatesInput {
-  @Field(() => [ScryfallCardFaceScalarWhereWithAggregatesInput], {
-    nullable: true,
-  })
-  AND?: Array<ScryfallCardFaceScalarWhereWithAggregatesInput>;
 
-  @Field(() => [ScryfallCardFaceScalarWhereWithAggregatesInput], {
-    nullable: true,
-  })
-  OR?: Array<ScryfallCardFaceScalarWhereWithAggregatesInput>;
+    @Field(() => [ScryfallCardFaceScalarWhereWithAggregatesInput], {nullable:true})
+    AND?: Array<ScryfallCardFaceScalarWhereWithAggregatesInput>;
 
-  @Field(() => [ScryfallCardFaceScalarWhereWithAggregatesInput], {
-    nullable: true,
-  })
-  NOT?: Array<ScryfallCardFaceScalarWhereWithAggregatesInput>;
+    @Field(() => [ScryfallCardFaceScalarWhereWithAggregatesInput], {nullable:true})
+    OR?: Array<ScryfallCardFaceScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  id?: StringWithAggregatesFilter;
+    @Field(() => [ScryfallCardFaceScalarWhereWithAggregatesInput], {nullable:true})
+    NOT?: Array<ScryfallCardFaceScalarWhereWithAggregatesInput>;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  cardId?: StringWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    id?: StringWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  artist?: StringNullableWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    cardId?: StringWithAggregatesFilter;
 
-  @Field(() => FloatNullableWithAggregatesFilter, { nullable: true })
-  cmc?: FloatNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    artist?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  colorIndicator?: StringNullableListFilter;
+    @Field(() => FloatNullableWithAggregatesFilter, {nullable:true})
+    cmc?: FloatNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableListFilter, { nullable: true })
-  colors?: StringNullableListFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    colorIndicator?: StringNullableListFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  flavorText?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableListFilter, {nullable:true})
+    colors?: StringNullableListFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  illustrationId?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    flavorText?: StringNullableWithAggregatesFilter;
 
-  @Field(() => JsonNullableWithAggregatesFilter, { nullable: true })
-  imageUris?: JsonNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    illustrationId?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  layout?: StringNullableWithAggregatesFilter;
+    @Field(() => JsonNullableWithAggregatesFilter, {nullable:true})
+    imageUris?: JsonNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  loyalty?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    layout?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  manaCost?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    loyalty?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringWithAggregatesFilter, { nullable: true })
-  name?: StringWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    manaCost?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  oracleId?: StringNullableWithAggregatesFilter;
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    name?: StringWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  oracleText?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    oracleId?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  power?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    oracleText?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  printedName?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    power?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  printedText?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    printedName?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  printedTypeLine?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    printedText?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  toughness?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    printedTypeLine?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  typeLine?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    toughness?: StringNullableWithAggregatesFilter;
 
-  @Field(() => StringNullableWithAggregatesFilter, { nullable: true })
-  watermark?: StringNullableWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    typeLine?: StringNullableWithAggregatesFilter;
 
-  @HideField()
-  createdAt?: DateTimeWithAggregatesFilter;
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    watermark?: StringNullableWithAggregatesFilter;
 
-  @HideField()
-  updatedAt?: DateTimeWithAggregatesFilter;
+    @HideField()
+    createdAt?: DateTimeWithAggregatesFilter;
+
+    @HideField()
+    updatedAt?: DateTimeWithAggregatesFilter;
 }

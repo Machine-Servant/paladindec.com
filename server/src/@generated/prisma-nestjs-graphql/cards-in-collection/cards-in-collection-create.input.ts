@@ -7,24 +7,25 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CardsInCollectionCreateInput {
-  @Field(() => CardCreateNestedOneWithoutCollectionsInput, { nullable: false })
-  card!: CardCreateNestedOneWithoutCollectionsInput;
 
-  @Field(() => CollectionCreateNestedOneWithoutCardsInput, { nullable: false })
-  collection!: CollectionCreateNestedOneWithoutCardsInput;
+    @Field(() => CardCreateNestedOneWithoutCollectionsInput, {nullable:false})
+    card!: CardCreateNestedOneWithoutCollectionsInput;
 
-  @Field(() => Boolean, { nullable: true })
-  isFoil?: boolean;
+    @Field(() => CollectionCreateNestedOneWithoutCardsInput, {nullable:false})
+    collection!: CollectionCreateNestedOneWithoutCardsInput;
 
-  @Field(() => Boolean, { nullable: true })
-  isEtched?: boolean;
+    @Field(() => Boolean, {nullable:true})
+    isFoil?: boolean;
 
-  @Field(() => Int, { nullable: true })
-  count?: number;
+    @Field(() => Boolean, {nullable:true})
+    isEtched?: boolean;
 
-  @HideField()
-  createdAt?: Date | string;
+    @Field(() => Int, {nullable:true})
+    count?: number;
 
-  @HideField()
-  updatedAt?: Date | string;
+    @HideField()
+    createdAt?: Date | string;
+
+    @HideField()
+    updatedAt?: Date | string;
 }

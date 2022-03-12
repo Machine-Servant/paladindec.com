@@ -6,24 +6,25 @@ import { ScryfallCardNameMaxAggregate } from './scryfall-card-name-max-aggregate
 
 @ObjectType()
 export class ScryfallCardNameGroupBy {
-  @Field(() => String, { nullable: false })
-  id!: string;
 
-  @Field(() => String, { nullable: false })
-  name!: string;
+    @Field(() => String, {nullable:false})
+    id!: string;
 
-  @Field(() => Date, { nullable: false })
-  createdAt!: Date | string;
+    @Field(() => String, {nullable:false})
+    name!: string;
 
-  @Field(() => Date, { nullable: false })
-  updatedAt!: Date | string;
+    @Field(() => Date, {nullable:false})
+    createdAt!: Date | string;
 
-  @Field(() => ScryfallCardNameCountAggregate, { nullable: true })
-  _count?: ScryfallCardNameCountAggregate;
+    @Field(() => Date, {nullable:false})
+    updatedAt!: Date | string;
 
-  @Field(() => ScryfallCardNameMinAggregate, { nullable: true })
-  _min?: ScryfallCardNameMinAggregate;
+    @Field(() => ScryfallCardNameCountAggregate, {nullable:true})
+    _count?: ScryfallCardNameCountAggregate;
 
-  @Field(() => ScryfallCardNameMaxAggregate, { nullable: true })
-  _max?: ScryfallCardNameMaxAggregate;
+    @Field(() => ScryfallCardNameMinAggregate, {nullable:true})
+    _min?: ScryfallCardNameMinAggregate;
+
+    @Field(() => ScryfallCardNameMaxAggregate, {nullable:true})
+    _max?: ScryfallCardNameMaxAggregate;
 }
