@@ -9,7 +9,9 @@ export class ScryfallSetService {
 
   private readonly logger = new Logger(ScryfallSetService.name);
 
-  async bulkUpsert(data: ScryfallSet[]): Promise<ScryfallSet[]> {
+  async bulkUpsert(
+    data: Omit<ScryfallSet, 'createdAt' | 'updatedAt'>[],
+  ): Promise<ScryfallSet[]> {
     this.logger.debug(`Upserting ${data.length} entries`);
     const results: ScryfallSet[] = [];
     for (const input of data) {

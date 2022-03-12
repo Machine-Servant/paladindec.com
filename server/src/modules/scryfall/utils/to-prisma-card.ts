@@ -1,7 +1,9 @@
 import { ScryfallCard } from 'prisma/prisma-client';
 import { ScryfallCardDataType } from '../types/scryfall.types';
 
-export function toCardObjectType(data: ScryfallCardDataType): ScryfallCard {
+export function toCardObjectType(
+  data: ScryfallCardDataType,
+): Omit<ScryfallCard, 'createdAt' | 'updatedAt'> {
   const {
     oracle_id: oracleId,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

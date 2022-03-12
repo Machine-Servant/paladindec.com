@@ -1,7 +1,9 @@
 import { ScryfallSet } from '@prisma/client';
 import { ScryfallSetDataType } from '../types/scryfall.types';
 
-export function toPrismaScryfallSet(data: ScryfallSetDataType): ScryfallSet {
+export function toPrismaScryfallSet(
+  data: ScryfallSetDataType,
+): Omit<ScryfallSet, 'createdAt' | 'updatedAt'> {
   const {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     object,

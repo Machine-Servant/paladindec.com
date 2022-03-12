@@ -68,6 +68,7 @@ type Card {
   canBeNonFoil: Boolean!
   collections(cursor: CardsInCollectionWhereUniqueInput, distinct: [CardsInCollectionScalarFieldEnum!], orderBy: [CardsInCollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CardsInCollectionWhereInput): [CardsInCollection!]!
   collectorNumber: String
+  createdAt: DateTime!
   currentPrice: ScryfallPrice!
   id: ID!
   isBorderless: Boolean!
@@ -78,6 +79,7 @@ type Card {
   name: String!
   scryfallCard: ScryfallCard!
   scryfallCardId: String!
+  updatedAt: DateTime!
 }
 
 type CardCount {
@@ -223,6 +225,7 @@ enum CardScalarFieldEnum {
   canBeFoil
   canBeNonFoil
   collectorNumber
+  createdAt
   id
   isBorderless
   isExtendedArt
@@ -231,6 +234,7 @@ enum CardScalarFieldEnum {
   isShowcase
   name
   scryfallCardId
+  updatedAt
 }
 
 input CardWhereInput {
@@ -404,8 +408,10 @@ input CardsInCollectionWhereUniqueInput {
 type Collection {
   _count: CollectionCount!
   cards(cursor: CardsInCollectionWhereUniqueInput, distinct: [CardsInCollectionScalarFieldEnum!], orderBy: [CardsInCollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CardsInCollectionWhereInput): [CardsInCollection!]!
+  createdAt: DateTime!
   id: ID!
   name: String!
+  updatedAt: DateTime!
   user: User!
   userId: String!
 }
@@ -461,8 +467,10 @@ input CollectionRelationFilter {
 }
 
 enum CollectionScalarFieldEnum {
+  createdAt
   id
   name
+  updatedAt
   userId
 }
 
@@ -823,6 +831,7 @@ type ScryfallCard {
   colorIndicator: [String!]
   colors: [String!]
   contentWarning: Boolean
+  createdAt: DateTime!
   digital: Boolean!
   edhrecRank: Int
   finishes: [String!]
@@ -888,6 +897,7 @@ type ScryfallCard {
   textless: Boolean!
   toughness: String
   typeLine: String
+  updatedAt: DateTime!
   uri: String!
   varationOf: String
   variation: Boolean!
@@ -1337,6 +1347,7 @@ type ScryfallCardFace {
   cmc: Float
   colorIndicator: [String!]
   colors: [String!]
+  createdAt: DateTime!
   flavorText: String
   id: ID!
   illustrationId: String
@@ -1353,6 +1364,7 @@ type ScryfallCardFace {
   printedTypeLine: String
   toughness: String
   typeLine: String
+  updatedAt: DateTime!
   watermark: String
 }
 
@@ -1479,8 +1491,10 @@ input ScryfallCardListRelationFilter {
 }
 
 type ScryfallCardName {
+  createdAt: DateTime!
   id: ID!
   name: String!
+  updatedAt: DateTime!
 }
 
 input ScryfallCardNameOrderByWithRelationInput {
@@ -1489,8 +1503,10 @@ input ScryfallCardNameOrderByWithRelationInput {
 }
 
 enum ScryfallCardNameScalarFieldEnum {
+  createdAt
   id
   name
+  updatedAt
 }
 
 input ScryfallCardNameWhereInput {
@@ -1616,6 +1632,7 @@ enum ScryfallCardScalarFieldEnum {
   colorIndicator
   colors
   contentWarning
+  createdAt
   digital
   edhrecRank
   finishes
@@ -1675,6 +1692,7 @@ enum ScryfallCardScalarFieldEnum {
   textless
   toughness
   typeLine
+  updatedAt
   uri
   varationOf
   variation
@@ -1777,6 +1795,7 @@ input ScryfallCardWhereUniqueInput {
 type ScryfallPrice {
   card: ScryfallCard!
   cardId: String!
+  createdAt: DateTime!
   currentPriceOfCard: Card
   currentPriceOfCardId: String
   date: DateTime!
@@ -1784,6 +1803,7 @@ type ScryfallPrice {
   eurFoil: Float
   id: ID!
   tix: Float
+  updatedAt: DateTime!
   usd: Float
   usdEtched: Float
   usdFoil: Float
@@ -1819,12 +1839,14 @@ input ScryfallPriceAvgOrderByAggregateInput {
 type ScryfallPriceCountAggregate {
   _all: Int!
   cardId: Int!
+  createdAt: Int!
   currentPriceOfCardId: Int!
   date: Int!
   eur: Int!
   eurFoil: Int!
   id: Int!
   tix: Int!
+  updatedAt: Int!
   usd: Int!
   usdEtched: Int!
   usdFoil: Int!
@@ -1928,12 +1950,14 @@ type ScryfallPriceGroupBy {
   _min: ScryfallPriceMinAggregate
   _sum: ScryfallPriceSumAggregate
   cardId: String!
+  createdAt: DateTime!
   currentPriceOfCardId: String
   date: DateTime!
   eur: Float
   eurFoil: Float
   id: String!
   tix: Float
+  updatedAt: DateTime!
   usd: Float
   usdEtched: Float
   usdFoil: Float
@@ -1947,12 +1971,14 @@ input ScryfallPriceListRelationFilter {
 
 type ScryfallPriceMaxAggregate {
   cardId: String
+  createdAt: DateTime
   currentPriceOfCardId: String
   date: DateTime
   eur: Float
   eurFoil: Float
   id: String
   tix: Float
+  updatedAt: DateTime
   usd: Float
   usdEtched: Float
   usdFoil: Float
@@ -1986,12 +2012,14 @@ input ScryfallPriceMaxOrderByAggregateInput {
 
 type ScryfallPriceMinAggregate {
   cardId: String
+  createdAt: DateTime
   currentPriceOfCardId: String
   date: DateTime
   eur: Float
   eurFoil: Float
   id: String
   tix: Float
+  updatedAt: DateTime
   usd: Float
   usdEtched: Float
   usdFoil: Float
@@ -2067,12 +2095,14 @@ input ScryfallPriceRelationFilter {
 
 enum ScryfallPriceScalarFieldEnum {
   cardId
+  createdAt
   currentPriceOfCardId
   date
   eur
   eurFoil
   id
   tix
+  updatedAt
   usd
   usdEtched
   usdFoil
@@ -2148,11 +2178,13 @@ type ScryfallRelatedCard {
   card: [ScryfallCard!]!
   cardId: String!
   component: String!
+  createdAt: DateTime!
   id: ID!
   name: String!
   reference: [ScryfallCard!]!
   referenceId: String!
   typeLine: String!
+  updatedAt: DateTime!
   uri: String!
 }
 
@@ -2263,6 +2295,7 @@ type ScryfallSet {
   cardCount: Int!
   cards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
   code: String!
+  createdAt: DateTime!
   iconSvgUri: String!
   id: ID!
   isDigital: Boolean!
@@ -2277,6 +2310,7 @@ type ScryfallSet {
   searchUri: String!
   setType: String!
   tcgPlayerId: Int
+  updatedAt: DateTime!
   uri: String!
 }
 
@@ -2353,6 +2387,7 @@ enum ScryfallSetScalarFieldEnum {
   blockCode
   cardCount
   code
+  createdAt
   iconSvgUri
   id
   isDigital
@@ -2367,6 +2402,7 @@ enum ScryfallSetScalarFieldEnum {
   searchUri
   setType
   tcgPlayerId
+  updatedAt
   uri
 }
 
@@ -2490,9 +2526,11 @@ input StringWithAggregatesFilter {
 type User {
   _count: UserCount!
   collections: [Collection!]
+  createdAt: DateTime!
   email: String!
   externalAuthId: String!
   id: ID!
+  updatedAt: DateTime!
 }
 
 type UserCount {

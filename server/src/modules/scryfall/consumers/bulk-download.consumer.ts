@@ -318,7 +318,7 @@ export class BulkDownloadConsumer {
 
     this.logger.debug(`Doing stuff`);
     const results = await new Promise((resolve, reject) => {
-      let cards: ScryfallCard[] = [];
+      let cards: Omit<ScryfallCard, 'createdAt' | 'updatedAt'>[] = [];
 
       pipeline.on(
         'data',
