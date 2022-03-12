@@ -15,7 +15,7 @@ export const BasicLayout: React.FC<BasicLayoutProps> = ({
     <>
       <Head {...props} />
       <main className={className}>
-        {props.loading ? <text>LOADING</text> : children}
+        {props.loading ? <div>LOADING</div> : children}
       </main>
     </>
   );

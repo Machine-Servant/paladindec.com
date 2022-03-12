@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
+import { HideField } from '@nestjs/graphql';
 import { ScryfallPriceCountOrderByAggregateInput } from './scryfall-price-count-order-by-aggregate.input';
 import { ScryfallPriceAvgOrderByAggregateInput } from './scryfall-price-avg-order-by-aggregate.input';
 import { ScryfallPriceMaxOrderByAggregateInput } from './scryfall-price-max-order-by-aggregate.input';
@@ -9,49 +10,54 @@ import { ScryfallPriceSumOrderByAggregateInput } from './scryfall-price-sum-orde
 
 @InputType()
 export class ScryfallPriceOrderByWithAggregationInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  date?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    date?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  eur?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    eur?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  tix?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    tix?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  usd?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    usd?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  eurFoil?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    eurFoil?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  usdFoil?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    usdFoil?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  usdEtched?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    usdEtched?: keyof typeof SortOrder;
+  @HideField()
+  createdAt?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    cardId?: keyof typeof SortOrder;
+  @HideField()
+  updatedAt?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    currentPriceOfCardId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  cardId?: keyof typeof SortOrder;
 
-    @Field(() => ScryfallPriceCountOrderByAggregateInput, {nullable:true})
-    _count?: ScryfallPriceCountOrderByAggregateInput;
+  @Field(() => SortOrder, { nullable: true })
+  currentPriceOfCardId?: keyof typeof SortOrder;
 
-    @Field(() => ScryfallPriceAvgOrderByAggregateInput, {nullable:true})
-    _avg?: ScryfallPriceAvgOrderByAggregateInput;
+  @Field(() => ScryfallPriceCountOrderByAggregateInput, { nullable: true })
+  _count?: ScryfallPriceCountOrderByAggregateInput;
 
-    @Field(() => ScryfallPriceMaxOrderByAggregateInput, {nullable:true})
-    _max?: ScryfallPriceMaxOrderByAggregateInput;
+  @Field(() => ScryfallPriceAvgOrderByAggregateInput, { nullable: true })
+  _avg?: ScryfallPriceAvgOrderByAggregateInput;
 
-    @Field(() => ScryfallPriceMinOrderByAggregateInput, {nullable:true})
-    _min?: ScryfallPriceMinOrderByAggregateInput;
+  @Field(() => ScryfallPriceMaxOrderByAggregateInput, { nullable: true })
+  _max?: ScryfallPriceMaxOrderByAggregateInput;
 
-    @Field(() => ScryfallPriceSumOrderByAggregateInput, {nullable:true})
-    _sum?: ScryfallPriceSumOrderByAggregateInput;
+  @Field(() => ScryfallPriceMinOrderByAggregateInput, { nullable: true })
+  _min?: ScryfallPriceMinOrderByAggregateInput;
+
+  @Field(() => ScryfallPriceSumOrderByAggregateInput, { nullable: true })
+  _sum?: ScryfallPriceSumOrderByAggregateInput;
 }

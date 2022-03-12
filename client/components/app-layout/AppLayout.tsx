@@ -28,7 +28,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, ...props }) => {
             }
           />
           <div className="w-full h-screen pt-16">
-            <div className="p-4">{children}</div>
+            <div className="h-full p-4">{children}</div>
           </div>
         </Main>
       </Container>

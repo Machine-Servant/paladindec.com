@@ -41,9 +41,9 @@ model ScryfallSet {
   cards ScryfallCard[]
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([code])
 }
@@ -60,9 +60,9 @@ model ScryfallRelatedCard {
   uri         String
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model ScryfallCardFace {
@@ -91,9 +91,9 @@ model ScryfallCardFace {
   watermark       String?
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model ScryfallCard {
@@ -189,9 +189,9 @@ model ScryfallCard {
   card          Card[]
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model ScryfallPrice {
@@ -206,9 +206,9 @@ model ScryfallPrice {
   usdEtched Float? @db.Real
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 
   // Relations
   card                 ScryfallCard @relation(fields: [cardId], references: [id], onDelete: Cascade)
@@ -225,9 +225,9 @@ model ScryfallCardName {
   name String @unique
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([name])
 }
@@ -241,9 +241,9 @@ model User {
   collections Collection[]
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([externalAuthId])
   @@index([email])
@@ -270,9 +270,9 @@ model Card {
   collections  CardsInCollection[]
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@index([scryfallCardId])
 }
@@ -287,9 +287,9 @@ model Collection {
   cards  CardsInCollection[]
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@unique([userId, name])
   @@index([userId])
@@ -307,9 +307,9 @@ model CardsInCollection {
   count Int @default(0)
 
   /// @HideField({ output: false, input: true })
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
   /// @HideField({ output: false, input: true })
-  updatedAt DateTime @default(now()) @updatedAt @ignore
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@id([cardId, collectionId, isFoil, isEtched])
 }

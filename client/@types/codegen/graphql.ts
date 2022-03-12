@@ -284,14 +284,18 @@ export type CardsInCollection = {
   collection: Collection;
   collectionId: Scalars['String'];
   count: Scalars['Int'];
+  createdAt: Scalars['DateTime'];
   isEtched: Scalars['Boolean'];
   isFoil: Scalars['Boolean'];
   price?: Maybe<CardsInCollectionCardPrice>;
+  updatedAt: Scalars['DateTime'];
 };
 
-export type CardsInCollectionCardIdCollectionIdCompoundUniqueInput = {
+export type CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput = {
   cardId: Scalars['String'];
   collectionId: Scalars['String'];
+  isEtched: Scalars['Boolean'];
+  isFoil: Scalars['Boolean'];
 };
 
 export type CardsInCollectionCardPrice = {
@@ -386,8 +390,10 @@ export enum CardsInCollectionScalarFieldEnum {
   CardId = 'cardId',
   CollectionId = 'collectionId',
   Count = 'count',
+  CreatedAt = 'createdAt',
   IsEtched = 'isEtched',
-  IsFoil = 'isFoil'
+  IsFoil = 'isFoil',
+  UpdatedAt = 'updatedAt'
 }
 
 export type CardsInCollectionUncheckedUpdateInput = {
@@ -412,7 +418,7 @@ export type CardsInCollectionWhereInput = {
 };
 
 export type CardsInCollectionWhereUniqueInput = {
-  cardId_collectionId?: InputMaybe<CardsInCollectionCardIdCollectionIdCompoundUniqueInput>;
+  cardId_collectionId_isFoil_isEtched?: InputMaybe<CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput>;
 };
 
 export type Collection = {
@@ -2709,10 +2715,12 @@ export type UserWhereUniqueInput = {
 
 export type CollectionManageQueryVariables = Exact<{
   collectionId: Scalars['String'];
+  take: Scalars['Int'];
+  skip: Scalars['Int'];
 }>;
 
 
-export type CollectionManageQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', id: string, name: string, cards: Array<{ __typename?: 'CardsInCollection', isFoil: boolean, count: number, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, scryfallCard: { __typename?: 'ScryfallCard', setCode: string, setName: string } } }> } };
+export type CollectionManageQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', id: string, name: string, cards: Array<{ __typename?: 'CardsInCollection', isFoil: boolean, isEtched: boolean, count: number, createdAt: any, updatedAt: any, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', rarity: string, imageUris?: any | null, set: { __typename?: 'ScryfallSet', iconSvgUri: string, name: string, code: string } } } }> } };
 
 export type AddCollectionMutationVariables = Exact<{
   input: CollectionCreateWithoutUserInput;
@@ -2884,12 +2892,13 @@ export const ScryfallCardFullFragmentDoc = gql`
 }
     `;
 export const CollectionManageDocument = gql`
-    query CollectionManage($collectionId: String!) {
+    query CollectionManage($collectionId: String!, $take: Int!, $skip: Int!) {
   collection(where: {id: {equals: $collectionId}}) {
     id
     name
-    cards(take: 10) {
+    cards(take: $take, skip: $skip) {
       isFoil
+      isEtched
       count
       card {
         canBeFoil
@@ -2898,11 +2907,23 @@ export const CollectionManageDocument = gql`
         collectorNumber
         isBorderless
         isShowcase
+        currentPrice {
+          usd
+          usdFoil
+          usdEtched
+        }
         scryfallCard {
-          setCode
-          setName
+          set {
+            iconSvgUri
+            name
+            code
+          }
+          rarity
+          imageUris
         }
       }
+      createdAt
+      updatedAt
     }
   }
 }
@@ -2921,6 +2942,8 @@ export const CollectionManageDocument = gql`
  * const { data, loading, error } = useCollectionManageQuery({
  *   variables: {
  *      collectionId: // value for 'collectionId'
+ *      take: // value for 'take'
+ *      skip: // value for 'skip'
  *   },
  * });
  */

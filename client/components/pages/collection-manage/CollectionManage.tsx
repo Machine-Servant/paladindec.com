@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useCollectionManageLazyQuery } from '../../../@types/codegen/graphql';
+import { CollectionGrid } from './components/collection-grid';
 
 type CollectionManageProps = {
   collectionId: string;
@@ -12,7 +13,7 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
     const doFetch = async () => {
       if (props.collectionId) {
         await fetchCollection({
-          variables: { collectionId: props.collectionId },
+          variables: { collectionId: props.collectionId, take: 100, skip: 0 },
         });
       }
     };
@@ -22,5 +23,10 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
   if (loading) return <div>Loading...</div>;
   if (!data) return <div>No data</div>;
 
-  return <div>{data?.collection.name}</div>;
+  return (
+    <div className="flex flex-col h-full">
+      <div>{data?.collection.name}</div>
+      <CollectionGrid cardsInCollection={data.collection.cards} />
+    </div>
+  );
 };

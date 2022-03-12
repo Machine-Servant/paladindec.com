@@ -1,22 +1,28 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CardsInCollectionUncheckedCreateInput {
+  @Field(() => String, { nullable: false })
+  cardId!: string;
 
-    @Field(() => String, {nullable:false})
-    cardId!: string;
+  @Field(() => String, { nullable: false })
+  collectionId!: string;
 
-    @Field(() => String, {nullable:false})
-    collectionId!: string;
+  @Field(() => Boolean, { nullable: true })
+  isFoil?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    isFoil?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    isEtched?: boolean;
+  @Field(() => Int, { nullable: true })
+  count?: number;
 
-    @Field(() => Int, {nullable:true})
-    count?: number;
+  @HideField()
+  createdAt?: Date | string;
+
+  @HideField()
+  updatedAt?: Date | string;
 }

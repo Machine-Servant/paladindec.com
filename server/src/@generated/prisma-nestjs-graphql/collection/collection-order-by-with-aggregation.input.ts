@@ -1,28 +1,34 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
+import { HideField } from '@nestjs/graphql';
 import { CollectionCountOrderByAggregateInput } from './collection-count-order-by-aggregate.input';
 import { CollectionMaxOrderByAggregateInput } from './collection-max-order-by-aggregate.input';
 import { CollectionMinOrderByAggregateInput } from './collection-min-order-by-aggregate.input';
 
 @InputType()
 export class CollectionOrderByWithAggregationInput {
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  name?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    name?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  userId?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    userId?: keyof typeof SortOrder;
+  @HideField()
+  createdAt?: keyof typeof SortOrder;
 
-    @Field(() => CollectionCountOrderByAggregateInput, {nullable:true})
-    _count?: CollectionCountOrderByAggregateInput;
+  @HideField()
+  updatedAt?: keyof typeof SortOrder;
 
-    @Field(() => CollectionMaxOrderByAggregateInput, {nullable:true})
-    _max?: CollectionMaxOrderByAggregateInput;
+  @Field(() => CollectionCountOrderByAggregateInput, { nullable: true })
+  _count?: CollectionCountOrderByAggregateInput;
 
-    @Field(() => CollectionMinOrderByAggregateInput, {nullable:true})
-    _min?: CollectionMinOrderByAggregateInput;
+  @Field(() => CollectionMaxOrderByAggregateInput, { nullable: true })
+  _max?: CollectionMaxOrderByAggregateInput;
+
+  @Field(() => CollectionMinOrderByAggregateInput, { nullable: true })
+  _min?: CollectionMinOrderByAggregateInput;
 }

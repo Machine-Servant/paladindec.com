@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
+import { HideField } from '@nestjs/graphql';
 import { CardsInCollectionCountOrderByAggregateInput } from './cards-in-collection-count-order-by-aggregate.input';
 import { CardsInCollectionAvgOrderByAggregateInput } from './cards-in-collection-avg-order-by-aggregate.input';
 import { CardsInCollectionMaxOrderByAggregateInput } from './cards-in-collection-max-order-by-aggregate.input';
@@ -9,34 +10,39 @@ import { CardsInCollectionSumOrderByAggregateInput } from './cards-in-collection
 
 @InputType()
 export class CardsInCollectionOrderByWithAggregationInput {
+  @Field(() => SortOrder, { nullable: true })
+  cardId?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    cardId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  collectionId?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    collectionId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  isFoil?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    isFoil?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  isEtched?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    isEtched?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  count?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    count?: keyof typeof SortOrder;
+  @HideField()
+  createdAt?: keyof typeof SortOrder;
 
-    @Field(() => CardsInCollectionCountOrderByAggregateInput, {nullable:true})
-    _count?: CardsInCollectionCountOrderByAggregateInput;
+  @HideField()
+  updatedAt?: keyof typeof SortOrder;
 
-    @Field(() => CardsInCollectionAvgOrderByAggregateInput, {nullable:true})
-    _avg?: CardsInCollectionAvgOrderByAggregateInput;
+  @Field(() => CardsInCollectionCountOrderByAggregateInput, { nullable: true })
+  _count?: CardsInCollectionCountOrderByAggregateInput;
 
-    @Field(() => CardsInCollectionMaxOrderByAggregateInput, {nullable:true})
-    _max?: CardsInCollectionMaxOrderByAggregateInput;
+  @Field(() => CardsInCollectionAvgOrderByAggregateInput, { nullable: true })
+  _avg?: CardsInCollectionAvgOrderByAggregateInput;
 
-    @Field(() => CardsInCollectionMinOrderByAggregateInput, {nullable:true})
-    _min?: CardsInCollectionMinOrderByAggregateInput;
+  @Field(() => CardsInCollectionMaxOrderByAggregateInput, { nullable: true })
+  _max?: CardsInCollectionMaxOrderByAggregateInput;
 
-    @Field(() => CardsInCollectionSumOrderByAggregateInput, {nullable:true})
-    _sum?: CardsInCollectionSumOrderByAggregateInput;
+  @Field(() => CardsInCollectionMinOrderByAggregateInput, { nullable: true })
+  _min?: CardsInCollectionMinOrderByAggregateInput;
+
+  @Field(() => CardsInCollectionSumOrderByAggregateInput, { nullable: true })
+  _sum?: CardsInCollectionSumOrderByAggregateInput;
 }

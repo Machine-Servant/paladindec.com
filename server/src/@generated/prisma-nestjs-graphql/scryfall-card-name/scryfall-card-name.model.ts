@@ -4,10 +4,15 @@ import { ID } from '@nestjs/graphql';
 
 @ObjectType()
 export class ScryfallCardName {
+  @Field(() => ID, { nullable: false })
+  id!: string;
 
-    @Field(() => ID, {nullable:false})
-    id!: string;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-    @Field(() => String, {nullable:false})
-    name!: string;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date;
+
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date;
 }

@@ -265,9 +265,11 @@ type CardsInCollection {
   collection: Collection!
   collectionId: String!
   count: Int!
+  createdAt: DateTime!
   isEtched: Boolean!
   isFoil: Boolean!
   price: CardsInCollectionCardPrice
+  updatedAt: DateTime!
 }
 
 input CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput {
@@ -368,8 +370,10 @@ enum CardsInCollectionScalarFieldEnum {
   cardId
   collectionId
   count
+  createdAt
   isEtched
   isFoil
+  updatedAt
 }
 
 input CardsInCollectionUncheckedUpdateInput {

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 export function ClientOnly({
   children,
   ...delegated
-}: React.PropsWithChildren<unknown>) {
+}: React.PropsWithChildren<Record<string, unknown>>) {
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {

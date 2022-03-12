@@ -25,8 +25,7 @@ export const CardResult: React.FC<CardResultProps> = (props) => {
   const [collection, setCollection] =
     useState<CardResultProps['collections'][0]>();
 
-  const [addCardToCollection, { data, loading }] =
-    useAddCardToCollectionMutation();
+  const [addCardToCollection, { loading }] = useAddCardToCollectionMutation();
 
   useEffect(() => {
     if (!props.card.canBeNonFoil) {

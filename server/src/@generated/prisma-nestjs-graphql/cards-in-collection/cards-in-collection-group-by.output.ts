@@ -9,34 +9,39 @@ import { CardsInCollectionMaxAggregate } from './cards-in-collection-max-aggrega
 
 @ObjectType()
 export class CardsInCollectionGroupBy {
+  @Field(() => String, { nullable: false })
+  cardId!: string;
 
-    @Field(() => String, {nullable:false})
-    cardId!: string;
+  @Field(() => String, { nullable: false })
+  collectionId!: string;
 
-    @Field(() => String, {nullable:false})
-    collectionId!: string;
+  @Field(() => Boolean, { nullable: false })
+  isFoil!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    isFoil!: boolean;
+  @Field(() => Boolean, { nullable: false })
+  isEtched!: boolean;
 
-    @Field(() => Boolean, {nullable:false})
-    isEtched!: boolean;
+  @Field(() => Int, { nullable: false })
+  count!: number;
 
-    @Field(() => Int, {nullable:false})
-    count!: number;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date | string;
 
-    @Field(() => CardsInCollectionCountAggregate, {nullable:true})
-    _count?: CardsInCollectionCountAggregate;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date | string;
 
-    @Field(() => CardsInCollectionAvgAggregate, {nullable:true})
-    _avg?: CardsInCollectionAvgAggregate;
+  @Field(() => CardsInCollectionCountAggregate, { nullable: true })
+  _count?: CardsInCollectionCountAggregate;
 
-    @Field(() => CardsInCollectionSumAggregate, {nullable:true})
-    _sum?: CardsInCollectionSumAggregate;
+  @Field(() => CardsInCollectionAvgAggregate, { nullable: true })
+  _avg?: CardsInCollectionAvgAggregate;
 
-    @Field(() => CardsInCollectionMinAggregate, {nullable:true})
-    _min?: CardsInCollectionMinAggregate;
+  @Field(() => CardsInCollectionSumAggregate, { nullable: true })
+  _sum?: CardsInCollectionSumAggregate;
 
-    @Field(() => CardsInCollectionMaxAggregate, {nullable:true})
-    _max?: CardsInCollectionMaxAggregate;
+  @Field(() => CardsInCollectionMinAggregate, { nullable: true })
+  _min?: CardsInCollectionMinAggregate;
+
+  @Field(() => CardsInCollectionMaxAggregate, { nullable: true })
+  _max?: CardsInCollectionMaxAggregate;
 }

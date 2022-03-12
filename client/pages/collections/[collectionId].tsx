@@ -29,8 +29,7 @@ const CollectionManagePage: React.FC = () => {
 
   return (
     <AppLayout title="Manage Collection" loading={loading}>
-      <h1>Manage Collection</h1>
-      <ClientOnly>
+      <ClientOnly className="h-full">
         <CollectionManage collectionId={router.query.collectionId} />
       </ClientOnly>
     </AppLayout>

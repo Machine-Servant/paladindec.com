@@ -9,49 +9,54 @@ import { ScryfallPriceMaxAggregate } from './scryfall-price-max-aggregate.output
 
 @ObjectType()
 export class ScryfallPriceGroupBy {
+  @Field(() => String, { nullable: false })
+  id!: string;
 
-    @Field(() => String, {nullable:false})
-    id!: string;
+  @Field(() => Date, { nullable: false })
+  date!: Date | string;
 
-    @Field(() => Date, {nullable:false})
-    date!: Date | string;
+  @Field(() => Float, { nullable: true })
+  eur?: number;
 
-    @Field(() => Float, {nullable:true})
-    eur?: number;
+  @Field(() => Float, { nullable: true })
+  tix?: number;
 
-    @Field(() => Float, {nullable:true})
-    tix?: number;
+  @Field(() => Float, { nullable: true })
+  usd?: number;
 
-    @Field(() => Float, {nullable:true})
-    usd?: number;
+  @Field(() => Float, { nullable: true })
+  eurFoil?: number;
 
-    @Field(() => Float, {nullable:true})
-    eurFoil?: number;
+  @Field(() => Float, { nullable: true })
+  usdFoil?: number;
 
-    @Field(() => Float, {nullable:true})
-    usdFoil?: number;
+  @Field(() => Float, { nullable: true })
+  usdEtched?: number;
 
-    @Field(() => Float, {nullable:true})
-    usdEtched?: number;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date | string;
 
-    @Field(() => String, {nullable:false})
-    cardId!: string;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date | string;
 
-    @Field(() => String, {nullable:true})
-    currentPriceOfCardId?: string;
+  @Field(() => String, { nullable: false })
+  cardId!: string;
 
-    @Field(() => ScryfallPriceCountAggregate, {nullable:true})
-    _count?: ScryfallPriceCountAggregate;
+  @Field(() => String, { nullable: true })
+  currentPriceOfCardId?: string;
 
-    @Field(() => ScryfallPriceAvgAggregate, {nullable:true})
-    _avg?: ScryfallPriceAvgAggregate;
+  @Field(() => ScryfallPriceCountAggregate, { nullable: true })
+  _count?: ScryfallPriceCountAggregate;
 
-    @Field(() => ScryfallPriceSumAggregate, {nullable:true})
-    _sum?: ScryfallPriceSumAggregate;
+  @Field(() => ScryfallPriceAvgAggregate, { nullable: true })
+  _avg?: ScryfallPriceAvgAggregate;
 
-    @Field(() => ScryfallPriceMinAggregate, {nullable:true})
-    _min?: ScryfallPriceMinAggregate;
+  @Field(() => ScryfallPriceSumAggregate, { nullable: true })
+  _sum?: ScryfallPriceSumAggregate;
 
-    @Field(() => ScryfallPriceMaxAggregate, {nullable:true})
-    _max?: ScryfallPriceMaxAggregate;
+  @Field(() => ScryfallPriceMinAggregate, { nullable: true })
+  _min?: ScryfallPriceMinAggregate;
+
+  @Field(() => ScryfallPriceMaxAggregate, { nullable: true })
+  _max?: ScryfallPriceMaxAggregate;
 }
