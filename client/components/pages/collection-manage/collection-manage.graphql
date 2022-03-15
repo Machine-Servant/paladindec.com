@@ -1,35 +1,6 @@
-query CollectionManage($collectionId: String!, $take: Int!, $skip: Int!) {
+query CollectionManage($collectionId: String!) {
   collection(where: { id: { equals: $collectionId } }) {
     id
     name
-    cards(take: $take, skip: $skip) {
-      isFoil
-      isEtched
-      count
-      card {
-        canBeFoil
-        name
-        id
-        collectorNumber
-        isBorderless
-        isShowcase
-        currentPrice {
-          usd
-          usdFoil
-          usdEtched
-        }
-        scryfallCard {
-          set {
-            iconSvgUri
-            name
-            code
-          }
-          rarity
-          imageUris
-        }
-      }
-      createdAt
-      updatedAt
-    }
   }
 }

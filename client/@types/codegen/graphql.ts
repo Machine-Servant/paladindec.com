@@ -75,6 +75,7 @@ export type Card = {
   canBeNonFoil: Scalars['Boolean'];
   collections: Array<CardsInCollection>;
   collectorNumber?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
   currentPrice: ScryfallPrice;
   id: Scalars['ID'];
   isBorderless: Scalars['Boolean'];
@@ -85,6 +86,7 @@ export type Card = {
   name: Scalars['String'];
   scryfallCard: ScryfallCard;
   scryfallCardId: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
 };
 
 
@@ -241,6 +243,7 @@ export enum CardScalarFieldEnum {
   CanBeFoil = 'canBeFoil',
   CanBeNonFoil = 'canBeNonFoil',
   CollectorNumber = 'collectorNumber',
+  CreatedAt = 'createdAt',
   Id = 'id',
   IsBorderless = 'isBorderless',
   IsExtendedArt = 'isExtendedArt',
@@ -248,7 +251,8 @@ export enum CardScalarFieldEnum {
   IsRetro = 'isRetro',
   IsShowcase = 'isShowcase',
   Name = 'name',
-  ScryfallCardId = 'scryfallCardId'
+  ScryfallCardId = 'scryfallCardId',
+  UpdatedAt = 'updatedAt'
 }
 
 export type CardWhereInput = {
@@ -425,8 +429,10 @@ export type Collection = {
   __typename?: 'Collection';
   _count: CollectionCount;
   cards: Array<CardsInCollection>;
+  createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   name: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
   user: User;
   userId: Scalars['String'];
 };
@@ -493,8 +499,10 @@ export type CollectionRelationFilter = {
 };
 
 export enum CollectionScalarFieldEnum {
+  CreatedAt = 'createdAt',
   Id = 'id',
   Name = 'name',
+  UpdatedAt = 'updatedAt',
   UserId = 'userId'
 }
 
@@ -943,6 +951,7 @@ export type ScryfallCard = {
   colorIndicator?: Maybe<Array<Scalars['String']>>;
   colors?: Maybe<Array<Scalars['String']>>;
   contentWarning?: Maybe<Scalars['Boolean']>;
+  createdAt: Scalars['DateTime'];
   digital: Scalars['Boolean'];
   edhrecRank?: Maybe<Scalars['Int']>;
   finishes?: Maybe<Array<Scalars['String']>>;
@@ -1008,6 +1017,7 @@ export type ScryfallCard = {
   textless: Scalars['Boolean'];
   toughness?: Maybe<Scalars['String']>;
   typeLine?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
   uri: Scalars['String'];
   varationOf?: Maybe<Scalars['String']>;
   variation: Scalars['Boolean'];
@@ -1483,6 +1493,7 @@ export type ScryfallCardFace = {
   cmc?: Maybe<Scalars['Float']>;
   colorIndicator?: Maybe<Array<Scalars['String']>>;
   colors?: Maybe<Array<Scalars['String']>>;
+  createdAt: Scalars['DateTime'];
   flavorText?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   illustrationId?: Maybe<Scalars['String']>;
@@ -1499,6 +1510,7 @@ export type ScryfallCardFace = {
   printedTypeLine?: Maybe<Scalars['String']>;
   toughness?: Maybe<Scalars['String']>;
   typeLine?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
   watermark?: Maybe<Scalars['String']>;
 };
 
@@ -1626,8 +1638,10 @@ export type ScryfallCardListRelationFilter = {
 
 export type ScryfallCardName = {
   __typename?: 'ScryfallCardName';
+  createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   name: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
 };
 
 export type ScryfallCardNameOrderByWithRelationInput = {
@@ -1636,8 +1650,10 @@ export type ScryfallCardNameOrderByWithRelationInput = {
 };
 
 export enum ScryfallCardNameScalarFieldEnum {
+  CreatedAt = 'createdAt',
   Id = 'id',
-  Name = 'name'
+  Name = 'name',
+  UpdatedAt = 'updatedAt'
 }
 
 export type ScryfallCardNameWhereInput = {
@@ -1763,6 +1779,7 @@ export enum ScryfallCardScalarFieldEnum {
   ColorIndicator = 'colorIndicator',
   Colors = 'colors',
   ContentWarning = 'contentWarning',
+  CreatedAt = 'createdAt',
   Digital = 'digital',
   EdhrecRank = 'edhrecRank',
   Finishes = 'finishes',
@@ -1822,6 +1839,7 @@ export enum ScryfallCardScalarFieldEnum {
   Textless = 'textless',
   Toughness = 'toughness',
   TypeLine = 'typeLine',
+  UpdatedAt = 'updatedAt',
   Uri = 'uri',
   VarationOf = 'varationOf',
   Variation = 'variation',
@@ -1925,6 +1943,7 @@ export type ScryfallPrice = {
   __typename?: 'ScryfallPrice';
   card: ScryfallCard;
   cardId: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   currentPriceOfCard?: Maybe<Card>;
   currentPriceOfCardId?: Maybe<Scalars['String']>;
   date: Scalars['DateTime'];
@@ -1932,6 +1951,7 @@ export type ScryfallPrice = {
   eurFoil?: Maybe<Scalars['Float']>;
   id: Scalars['ID'];
   tix?: Maybe<Scalars['Float']>;
+  updatedAt: Scalars['DateTime'];
   usd?: Maybe<Scalars['Float']>;
   usdEtched?: Maybe<Scalars['Float']>;
   usdFoil?: Maybe<Scalars['Float']>;
@@ -1969,12 +1989,14 @@ export type ScryfallPriceCountAggregate = {
   __typename?: 'ScryfallPriceCountAggregate';
   _all: Scalars['Int'];
   cardId: Scalars['Int'];
+  createdAt: Scalars['Int'];
   currentPriceOfCardId: Scalars['Int'];
   date: Scalars['Int'];
   eur: Scalars['Int'];
   eurFoil: Scalars['Int'];
   id: Scalars['Int'];
   tix: Scalars['Int'];
+  updatedAt: Scalars['Int'];
   usd: Scalars['Int'];
   usdEtched: Scalars['Int'];
   usdFoil: Scalars['Int'];
@@ -2079,12 +2101,14 @@ export type ScryfallPriceGroupBy = {
   _min?: Maybe<ScryfallPriceMinAggregate>;
   _sum?: Maybe<ScryfallPriceSumAggregate>;
   cardId: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   currentPriceOfCardId?: Maybe<Scalars['String']>;
   date: Scalars['DateTime'];
   eur?: Maybe<Scalars['Float']>;
   eurFoil?: Maybe<Scalars['Float']>;
   id: Scalars['String'];
   tix?: Maybe<Scalars['Float']>;
+  updatedAt: Scalars['DateTime'];
   usd?: Maybe<Scalars['Float']>;
   usdEtched?: Maybe<Scalars['Float']>;
   usdFoil?: Maybe<Scalars['Float']>;
@@ -2099,12 +2123,14 @@ export type ScryfallPriceListRelationFilter = {
 export type ScryfallPriceMaxAggregate = {
   __typename?: 'ScryfallPriceMaxAggregate';
   cardId?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   currentPriceOfCardId?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['DateTime']>;
   eur?: Maybe<Scalars['Float']>;
   eurFoil?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['String']>;
   tix?: Maybe<Scalars['Float']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   usd?: Maybe<Scalars['Float']>;
   usdEtched?: Maybe<Scalars['Float']>;
   usdFoil?: Maybe<Scalars['Float']>;
@@ -2139,12 +2165,14 @@ export type ScryfallPriceMaxOrderByAggregateInput = {
 export type ScryfallPriceMinAggregate = {
   __typename?: 'ScryfallPriceMinAggregate';
   cardId?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
   currentPriceOfCardId?: Maybe<Scalars['String']>;
   date?: Maybe<Scalars['DateTime']>;
   eur?: Maybe<Scalars['Float']>;
   eurFoil?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['String']>;
   tix?: Maybe<Scalars['Float']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
   usd?: Maybe<Scalars['Float']>;
   usdEtched?: Maybe<Scalars['Float']>;
   usdFoil?: Maybe<Scalars['Float']>;
@@ -2220,12 +2248,14 @@ export type ScryfallPriceRelationFilter = {
 
 export enum ScryfallPriceScalarFieldEnum {
   CardId = 'cardId',
+  CreatedAt = 'createdAt',
   CurrentPriceOfCardId = 'currentPriceOfCardId',
   Date = 'date',
   Eur = 'eur',
   EurFoil = 'eurFoil',
   Id = 'id',
   Tix = 'tix',
+  UpdatedAt = 'updatedAt',
   Usd = 'usd',
   UsdEtched = 'usdEtched',
   UsdFoil = 'usdFoil'
@@ -2303,11 +2333,13 @@ export type ScryfallRelatedCard = {
   card: Array<ScryfallCard>;
   cardId: Scalars['String'];
   component: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
   name: Scalars['String'];
   reference: Array<ScryfallCard>;
   referenceId: Scalars['String'];
   typeLine: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
   uri: Scalars['String'];
 };
 
@@ -2419,6 +2451,7 @@ export type ScryfallSet = {
   cardCount: Scalars['Int'];
   cards: Array<ScryfallCard>;
   code: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   iconSvgUri: Scalars['String'];
   id: Scalars['ID'];
   isDigital: Scalars['Boolean'];
@@ -2433,6 +2466,7 @@ export type ScryfallSet = {
   searchUri: Scalars['String'];
   setType: Scalars['String'];
   tcgPlayerId?: Maybe<Scalars['Int']>;
+  updatedAt: Scalars['DateTime'];
   uri: Scalars['String'];
 };
 
@@ -2520,6 +2554,7 @@ export enum ScryfallSetScalarFieldEnum {
   BlockCode = 'blockCode',
   CardCount = 'cardCount',
   Code = 'code',
+  CreatedAt = 'createdAt',
   IconSvgUri = 'iconSvgUri',
   Id = 'id',
   IsDigital = 'isDigital',
@@ -2534,6 +2569,7 @@ export enum ScryfallSetScalarFieldEnum {
   SearchUri = 'searchUri',
   SetType = 'setType',
   TcgPlayerId = 'tcgPlayerId',
+  UpdatedAt = 'updatedAt',
   Uri = 'uri'
 }
 
@@ -2658,9 +2694,11 @@ export type User = {
   __typename?: 'User';
   _count: UserCount;
   collections?: Maybe<Array<Collection>>;
+  createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   externalAuthId: Scalars['String'];
   id: Scalars['ID'];
+  updatedAt: Scalars['DateTime'];
 };
 
 export type UserCount = {
@@ -2715,12 +2753,35 @@ export type UserWhereUniqueInput = {
 
 export type CollectionManageQueryVariables = Exact<{
   collectionId: Scalars['String'];
-  take: Scalars['Int'];
-  skip: Scalars['Int'];
 }>;
 
 
-export type CollectionManageQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', id: string, name: string, cards: Array<{ __typename?: 'CardsInCollection', isFoil: boolean, isEtched: boolean, count: number, createdAt: any, updatedAt: any, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', rarity: string, imageUris?: any | null, set: { __typename?: 'ScryfallSet', iconSvgUri: string, name: string, code: string } } } }> } };
+export type CollectionManageQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', id: string, name: string } };
+
+export type PaginatedCardsInCollectionQueryVariables = Exact<{
+  collectionId: Scalars['String'];
+  take: Scalars['Int'];
+  skip: Scalars['Int'];
+  orderBy?: InputMaybe<Array<CardsInCollectionOrderByWithRelationInput> | CardsInCollectionOrderByWithRelationInput>;
+}>;
+
+
+export type PaginatedCardsInCollectionQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', _count: { __typename?: 'CollectionCount', cards: number }, cards: Array<{ __typename?: 'CardsInCollection', isFoil: boolean, isEtched: boolean, count: number, createdAt: any, updatedAt: any, price?: { __typename?: 'CardsInCollectionCardPrice', usd: number } | null, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', rarity: string, imageUris?: any | null, set: { __typename?: 'ScryfallSet', iconSvgUri: string, name: string, code: string } } } }> } };
+
+export type QuickAddCardToCollectionMutationVariables = Exact<{
+  input: AddCardToCollectionInput;
+}>;
+
+
+export type QuickAddCardToCollectionMutation = { __typename?: 'Mutation', addCardToCollection: { __typename?: 'CardsInCollection', cardId: string, collectionId: string, isFoil: boolean, isEtched: boolean, count: number } };
+
+export type QuickAddSearchResultsQueryVariables = Exact<{
+  name: Scalars['String'];
+  collectionId: Scalars['String'];
+}>;
+
+
+export type QuickAddSearchResultsQuery = { __typename?: 'Query', allCards: Array<{ __typename?: 'Card', id: string, name: string, canBeFoil: boolean, canBeEtched: boolean, canBeNonFoil: boolean, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', rarity: string, imageUris?: any | null, set: { __typename?: 'ScryfallSet', name: string, code: string, iconSvgUri: string } } }>, collection: { __typename?: 'Collection', id: string, cards: Array<{ __typename?: 'CardsInCollection', cardId: string, isFoil: boolean, isEtched: boolean, count: number, card: { __typename?: 'Card', name: string, scryfallCard: { __typename?: 'ScryfallCard', imageUris?: any | null, rarity: string, set: { __typename?: 'ScryfallSet', code: string, iconSvgUri: string } } } }> } };
 
 export type AddCollectionMutationVariables = Exact<{
   input: CollectionCreateWithoutUserInput;
@@ -2892,14 +2953,54 @@ export const ScryfallCardFullFragmentDoc = gql`
 }
     `;
 export const CollectionManageDocument = gql`
-    query CollectionManage($collectionId: String!, $take: Int!, $skip: Int!) {
+    query CollectionManage($collectionId: String!) {
   collection(where: {id: {equals: $collectionId}}) {
     id
     name
-    cards(take: $take, skip: $skip) {
+  }
+}
+    `;
+
+/**
+ * __useCollectionManageQuery__
+ *
+ * To run a query within a React component, call `useCollectionManageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCollectionManageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCollectionManageQuery({
+ *   variables: {
+ *      collectionId: // value for 'collectionId'
+ *   },
+ * });
+ */
+export function useCollectionManageQuery(baseOptions: Apollo.QueryHookOptions<CollectionManageQuery, CollectionManageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CollectionManageQuery, CollectionManageQueryVariables>(CollectionManageDocument, options);
+      }
+export function useCollectionManageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CollectionManageQuery, CollectionManageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CollectionManageQuery, CollectionManageQueryVariables>(CollectionManageDocument, options);
+        }
+export type CollectionManageQueryHookResult = ReturnType<typeof useCollectionManageQuery>;
+export type CollectionManageLazyQueryHookResult = ReturnType<typeof useCollectionManageLazyQuery>;
+export type CollectionManageQueryResult = Apollo.QueryResult<CollectionManageQuery, CollectionManageQueryVariables>;
+export const PaginatedCardsInCollectionDocument = gql`
+    query PaginatedCardsInCollection($collectionId: String!, $take: Int!, $skip: Int!, $orderBy: [CardsInCollectionOrderByWithRelationInput!]) {
+  collection(where: {id: {equals: $collectionId}}) {
+    _count {
+      cards
+    }
+    cards(take: $take, skip: $skip, orderBy: $orderBy) {
       isFoil
       isEtched
       count
+      price {
+        usd
+      }
       card {
         canBeFoil
         name
@@ -2930,34 +3031,151 @@ export const CollectionManageDocument = gql`
     `;
 
 /**
- * __useCollectionManageQuery__
+ * __usePaginatedCardsInCollectionQuery__
  *
- * To run a query within a React component, call `useCollectionManageQuery` and pass it any options that fit your needs.
- * When your component renders, `useCollectionManageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePaginatedCardsInCollectionQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePaginatedCardsInCollectionQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCollectionManageQuery({
+ * const { data, loading, error } = usePaginatedCardsInCollectionQuery({
  *   variables: {
  *      collectionId: // value for 'collectionId'
  *      take: // value for 'take'
  *      skip: // value for 'skip'
+ *      orderBy: // value for 'orderBy'
  *   },
  * });
  */
-export function useCollectionManageQuery(baseOptions: Apollo.QueryHookOptions<CollectionManageQuery, CollectionManageQueryVariables>) {
+export function usePaginatedCardsInCollectionQuery(baseOptions: Apollo.QueryHookOptions<PaginatedCardsInCollectionQuery, PaginatedCardsInCollectionQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CollectionManageQuery, CollectionManageQueryVariables>(CollectionManageDocument, options);
+        return Apollo.useQuery<PaginatedCardsInCollectionQuery, PaginatedCardsInCollectionQueryVariables>(PaginatedCardsInCollectionDocument, options);
       }
-export function useCollectionManageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CollectionManageQuery, CollectionManageQueryVariables>) {
+export function usePaginatedCardsInCollectionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PaginatedCardsInCollectionQuery, PaginatedCardsInCollectionQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CollectionManageQuery, CollectionManageQueryVariables>(CollectionManageDocument, options);
+          return Apollo.useLazyQuery<PaginatedCardsInCollectionQuery, PaginatedCardsInCollectionQueryVariables>(PaginatedCardsInCollectionDocument, options);
         }
-export type CollectionManageQueryHookResult = ReturnType<typeof useCollectionManageQuery>;
-export type CollectionManageLazyQueryHookResult = ReturnType<typeof useCollectionManageLazyQuery>;
-export type CollectionManageQueryResult = Apollo.QueryResult<CollectionManageQuery, CollectionManageQueryVariables>;
+export type PaginatedCardsInCollectionQueryHookResult = ReturnType<typeof usePaginatedCardsInCollectionQuery>;
+export type PaginatedCardsInCollectionLazyQueryHookResult = ReturnType<typeof usePaginatedCardsInCollectionLazyQuery>;
+export type PaginatedCardsInCollectionQueryResult = Apollo.QueryResult<PaginatedCardsInCollectionQuery, PaginatedCardsInCollectionQueryVariables>;
+export const QuickAddCardToCollectionDocument = gql`
+    mutation QuickAddCardToCollection($input: AddCardToCollectionInput!) {
+  addCardToCollection(input: $input) {
+    cardId
+    collectionId
+    isFoil
+    isEtched
+    count
+  }
+}
+    `;
+export type QuickAddCardToCollectionMutationFn = Apollo.MutationFunction<QuickAddCardToCollectionMutation, QuickAddCardToCollectionMutationVariables>;
+
+/**
+ * __useQuickAddCardToCollectionMutation__
+ *
+ * To run a mutation, you first call `useQuickAddCardToCollectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useQuickAddCardToCollectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [quickAddCardToCollectionMutation, { data, loading, error }] = useQuickAddCardToCollectionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useQuickAddCardToCollectionMutation(baseOptions?: Apollo.MutationHookOptions<QuickAddCardToCollectionMutation, QuickAddCardToCollectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<QuickAddCardToCollectionMutation, QuickAddCardToCollectionMutationVariables>(QuickAddCardToCollectionDocument, options);
+      }
+export type QuickAddCardToCollectionMutationHookResult = ReturnType<typeof useQuickAddCardToCollectionMutation>;
+export type QuickAddCardToCollectionMutationResult = Apollo.MutationResult<QuickAddCardToCollectionMutation>;
+export type QuickAddCardToCollectionMutationOptions = Apollo.BaseMutationOptions<QuickAddCardToCollectionMutation, QuickAddCardToCollectionMutationVariables>;
+export const QuickAddSearchResultsDocument = gql`
+    query QuickAddSearchResults($name: String!, $collectionId: String!) {
+  allCards(
+    where: {isPaper: {equals: true}, scryfallCard: {is: {name: {equals: $name}}}}
+  ) {
+    id
+    name
+    canBeFoil
+    canBeEtched
+    canBeNonFoil
+    collectorNumber
+    isBorderless
+    isShowcase
+    currentPrice {
+      usd
+      usdFoil
+      usdEtched
+    }
+    scryfallCard {
+      set {
+        name
+        code
+        iconSvgUri
+      }
+      rarity
+      imageUris
+    }
+  }
+  collection(where: {id: {equals: $collectionId}}) {
+    id
+    cards(where: {card: {is: {name: {equals: $name}}}}) {
+      card {
+        name
+        scryfallCard {
+          imageUris
+          rarity
+          set {
+            code
+            iconSvgUri
+          }
+        }
+      }
+      cardId
+      isFoil
+      isEtched
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useQuickAddSearchResultsQuery__
+ *
+ * To run a query within a React component, call `useQuickAddSearchResultsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useQuickAddSearchResultsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useQuickAddSearchResultsQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *      collectionId: // value for 'collectionId'
+ *   },
+ * });
+ */
+export function useQuickAddSearchResultsQuery(baseOptions: Apollo.QueryHookOptions<QuickAddSearchResultsQuery, QuickAddSearchResultsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<QuickAddSearchResultsQuery, QuickAddSearchResultsQueryVariables>(QuickAddSearchResultsDocument, options);
+      }
+export function useQuickAddSearchResultsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<QuickAddSearchResultsQuery, QuickAddSearchResultsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<QuickAddSearchResultsQuery, QuickAddSearchResultsQueryVariables>(QuickAddSearchResultsDocument, options);
+        }
+export type QuickAddSearchResultsQueryHookResult = ReturnType<typeof useQuickAddSearchResultsQuery>;
+export type QuickAddSearchResultsLazyQueryHookResult = ReturnType<typeof useQuickAddSearchResultsLazyQuery>;
+export type QuickAddSearchResultsQueryResult = Apollo.QueryResult<QuickAddSearchResultsQuery, QuickAddSearchResultsQueryVariables>;
 export const AddCollectionDocument = gql`
     mutation AddCollection($input: CollectionCreateWithoutUserInput!) {
   addCollection(input: $input) {

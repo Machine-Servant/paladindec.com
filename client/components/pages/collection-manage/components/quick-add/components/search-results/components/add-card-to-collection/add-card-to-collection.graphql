@@ -1,0 +1,9 @@
+mutation QuickAddCardToCollection($input: AddCardToCollectionInput!) {
+  addCardToCollection(input: $input) {
+    cardId
+    collectionId
+    isFoil
+    isEtched
+    count
+  }
+}

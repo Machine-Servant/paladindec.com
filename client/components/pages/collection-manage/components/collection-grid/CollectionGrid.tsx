@@ -1,109 +1,109 @@
-import { ColDef } from 'ag-grid-community';
+import {
+  ColDef,
+  GridReadyEvent,
+  IServerSideDatasource,
+  ValueFormatterParams,
+} from '@ag-grid-community/core';
+import { AgGridReact } from '@ag-grid-community/react';
+import { ServerSideRowModelModule } from '@ag-grid-enterprise/server-side-row-model';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { AgGridReact } from 'ag-grid-react';
-import Image from 'next/image';
-import React, { memo, useMemo, useState } from 'react';
-import { CollectionManageQuery } from '../../../../../@types/codegen/graphql';
-import CheckMark from '../../../../../assets/svg/icons8-done-50.svg';
-import Edit from '../../../../../assets/svg/icons8-edit-50.svg';
-import Trash from '../../../../../assets/svg/icons8-trash-50.svg';
-import { SetIcon } from '../../../../set-icon';
+import 'ag-grid-enterprise';
+import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import {
+  CardsInCollectionOrderByWithRelationInput,
+  CollectionManageQuery,
+  SortOrder,
+  usePaginatedCardsInCollectionLazyQuery,
+} from '../../../../../@types/codegen/graphql';
+import { dollar } from '../../../../../utils/dollar';
+import { CheckmarkCellRenderer } from './components/checkmark-cell-renderer';
+import { ImageTooltip } from './components/image-tooltip';
+import { MgmtCellRenderer } from './components/mgmt-cell-renderer';
+import { SetCellRenderer } from './components/set-cell-renderer';
 
-const ImageTooltip: React.FC<{
-  data: { _images: Record<string, string>; name: string };
-}> = (props) => {
-  if (!props.data._images) return null;
-  return (
-    <div className="relative w-40 h-64 -mt-6">
-      <Image
-        src={props.data._images.normal}
-        alt={props.data.name}
-        layout="fill"
-        objectFit="contain"
-      />
-    </div>
-  );
-};
-
-type CollectionGridProps = {
-  cardsInCollection: CollectionManageQuery['collection']['cards'];
-};
-
-type RowDataProps = {
-  '#': number;
-  name: string;
-  foil: boolean;
-  etched: boolean;
-  price: number;
-  set: { set: unknown; rarity: string };
-  modified: string;
-};
-
-const dollar = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2,
-});
-
-const getCurrentPriceForCardInCollection = (
-  cardInCollection: CollectionManageQuery['collection']['cards'][0],
-): number => {
-  if (cardInCollection.isEtched)
-    return cardInCollection.card.currentPrice.usdEtched || 0;
-  if (cardInCollection.isFoil)
-    return cardInCollection.card.currentPrice.usdFoil || 0;
-  return cardInCollection.card.currentPrice.usd || 0;
+export type CollectionGridProps = {
+  collection: CollectionManageQuery['collection'];
 };
 
 export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
-  // eslint-disable-next-line react/display-name
-  const SetCellRenderer = memo(
-    (props: {
-      value: {
-        set: CollectionGridProps['cardsInCollection'][0]['card']['scryfallCard']['set'];
-        rarity: string;
-      };
-    }) => {
-      return (
-        <div className="flex items-center justify-start h-full">
-          <SetIcon
-            className="w-6 h-6"
-            src={props.value.set.iconSvgUri}
-            rarity={props.value.rarity}
-            title={props.value.set.name}
-          />
-        </div>
-      );
-    },
+  const MemoizedSetCellRenderer = memo(SetCellRenderer);
+  const MemoizedCheckmarkCellRenderer = memo(CheckmarkCellRenderer);
+  const MemoizedMgmtCellRenderer = memo(MgmtCellRenderer);
+  const collectorNumberFormatter = useCallback(
+    (params: ValueFormatterParams) => `(${params.value})`,
+    [],
+  );
+  const priceFormatter = useCallback(
+    (params: ValueFormatterParams) => dollar.format(params.value),
+    [],
   );
 
-  // eslint-disable-next-line react/display-name
-  const CheckMarkCellRenderer = memo((props: { value: boolean }) => {
-    return props.value ? (
-      <div className="flex items-center justify-center h-full">
-        <CheckMark className="w-6 h-6 stroke-2 stroke-green-500" />
-      </div>
-    ) : null;
-  });
+  const ref = useRef<AgGridReact>(null);
+  const modules = useMemo(() => [ServerSideRowModelModule], []);
+  const [fetchCards] = usePaginatedCardsInCollectionLazyQuery();
 
-  // eslint-disable-next-line react/display-name
-  const MgmtCellRenderer = memo(() => {
-    return (
-      <div className="flex flex-row items-center justify-end h-full">
-        <button className="mr-2">
-          <Edit className="w-6 h-6 hover:stroke-green-50" />
-        </button>
-        <button>
-          <Trash className="w-6 h-6 hover:stroke-red-50" />
-        </button>
-      </div>
-    );
-  });
+  const serverSideDatasource = useCallback((): IServerSideDatasource => {
+    return {
+      getRows: async (params) => {
+        if (!params.request.endRow || !params.request.startRow) {
+          params.request.endRow = 50;
+          params.request.startRow = 0;
+        }
+        let orderBy: CardsInCollectionOrderByWithRelationInput[] = [];
+        const byPrice = params.request.sortModel?.find(
+          (model) => model.colId === 'price',
+        );
+        if (byPrice) {
+          orderBy = [
+            {
+              card: {
+                currentPrice: {
+                  usd: byPrice.sort === 'asc' ? SortOrder.Asc : SortOrder.Desc,
+                },
+              },
+            },
+          ];
+        }
+        const { data } = await fetchCards({
+          variables: {
+            collectionId: props.collection.id,
+            take: params.request.endRow - params.request.startRow,
+            skip: params.request.startRow,
+            orderBy,
+          },
+        });
+        if (data?.collection) {
+          params.success({
+            rowCount: data.collection._count.cards,
+            rowData: data?.collection.cards.map((cardInCollection) => ({
+              '#': cardInCollection.count,
+              set: {
+                set: cardInCollection.card.scryfallCard.set,
+                rarity: cardInCollection.card.scryfallCard.rarity,
+              },
+              name: cardInCollection.card.name,
+              foil: cardInCollection.isFoil,
+              etched: cardInCollection.isEtched,
+              price: cardInCollection.price?.usd,
+              cn: cardInCollection.card.collectorNumber,
+              modified: Intl.DateTimeFormat('en-US', {
+                dateStyle: 'short',
+                timeStyle: 'short',
+              }).format(new Date(cardInCollection.updatedAt)),
+              _images: cardInCollection.card.scryfallCard.imageUris,
+            })),
+          });
+        } else {
+          params.fail();
+        }
+      },
+    };
+  }, [fetchCards, props.collection]);
 
   const [columnDefs] = useState<ColDef[]>([
     { field: '#', width: 50, resizable: true, editable: true },
-    { field: 'set', cellRenderer: SetCellRenderer, width: 60 },
+    { field: 'set', cellRenderer: MemoizedSetCellRenderer, width: 60 },
     {
       field: 'name',
       flex: 1,
@@ -111,53 +111,49 @@ export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
     },
     {
       field: 'cn',
-      valueFormatter: (params) => `(${params.value})`,
+      valueFormatter: collectorNumberFormatter,
       width: 80,
     },
-    { field: 'foil', cellRenderer: CheckMarkCellRenderer, width: 60 },
-    { field: 'etched', cellRenderer: CheckMarkCellRenderer, width: 90 },
+    { field: 'foil', cellRenderer: MemoizedCheckmarkCellRenderer, width: 60 },
+    { field: 'etched', cellRenderer: MemoizedCheckmarkCellRenderer, width: 90 },
     {
       field: 'price',
-      valueFormatter: (params) => dollar.format(params.value),
+      valueFormatter: priceFormatter,
       type: 'numericColumn',
+      sortable: true,
     },
     { field: 'modified' },
     {
       field: 'mgmt',
-      cellRenderer: MgmtCellRenderer,
+      cellRenderer: MemoizedMgmtCellRenderer,
       width: 75,
       type: 'rightAligned',
     },
   ]);
 
-  const rowData = useMemo<RowDataProps[]>(() => {
-    return props.cardsInCollection.map((cardInCollection) => ({
-      '#': cardInCollection.count,
-      set: {
-        set: cardInCollection.card.scryfallCard.set,
-        rarity: cardInCollection.card.scryfallCard.rarity,
-      },
-      name: cardInCollection.card.name,
-      foil: cardInCollection.isFoil,
-      etched: cardInCollection.isEtched,
-      price: getCurrentPriceForCardInCollection(cardInCollection),
-      cn: cardInCollection.card.collectorNumber,
-      modified: Intl.DateTimeFormat('en-US', {
-        dateStyle: 'short',
-        timeStyle: 'short',
-      }).format(new Date(cardInCollection.updatedAt)),
-      _images: cardInCollection.card.scryfallCard.imageUris,
-    }));
-  }, [props.cardsInCollection]);
+  const onGridReady = useCallback(
+    (params: GridReadyEvent) => {
+      if (!ref.current) return;
+      params.api.setServerSideDatasource(serverSideDatasource());
+    },
+    [serverSideDatasource],
+  );
 
   return (
     <div className="w-full h-full mx-auto ag-theme-alpine">
       <AgGridReact
-        rowData={rowData}
+        ref={ref}
+        modules={modules}
+        rowModelType="serverSide"
         columnDefs={columnDefs}
         defaultColDef={{ tooltipComponent: ImageTooltip }}
         tooltipShowDelay={100}
         suppressCellFocus
+        onGridReady={onGridReady}
+        pagination
+        paginationPageSize={50}
+        cacheBlockSize={50}
+        serverSideStoreType="partial"
       />
     </div>
   );

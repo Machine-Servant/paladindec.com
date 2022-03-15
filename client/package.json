@@ -10,12 +10,16 @@
     "generate": "graphql-codegen -r dotenv/config"
   },
   "dependencies": {
+    "@ag-grid-community/core": "^27.0.1",
+    "@ag-grid-community/react": "^27.0.1",
+    "@ag-grid-enterprise/server-side-row-model": "^27.0.0",
     "@apollo/client": "^3.5.10",
     "@emotion/css": "^11.7.1",
     "@emotion/react": "^11.8.1",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.8.1",
     "ag-grid-community": "^27.0.1",
+    "ag-grid-enterprise": "^27.0.1",
     "ag-grid-react": "^27.0.1",
     "firebase": "^9.6.7",
     "graphql": "^16.3.0",

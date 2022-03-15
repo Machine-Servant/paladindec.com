@@ -15,7 +15,9 @@ const QUERY = gql`
 `;
 
 type SearchInputProps = {
-  onCardSearchSelect: (name: string) => void;
+  onCardSearchSelect:
+    | ((name: string) => void)
+    | ((name: string) => Promise<void>);
 };
 
 export const SearchInput: React.FC<SearchInputProps> = (props) => {

@@ -1,0 +1,51 @@
+query QuickAddSearchResults($name: String!, $collectionId: String!) {
+  allCards(
+    where: {
+      isPaper: { equals: true }
+      scryfallCard: { is: { name: { equals: $name } } }
+    }
+  ) {
+    id
+    name
+    canBeFoil
+    canBeEtched
+    canBeNonFoil
+    collectorNumber
+    isBorderless
+    isShowcase
+    currentPrice {
+      usd
+      usdFoil
+      usdEtched
+    }
+    scryfallCard {
+      set {
+        name
+        code
+        iconSvgUri
+      }
+      rarity
+      imageUris
+    }
+  }
+  collection(where: { id: { equals: $collectionId } }) {
+    id
+    cards(where: { card: { is: { name: { equals: $name } } } }) {
+      card {
+        name
+        scryfallCard {
+          imageUris
+          rarity
+          set {
+            code
+            iconSvgUri
+          }
+        }
+      }
+      cardId
+      isFoil
+      isEtched
+      count
+    }
+  }
+}

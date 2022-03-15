@@ -13,7 +13,6 @@ type CollectionManagePageQueryType = {
 function isCollectionManagePageQueryType(
   query: ParsedUrlQuery,
 ): query is CollectionManagePageQueryType {
-  console.log(query);
   return typeof query.collectionId === 'string';
 }
 
@@ -23,7 +22,6 @@ const CollectionManagePage: React.FC = () => {
 
   if (!router.query) throw new Error('Expected parameters, got none.');
   if (!isCollectionManagePageQueryType(router.query)) {
-    console.error('oh no', router.query);
     return null;
   }
 

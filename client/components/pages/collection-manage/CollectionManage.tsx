@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useCollectionManageLazyQuery } from '../../../@types/codegen/graphql';
 import { CollectionGrid } from './components/collection-grid';
+import { QuickAdd } from './components/quick-add';
 
 type CollectionManageProps = {
   collectionId: string;
@@ -9,16 +10,21 @@ type CollectionManageProps = {
 export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
   const [fetchCollection, { data, loading }] = useCollectionManageLazyQuery();
 
+  const doFetch = useCallback(async () => {
+    if (props.collectionId) {
+      await fetchCollection({
+        variables: { collectionId: props.collectionId },
+      });
+    }
+  }, [fetchCollection, props.collectionId]);
+
   useEffect(() => {
-    const doFetch = async () => {
-      if (props.collectionId) {
-        await fetchCollection({
-          variables: { collectionId: props.collectionId, take: 100, skip: 0 },
-        });
-      }
-    };
     doFetch();
-  }, [props.collectionId, fetchCollection]);
+  }, [doFetch]);
+
+  const handleAddComplete = useCallback(() => {
+    doFetch();
+  }, [doFetch]);
 
   if (loading) return <div>Loading...</div>;
   if (!data) return <div>No data</div>;
@@ -26,7 +32,11 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
   return (
     <div className="flex flex-col h-full">
       <div>{data?.collection.name}</div>
-      <CollectionGrid cardsInCollection={data.collection.cards} />
+      <QuickAdd
+        collection={data.collection}
+        onAddComplete={handleAddComplete}
+      />
+      <CollectionGrid collection={data.collection} />
     </div>
   );
 };

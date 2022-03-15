@@ -1,0 +1,44 @@
+query PaginatedCardsInCollection(
+  $collectionId: String!
+  $take: Int!
+  $skip: Int!
+  $orderBy: [CardsInCollectionOrderByWithRelationInput!]
+) {
+  collection(where: { id: { equals: $collectionId } }) {
+    _count {
+      cards
+    }
+    cards(take: $take, skip: $skip, orderBy: $orderBy) {
+      isFoil
+      isEtched
+      count
+      price {
+        usd
+      }
+      card {
+        canBeFoil
+        name
+        id
+        collectorNumber
+        isBorderless
+        isShowcase
+        currentPrice {
+          usd
+          usdFoil
+          usdEtched
+        }
+        scryfallCard {
+          set {
+            iconSvgUri
+            name
+            code
+          }
+          rarity
+          imageUris
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+}
