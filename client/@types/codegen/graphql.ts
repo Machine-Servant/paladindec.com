@@ -23,8 +23,10 @@ export type AddCardToCollectionInput = {
   cardId: Scalars['String'];
   collectionId: Scalars['String'];
   count?: InputMaybe<Scalars['Int']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type BoolFieldUpdateOperationsInput = {
@@ -311,8 +313,10 @@ export type CardsInCollectionCardPrice = {
 export type CardsInCollectionCreateManyCardInput = {
   collectionId: Scalars['String'];
   count?: InputMaybe<Scalars['Int']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type CardsInCollectionCreateManyCardInputEnvelope = {
@@ -323,8 +327,10 @@ export type CardsInCollectionCreateManyCardInputEnvelope = {
 export type CardsInCollectionCreateManyCollectionInput = {
   cardId: Scalars['String'];
   count?: InputMaybe<Scalars['Int']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type CardsInCollectionCreateManyCollectionInputEnvelope = {
@@ -359,15 +365,19 @@ export type CardsInCollectionCreateOrConnectWithoutCollectionInput = {
 export type CardsInCollectionCreateWithoutCardInput = {
   collection: CollectionCreateNestedOneWithoutCardsInput;
   count?: InputMaybe<Scalars['Int']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type CardsInCollectionCreateWithoutCollectionInput = {
   card: CardCreateNestedOneWithoutCollectionsInput;
   count?: InputMaybe<Scalars['Int']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type CardsInCollectionListRelationFilter = {
@@ -386,8 +396,10 @@ export type CardsInCollectionOrderByWithRelationInput = {
   collection?: InputMaybe<CollectionOrderByWithRelationInput>;
   collectionId?: InputMaybe<SortOrder>;
   count?: InputMaybe<SortOrder>;
+  createdAt?: InputMaybe<SortOrder>;
   isEtched?: InputMaybe<SortOrder>;
   isFoil?: InputMaybe<SortOrder>;
+  updatedAt?: InputMaybe<SortOrder>;
 };
 
 export enum CardsInCollectionScalarFieldEnum {
@@ -404,8 +416,10 @@ export type CardsInCollectionUncheckedUpdateInput = {
   cardId?: InputMaybe<StringFieldUpdateOperationsInput>;
   collectionId?: InputMaybe<StringFieldUpdateOperationsInput>;
   count?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   isEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
   isFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type CardsInCollectionWhereInput = {
@@ -417,8 +431,10 @@ export type CardsInCollectionWhereInput = {
   collection?: InputMaybe<CollectionRelationFilter>;
   collectionId?: InputMaybe<StringFilter>;
   count?: InputMaybe<IntFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
   isEtched?: InputMaybe<BoolFilter>;
   isFoil?: InputMaybe<BoolFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
 export type CardsInCollectionWhereUniqueInput = {
@@ -525,6 +541,10 @@ export type CollectionWhereInput = {
 export type CollectionWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
   userId_name?: InputMaybe<CollectionUserIdNameCompoundUniqueInput>;
+};
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type DateTimeFilter = {

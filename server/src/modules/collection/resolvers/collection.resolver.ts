@@ -58,7 +58,7 @@ export class CollectionResolver {
     @CurrentUser() user: User,
     @Args() args?: FindManyCardsInCollectionArgs,
   ): Promise<CardsInCollection[]> {
-    return this.cardsInCollectionService.findMany(user.id, {
+    return this.cardsInCollectionService.findManyOrderedByPrice(user.id, {
       ...args,
       where: { ...args.where, collectionId: { equals: collection.id } },
     });

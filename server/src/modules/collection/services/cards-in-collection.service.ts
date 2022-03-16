@@ -48,6 +48,55 @@ export class CardsInCollectionService {
     });
   }
 
+  async findManyOrderedByPrice(
+    userId: string,
+    args?: FindManyCardsInCollectionArgs,
+  ): Promise<CardsInCollection[]> {
+    const { take, skip, orderBy, ...otherArgs } = args;
+
+    if (!orderBy) return this.findMany(userId, args);
+
+    const results = await this.prismaService.cardsInCollection.findMany({
+      ...otherArgs,
+      where: { ...otherArgs.where, collection: { userId: { equals: userId } } },
+      include: { card: { include: { currentPrice: true } } },
+      orderBy: orderBy.filter((ob) => ob.card === undefined),
+    });
+
+    const orderByPriceOpts = orderBy.find(
+      (option) => option?.card?.currentPrice?.usd,
+    );
+
+    let sorted = results;
+    if (orderByPriceOpts?.card?.currentPrice?.usd) {
+      sorted = results.sort((a, b) => {
+        const priceA = a.isEtched
+          ? a.card.currentPrice.usdEtched
+          : a.isFoil
+          ? a.card.currentPrice.usdFoil
+          : a.card.currentPrice.usd;
+        const priceB = b.isEtched
+          ? b.card.currentPrice.usdEtched
+          : b.isFoil
+          ? b.card.currentPrice.usdFoil
+          : b.card.currentPrice.usd;
+        return orderByPriceOpts.card.currentPrice.usd === 'asc'
+          ? priceA - priceB
+          : priceB - priceA;
+      });
+    }
+
+    if (take && skip) {
+      return sorted.slice(skip, take + 1);
+    } else if (take) {
+      return sorted.slice(0, take + 1);
+    } else if (skip) {
+      return sorted.slice(skip);
+    }
+
+    return sorted;
+  }
+
   async findUnique(
     args: FindUniqueCardsInCollectionArgs,
   ): Promise<CardsInCollection> {

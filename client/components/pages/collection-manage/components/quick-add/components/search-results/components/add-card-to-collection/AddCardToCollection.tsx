@@ -1,31 +1,24 @@
 import React, { useCallback, useState } from 'react';
-import {
-  QuickAddSearchResultsQuery,
-  useQuickAddCardToCollectionMutation,
-} from '../../../../../../../../../@types/codegen/graphql';
+import { QuickAddSearchResultsQuery } from '../../../../../../../../../@types/codegen/graphql';
 import { DropdownSelect } from '../../../../../../../../dropdown-select';
 import { ImageHover, useImageHover } from '../../../../../../../../image-hover';
 import { SetIcon } from '../../../../../../../../set-icon';
+import { useQuickAdd } from '../../../../QuickAdd.context';
 import { SwitchButton } from './AddCardToCollection.styles';
 
 type Card = QuickAddSearchResultsQuery['allCards'][0];
 
-type AddCardToCollectionProps = {
-  cards?: Card[];
-  collection?: QuickAddSearchResultsQuery['collection'];
-  onAddComplete: (() => void) | (() => Promise<void>);
-};
-
-export const AddCardToCollection: React.FC<AddCardToCollectionProps> = (
-  props,
-) => {
-  const [selectedCard, setSelectedCard] = useState<Card>();
-  const [count, setCount] = useState<number>(0);
+export const AddCardToCollection: React.FC = () => {
+  const {
+    collection,
+    selectedCard,
+    setSelectedCard,
+    searchResults,
+    quickAddCardToCollection,
+  } = useQuickAdd();
+  const [count, setCount] = useState<number>(1);
   const [isFoil, setIsFoil] = useState<boolean>(false);
   const [isEtched, setIsEtched] = useState<boolean>(false);
-
-  const [addCardToCollection, { loading }] =
-    useQuickAddCardToCollectionMutation();
 
   const {
     card: hoverCard,
@@ -55,32 +48,30 @@ export const AddCardToCollection: React.FC<AddCardToCollectionProps> = (
     setIsFoil(false);
   }, []);
 
-  const handleAddClick = useCallback(() => {
-    const doAddCardToCollection = async () => {
-      if (!selectedCard) return;
-      if (!props.collection?.id) return;
-      const results = await addCardToCollection({
-        variables: {
-          input: {
-            cardId: selectedCard?.id,
-            collectionId: props.collection.id,
-            count,
-            isEtched,
-            isFoil,
-          },
-        },
-      });
-      console.log(results);
-    };
-    doAddCardToCollection();
-    props.onAddComplete();
-  }, [props, addCardToCollection, count, isFoil, isEtched, selectedCard]);
+  const handleAddCardToCollectionClick = useCallback(async () => {
+    if (!selectedCard) return;
+    if (!collection) return;
+    await quickAddCardToCollection({
+      cardId: selectedCard.id,
+      collectionId: collection.id,
+      isEtched,
+      isFoil,
+      count,
+    });
+  }, [
+    quickAddCardToCollection,
+    selectedCard,
+    collection,
+    isEtched,
+    isFoil,
+    count,
+  ]);
 
   return (
     <div className="relative flex flex-row items-center justify-between mb-4">
       <DropdownSelect
         className="w-64 h-10 mr-2"
-        items={props.cards}
+        items={searchResults}
         renderSelectedItem={(item: Card) => (
           <div
             className="flex flex-row items-center justify-start w-full"
@@ -117,10 +108,18 @@ export const AddCardToCollection: React.FC<AddCardToCollectionProps> = (
         onSelect={(item) => handleSelect(item)}
         extractKey={(item) => item.id}
       />
-      <SwitchButton isActive={isFoil} onClick={handleClickFoil}>
+      <SwitchButton
+        isActive={isFoil}
+        onClick={handleClickFoil}
+        disabled={!selectedCard?.canBeFoil}
+      >
         Foil
       </SwitchButton>
-      <SwitchButton isActive={isEtched} onClick={handleClickEtched}>
+      <SwitchButton
+        isActive={isEtched}
+        onClick={handleClickEtched}
+        disabled={!selectedCard?.canBeEtched}
+      >
         Etched
       </SwitchButton>
       <input
@@ -131,7 +130,7 @@ export const AddCardToCollection: React.FC<AddCardToCollectionProps> = (
         }
         value={count}
       />
-      <button className="ml-2" onClick={handleAddClick}>
+      <button className="ml-2" onClick={handleAddCardToCollectionClick}>
         Add
       </button>
       <ImageHover className="w-40 h-52 top-8 left-48" card={hoverCard} />

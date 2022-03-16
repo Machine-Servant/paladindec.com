@@ -306,9 +306,7 @@ model CardsInCollection {
 
   count Int @default(0)
 
-  /// @HideField({ output: false, input: true })
   createdAt DateTime @default(now())
-  /// @HideField({ output: false, input: true })
   updatedAt DateTime @default(now()) @updatedAt
 
   @@id([cardId, collectionId, isFoil, isEtched])

@@ -9,7 +9,14 @@ import { ServerSideRowModelModule } from '@ag-grid-enterprise/server-side-row-mo
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
-import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   CardsInCollectionOrderByWithRelationInput,
   CollectionManageQuery,
@@ -24,9 +31,14 @@ import { SetCellRenderer } from './components/set-cell-renderer';
 
 export type CollectionGridProps = {
   collection: CollectionManageQuery['collection'];
+  ref: React.RefObject<AgGridReact>;
 };
 
-export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
+// eslint-disable-next-line react/display-name
+export const CollectionGrid = React.forwardRef<
+  AgGridReact,
+  CollectionGridProps
+>((props, ref) => {
   const MemoizedSetCellRenderer = memo(SetCellRenderer);
   const MemoizedCheckmarkCellRenderer = memo(CheckmarkCellRenderer);
   const MemoizedMgmtCellRenderer = memo(MgmtCellRenderer);
@@ -39,7 +51,6 @@ export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
     [],
   );
 
-  const ref = useRef<AgGridReact>(null);
   const modules = useMemo(() => [ServerSideRowModelModule], []);
   const [fetchCards] = usePaginatedCardsInCollectionLazyQuery();
 
@@ -50,21 +61,34 @@ export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
           params.request.endRow = 50;
           params.request.startRow = 0;
         }
-        let orderBy: CardsInCollectionOrderByWithRelationInput[] = [];
-        const byPrice = params.request.sortModel?.find(
-          (model) => model.colId === 'price',
-        );
-        if (byPrice) {
-          orderBy = [
-            {
-              card: {
-                currentPrice: {
-                  usd: byPrice.sort === 'asc' ? SortOrder.Asc : SortOrder.Desc,
+
+        const orderBy: CardsInCollectionOrderByWithRelationInput[] = [];
+        params.request.sortModel.forEach((sortOption) => {
+          if (!['asc', 'desc'].includes(sortOption.sort)) return;
+          switch (sortOption.colId) {
+            case 'price':
+              orderBy.push({
+                card: {
+                  currentPrice: {
+                    usd:
+                      sortOption.sort === 'asc'
+                        ? SortOrder.Asc
+                        : SortOrder.Desc,
+                  },
                 },
-              },
-            },
-          ];
-        }
+              });
+              break;
+            case 'modified':
+              orderBy.push({
+                updatedAt:
+                  sortOption.sort === 'asc' ? SortOrder.Asc : SortOrder.Desc,
+              });
+              break;
+            default:
+              break;
+          }
+        });
+
         const { data } = await fetchCards({
           variables: {
             collectionId: props.collection.id,
@@ -73,6 +97,7 @@ export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
             orderBy,
           },
         });
+
         if (data?.collection) {
           params.success({
             rowCount: data.collection._count.cards,
@@ -115,14 +140,18 @@ export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
       width: 80,
     },
     { field: 'foil', cellRenderer: MemoizedCheckmarkCellRenderer, width: 60 },
-    { field: 'etched', cellRenderer: MemoizedCheckmarkCellRenderer, width: 90 },
+    {
+      field: 'etched',
+      cellRenderer: MemoizedCheckmarkCellRenderer,
+      width: 90,
+    },
     {
       field: 'price',
       valueFormatter: priceFormatter,
       type: 'numericColumn',
       sortable: true,
     },
-    { field: 'modified' },
+    { field: 'modified', sortable: true },
     {
       field: 'mgmt',
       cellRenderer: MemoizedMgmtCellRenderer,
@@ -133,10 +162,10 @@ export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
 
   const onGridReady = useCallback(
     (params: GridReadyEvent) => {
-      if (!ref.current) return;
+      if (!ref) return;
       params.api.setServerSideDatasource(serverSideDatasource());
     },
-    [serverSideDatasource],
+    [ref, serverSideDatasource],
   );
 
   return (
@@ -157,4 +186,4 @@ export const CollectionGrid: React.FC<CollectionGridProps> = (props) => {
       />
     </div>
   );
-};
+});

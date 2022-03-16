@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import { AgGridReact } from '@ag-grid-community/react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useCollectionManageLazyQuery } from '../../../@types/codegen/graphql';
 import { CollectionGrid } from './components/collection-grid';
 import { QuickAdd } from './components/quick-add';
+import { QuickAddProvider } from './components/quick-add/QuickAdd.context';
 
 type CollectionManageProps = {
   collectionId: string;
@@ -9,6 +11,7 @@ type CollectionManageProps = {
 
 export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
   const [fetchCollection, { data, loading }] = useCollectionManageLazyQuery();
+  const ref = React.createRef<AgGridReact>();
 
   const doFetch = useCallback(async () => {
     if (props.collectionId) {
@@ -22,21 +25,25 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
     doFetch();
   }, [doFetch]);
 
-  const handleAddComplete = useCallback(() => {
-    doFetch();
-  }, [doFetch]);
+  const handleCardAddedToCollection = useCallback(() => {
+    console.log('card added to collection');
+    if (!ref.current) return;
+    ref.current.api.refreshServerSideStore({ route: [], purge: true });
+  }, [ref]);
 
   if (loading) return <div>Loading...</div>;
   if (!data) return <div>No data</div>;
 
   return (
-    <div className="flex flex-col h-full">
-      <div>{data?.collection.name}</div>
-      <QuickAdd
-        collection={data.collection}
-        onAddComplete={handleAddComplete}
-      />
-      <CollectionGrid collection={data.collection} />
-    </div>
+    <QuickAddProvider
+      collection={data.collection}
+      onCardAddedToCollection={handleCardAddedToCollection}
+    >
+      <div className="flex flex-col h-full">
+        <div>{data?.collection.name}</div>
+        <QuickAdd />
+        <CollectionGrid ref={ref} collection={data.collection} />
+      </div>
+    </QuickAddProvider>
   );
 };

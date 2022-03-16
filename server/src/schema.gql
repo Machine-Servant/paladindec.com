@@ -6,8 +6,10 @@ input AddCardToCollectionInput {
   cardId: String!
   collectionId: String!
   count: Int
+  createdAt: DateTime
   isEtched: Boolean
   isFoil: Boolean
+  updatedAt: DateTime
 }
 
 input BoolFieldUpdateOperationsInput {
@@ -291,8 +293,10 @@ type CardsInCollectionCardPrice {
 input CardsInCollectionCreateManyCardInput {
   collectionId: String!
   count: Int
+  createdAt: DateTime
   isEtched: Boolean
   isFoil: Boolean
+  updatedAt: DateTime
 }
 
 input CardsInCollectionCreateManyCardInputEnvelope {
@@ -303,8 +307,10 @@ input CardsInCollectionCreateManyCardInputEnvelope {
 input CardsInCollectionCreateManyCollectionInput {
   cardId: String!
   count: Int
+  createdAt: DateTime
   isEtched: Boolean
   isFoil: Boolean
+  updatedAt: DateTime
 }
 
 input CardsInCollectionCreateManyCollectionInputEnvelope {
@@ -339,15 +345,19 @@ input CardsInCollectionCreateOrConnectWithoutCollectionInput {
 input CardsInCollectionCreateWithoutCardInput {
   collection: CollectionCreateNestedOneWithoutCardsInput!
   count: Int
+  createdAt: DateTime
   isEtched: Boolean
   isFoil: Boolean
+  updatedAt: DateTime
 }
 
 input CardsInCollectionCreateWithoutCollectionInput {
   card: CardCreateNestedOneWithoutCollectionsInput!
   count: Int
+  createdAt: DateTime
   isEtched: Boolean
   isFoil: Boolean
+  updatedAt: DateTime
 }
 
 input CardsInCollectionListRelationFilter {
@@ -366,8 +376,10 @@ input CardsInCollectionOrderByWithRelationInput {
   collection: CollectionOrderByWithRelationInput
   collectionId: SortOrder
   count: SortOrder
+  createdAt: SortOrder
   isEtched: SortOrder
   isFoil: SortOrder
+  updatedAt: SortOrder
 }
 
 enum CardsInCollectionScalarFieldEnum {
@@ -384,8 +396,10 @@ input CardsInCollectionUncheckedUpdateInput {
   cardId: StringFieldUpdateOperationsInput
   collectionId: StringFieldUpdateOperationsInput
   count: IntFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
   isEtched: BoolFieldUpdateOperationsInput
   isFoil: BoolFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
 input CardsInCollectionWhereInput {
@@ -397,8 +411,10 @@ input CardsInCollectionWhereInput {
   collection: CollectionRelationFilter
   collectionId: StringFilter
   count: IntFilter
+  createdAt: DateTimeFilter
   isEtched: BoolFilter
   isFoil: BoolFilter
+  updatedAt: DateTimeFilter
 }
 
 input CardsInCollectionWhereUniqueInput {
@@ -499,6 +515,10 @@ input CollectionWhereUniqueInput {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
 
 input DateTimeFilter {
   equals: DateTime
