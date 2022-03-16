@@ -13,6 +13,7 @@ import React, { memo, useCallback, useMemo, useState } from 'react';
 import {
   CardsInCollectionOrderByWithRelationInput,
   CollectionManageQuery,
+  PaginatedCardsInCollectionQuery,
   SortOrder,
   usePaginatedCardsInCollectionLazyQuery,
 } from '../../../../../@types/codegen/graphql';
@@ -22,9 +23,37 @@ import { ImageTooltip } from './components/image-tooltip';
 import { MgmtCellRenderer } from './components/mgmt-cell-renderer';
 import { SetCellRenderer } from './components/set-cell-renderer';
 
+export type CardInCollection =
+  PaginatedCardsInCollectionQuery['collection']['cards'][0];
+
 export type CollectionGridProps = {
   collection: CollectionManageQuery['collection'];
+  onDeleteCardFromCollection: (card: CardInCollection) => void;
+  onUpdateCardCount: (
+    card: Pick<CardInCollection, 'isEtched' | 'isFoil'> & {
+      cardId: string;
+      collectionId: string;
+    },
+    count: number,
+  ) => void;
   ref: React.RefObject<AgGridReact>;
+};
+
+type RowDataType = {
+  '#': number;
+  set: {
+    set: CardInCollection['card']['scryfallCard']['set'];
+    rarity: CardInCollection['card']['scryfallCard']['rarity'];
+  };
+  name: CardInCollection['card']['name'];
+  foil: CardInCollection['isFoil'];
+  etched: CardInCollection['isEtched'];
+  price: number;
+  cn: CardInCollection['card']['collectorNumber'];
+  modified: string;
+  mgmt: { cardInCollection: CardInCollection };
+  _images: unknown[];
+  _cardId: string;
 };
 
 // eslint-disable-next-line react/display-name
@@ -82,7 +111,6 @@ export const CollectionGrid = React.forwardRef<
           }
         });
 
-        console.log(params.request.startRow, params.request.endRow);
         const { data } = await fetchCards({
           variables: {
             collectionId: props.collection.id,
@@ -110,7 +138,11 @@ export const CollectionGrid = React.forwardRef<
                 dateStyle: 'short',
                 timeStyle: 'short',
               }).format(new Date(cardInCollection.updatedAt)),
+              mgmt: {
+                cardInCollection,
+              },
               _images: cardInCollection.card.scryfallCard.imageUris,
+              _cardId: cardInCollection.card.id,
             })),
           });
         } else {
@@ -121,7 +153,12 @@ export const CollectionGrid = React.forwardRef<
   }, [fetchCards, props.collection]);
 
   const [columnDefs] = useState<ColDef[]>([
-    { field: '#', width: 50, resizable: true, editable: true },
+    {
+      field: '#',
+      width: 50,
+      resizable: true,
+      editable: true,
+    },
     { field: 'set', cellRenderer: MemoizedSetCellRenderer, width: 60 },
     {
       field: 'name',
@@ -149,12 +186,16 @@ export const CollectionGrid = React.forwardRef<
     {
       field: 'mgmt',
       cellRenderer: MemoizedMgmtCellRenderer,
+      cellRendererParams: {
+        onDeleteClick: (cardInCollection: CardInCollection) =>
+          props.onDeleteCardFromCollection(cardInCollection),
+      },
       width: 75,
       type: 'rightAligned',
     },
   ]);
 
-  const onGridReady = useCallback(
+  const handleGridReady = useCallback(
     (params: GridReadyEvent) => {
       if (!ref) return;
       params.api.setServerSideDatasource(serverSideDatasource());
@@ -172,11 +213,22 @@ export const CollectionGrid = React.forwardRef<
         defaultColDef={{ tooltipComponent: ImageTooltip }}
         tooltipShowDelay={100}
         suppressCellFocus
-        onGridReady={onGridReady}
+        onGridReady={handleGridReady}
         pagination
         paginationPageSize={50}
         cacheBlockSize={50}
         serverSideStoreType="partial"
+        onCellValueChanged={(params: { data: RowDataType }) => {
+          props.onUpdateCardCount(
+            {
+              cardId: params.data._cardId,
+              collectionId: props.collection.id,
+              isEtched: params.data.etched,
+              isFoil: params.data.foil,
+            },
+            Number(params.data['#']),
+          );
+        }}
       />
     </div>
   );

@@ -9,6 +9,7 @@ import { User } from '@prisma/client';
 import { Card } from '../../../@generated/prisma-nestjs-graphql/card/card.model';
 import { CardsInCollectionUncheckedUpdateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-unchecked-update.input';
 import { CardsInCollection } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection.model';
+import { DeleteOneCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/delete-one-cards-in-collection.args';
 import { CardService } from '../../card/services/card.service';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { ScryfallPriceService } from '../../scryfall/services/scryfall-price.service';
@@ -37,6 +38,14 @@ export class CardsInCollectionResolver {
     @CurrentUser() user: User,
   ): Promise<CardsInCollection> {
     return this.cardsInCollectionService.addCardToCollection(input, user.id);
+  }
+
+  @Mutation(() => CardsInCollection)
+  async deleteCardFromCollection(
+    @Args() args: DeleteOneCardsInCollectionArgs,
+    @CurrentUser() user: User,
+  ): Promise<CardsInCollection> {
+    return this.cardsInCollectionService.delete(args, user.id);
   }
 
   @ResolveField('card', () => Card)

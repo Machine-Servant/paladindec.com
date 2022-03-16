@@ -1,3 +1,4 @@
+import React from 'react';
 import CheckMark from '../../../../../../../assets/svg/icons8-done-50.svg';
 
 export const CheckmarkCellRenderer = (props: { value: boolean }) => {

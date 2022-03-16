@@ -647,6 +647,7 @@ input JsonNullableListFilter {
 type Mutation {
   addCardToCollection(input: AddCardToCollectionInput!): CardsInCollection!
   addCollection(input: CollectionCreateWithoutUserInput!): Collection!
+  deleteCardFromCollection(where: CardsInCollectionWhereUniqueInput!): CardsInCollection!
   downloadBulkData(typeName: String!): Boolean!
   getOrCreateUser(input: UserCreateWithoutCollectionsInput!): User!
   processAllParts: Boolean!

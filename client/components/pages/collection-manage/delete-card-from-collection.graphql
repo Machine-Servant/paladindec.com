@@ -1,0 +1,22 @@
+mutation CollectionGridDeleteCardFromCollection(
+  $cardId: String!
+  $collectionId: String!
+  $isFoil: Boolean!
+  $isEtched: Boolean!
+) {
+  deleteCardFromCollection(
+    where: {
+      cardId_collectionId_isFoil_isEtched: {
+        cardId: $cardId
+        collectionId: $collectionId
+        isFoil: $isFoil
+        isEtched: $isEtched
+      }
+    }
+  ) {
+    cardId
+    collectionId
+    isEtched
+    isFoil
+  }
+}

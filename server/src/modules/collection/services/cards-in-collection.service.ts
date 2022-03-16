@@ -1,6 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CardsInCollection } from '@prisma/client';
 import { CardsInCollectionUncheckedUpdateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-unchecked-update.input';
+import { DeleteOneCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/delete-one-cards-in-collection.args';
 import { FindManyCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-many-cards-in-collection.args';
 import { FindUniqueCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-unique-cards-in-collection.args';
 import { PrismaService } from '../../prisma/services/prisma.service';
@@ -30,6 +31,34 @@ export class CardsInCollectionService {
       },
       data: input,
     });
+  }
+
+  async findOne(
+    args: FindUniqueCardsInCollectionArgs,
+    userId: string,
+  ): Promise<CardsInCollection> {
+    return this.prismaService.cardsInCollection.findFirst({
+      where: {
+        ...args.where.cardId_collectionId_isFoil_isEtched,
+        collection: {
+          user: {
+            id: { equals: userId },
+          },
+        },
+      },
+    });
+  }
+
+  async delete(
+    args: DeleteOneCardsInCollectionArgs,
+    userId: string,
+  ): Promise<CardsInCollection> {
+    const found = await this.findOne(args, userId);
+    if (!found) {
+      this.logger.error(`Could not find card in collection`, args);
+      throw new NotFoundException(`Could not find card in collection`);
+    }
+    return this.prismaService.cardsInCollection.delete(args);
   }
 
   async findMany(

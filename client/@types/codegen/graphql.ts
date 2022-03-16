@@ -670,6 +670,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addCardToCollection: CardsInCollection;
   addCollection: Collection;
+  deleteCardFromCollection: CardsInCollection;
   downloadBulkData: Scalars['Boolean'];
   getOrCreateUser: User;
   processAllParts: Scalars['Boolean'];
@@ -691,6 +692,11 @@ export type MutationAddCardToCollectionArgs = {
 
 export type MutationAddCollectionArgs = {
   input: CollectionCreateWithoutUserInput;
+};
+
+
+export type MutationDeleteCardFromCollectionArgs = {
+  where: CardsInCollectionWhereUniqueInput;
 };
 
 
@@ -2803,6 +2809,23 @@ export type QuickAddSearchResultsQueryVariables = Exact<{
 
 export type QuickAddSearchResultsQuery = { __typename?: 'Query', allCards: Array<{ __typename?: 'Card', id: string, name: string, canBeFoil: boolean, canBeEtched: boolean, canBeNonFoil: boolean, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', rarity: string, imageUris?: any | null, set: { __typename?: 'ScryfallSet', name: string, code: string, iconSvgUri: string } } }>, collection: { __typename?: 'Collection', id: string, cards: Array<{ __typename?: 'CardsInCollection', cardId: string, isFoil: boolean, isEtched: boolean, count: number, card: { __typename?: 'Card', name: string, scryfallCard: { __typename?: 'ScryfallCard', imageUris?: any | null, rarity: string, set: { __typename?: 'ScryfallSet', code: string, iconSvgUri: string } } } }> } };
 
+export type CollectionGridDeleteCardFromCollectionMutationVariables = Exact<{
+  cardId: Scalars['String'];
+  collectionId: Scalars['String'];
+  isFoil: Scalars['Boolean'];
+  isEtched: Scalars['Boolean'];
+}>;
+
+
+export type CollectionGridDeleteCardFromCollectionMutation = { __typename?: 'Mutation', deleteCardFromCollection: { __typename?: 'CardsInCollection', cardId: string, collectionId: string, isEtched: boolean, isFoil: boolean } };
+
+export type CollectionManageUpdateCardInCollectionMutationVariables = Exact<{
+  input: CardsInCollectionUncheckedUpdateInput;
+}>;
+
+
+export type CollectionManageUpdateCardInCollectionMutation = { __typename?: 'Mutation', updateCardsInCollection: { __typename?: 'CardsInCollection', cardId: string, collectionId: string, isFoil: boolean, isEtched: boolean, count: number } };
+
 export type AddCollectionMutationVariables = Exact<{
   input: CollectionCreateWithoutUserInput;
 }>;
@@ -3196,6 +3219,84 @@ export function useQuickAddSearchResultsLazyQuery(baseOptions?: Apollo.LazyQuery
 export type QuickAddSearchResultsQueryHookResult = ReturnType<typeof useQuickAddSearchResultsQuery>;
 export type QuickAddSearchResultsLazyQueryHookResult = ReturnType<typeof useQuickAddSearchResultsLazyQuery>;
 export type QuickAddSearchResultsQueryResult = Apollo.QueryResult<QuickAddSearchResultsQuery, QuickAddSearchResultsQueryVariables>;
+export const CollectionGridDeleteCardFromCollectionDocument = gql`
+    mutation CollectionGridDeleteCardFromCollection($cardId: String!, $collectionId: String!, $isFoil: Boolean!, $isEtched: Boolean!) {
+  deleteCardFromCollection(
+    where: {cardId_collectionId_isFoil_isEtched: {cardId: $cardId, collectionId: $collectionId, isFoil: $isFoil, isEtched: $isEtched}}
+  ) {
+    cardId
+    collectionId
+    isEtched
+    isFoil
+  }
+}
+    `;
+export type CollectionGridDeleteCardFromCollectionMutationFn = Apollo.MutationFunction<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>;
+
+/**
+ * __useCollectionGridDeleteCardFromCollectionMutation__
+ *
+ * To run a mutation, you first call `useCollectionGridDeleteCardFromCollectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCollectionGridDeleteCardFromCollectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [collectionGridDeleteCardFromCollectionMutation, { data, loading, error }] = useCollectionGridDeleteCardFromCollectionMutation({
+ *   variables: {
+ *      cardId: // value for 'cardId'
+ *      collectionId: // value for 'collectionId'
+ *      isFoil: // value for 'isFoil'
+ *      isEtched: // value for 'isEtched'
+ *   },
+ * });
+ */
+export function useCollectionGridDeleteCardFromCollectionMutation(baseOptions?: Apollo.MutationHookOptions<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>(CollectionGridDeleteCardFromCollectionDocument, options);
+      }
+export type CollectionGridDeleteCardFromCollectionMutationHookResult = ReturnType<typeof useCollectionGridDeleteCardFromCollectionMutation>;
+export type CollectionGridDeleteCardFromCollectionMutationResult = Apollo.MutationResult<CollectionGridDeleteCardFromCollectionMutation>;
+export type CollectionGridDeleteCardFromCollectionMutationOptions = Apollo.BaseMutationOptions<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>;
+export const CollectionManageUpdateCardInCollectionDocument = gql`
+    mutation CollectionManageUpdateCardInCollection($input: CardsInCollectionUncheckedUpdateInput!) {
+  updateCardsInCollection(input: $input) {
+    cardId
+    collectionId
+    isFoil
+    isEtched
+    count
+  }
+}
+    `;
+export type CollectionManageUpdateCardInCollectionMutationFn = Apollo.MutationFunction<CollectionManageUpdateCardInCollectionMutation, CollectionManageUpdateCardInCollectionMutationVariables>;
+
+/**
+ * __useCollectionManageUpdateCardInCollectionMutation__
+ *
+ * To run a mutation, you first call `useCollectionManageUpdateCardInCollectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCollectionManageUpdateCardInCollectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [collectionManageUpdateCardInCollectionMutation, { data, loading, error }] = useCollectionManageUpdateCardInCollectionMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCollectionManageUpdateCardInCollectionMutation(baseOptions?: Apollo.MutationHookOptions<CollectionManageUpdateCardInCollectionMutation, CollectionManageUpdateCardInCollectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CollectionManageUpdateCardInCollectionMutation, CollectionManageUpdateCardInCollectionMutationVariables>(CollectionManageUpdateCardInCollectionDocument, options);
+      }
+export type CollectionManageUpdateCardInCollectionMutationHookResult = ReturnType<typeof useCollectionManageUpdateCardInCollectionMutation>;
+export type CollectionManageUpdateCardInCollectionMutationResult = Apollo.MutationResult<CollectionManageUpdateCardInCollectionMutation>;
+export type CollectionManageUpdateCardInCollectionMutationOptions = Apollo.BaseMutationOptions<CollectionManageUpdateCardInCollectionMutation, CollectionManageUpdateCardInCollectionMutationVariables>;
 export const AddCollectionDocument = gql`
     mutation AddCollection($input: CollectionCreateWithoutUserInput!) {
   addCollection(input: $input) {

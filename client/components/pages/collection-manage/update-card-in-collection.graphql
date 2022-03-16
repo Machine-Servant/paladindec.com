@@ -1,0 +1,11 @@
+mutation CollectionManageUpdateCardInCollection(
+  $input: CardsInCollectionUncheckedUpdateInput!
+) {
+  updateCardsInCollection(input: $input) {
+    cardId
+    collectionId
+    isFoil
+    isEtched
+    count
+  }
+}
