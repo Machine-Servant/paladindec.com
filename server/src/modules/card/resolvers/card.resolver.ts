@@ -14,12 +14,9 @@ import { Card } from '../../../@generated/prisma-nestjs-graphql/card/card.model'
 import { FindManyCardArgs } from '../../../@generated/prisma-nestjs-graphql/card/find-many-card.args';
 import { CardsInCollection } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection.model';
 import { FindManyCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-many-cards-in-collection.args';
-import { Collection } from '../../../@generated/prisma-nestjs-graphql/collection/collection.model';
-import { FindManyCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-many-collection.args';
 import { ScryfallCard } from '../../../@generated/prisma-nestjs-graphql/scryfall-card/scryfall-card.model';
 import { ScryfallPrice } from '../../../@generated/prisma-nestjs-graphql/scryfall-price/scryfall-price.model';
 import { CardsInCollectionService } from '../../collection/services/cards-in-collection.service';
-import { CollectionService } from '../../collection/services/collection.service';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { ScryfallCardService } from '../../scryfall/services/scryfall-card.service';
 import { ScryfallPriceService } from '../../scryfall/services/scryfall-price.service';

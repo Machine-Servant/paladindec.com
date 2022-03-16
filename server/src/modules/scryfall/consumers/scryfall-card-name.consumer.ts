@@ -1,12 +1,8 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { Job } from 'bull';
-import stream from 'stream';
-import Chain, { chain } from 'stream-chain';
-import { parser } from 'stream-json';
-import { streamArray } from 'stream-json/streamers/StreamArray';
 import { ScryfallCardNameService } from '../services/scryfall-card-name.service';
 
 @Processor('card-name')

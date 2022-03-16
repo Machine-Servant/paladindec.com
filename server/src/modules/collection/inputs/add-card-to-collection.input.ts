@@ -1,4 +1,4 @@
-import { Field, InputType, OmitType, PickType } from '@nestjs/graphql';
+import { Field, InputType, OmitType } from '@nestjs/graphql';
 import { CardsInCollectionCreateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-create.input';
 
 @InputType()

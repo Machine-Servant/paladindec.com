@@ -5,10 +5,8 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { Prisma, User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { Card } from '../../../@generated/prisma-nestjs-graphql/card/card.model';
-import { CardsInCollectionCreateWithoutCardInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-create-without-card.input';
-import { CardsInCollectionCreateWithoutCollectionInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-create-without-collection.input';
 import { CardsInCollectionUncheckedUpdateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-unchecked-update.input';
 import { CardsInCollection } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection.model';
 import { CardService } from '../../card/services/card.service';

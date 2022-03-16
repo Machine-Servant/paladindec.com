@@ -28,7 +28,7 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
   const handleCardAddedToCollection = useCallback(() => {
     console.log('card added to collection');
     if (!ref.current) return;
-    ref.current.api.refreshServerSideStore({ route: [], purge: true });
+    ref.current.api.refreshServerSideStore({ route: [], purge: false });
   }, [ref]);
 
   if (loading) return <div>Loading...</div>;

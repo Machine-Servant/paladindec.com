@@ -1,8 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Card, CardsInCollection, Prisma } from '@prisma/client';
-import { CardsInCollectionCreateWithoutCardInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-create-without-card.input';
-import { CardsInCollectionCreateWithoutCollectionInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-create-without-collection.input';
-import { CardsInCollectionCreateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-create.input';
+import { CardsInCollection } from '@prisma/client';
 import { CardsInCollectionUncheckedUpdateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-unchecked-update.input';
 import { FindManyCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-many-cards-in-collection.args';
 import { FindUniqueCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-unique-cards-in-collection.args';

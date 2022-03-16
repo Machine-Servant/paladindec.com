@@ -11,12 +11,9 @@ import { CardsInCollection } from '../../../@generated/prisma-nestjs-graphql/car
 import { FindManyCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-many-cards-in-collection.args';
 import { CollectionCount } from '../../../@generated/prisma-nestjs-graphql/collection/collection-count.output';
 import { CollectionCreateWithoutUserInput } from '../../../@generated/prisma-nestjs-graphql/collection/collection-create-without-user.input';
-import { CollectionCreateInput } from '../../../@generated/prisma-nestjs-graphql/collection/collection-create.input';
 import { Collection } from '../../../@generated/prisma-nestjs-graphql/collection/collection.model';
-import { CreateOneCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/create-one-collection.args';
 import { FindFirstCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-first-collection.args';
 import { FindManyCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-many-collection.args';
-import { FindUniqueCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-unique-collection.args';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { CardsInCollectionService } from '../services/cards-in-collection.service';
 import { CollectionService } from '../services/collection.service';

@@ -1,11 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Card, Collection } from '@prisma/client';
+import { Collection } from '@prisma/client';
 import { CollectionCreateWithoutUserInput } from '../../../@generated/prisma-nestjs-graphql/collection/collection-create-without-user.input';
-import { CollectionCreateInput } from '../../../@generated/prisma-nestjs-graphql/collection/collection-create.input';
-import { CreateOneCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/create-one-collection.args';
 import { FindFirstCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-first-collection.args';
 import { FindManyCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-many-collection.args';
-import { FindUniqueCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/collection/find-unique-collection.args';
 import { PrismaService } from '../../prisma/services/prisma.service';
 
 @Injectable()
