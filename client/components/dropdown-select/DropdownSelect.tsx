@@ -13,18 +13,23 @@ type DropdownSelectProps<T> = {
   renderItem: (item: T) => React.ReactElement;
   extractKey: (item: T) => React.Key;
   onSelect: (item: T) => void | Promise<void>;
+  value?: T;
   items?: T[];
 };
 
 export function DropdownSelect<T>(
   props: React.PropsWithChildren<DropdownSelectProps<T>>,
 ) {
-  const [selected, setSelected] = useState<T>();
+  const [selected, setSelected] = useState<T | undefined>(props.value);
   const [isSelectionVisible, setIsSelectionVisible] = useState<boolean>(false);
   const [currentHighlightIndex, setCurrentHighlightIndex] = useState<number>(0);
   const ref = useRef<HTMLDivElement>(null);
   const dropdownButtonRef = useRef<HTMLButtonElement>(null);
   const selectItemsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setSelected(props.value);
+  }, [props.value]);
 
   const isClickOutside = useCallback((e: MouseEvent) => {
     if (!ref?.current?.contains(e.target as Node)) {

@@ -2,6 +2,7 @@ import {
   ColDef,
   GridReadyEvent,
   IServerSideDatasource,
+  SortChangedEvent,
   ValueFormatterParams,
 } from '@ag-grid-community/core';
 import { AgGridReact } from '@ag-grid-community/react';
@@ -18,6 +19,7 @@ import {
   usePaginatedCardsInCollectionLazyQuery,
 } from '../../../../../@types/codegen/graphql';
 import { dollar } from '../../../../../utils/dollar';
+import { useCollectionGrid } from './CollectionGrid.context';
 import { CheckmarkCellRenderer } from './components/checkmark-cell-renderer';
 import { ImageTooltip } from './components/image-tooltip';
 import { MgmtCellRenderer } from './components/mgmt-cell-renderer';
@@ -72,6 +74,8 @@ export const CollectionGrid = React.forwardRef<
     (params: ValueFormatterParams) => dollar.format(params.value),
     [],
   );
+
+  const { columnState, setColumnState } = useCollectionGrid();
 
   const modules = useMemo(() => [ServerSideRowModelModule], []);
   const [fetchCards] = usePaginatedCardsInCollectionLazyQuery();
@@ -199,8 +203,18 @@ export const CollectionGrid = React.forwardRef<
     (params: GridReadyEvent) => {
       if (!ref) return;
       params.api.setServerSideDatasource(serverSideDatasource());
+
+      if (!columnState) return;
+      params.columnApi.applyColumnState({ state: columnState });
     },
-    [ref, serverSideDatasource],
+    [ref, serverSideDatasource, columnState],
+  );
+
+  const handleSortChanged = useCallback(
+    (params: SortChangedEvent) => {
+      setColumnState(params.columnApi.getColumnState());
+    },
+    [setColumnState],
   );
 
   return (
@@ -218,6 +232,7 @@ export const CollectionGrid = React.forwardRef<
         paginationPageSize={50}
         cacheBlockSize={50}
         serverSideStoreType="partial"
+        onSortChanged={handleSortChanged}
         onCellValueChanged={(params: { data: RowDataType }) => {
           props.onUpdateCardCount(
             {

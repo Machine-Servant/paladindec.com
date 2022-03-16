@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { QuickAddSearchResultsQuery } from '../../../../../../../../../@types/codegen/graphql';
 import { DropdownSelect } from '../../../../../../../../dropdown-select';
 import { ImageHover, useImageHover } from '../../../../../../../../image-hover';
@@ -67,6 +67,15 @@ export const AddCardToCollection: React.FC = () => {
     count,
   ]);
 
+  useEffect(() => {
+    if (!searchResults?.length) return;
+    setSelectedCard(searchResults[0]);
+  }, [searchResults, setSelectedCard]);
+
+  useEffect(() => {
+    console.log(selectedCard);
+  }, [selectedCard]);
+
   return (
     <div className="relative flex flex-row items-center justify-between mb-4">
       <DropdownSelect
@@ -85,7 +94,7 @@ export const AddCardToCollection: React.FC = () => {
               className="w-4 h-4 mr-2"
             />
             <div className="flex-1 truncate whitespace-nowrap">
-              {selectedCard?.name} ({selectedCard?.collectorNumber})
+              {item?.name} ({item?.collectorNumber})
             </div>
             <ImageHover className="w-40 h-52 top-8" card={selectedHoverCard} />
           </div>
@@ -105,6 +114,7 @@ export const AddCardToCollection: React.FC = () => {
             <div className="w-10">({item.collectorNumber})</div>
           </div>
         )}
+        value={selectedCard}
         onSelect={(item) => handleSelect(item)}
         extractKey={(item) => item.id}
       />

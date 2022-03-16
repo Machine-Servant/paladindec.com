@@ -21,7 +21,7 @@ export type QuickAddActionType =
     }
   | {
       type: QuickAddAction.SetSelectedCard;
-      payload: QuickAddSearchResultsQuery['allCards'][0];
+      payload?: QuickAddSearchResultsQuery['allCards'][0];
     }
   | {
       type: QuickAddAction.SetSearchResults;
@@ -65,7 +65,7 @@ const quickAddReducer = (
 };
 
 type QuickAddContextType = {
-  setSelectedCard: (card: QuickAddSearchResultsQuery['allCards'][0]) => void;
+  setSelectedCard: (card?: QuickAddSearchResultsQuery['allCards'][0]) => void;
   setSearchCardName: (name: string) => void;
   fetchSearchResults: () => Promise<void>;
   quickAddCardToCollection: (input: AddCardToCollectionInput) => Promise<void>;
@@ -88,7 +88,7 @@ export const QuickAddProvider: React.FC<
   const [state, dispatch] = useReducer(quickAddReducer, initialState);
 
   const setSelectedCard = useCallback(
-    (card: QuickAddSearchResultsQuery['allCards'][0]) => {
+    (card?: QuickAddSearchResultsQuery['allCards'][0]) => {
       return dispatch({ type: QuickAddAction.SetSelectedCard, payload: card });
     },
     [],
