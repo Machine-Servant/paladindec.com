@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { BasicLayout, BasicLayoutProps } from '../basic-layout';
 import { Navbar } from '../navbar';
-import { NavLink } from '../navbar/components/nav-link';
 import { Sidebar } from '../sidebar';
 import { Container, Main } from './AppLayout.styles';
 

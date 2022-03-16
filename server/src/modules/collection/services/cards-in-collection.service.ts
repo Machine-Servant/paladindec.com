@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CardsInCollection } from '@prisma/client';
 import { CardsInCollectionUncheckedUpdateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-unchecked-update.input';
 import { FindManyCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-many-cards-in-collection.args';
@@ -13,6 +13,8 @@ export class CardsInCollectionService {
     private readonly prismaService: PrismaService,
     private readonly collectionService: CollectionService,
   ) {}
+
+  private readonly logger = new Logger(CardsInCollectionService.name);
 
   async update(
     input?: CardsInCollectionUncheckedUpdateInput,
@@ -84,7 +86,7 @@ export class CardsInCollectionService {
     }
 
     if (take && skip) {
-      return sorted.slice(skip, take + 1);
+      return sorted.slice(skip, skip + take + 1);
     } else if (take) {
       return sorted.slice(0, take + 1);
     } else if (skip) {

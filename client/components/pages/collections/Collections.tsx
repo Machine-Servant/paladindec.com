@@ -1,5 +1,4 @@
 import React from 'react';
-import { useCollectionListLazyQuery } from '../../../@types/codegen/graphql';
 import { AppLayout, AppLayoutProps } from '../../app-layout';
 import { ClientOnly } from '../../client-only';
 import { CollectionList } from './components/collection-list';

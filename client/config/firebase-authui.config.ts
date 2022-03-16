@@ -21,7 +21,7 @@ export const firebaseAuthUIConfig: Props['uiConfig'] = {
     GoogleAuthProvider.PROVIDER_ID,
   ],
   callbacks: {
-    signInSuccessWithAuthResult: (authResults, redirectUrl) => {
+    signInSuccessWithAuthResult: (authResults) => {
       console.log(JSON.stringify(authResults, null, 2));
       const doGetOrCreateUser = async () => {
         try {

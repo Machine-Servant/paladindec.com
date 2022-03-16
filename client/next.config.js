@@ -2,7 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   eslint: {
-    dirs: ['pages'],
+    dirs: [
+      'pages',
+      'app',
+      'components',
+      'config',
+      'contexts',
+      'graphql',
+      'utils',
+      'styles',
+    ],
   },
   images: {
     domains: [

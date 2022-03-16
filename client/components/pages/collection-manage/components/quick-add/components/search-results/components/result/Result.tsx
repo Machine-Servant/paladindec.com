@@ -1,7 +1,6 @@
 import React from 'react';
 import { QuickAddSearchResultsQuery } from '../../../../../../../../../@types/codegen/graphql';
 import { SetIcon } from '../../../../../../../../set-icon';
-import { Round } from './Result.styles';
 
 type ResultProps = {
   cardInCollection?: QuickAddSearchResultsQuery['collection']['cards'][0];

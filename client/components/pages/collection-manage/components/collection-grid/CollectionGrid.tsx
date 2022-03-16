@@ -9,14 +9,7 @@ import { ServerSideRowModelModule } from '@ag-grid-enterprise/server-side-row-mo
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import {
   CardsInCollectionOrderByWithRelationInput,
   CollectionManageQuery,
@@ -89,6 +82,7 @@ export const CollectionGrid = React.forwardRef<
           }
         });
 
+        console.log(params.request.startRow, params.request.endRow);
         const { data } = await fetchCards({
           variables: {
             collectionId: props.collection.id,

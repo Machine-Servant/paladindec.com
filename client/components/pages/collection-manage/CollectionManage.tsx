@@ -1,5 +1,5 @@
 import { AgGridReact } from '@ag-grid-community/react';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useCollectionManageLazyQuery } from '../../../@types/codegen/graphql';
 import { CollectionGrid } from './components/collection-grid';
 import { QuickAdd } from './components/quick-add';
