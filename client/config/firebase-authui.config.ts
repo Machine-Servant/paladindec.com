@@ -2,6 +2,7 @@ import { gql } from '@apollo/client';
 import { EmailAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { Props } from 'react-firebaseui';
 import { client } from '../graphql/apollo-client';
+import { Logger } from '../utils/logger';
 
 const GET_OR_CREATE_USER_MUTATION = gql`
   mutation GetOrCreateUser($input: UserCreateWithoutCollectionsInput!) {
@@ -11,35 +12,41 @@ const GET_OR_CREATE_USER_MUTATION = gql`
   }
 `;
 
-export const firebaseAuthUIConfig: Props['uiConfig'] = {
-  signInFlow: 'popup',
-  signInSuccessUrl: '/user-home',
-  tosUrl: '/terms-of-service',
-  privacyPolicyUrl: '/privacy-policy',
-  signInOptions: [
-    EmailAuthProvider.PROVIDER_ID,
-    GoogleAuthProvider.PROVIDER_ID,
-  ],
-  callbacks: {
-    signInSuccessWithAuthResult: (authResults) => {
-      console.log(JSON.stringify(authResults, null, 2));
-      const doGetOrCreateUser = async () => {
-        try {
-          await client.mutate({
-            mutation: GET_OR_CREATE_USER_MUTATION,
-            variables: {
-              input: {
-                externalAuthId: authResults.user.uid,
-                email: authResults.user.email,
-              },
-            },
-          });
-        } catch (err) {
-          console.error(JSON.stringify(err, null, 2));
-        }
-      };
-      doGetOrCreateUser();
-      return true;
-    },
-  },
-};
+export class FirebaseAuthUiConfig {
+  private readonly logger = new Logger(FirebaseAuthUiConfig.name);
+
+  get config(): Props['uiConfig'] {
+    return {
+      signInFlow: 'popup',
+      signInSuccessUrl: '/user-home',
+      tosUrl: '/terms-of-service',
+      privacyPolicyUrl: '/privacy-policy',
+      signInOptions: [
+        EmailAuthProvider.PROVIDER_ID,
+        GoogleAuthProvider.PROVIDER_ID,
+      ],
+      callbacks: {
+        signInSuccessWithAuthResult: (authResults) => {
+          this.logger.debug(`AuthResults`, authResults);
+          const doGetOrCreateUser = async () => {
+            try {
+              await client.mutate({
+                mutation: GET_OR_CREATE_USER_MUTATION,
+                variables: {
+                  input: {
+                    externalAuthId: authResults.user.uid,
+                    email: authResults.user.email,
+                  },
+                },
+              });
+            } catch (err) {
+              this.logger.error(JSON.stringify(err, null, 2));
+            }
+          };
+          doGetOrCreateUser();
+          return true;
+        },
+      },
+    };
+  }
+}
