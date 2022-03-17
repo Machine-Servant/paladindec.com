@@ -18,8 +18,8 @@ import {
   SortOrder,
   usePaginatedCardsInCollectionLazyQuery,
 } from '../../../../../@types/codegen/graphql';
+import { useCollectionGrid } from '../../../../../contexts/collection-grid';
 import { dollar } from '../../../../../utils/dollar';
-import { useCollectionGrid } from './CollectionGrid.context';
 import { CheckmarkCellRenderer } from './components/checkmark-cell-renderer';
 import { ImageTooltip } from './components/image-tooltip';
 import { MgmtCellRenderer } from './components/mgmt-cell-renderer';

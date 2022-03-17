@@ -1,29 +1,26 @@
 import Image from 'next/image';
 import React from 'react';
 import { auth } from '../../app/firebase.app';
+import { useSidebar } from '../../contexts/sidebar-context';
 import { useAuth } from '../../hooks/useAuth';
 import { HamburgerButton } from '../hamburger-button';
 import { Container, NavLink } from './Sidebar.styles';
 
-type SidebarProps = {
-  onHamburgerIconClick: () => void;
-  isHidden?: boolean;
-};
-
-export const Sidebar: React.FC<SidebarProps> = (props) => {
+export const Sidebar: React.FC = () => {
+  const { isOpen, setSidebarIsOpen } = useSidebar();
   const { user } = useAuth();
   return (
-    <Container isHidden={!!props.isHidden}>
+    <Container isHidden={!isOpen}>
       <div className="flex flex-col">
         <div className="flex flex-row items-center justify-around h-16 px-2 border-b border-white-900">
-          {!props.isHidden && <div>PaladinDeck</div>}
+          {isOpen && <div>PaladinDeck</div>}
           <HamburgerButton
             className="hidden sm:block"
-            onClick={props.onHamburgerIconClick}
+            onClick={() => setSidebarIsOpen(!isOpen)}
           />
         </div>
         <div className="mt-4">
-          {props.isHidden ? (
+          {!isOpen ? (
             <div className="flex flex-col items-center">
               <NavLink href="/user-home" isCurrent>
                 D
@@ -40,7 +37,7 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
           )}
         </div>
       </div>
-      {!props.isHidden && (
+      {isOpen && (
         <div className="px-4 py-8 border-t border-white-900">
           <div className="flex flex-row items-center justify-between">
             <h3 className="font-bold">{user?.email}</h3>

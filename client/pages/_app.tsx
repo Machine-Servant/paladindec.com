@@ -1,7 +1,8 @@
 import type { AppProps } from 'next/app';
-import { CollectionGridProvider } from '../components/pages/collection-manage/components/collection-grid/CollectionGrid.context';
 import { ApolloProvider } from '../contexts/apollo-provider/ApolloProvider';
 import { AuthContextProvider } from '../contexts/auth-context';
+import { CollectionGridProvider } from '../contexts/collection-grid';
+import { SidebarProvider } from '../contexts/sidebar-context';
 import { BaseStyles } from '../styles/BaseStyles';
 import '../styles/globals.css';
 
@@ -10,9 +11,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthContextProvider>
       <ApolloProvider>
         <BaseStyles />
-        <CollectionGridProvider>
-          <Component {...pageProps} />
-        </CollectionGridProvider>
+        <SidebarProvider>
+          <CollectionGridProvider>
+            <Component {...pageProps} />
+          </CollectionGridProvider>
+        </SidebarProvider>
       </ApolloProvider>
     </AuthContextProvider>
   );

@@ -13,7 +13,7 @@ const CollectionGridContext = React.createContext<
   CollectionGridContextType | undefined
 >(undefined);
 
-const COLUMN_STATE_KEY = 'paladindeck:columnState';
+const COLUMN_STATE_KEY = 'paladindeck:collectiongrid:columnState';
 
 export const CollectionGridProvider: React.FC<
   React.PropsWithChildren<unknown>
