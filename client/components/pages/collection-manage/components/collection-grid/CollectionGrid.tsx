@@ -21,6 +21,7 @@ import {
 import { useCollectionGrid } from '../../../../../contexts/collection-grid';
 import { dollar } from '../../../../../utils/dollar';
 import { CheckmarkCellRenderer } from './components/checkmark-cell-renderer';
+import { ImageCellRenderer } from './components/image-cell-renderer';
 import { ImageTooltip } from './components/image-tooltip';
 import { MgmtCellRenderer } from './components/mgmt-cell-renderer';
 import { SetCellRenderer } from './components/set-cell-renderer';
@@ -66,6 +67,7 @@ export const CollectionGrid = React.forwardRef<
   const MemoizedSetCellRenderer = memo(SetCellRenderer);
   const MemoizedCheckmarkCellRenderer = memo(CheckmarkCellRenderer);
   const MemoizedMgmtCellRenderer = memo(MgmtCellRenderer);
+  const MemoizedImageCellRenderer = memo(ImageCellRenderer);
   const collectorNumberFormatter = useCallback(
     (params: ValueFormatterParams) => `(${params.value})`,
     [],
@@ -145,6 +147,7 @@ export const CollectionGrid = React.forwardRef<
               mgmt: {
                 cardInCollection,
               },
+              img: cardInCollection.card.name,
               _images: cardInCollection.card.scryfallCard.imageUris,
               _cardId: cardInCollection.card.id,
             })),
@@ -163,16 +166,21 @@ export const CollectionGrid = React.forwardRef<
       editable: true,
       type: 'rightAligned',
     },
-    { field: 'set', cellRenderer: MemoizedSetCellRenderer, width: 60 },
     {
-      field: 'name',
-      flex: 1,
-      tooltipField: 'name',
+      field: 'img',
+      width: 65,
+      cellRenderer: MemoizedImageCellRenderer,
+      tooltipField: 'img',
     },
     {
       field: 'cn',
       valueFormatter: collectorNumberFormatter,
       width: 80,
+    },
+    { field: 'set', cellRenderer: MemoizedSetCellRenderer, width: 60 },
+    {
+      field: 'name',
+      flex: 1,
     },
     { field: 'foil', cellRenderer: MemoizedCheckmarkCellRenderer, width: 60 },
     {
@@ -184,9 +192,10 @@ export const CollectionGrid = React.forwardRef<
       field: 'price',
       valueFormatter: priceFormatter,
       type: 'numericColumn',
+      width: 100,
       sortable: true,
     },
-    { field: 'modified', sortable: true },
+    { field: 'modified', sortable: true, width: 170 },
     {
       field: 'mgmt',
       cellRenderer: MemoizedMgmtCellRenderer,
