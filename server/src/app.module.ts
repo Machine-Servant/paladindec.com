@@ -15,6 +15,7 @@ import { FirebaseModule } from './modules/firebase/firebase.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { ScryfallModule } from './modules/scryfall/scryfall.module';
 import { UserModule } from './modules/user/user.module';
+import { SentryModule } from './modules/sentry/sentry.module';
 import Redis from 'ioredis';
 
 @Module({
@@ -75,6 +76,7 @@ import Redis from 'ioredis';
     UserModule,
     CardModule,
     CollectionModule,
+    SentryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

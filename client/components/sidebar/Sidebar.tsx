@@ -10,6 +10,7 @@ import { Container, NavLink } from './Sidebar.styles';
 export const Sidebar: React.FC = () => {
   const { isOpen, setSidebarIsOpen } = useSidebar();
   const { user } = useAuth();
+
   return (
     <Container isHidden={!isOpen}>
       <div className="flex flex-col">
@@ -55,7 +56,7 @@ export const Sidebar: React.FC = () => {
               )}
             </div>
             <h3 className="w-full font-bold truncate whitespace-nowrap">
-              {user?.email} asdf sda sdfa
+              {user?.email}
             </h3>
           </div>
           <button onClick={() => auth.signOut()}>Sign out</button>
