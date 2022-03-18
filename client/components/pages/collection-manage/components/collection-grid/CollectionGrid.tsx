@@ -159,9 +159,9 @@ export const CollectionGrid = React.forwardRef<
   const [columnDefs] = useState<ColDef[]>([
     {
       field: '#',
-      width: 50,
-      resizable: true,
+      width: 70,
       editable: true,
+      type: 'rightAligned',
     },
     { field: 'set', cellRenderer: MemoizedSetCellRenderer, width: 60 },
     {
