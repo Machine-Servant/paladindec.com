@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { auth } from '../../app/firebase.app';
 import { useSidebar } from '../../contexts/sidebar-context';
@@ -9,6 +10,7 @@ import { Container, NavLink } from './Sidebar.styles';
 export const Sidebar: React.FC = () => {
   const { isOpen, setSidebarIsOpen } = useSidebar();
   const { user } = useAuth();
+
   return (
     <Container isHidden={!isOpen}>
       <div className="flex flex-col">
@@ -22,25 +24,28 @@ export const Sidebar: React.FC = () => {
         <div className="mt-4">
           {!isOpen ? (
             <div className="flex flex-col items-center">
-              <NavLink href="/user-home" isCurrent>
-                D
-              </NavLink>
-              <NavLink href="/collections">C</NavLink>
+              <Link href="/user-home" passHref>
+                <NavLink>D</NavLink>
+              </Link>
+              <Link href="/collections" passHref>
+                <NavLink>C</NavLink>
+              </Link>
             </div>
           ) : (
             <div className="flex flex-col items-end px-4">
-              <NavLink href="/user-home" isCurrent>
-                Dashboard
-              </NavLink>
-              <NavLink href="/collections">Collections</NavLink>
+              <Link href="/user-home" passHref>
+                <NavLink>Dashboard</NavLink>
+              </Link>
+              <Link href="/collections" passHref>
+                <NavLink>Collections</NavLink>
+              </Link>
             </div>
           )}
         </div>
       </div>
       {isOpen && (
         <div className="px-4 py-8 border-t border-white-900">
-          <div className="flex flex-row items-center justify-between">
-            <h3 className="font-bold">{user?.email}</h3>
+          <div className="flex flex-col items-start justify-between mb-4">
             <div className="relative w-8 h-8 overflow-hidden border border-green-800 rounded-full">
               {user?.photoURL && (
                 <Image
@@ -50,6 +55,9 @@ export const Sidebar: React.FC = () => {
                 />
               )}
             </div>
+            <h3 className="w-full font-bold truncate whitespace-nowrap">
+              {user?.email}
+            </h3>
           </div>
           <button onClick={() => auth.signOut()}>Sign out</button>
         </div>

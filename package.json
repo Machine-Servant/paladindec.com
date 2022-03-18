@@ -1,0 +1,26 @@
+{
+  "name": "paladindeck.com",
+  "version": "0.0.2",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "lint-staged": "^12.3.4"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Machine-Servant/paladindec.com.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Machine-Servant/paladindec.com/issues"
+  },
+  "homepage": "https://github.com/Machine-Servant/paladindec.com#readme"
+}

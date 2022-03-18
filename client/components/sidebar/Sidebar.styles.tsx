@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Link from 'next/link';
 import tw from 'twin.macro';
 
 export const Container = styled.div<{ isHidden: boolean }>`
@@ -7,8 +6,6 @@ export const Container = styled.div<{ isHidden: boolean }>`
   ${({ isHidden }) => (isHidden ? tw`w-0 sm:w-16` : tw`w-64`)}
 `;
 
-export const NavLink = styled(Link)<{ isCurrent?: boolean }>`
-  > {
-    ${({ isCurrent }) => (isCurrent ? tw`text-blue-800` : tw`text-black-50`)}
-  }
+export const NavLink = styled.span`
+  ${tw`mb-3 text-xl cursor-pointer hover:underline`}
 `;

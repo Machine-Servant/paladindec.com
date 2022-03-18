@@ -1,11 +1,11 @@
 import { FirebaseOptions } from 'firebase/app';
 
 export const firebaseAppConfig: FirebaseOptions = {
-  apiKey: 'AIzaSyDszlb7miPgL8m19kItgSf9jqw9XGlFrm8',
-  authDomain: 'paladindeck-45ae6.firebaseapp.com',
-  projectId: 'paladindeck-45ae6',
-  storageBucket: 'paladindeck-45ae6.appspot.com',
-  messagingSenderId: '1096666725344',
-  appId: '1:1096666725344:web:ca0cbee1086b5c6ad2c985',
-  measurementId: 'G-51F2KGYPCX',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
