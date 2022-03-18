@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import * as firebase from 'firebase-admin';
 import { ServiceAccount } from 'firebase-admin';
+import Redis from 'ioredis';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -15,8 +16,8 @@ import { FirebaseModule } from './modules/firebase/firebase.module';
 import { PrismaModule } from './modules/prisma/prisma.module';
 import { ScryfallModule } from './modules/scryfall/scryfall.module';
 import { UserModule } from './modules/user/user.module';
-import { SentryModule } from './modules/sentry/sentry.module';
-import Redis from 'ioredis';
+import { GraphqlInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -76,9 +77,23 @@ import Redis from 'ioredis';
     UserModule,
     CardModule,
     CollectionModule,
-    SentryModule,
+    SentryModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        dsn: config.get<string>('SENTRY_DSN'),
+        debug: false,
+        environment: process.env.NODE_ENV,
+      }),
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useFactory: () => new GraphqlInterceptor(),
+    },
+  ],
 })
 export class AppModule {}
