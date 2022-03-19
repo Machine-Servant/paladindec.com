@@ -9,6 +9,7 @@ query PaginatedCardsInCollection(
       cards
     }
     cards(take: $take, skip: $skip, orderBy: $orderBy) {
+      id
       isFoil
       isEtched
       count

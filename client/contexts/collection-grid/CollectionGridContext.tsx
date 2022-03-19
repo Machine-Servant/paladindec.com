@@ -23,9 +23,13 @@ export const CollectionGridProvider: React.FC<
   useEffect(() => {
     const storedColumnState = localStorage.getItem(COLUMN_STATE_KEY);
     if (storedColumnState) {
-      const parsed = JSON.parse(storedColumnState);
-      if (!isEmpty(parsed)) {
-        setColumnState(parsed);
+      try {
+        const parsed = JSON.parse(storedColumnState);
+        if (!isEmpty(parsed)) {
+          setColumnState(parsed);
+        }
+      } catch (err) {
+        setColumnState([]);
       }
     }
   }, []);

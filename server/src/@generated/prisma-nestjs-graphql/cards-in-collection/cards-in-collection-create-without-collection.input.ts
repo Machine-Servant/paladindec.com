@@ -1,19 +1,10 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { CardCreateNestedOneWithoutCollectionsInput } from '../card/card-create-nested-one-without-collections.input';
 import { Int } from '@nestjs/graphql';
+import { CardCreateNestedOneWithoutCollectionsInput } from '../card/card-create-nested-one-without-collections.input';
 
 @InputType()
 export class CardsInCollectionCreateWithoutCollectionInput {
-  @Field(() => CardCreateNestedOneWithoutCollectionsInput, { nullable: false })
-  card!: CardCreateNestedOneWithoutCollectionsInput;
-
-  @Field(() => Boolean, { nullable: true })
-  isFoil?: boolean;
-
-  @Field(() => Boolean, { nullable: true })
-  isEtched?: boolean;
-
   @Field(() => Int, { nullable: true })
   count?: number;
 
@@ -22,4 +13,16 @@ export class CardsInCollectionCreateWithoutCollectionInput {
 
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  isFoil?: boolean;
+
+  @Field(() => String, { nullable: true })
+  id?: string;
+
+  @Field(() => CardCreateNestedOneWithoutCollectionsInput, { nullable: false })
+  card!: CardCreateNestedOneWithoutCollectionsInput;
 }

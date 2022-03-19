@@ -12,6 +12,7 @@ import { User } from '@prisma/client';
 import { Queue } from 'bull';
 import { Card } from '../../../@generated/prisma-nestjs-graphql/card/card.model';
 import { FindManyCardArgs } from '../../../@generated/prisma-nestjs-graphql/card/find-many-card.args';
+import { FindUniqueCardArgs } from '../../../@generated/prisma-nestjs-graphql/card/find-unique-card.args';
 import { CardsInCollection } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection.model';
 import { FindManyCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-many-cards-in-collection.args';
 import { ScryfallCard } from '../../../@generated/prisma-nestjs-graphql/scryfall-card/scryfall-card.model';
@@ -40,6 +41,11 @@ export class CardResolver {
       includeCurrentPrice: true,
       includeScryfallCard: true,
     });
+  }
+
+  @Query(() => Card)
+  async card(@Args() args: FindUniqueCardArgs): Promise<Card> {
+    return this.cardService.findUnique(args);
   }
 
   @Mutation(() => Boolean)

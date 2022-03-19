@@ -11,12 +11,6 @@ export class CardsInCollectionMinOrderByAggregateInput {
   collectionId?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
-  isFoil?: keyof typeof SortOrder;
-
-  @Field(() => SortOrder, { nullable: true })
-  isEtched?: keyof typeof SortOrder;
-
-  @Field(() => SortOrder, { nullable: true })
   count?: keyof typeof SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
@@ -24,4 +18,13 @@ export class CardsInCollectionMinOrderByAggregateInput {
 
   @Field(() => SortOrder, { nullable: true })
   updatedAt?: keyof typeof SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
+  isEtched?: keyof typeof SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
+  isFoil?: keyof typeof SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
 }

@@ -4,19 +4,18 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class UserCreateManyInput {
+  @Field(() => String, { nullable: false })
+  externalAuthId!: string;
 
-    @Field(() => String, {nullable:true})
-    id?: string;
+  @Field(() => String, { nullable: false })
+  email!: string;
 
-    @Field(() => String, {nullable:false})
-    externalAuthId!: string;
+  @HideField()
+  createdAt?: Date | string;
 
-    @Field(() => String, {nullable:false})
-    email!: string;
+  @HideField()
+  updatedAt?: Date | string;
 
-    @HideField()
-    createdAt?: Date | string;
-
-    @HideField()
-    updatedAt?: Date | string;
+  @Field(() => String, { nullable: true })
+  id?: string;
 }

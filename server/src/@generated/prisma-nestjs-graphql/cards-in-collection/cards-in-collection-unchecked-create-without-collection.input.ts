@@ -7,12 +7,6 @@ export class CardsInCollectionUncheckedCreateWithoutCollectionInput {
   @Field(() => String, { nullable: false })
   cardId!: string;
 
-  @Field(() => Boolean, { nullable: true })
-  isFoil?: boolean;
-
-  @Field(() => Boolean, { nullable: true })
-  isEtched?: boolean;
-
   @Field(() => Int, { nullable: true })
   count?: number;
 
@@ -21,4 +15,13 @@ export class CardsInCollectionUncheckedCreateWithoutCollectionInput {
 
   @Field(() => Date, { nullable: true })
   updatedAt?: Date | string;
+
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  isFoil?: boolean;
+
+  @Field(() => String, { nullable: true })
+  id?: string;
 }

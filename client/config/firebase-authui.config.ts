@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 import { EmailAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { Props } from 'react-firebaseui';
-import { client } from '../graphql/apollo-client';
+import { GraphQLClient } from '../graphql/graphql-client';
 import { Logger } from '../utils/logger';
 
 const GET_OR_CREATE_USER_MUTATION = gql`
@@ -28,9 +28,10 @@ export class FirebaseAuthUiConfig {
       callbacks: {
         signInSuccessWithAuthResult: (authResults) => {
           this.logger.debug(`AuthResults`, authResults);
+          const client = new GraphQLClient(authResults.user);
           const doGetOrCreateUser = async () => {
             try {
-              await client.mutate({
+              await client.value.mutate({
                 mutation: GET_OR_CREATE_USER_MUTATION,
                 variables: {
                   input: {

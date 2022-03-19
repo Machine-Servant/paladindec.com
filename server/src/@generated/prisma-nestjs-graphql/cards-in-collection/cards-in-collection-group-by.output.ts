@@ -9,40 +9,42 @@ import { CardsInCollectionMaxAggregate } from './cards-in-collection-max-aggrega
 
 @ObjectType()
 export class CardsInCollectionGroupBy {
+  @Field(() => String, { nullable: false })
+  cardId!: string;
 
-    @Field(() => String, {nullable:false})
-    cardId!: string;
+  @Field(() => String, { nullable: false })
+  collectionId!: string;
 
-    @Field(() => String, {nullable:false})
-    collectionId!: string;
+  @Field(() => Int, { nullable: false })
+  count!: number;
 
-    @Field(() => Boolean, {nullable:false})
-    isFoil!: boolean;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date | string;
 
-    @Field(() => Boolean, {nullable:false})
-    isEtched!: boolean;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date | string;
 
-    @Field(() => Int, {nullable:false})
-    count!: number;
+  @Field(() => Boolean, { nullable: false })
+  isEtched!: boolean;
 
-    @Field(() => Date, {nullable:false})
-    createdAt!: Date | string;
+  @Field(() => Boolean, { nullable: false })
+  isFoil!: boolean;
 
-    @Field(() => Date, {nullable:false})
-    updatedAt!: Date | string;
+  @Field(() => String, { nullable: false })
+  id!: string;
 
-    @Field(() => CardsInCollectionCountAggregate, {nullable:true})
-    _count?: CardsInCollectionCountAggregate;
+  @Field(() => CardsInCollectionCountAggregate, { nullable: true })
+  _count?: CardsInCollectionCountAggregate;
 
-    @Field(() => CardsInCollectionAvgAggregate, {nullable:true})
-    _avg?: CardsInCollectionAvgAggregate;
+  @Field(() => CardsInCollectionAvgAggregate, { nullable: true })
+  _avg?: CardsInCollectionAvgAggregate;
 
-    @Field(() => CardsInCollectionSumAggregate, {nullable:true})
-    _sum?: CardsInCollectionSumAggregate;
+  @Field(() => CardsInCollectionSumAggregate, { nullable: true })
+  _sum?: CardsInCollectionSumAggregate;
 
-    @Field(() => CardsInCollectionMinAggregate, {nullable:true})
-    _min?: CardsInCollectionMinAggregate;
+  @Field(() => CardsInCollectionMinAggregate, { nullable: true })
+  _min?: CardsInCollectionMinAggregate;
 
-    @Field(() => CardsInCollectionMaxAggregate, {nullable:true})
-    _max?: CardsInCollectionMaxAggregate;
+  @Field(() => CardsInCollectionMaxAggregate, { nullable: true })
+  _max?: CardsInCollectionMaxAggregate;
 }

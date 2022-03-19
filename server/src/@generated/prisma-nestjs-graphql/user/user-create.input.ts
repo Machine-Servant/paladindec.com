@@ -1,26 +1,25 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { CollectionCreateNestedManyWithoutUserInput } from '../collection/collection-create-nested-many-without-user.input';
 import { HideField } from '@nestjs/graphql';
+import { CollectionCreateNestedManyWithoutUserInput } from '../collection/collection-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateInput {
+  @Field(() => String, { nullable: false })
+  externalAuthId!: string;
 
-    @Field(() => String, {nullable:true})
-    id?: string;
+  @Field(() => String, { nullable: false })
+  email!: string;
 
-    @Field(() => String, {nullable:false})
-    externalAuthId!: string;
+  @HideField()
+  createdAt?: Date | string;
 
-    @Field(() => String, {nullable:false})
-    email!: string;
+  @HideField()
+  updatedAt?: Date | string;
 
-    @Field(() => CollectionCreateNestedManyWithoutUserInput, {nullable:true})
-    collections?: CollectionCreateNestedManyWithoutUserInput;
+  @Field(() => String, { nullable: true })
+  id?: string;
 
-    @HideField()
-    createdAt?: Date | string;
-
-    @HideField()
-    updatedAt?: Date | string;
+  @Field(() => CollectionCreateNestedManyWithoutUserInput, { nullable: true })
+  collections?: CollectionCreateNestedManyWithoutUserInput;
 }
