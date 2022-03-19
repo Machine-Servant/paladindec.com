@@ -7,6 +7,7 @@ input AddCardToCollectionInput {
   collectionId: String!
   count: Int
   createdAt: DateTime
+  id: String
   isEtched: Boolean
   isFoil: Boolean
   updatedAt: DateTime
@@ -88,32 +89,6 @@ type CardCount {
   collections: Int!
 }
 
-input CardCreateManyScryfallCardInput {
-  canBeEtched: Boolean
-  canBeFoil: Boolean
-  canBeNonFoil: Boolean
-  collectorNumber: String
-  id: String
-  isBorderless: Boolean
-  isExtendedArt: Boolean
-  isPaper: Boolean
-  isRetro: Boolean
-  isShowcase: Boolean
-  name: String!
-}
-
-input CardCreateManyScryfallCardInputEnvelope {
-  data: [CardCreateManyScryfallCardInput!]!
-  skipDuplicates: Boolean
-}
-
-input CardCreateNestedManyWithoutScryfallCardInput {
-  connect: [CardWhereUniqueInput!]
-  connectOrCreate: [CardCreateOrConnectWithoutScryfallCardInput!]
-  create: [CardCreateWithoutScryfallCardInput!]
-  createMany: CardCreateManyScryfallCardInputEnvelope
-}
-
 input CardCreateNestedOneWithoutCollectionsInput {
   connect: CardWhereUniqueInput
   connectOrCreate: CardCreateOrConnectWithoutCollectionsInput
@@ -124,6 +99,12 @@ input CardCreateNestedOneWithoutCurrentPriceInput {
   connect: CardWhereUniqueInput
   connectOrCreate: CardCreateOrConnectWithoutCurrentPriceInput
   create: CardCreateWithoutCurrentPriceInput
+}
+
+input CardCreateNestedOneWithoutScryfallCardInput {
+  connect: CardWhereUniqueInput
+  connectOrCreate: CardCreateOrConnectWithoutScryfallCardInput
+  create: CardCreateWithoutScryfallCardInput
 }
 
 input CardCreateOrConnectWithoutCollectionsInput {
@@ -187,16 +168,6 @@ input CardCreateWithoutScryfallCardInput {
   isRetro: Boolean
   isShowcase: Boolean
   name: String!
-}
-
-input CardListRelationFilter {
-  every: CardWhereInput
-  none: CardWhereInput
-  some: CardWhereInput
-}
-
-input CardOrderByRelationAggregateInput {
-  _count: SortOrder
 }
 
 input CardOrderByWithRelationInput {
@@ -272,6 +243,7 @@ type CardsInCollection {
   collectionId: String!
   count: Int!
   createdAt: DateTime!
+  id: ID!
   isEtched: Boolean!
   isFoil: Boolean!
   price: CardsInCollectionCardPrice
@@ -294,6 +266,7 @@ input CardsInCollectionCreateManyCardInput {
   collectionId: String!
   count: Int
   createdAt: DateTime
+  id: String
   isEtched: Boolean
   isFoil: Boolean
   updatedAt: DateTime
@@ -308,6 +281,7 @@ input CardsInCollectionCreateManyCollectionInput {
   cardId: String!
   count: Int
   createdAt: DateTime
+  id: String
   isEtched: Boolean
   isFoil: Boolean
   updatedAt: DateTime
@@ -346,6 +320,7 @@ input CardsInCollectionCreateWithoutCardInput {
   collection: CollectionCreateNestedOneWithoutCardsInput!
   count: Int
   createdAt: DateTime
+  id: String
   isEtched: Boolean
   isFoil: Boolean
   updatedAt: DateTime
@@ -355,6 +330,7 @@ input CardsInCollectionCreateWithoutCollectionInput {
   card: CardCreateNestedOneWithoutCollectionsInput!
   count: Int
   createdAt: DateTime
+  id: String
   isEtched: Boolean
   isFoil: Boolean
   updatedAt: DateTime
@@ -377,6 +353,7 @@ input CardsInCollectionOrderByWithRelationInput {
   collectionId: SortOrder
   count: SortOrder
   createdAt: SortOrder
+  id: SortOrder
   isEtched: SortOrder
   isFoil: SortOrder
   updatedAt: SortOrder
@@ -387,6 +364,7 @@ enum CardsInCollectionScalarFieldEnum {
   collectionId
   count
   createdAt
+  id
   isEtched
   isFoil
   updatedAt
@@ -397,6 +375,7 @@ input CardsInCollectionUncheckedUpdateInput {
   collectionId: StringFieldUpdateOperationsInput
   count: IntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
   isEtched: BoolFieldUpdateOperationsInput
   isFoil: BoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
@@ -412,6 +391,7 @@ input CardsInCollectionWhereInput {
   collectionId: StringFilter
   count: IntFilter
   createdAt: DateTimeFilter
+  id: StringFilter
   isEtched: BoolFilter
   isFoil: BoolFilter
   updatedAt: DateTimeFilter
@@ -419,6 +399,7 @@ input CardsInCollectionWhereInput {
 
 input CardsInCollectionWhereUniqueInput {
   cardId_collectionId_isFoil_isEtched: CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput
+  id: String
 }
 
 type Collection {
@@ -821,11 +802,14 @@ input NestedStringWithAggregatesFilter {
 type Query {
   allBulkData: [BulkDataObjectType!]!
   allCards(cursor: CardWhereUniqueInput, distinct: [CardScalarFieldEnum!], orderBy: [CardOrderByWithRelationInput!], skip: Int, take: Int, where: CardWhereInput): [Card!]!
+  allCardsInCollection(cursor: CardsInCollectionWhereUniqueInput, distinct: [CardsInCollectionScalarFieldEnum!], orderBy: [CardsInCollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CardsInCollectionWhereInput): [CardsInCollection!]!
   allCollections(cursor: CollectionWhereUniqueInput, distinct: [CollectionScalarFieldEnum!], orderBy: [CollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CollectionWhereInput): [Collection!]!
   allScryfallCardNames(cursor: ScryfallCardNameWhereUniqueInput, distinct: [ScryfallCardNameScalarFieldEnum!], orderBy: [ScryfallCardNameOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardNameWhereInput): [ScryfallCardName!]!
   allScryfallCards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
   allScryfallPrices(cursor: ScryfallPriceWhereUniqueInput, distinct: [ScryfallPriceScalarFieldEnum!], orderBy: [ScryfallPriceOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPrice!]!
   allScryfallSets(cursor: ScryfallSetWhereUniqueInput, distinct: [ScryfallSetScalarFieldEnum!], orderBy: [ScryfallSetOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallSetWhereInput): [ScryfallSet!]!
+  card(where: CardWhereUniqueInput!): Card!
+  cardsInCollection(cursor: CardsInCollectionWhereUniqueInput, distinct: [CardsInCollectionScalarFieldEnum!], orderBy: [CardsInCollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CardsInCollectionWhereInput): CardsInCollection!
   collection(cursor: CollectionWhereUniqueInput, distinct: [CollectionScalarFieldEnum!], orderBy: [CollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CollectionWhereInput): Collection!
 }
 
@@ -841,7 +825,7 @@ type ScryfallCard {
   artist: String
   booster: Boolean!
   borderColor: String!
-  card: [Card!]
+  card: Card
   cardBackId: String
   cardFaces: [ScryfallCardFace!]!
   cardFacesRaw: [JSON!]
@@ -926,7 +910,6 @@ type ScryfallCard {
 }
 
 type ScryfallCardCount {
-  card: Int!
   cardFaces: Int!
   referencedBy: Int!
   relatedTo: Int!
@@ -1067,7 +1050,7 @@ input ScryfallCardCreateWithoutReferencedByInput {
   artist: String
   booster: Boolean!
   borderColor: String!
-  card: CardCreateNestedManyWithoutScryfallCardInput
+  card: CardCreateNestedOneWithoutScryfallCardInput
   cardBackId: String
   cardFaces: ScryfallCardFaceCreateNestedManyWithoutCardInput
   cardFacesRaw: ScryfallCardCreatecardFacesRawInput
@@ -1151,7 +1134,7 @@ input ScryfallCardCreateWithoutRelatedToInput {
   artist: String
   booster: Boolean!
   borderColor: String!
-  card: CardCreateNestedManyWithoutScryfallCardInput
+  card: CardCreateNestedOneWithoutScryfallCardInput
   cardBackId: String
   cardFaces: ScryfallCardFaceCreateNestedManyWithoutCardInput
   cardFacesRaw: ScryfallCardCreatecardFacesRawInput
@@ -1235,7 +1218,7 @@ input ScryfallCardCreateWithoutScryfallPriceInput {
   artist: String
   booster: Boolean!
   borderColor: String!
-  card: CardCreateNestedManyWithoutScryfallCardInput
+  card: CardCreateNestedOneWithoutScryfallCardInput
   cardBackId: String
   cardFaces: ScryfallCardFaceCreateNestedManyWithoutCardInput
   cardFacesRaw: ScryfallCardCreatecardFacesRawInput
@@ -1553,7 +1536,7 @@ input ScryfallCardOrderByWithRelationInput {
   artist: SortOrder
   booster: SortOrder
   borderColor: SortOrder
-  card: CardOrderByRelationAggregateInput
+  card: CardOrderByWithRelationInput
   cardBackId: SortOrder
   cardFaces: ScryfallCardFaceOrderByRelationAggregateInput
   cardFacesRaw: SortOrder
@@ -1729,7 +1712,7 @@ input ScryfallCardWhereInput {
   artist: StringNullableFilter
   booster: BoolFilter
   borderColor: StringFilter
-  card: CardListRelationFilter
+  card: CardRelationFilter
   cardBackId: StringNullableFilter
   cardFaces: ScryfallCardFaceListRelationFilter
   cardFacesRaw: JsonNullableListFilter

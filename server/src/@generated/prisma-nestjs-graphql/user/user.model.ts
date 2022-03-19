@@ -6,25 +6,24 @@ import { UserCount } from './user-count.output';
 
 @ObjectType()
 export class User {
+  @Field(() => String, { nullable: false })
+  externalAuthId!: string;
 
-    @Field(() => ID, {nullable:false})
-    id!: string;
+  @Field(() => String, { nullable: false })
+  email!: string;
 
-    @Field(() => String, {nullable:false})
-    externalAuthId!: string;
+  @Field(() => Date, { nullable: false })
+  createdAt!: Date;
 
-    @Field(() => String, {nullable:false})
-    email!: string;
+  @Field(() => Date, { nullable: false })
+  updatedAt!: Date;
 
-    @Field(() => [Collection], {nullable:true})
-    collections?: Array<Collection>;
+  @Field(() => ID, { nullable: false })
+  id!: string;
 
-    @Field(() => Date, {nullable:false})
-    createdAt!: Date;
+  @Field(() => [Collection], { nullable: true })
+  collections?: Array<Collection>;
 
-    @Field(() => Date, {nullable:false})
-    updatedAt!: Date;
-
-    @Field(() => UserCount, {nullable:false})
-    _count?: UserCount;
+  @Field(() => UserCount, { nullable: false })
+  _count?: UserCount;
 }

@@ -10,12 +10,6 @@ export class CardsInCollectionCountAggregateInput {
   collectionId?: true;
 
   @Field(() => Boolean, { nullable: true })
-  isFoil?: true;
-
-  @Field(() => Boolean, { nullable: true })
-  isEtched?: true;
-
-  @Field(() => Boolean, { nullable: true })
   count?: true;
 
   @Field(() => Boolean, { nullable: true })
@@ -23,6 +17,15 @@ export class CardsInCollectionCountAggregateInput {
 
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
+
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: true;
+
+  @Field(() => Boolean, { nullable: true })
+  isFoil?: true;
+
+  @Field(() => Boolean, { nullable: true })
+  id?: true;
 
   @Field(() => Boolean, { nullable: true })
   _all?: true;

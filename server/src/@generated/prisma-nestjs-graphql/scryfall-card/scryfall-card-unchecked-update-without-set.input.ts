@@ -20,262 +20,271 @@ import { ScryfallCardUpdateframeEffectsInput } from '../prisma/scryfall-card-upd
 import { ScryfallCardUpdategamesInput } from '../prisma/scryfall-card-updategames.input';
 import { ScryfallCardUpdatepromoTypesInput } from '../prisma/scryfall-card-updatepromo-types.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
-import { ScryfallRelatedCardUncheckedUpdateManyWithoutCardInput } from '../scryfall-related-card/scryfall-related-card-unchecked-update-many-without-card.input';
-import { ScryfallRelatedCardUncheckedUpdateManyWithoutReferenceInput } from '../scryfall-related-card/scryfall-related-card-unchecked-update-many-without-reference.input';
+import { HideField } from '@nestjs/graphql';
+import { CardUncheckedUpdateOneWithoutScryfallCardInput } from '../card/card-unchecked-update-one-without-scryfall-card.input';
 import { ScryfallCardFaceUncheckedUpdateManyWithoutCardInput } from '../scryfall-card-face/scryfall-card-face-unchecked-update-many-without-card.input';
 import { ScryfallPriceUncheckedUpdateManyWithoutCardInput } from '../scryfall-price/scryfall-price-unchecked-update-many-without-card.input';
-import { CardUncheckedUpdateManyWithoutScryfallCardInput } from '../card/card-unchecked-update-many-without-scryfall-card.input';
-import { HideField } from '@nestjs/graphql';
+import { ScryfallRelatedCardUncheckedUpdateManyWithoutCardInput } from '../scryfall-related-card/scryfall-related-card-unchecked-update-many-without-card.input';
+import { ScryfallRelatedCardUncheckedUpdateManyWithoutReferenceInput } from '../scryfall-related-card/scryfall-related-card-unchecked-update-many-without-reference.input';
 
 @InputType()
 export class ScryfallCardUncheckedUpdateWithoutSetInput {
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  id?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    id?: StringFieldUpdateOperationsInput;
+  @Field(() => NullableIntFieldUpdateOperationsInput, { nullable: true })
+  arenaId?: NullableIntFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    arenaId?: NullableIntFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  lang?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    lang?: StringFieldUpdateOperationsInput;
+  @Field(() => NullableIntFieldUpdateOperationsInput, { nullable: true })
+  mtgoId?: NullableIntFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    mtgoId?: NullableIntFieldUpdateOperationsInput;
+  @Field(() => NullableIntFieldUpdateOperationsInput, { nullable: true })
+  mtgoFoilId?: NullableIntFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    mtgoFoilId?: NullableIntFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdatemultiverseIdsInput, { nullable: true })
+  multiverseIds?: ScryfallCardUpdatemultiverseIdsInput;
 
-    @Field(() => ScryfallCardUpdatemultiverseIdsInput, {nullable:true})
-    multiverseIds?: ScryfallCardUpdatemultiverseIdsInput;
+  @Field(() => NullableIntFieldUpdateOperationsInput, { nullable: true })
+  tcgplayerId?: NullableIntFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    tcgplayerId?: NullableIntFieldUpdateOperationsInput;
+  @Field(() => NullableIntFieldUpdateOperationsInput, { nullable: true })
+  tcgplayerEtchedId?: NullableIntFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    tcgplayerEtchedId?: NullableIntFieldUpdateOperationsInput;
+  @Field(() => NullableIntFieldUpdateOperationsInput, { nullable: true })
+  cardmarketId?: NullableIntFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    cardmarketId?: NullableIntFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  oracleId?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    oracleId?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  printsSearchUri?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    printsSearchUri?: StringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  rulingUri?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    rulingUri?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  scryfallUri?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    scryfallUri?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  uri?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    uri?: StringFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdateallPartsInput, { nullable: true })
+  allParts?: ScryfallCardUpdateallPartsInput;
 
-    @Field(() => ScryfallCardUpdateallPartsInput, {nullable:true})
-    allParts?: ScryfallCardUpdateallPartsInput;
+  @Field(() => ScryfallCardUpdatecardFacesRawInput, { nullable: true })
+  cardFacesRaw?: ScryfallCardUpdatecardFacesRawInput;
 
-    @Field(() => ScryfallCardUpdatecardFacesRawInput, {nullable:true})
-    cardFacesRaw?: ScryfallCardUpdatecardFacesRawInput;
+  @Field(() => NullableFloatFieldUpdateOperationsInput, { nullable: true })
+  cmc?: NullableFloatFieldUpdateOperationsInput;
 
-    @Field(() => NullableFloatFieldUpdateOperationsInput, {nullable:true})
-    cmc?: NullableFloatFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdatecolorIdentityInput, { nullable: true })
+  colorIdentity?: ScryfallCardUpdatecolorIdentityInput;
 
-    @Field(() => ScryfallCardUpdatecolorIdentityInput, {nullable:true})
-    colorIdentity?: ScryfallCardUpdatecolorIdentityInput;
+  @Field(() => ScryfallCardUpdatecolorIndicatorInput, { nullable: true })
+  colorIndicator?: ScryfallCardUpdatecolorIndicatorInput;
 
-    @Field(() => ScryfallCardUpdatecolorIndicatorInput, {nullable:true})
-    colorIndicator?: ScryfallCardUpdatecolorIndicatorInput;
+  @Field(() => ScryfallCardUpdatecolorsInput, { nullable: true })
+  colors?: ScryfallCardUpdatecolorsInput;
 
-    @Field(() => ScryfallCardUpdatecolorsInput, {nullable:true})
-    colors?: ScryfallCardUpdatecolorsInput;
+  @Field(() => NullableIntFieldUpdateOperationsInput, { nullable: true })
+  edhrecRank?: NullableIntFieldUpdateOperationsInput;
 
-    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
-    edhrecRank?: NullableIntFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  handModifier?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    handModifier?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdatekeywordsInput, { nullable: true })
+  keywords?: ScryfallCardUpdatekeywordsInput;
 
-    @Field(() => ScryfallCardUpdatekeywordsInput, {nullable:true})
-    keywords?: ScryfallCardUpdatekeywordsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  layout?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    layout?: StringFieldUpdateOperationsInput;
+  @Field(() => GraphQLJSON, { nullable: true })
+  legalities?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    legalities?: any;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  lifeModifier?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    lifeModifier?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  loyalty?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    loyalty?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  manaCost?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    manaCost?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  name?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    name?: StringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  oracleText?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    oracleText?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  oversized?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    oversized?: BoolFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  power?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    power?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdateproducedManaInput, { nullable: true })
+  producedMana?: ScryfallCardUpdateproducedManaInput;
 
-    @Field(() => ScryfallCardUpdateproducedManaInput, {nullable:true})
-    producedMana?: ScryfallCardUpdateproducedManaInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  reserved?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    reserved?: BoolFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  toughness?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    toughness?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  typeLine?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    typeLine?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  artist?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    artist?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  booster?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    booster?: BoolFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  borderColor?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    borderColor?: StringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  cardBackId?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    cardBackId?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  collectorNumber?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    collectorNumber?: StringFieldUpdateOperationsInput;
+  @Field(() => NullableBoolFieldUpdateOperationsInput, { nullable: true })
+  contentWarning?: NullableBoolFieldUpdateOperationsInput;
 
-    @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
-    contentWarning?: NullableBoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  digital?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    digital?: BoolFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdatefinishesInput, { nullable: true })
+  finishes?: ScryfallCardUpdatefinishesInput;
 
-    @Field(() => ScryfallCardUpdatefinishesInput, {nullable:true})
-    finishes?: ScryfallCardUpdatefinishesInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  flavorName?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    flavorName?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdateframeEffectsInput, { nullable: true })
+  frameEffects?: ScryfallCardUpdateframeEffectsInput;
 
-    @Field(() => ScryfallCardUpdateframeEffectsInput, {nullable:true})
-    frameEffects?: ScryfallCardUpdateframeEffectsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  frame?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    frame?: StringFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  fullArt?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    fullArt?: BoolFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdategamesInput, { nullable: true })
+  games?: ScryfallCardUpdategamesInput;
 
-    @Field(() => ScryfallCardUpdategamesInput, {nullable:true})
-    games?: ScryfallCardUpdategamesInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  highresImage?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    highresImage?: BoolFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  illustrationId?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    illustrationId?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  imageStatus?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    imageStatus?: StringFieldUpdateOperationsInput;
+  @Field(() => GraphQLJSON, { nullable: true })
+  imageUris?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    imageUris?: any;
+  @Field(() => GraphQLJSON, { nullable: true })
+  prices?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    prices?: any;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  printedName?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    printedName?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  printedText?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    printedText?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  printedTypeLine?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    printedTypeLine?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  promo?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    promo?: BoolFieldUpdateOperationsInput;
+  @Field(() => ScryfallCardUpdatepromoTypesInput, { nullable: true })
+  promoTypes?: ScryfallCardUpdatepromoTypesInput;
 
-    @Field(() => ScryfallCardUpdatepromoTypesInput, {nullable:true})
-    promoTypes?: ScryfallCardUpdatepromoTypesInput;
+  @Field(() => GraphQLJSON, { nullable: true })
+  purchaseUris?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    purchaseUris?: any;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  rarity?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    rarity?: StringFieldUpdateOperationsInput;
+  @Field(() => GraphQLJSON, { nullable: true })
+  relatedUris?: any;
 
-    @Field(() => GraphQLJSON, {nullable:true})
-    relatedUris?: any;
+  @Field(() => DateTimeFieldUpdateOperationsInput, { nullable: true })
+  releasedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
-    releasedAt?: DateTimeFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  reprint?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    reprint?: BoolFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  scryfallSetUri?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    scryfallSetUri?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  setCode?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    setCode?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  setName?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    setName?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  setSearchUri?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    setSearchUri?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  setType?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    setType?: StringFieldUpdateOperationsInput;
+  @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
+  setUri?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    setUri?: StringFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  storySpotlight?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    storySpotlight?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  textless?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    textless?: BoolFieldUpdateOperationsInput;
+  @Field(() => BoolFieldUpdateOperationsInput, { nullable: true })
+  variation?: BoolFieldUpdateOperationsInput;
 
-    @Field(() => BoolFieldUpdateOperationsInput, {nullable:true})
-    variation?: BoolFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  varationOf?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    varationOf?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  securityStamp?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    securityStamp?: NullableStringFieldUpdateOperationsInput;
+  @Field(() => NullableStringFieldUpdateOperationsInput, { nullable: true })
+  watermark?: NullableStringFieldUpdateOperationsInput;
 
-    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
-    watermark?: NullableStringFieldUpdateOperationsInput;
+  @HideField()
+  createdAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => ScryfallRelatedCardUncheckedUpdateManyWithoutCardInput, {nullable:true})
-    relatedTo?: ScryfallRelatedCardUncheckedUpdateManyWithoutCardInput;
+  @HideField()
+  updatedAt?: DateTimeFieldUpdateOperationsInput;
 
-    @Field(() => ScryfallRelatedCardUncheckedUpdateManyWithoutReferenceInput, {nullable:true})
-    referencedBy?: ScryfallRelatedCardUncheckedUpdateManyWithoutReferenceInput;
+  @Field(() => CardUncheckedUpdateOneWithoutScryfallCardInput, {
+    nullable: true,
+  })
+  card?: CardUncheckedUpdateOneWithoutScryfallCardInput;
 
-    @Field(() => ScryfallCardFaceUncheckedUpdateManyWithoutCardInput, {nullable:true})
-    cardFaces?: ScryfallCardFaceUncheckedUpdateManyWithoutCardInput;
+  @Field(() => ScryfallCardFaceUncheckedUpdateManyWithoutCardInput, {
+    nullable: true,
+  })
+  cardFaces?: ScryfallCardFaceUncheckedUpdateManyWithoutCardInput;
 
-    @Field(() => ScryfallPriceUncheckedUpdateManyWithoutCardInput, {nullable:true})
-    scryfallPrice?: ScryfallPriceUncheckedUpdateManyWithoutCardInput;
+  @Field(() => ScryfallPriceUncheckedUpdateManyWithoutCardInput, {
+    nullable: true,
+  })
+  scryfallPrice?: ScryfallPriceUncheckedUpdateManyWithoutCardInput;
 
-    @Field(() => CardUncheckedUpdateManyWithoutScryfallCardInput, {nullable:true})
-    card?: CardUncheckedUpdateManyWithoutScryfallCardInput;
+  @Field(() => ScryfallRelatedCardUncheckedUpdateManyWithoutCardInput, {
+    nullable: true,
+  })
+  relatedTo?: ScryfallRelatedCardUncheckedUpdateManyWithoutCardInput;
 
-    @HideField()
-    createdAt?: DateTimeFieldUpdateOperationsInput;
-
-    @HideField()
-    updatedAt?: DateTimeFieldUpdateOperationsInput;
+  @Field(() => ScryfallRelatedCardUncheckedUpdateManyWithoutReferenceInput, {
+    nullable: true,
+  })
+  referencedBy?: ScryfallRelatedCardUncheckedUpdateManyWithoutReferenceInput;
 }

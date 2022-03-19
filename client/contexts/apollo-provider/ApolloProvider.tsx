@@ -1,45 +1,29 @@
 import {
   ApolloClient,
   ApolloProvider as BaseApolloProvider,
-  createHttpLink,
-  InMemoryCache,
+  NormalizedCacheObject,
 } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import React, { useMemo } from 'react';
-import generatedIntrospection from '../../@types/codegen/fragments';
-import { apolloConfig } from '../../config/apollo.config';
+import { GraphQLClient } from '../../graphql/graphql-client';
 import { useAuth } from '../../hooks/useAuth';
+
+type ApolloProivderContextType = {
+  client: ApolloClient<NormalizedCacheObject>;
+};
+
+const ApolloContext = React.createContext<
+  ApolloProivderContextType | undefined
+>(undefined);
 
 export const ApolloProvider: React.FC<React.PropsWithChildren<unknown>> = ({
   children,
 }) => {
   const { user } = useAuth();
+  const client = useMemo(() => new GraphQLClient(user), [user]);
 
-  const httpLink = useMemo(() => createHttpLink({ uri: apolloConfig.uri }), []);
-  const authLink = useMemo(
-    () =>
-      setContext(async (_, { headers }) => {
-        const token = await user?.getIdToken();
-        return {
-          headers: {
-            ...headers,
-            authorization: token ? `Bearer ${token}` : ``,
-          },
-        };
-      }),
-    [user],
+  return (
+    <ApolloContext.Provider value={{ client: client.value }}>
+      <BaseApolloProvider client={client.value}>{children}</BaseApolloProvider>;
+    </ApolloContext.Provider>
   );
-
-  const client = useMemo(
-    () =>
-      new ApolloClient({
-        link: authLink.concat(httpLink),
-        cache: new InMemoryCache({
-          possibleTypes: generatedIntrospection.possibleTypes,
-        }),
-      }),
-    [authLink, httpLink],
-  );
-
-  return <BaseApolloProvider client={client}>{children}</BaseApolloProvider>;
 };

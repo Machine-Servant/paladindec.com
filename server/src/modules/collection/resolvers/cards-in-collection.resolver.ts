@@ -2,6 +2,7 @@ import {
   Args,
   Mutation,
   Parent,
+  Query,
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
@@ -10,6 +11,8 @@ import { Card } from '../../../@generated/prisma-nestjs-graphql/card/card.model'
 import { CardsInCollectionUncheckedUpdateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-unchecked-update.input';
 import { CardsInCollection } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection.model';
 import { DeleteOneCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/delete-one-cards-in-collection.args';
+import { FindFirstCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-first-cards-in-collection.args';
+import { FindManyCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-many-cards-in-collection.args';
 import { CardService } from '../../card/services/card.service';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { ScryfallPriceService } from '../../scryfall/services/scryfall-price.service';
@@ -24,6 +27,22 @@ export class CardsInCollectionResolver {
     private readonly cardService: CardService,
     private readonly scryfallPriceService: ScryfallPriceService,
   ) {}
+
+  @Query(() => [CardsInCollection])
+  async allCardsInCollection(
+    @Args() args: FindManyCardsInCollectionArgs,
+    @CurrentUser() user: User,
+  ): Promise<CardsInCollection[]> {
+    return this.cardsInCollectionService.findMany(user.id, args);
+  }
+
+  @Query(() => CardsInCollection)
+  async cardsInCollection(
+    @Args() args: FindFirstCardsInCollectionArgs,
+    @CurrentUser() user: User,
+  ): Promise<CardsInCollection> {
+    return this.cardsInCollectionService.findOne(args, user.id);
+  }
 
   @Mutation(() => CardsInCollection)
   async updateCardsInCollection(

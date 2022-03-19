@@ -10,12 +10,6 @@ export class CardsInCollectionMinAggregateInput {
   collectionId?: true;
 
   @Field(() => Boolean, { nullable: true })
-  isFoil?: true;
-
-  @Field(() => Boolean, { nullable: true })
-  isEtched?: true;
-
-  @Field(() => Boolean, { nullable: true })
   count?: true;
 
   @Field(() => Boolean, { nullable: true })
@@ -23,4 +17,13 @@ export class CardsInCollectionMinAggregateInput {
 
   @Field(() => Boolean, { nullable: true })
   updatedAt?: true;
+
+  @Field(() => Boolean, { nullable: true })
+  isEtched?: true;
+
+  @Field(() => Boolean, { nullable: true })
+  isFoil?: true;
+
+  @Field(() => Boolean, { nullable: true })
+  id?: true;
 }

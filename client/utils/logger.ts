@@ -67,23 +67,23 @@ export class Logger {
     }
   }
 
-  log(message: unknown, data?: unknown[]) {
+  log(message: unknown, ...data: unknown[]) {
     this.doLog(LogLevel.Log, message, data);
   }
 
-  debug(message: unknown, data?: unknown[]) {
+  debug(message: unknown, ...data: unknown[]) {
     this.doLog(LogLevel.Debug, message, data);
   }
 
-  error(message: unknown, data?: unknown[]) {
+  error(message: unknown, ...data: unknown[]) {
     this.doLog(LogLevel.Error, message, data);
   }
 
-  info(message: unknown, data?: unknown[]) {
+  info(message: unknown, ...data: unknown[]) {
     this.doLog(LogLevel.Info, message, data);
   }
 
-  warn(message: unknown, data?: unknown[]) {
+  warn(message: unknown, ...data: unknown[]) {
     this.doLog(LogLevel.Warn, message, data);
   }
 }

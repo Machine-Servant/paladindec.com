@@ -46,8 +46,12 @@ export class CardConsumer {
                   name: card.name,
                   scryfallCard: { connect: { id: card.id } },
                   currentPrice: { connect: { id: currentPrice.id } },
-                  isBorderless: card.frameEffects.includes('borderless'),
-                  isShowcase: card.frameEffects.includes('showcase'),
+                  isBorderless:
+                    card.frameEffects.includes('borderless') ||
+                    card.borderColor === 'borderless',
+                  isShowcase:
+                    card.frameEffects.includes('showcase') ||
+                    card.borderColor === 'showcase',
                   isExtendedArt: card.frameEffects.includes('extendedart'),
                   isPaper: card.games.includes('paper'),
                   // the card is "retro" if the frame is from 1997 or before but

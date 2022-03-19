@@ -24,6 +24,7 @@ export type AddCardToCollectionInput = {
   collectionId: Scalars['String'];
   count?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -106,32 +107,6 @@ export type CardCount = {
   collections: Scalars['Int'];
 };
 
-export type CardCreateManyScryfallCardInput = {
-  canBeEtched?: InputMaybe<Scalars['Boolean']>;
-  canBeFoil?: InputMaybe<Scalars['Boolean']>;
-  canBeNonFoil?: InputMaybe<Scalars['Boolean']>;
-  collectorNumber?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['String']>;
-  isBorderless?: InputMaybe<Scalars['Boolean']>;
-  isExtendedArt?: InputMaybe<Scalars['Boolean']>;
-  isPaper?: InputMaybe<Scalars['Boolean']>;
-  isRetro?: InputMaybe<Scalars['Boolean']>;
-  isShowcase?: InputMaybe<Scalars['Boolean']>;
-  name: Scalars['String'];
-};
-
-export type CardCreateManyScryfallCardInputEnvelope = {
-  data: Array<CardCreateManyScryfallCardInput>;
-  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
-};
-
-export type CardCreateNestedManyWithoutScryfallCardInput = {
-  connect?: InputMaybe<Array<CardWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<CardCreateOrConnectWithoutScryfallCardInput>>;
-  create?: InputMaybe<Array<CardCreateWithoutScryfallCardInput>>;
-  createMany?: InputMaybe<CardCreateManyScryfallCardInputEnvelope>;
-};
-
 export type CardCreateNestedOneWithoutCollectionsInput = {
   connect?: InputMaybe<CardWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CardCreateOrConnectWithoutCollectionsInput>;
@@ -142,6 +117,12 @@ export type CardCreateNestedOneWithoutCurrentPriceInput = {
   connect?: InputMaybe<CardWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CardCreateOrConnectWithoutCurrentPriceInput>;
   create?: InputMaybe<CardCreateWithoutCurrentPriceInput>;
+};
+
+export type CardCreateNestedOneWithoutScryfallCardInput = {
+  connect?: InputMaybe<CardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CardCreateOrConnectWithoutScryfallCardInput>;
+  create?: InputMaybe<CardCreateWithoutScryfallCardInput>;
 };
 
 export type CardCreateOrConnectWithoutCollectionsInput = {
@@ -205,16 +186,6 @@ export type CardCreateWithoutScryfallCardInput = {
   isRetro?: InputMaybe<Scalars['Boolean']>;
   isShowcase?: InputMaybe<Scalars['Boolean']>;
   name: Scalars['String'];
-};
-
-export type CardListRelationFilter = {
-  every?: InputMaybe<CardWhereInput>;
-  none?: InputMaybe<CardWhereInput>;
-  some?: InputMaybe<CardWhereInput>;
-};
-
-export type CardOrderByRelationAggregateInput = {
-  _count?: InputMaybe<SortOrder>;
 };
 
 export type CardOrderByWithRelationInput = {
@@ -291,6 +262,7 @@ export type CardsInCollection = {
   collectionId: Scalars['String'];
   count: Scalars['Int'];
   createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
   isEtched: Scalars['Boolean'];
   isFoil: Scalars['Boolean'];
   price?: Maybe<CardsInCollectionCardPrice>;
@@ -314,6 +286,7 @@ export type CardsInCollectionCreateManyCardInput = {
   collectionId: Scalars['String'];
   count?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -328,6 +301,7 @@ export type CardsInCollectionCreateManyCollectionInput = {
   cardId: Scalars['String'];
   count?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -366,6 +340,7 @@ export type CardsInCollectionCreateWithoutCardInput = {
   collection: CollectionCreateNestedOneWithoutCardsInput;
   count?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -375,6 +350,7 @@ export type CardsInCollectionCreateWithoutCollectionInput = {
   card: CardCreateNestedOneWithoutCollectionsInput;
   count?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -397,6 +373,7 @@ export type CardsInCollectionOrderByWithRelationInput = {
   collectionId?: InputMaybe<SortOrder>;
   count?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
+  id?: InputMaybe<SortOrder>;
   isEtched?: InputMaybe<SortOrder>;
   isFoil?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
@@ -407,6 +384,7 @@ export enum CardsInCollectionScalarFieldEnum {
   CollectionId = 'collectionId',
   Count = 'count',
   CreatedAt = 'createdAt',
+  Id = 'id',
   IsEtched = 'isEtched',
   IsFoil = 'isFoil',
   UpdatedAt = 'updatedAt'
@@ -417,6 +395,7 @@ export type CardsInCollectionUncheckedUpdateInput = {
   collectionId?: InputMaybe<StringFieldUpdateOperationsInput>;
   count?: InputMaybe<IntFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
   isEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
   isFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -432,6 +411,7 @@ export type CardsInCollectionWhereInput = {
   collectionId?: InputMaybe<StringFilter>;
   count?: InputMaybe<IntFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
   isEtched?: InputMaybe<BoolFilter>;
   isFoil?: InputMaybe<BoolFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
@@ -439,6 +419,7 @@ export type CardsInCollectionWhereInput = {
 
 export type CardsInCollectionWhereUniqueInput = {
   cardId_collectionId_isFoil_isEtched?: InputMaybe<CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput>;
+  id?: InputMaybe<Scalars['String']>;
 };
 
 export type Collection = {
@@ -880,6 +861,8 @@ export type Query = {
   allScryfallCards: Array<ScryfallCard>;
   allScryfallPrices: Array<ScryfallPrice>;
   allScryfallSets: Array<ScryfallSet>;
+  card: Card;
+  cardsInCollection: CardsInCollection;
   collection: Collection;
 };
 
@@ -944,6 +927,21 @@ export type QueryAllScryfallSetsArgs = {
 };
 
 
+export type QueryCardArgs = {
+  where: CardWhereUniqueInput;
+};
+
+
+export type QueryCardsInCollectionArgs = {
+  cursor?: InputMaybe<CardsInCollectionWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CardsInCollectionScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CardsInCollectionOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CardsInCollectionWhereInput>;
+};
+
+
 export type QueryCollectionArgs = {
   cursor?: InputMaybe<CollectionWhereUniqueInput>;
   distinct?: InputMaybe<Array<CollectionScalarFieldEnum>>;
@@ -966,7 +964,7 @@ export type ScryfallCard = {
   artist?: Maybe<Scalars['String']>;
   booster: Scalars['Boolean'];
   borderColor: Scalars['String'];
-  card?: Maybe<Array<Card>>;
+  card?: Maybe<Card>;
   cardBackId?: Maybe<Scalars['String']>;
   cardFaces: Array<ScryfallCardFace>;
   cardFacesRaw?: Maybe<Array<Scalars['JSON']>>;
@@ -1076,7 +1074,6 @@ export type ScryfallCardScryfallPricesGroupByArgs = {
 
 export type ScryfallCardCount = {
   __typename?: 'ScryfallCardCount';
-  card: Scalars['Int'];
   cardFaces: Scalars['Int'];
   referencedBy: Scalars['Int'];
   relatedTo: Scalars['Int'];
@@ -1217,7 +1214,7 @@ export type ScryfallCardCreateWithoutReferencedByInput = {
   artist?: InputMaybe<Scalars['String']>;
   booster: Scalars['Boolean'];
   borderColor: Scalars['String'];
-  card?: InputMaybe<CardCreateNestedManyWithoutScryfallCardInput>;
+  card?: InputMaybe<CardCreateNestedOneWithoutScryfallCardInput>;
   cardBackId?: InputMaybe<Scalars['String']>;
   cardFaces?: InputMaybe<ScryfallCardFaceCreateNestedManyWithoutCardInput>;
   cardFacesRaw?: InputMaybe<ScryfallCardCreatecardFacesRawInput>;
@@ -1301,7 +1298,7 @@ export type ScryfallCardCreateWithoutRelatedToInput = {
   artist?: InputMaybe<Scalars['String']>;
   booster: Scalars['Boolean'];
   borderColor: Scalars['String'];
-  card?: InputMaybe<CardCreateNestedManyWithoutScryfallCardInput>;
+  card?: InputMaybe<CardCreateNestedOneWithoutScryfallCardInput>;
   cardBackId?: InputMaybe<Scalars['String']>;
   cardFaces?: InputMaybe<ScryfallCardFaceCreateNestedManyWithoutCardInput>;
   cardFacesRaw?: InputMaybe<ScryfallCardCreatecardFacesRawInput>;
@@ -1385,7 +1382,7 @@ export type ScryfallCardCreateWithoutScryfallPriceInput = {
   artist?: InputMaybe<Scalars['String']>;
   booster: Scalars['Boolean'];
   borderColor: Scalars['String'];
-  card?: InputMaybe<CardCreateNestedManyWithoutScryfallCardInput>;
+  card?: InputMaybe<CardCreateNestedOneWithoutScryfallCardInput>;
   cardBackId?: InputMaybe<Scalars['String']>;
   cardFaces?: InputMaybe<ScryfallCardFaceCreateNestedManyWithoutCardInput>;
   cardFacesRaw?: InputMaybe<ScryfallCardCreatecardFacesRawInput>;
@@ -1705,7 +1702,7 @@ export type ScryfallCardOrderByWithRelationInput = {
   artist?: InputMaybe<SortOrder>;
   booster?: InputMaybe<SortOrder>;
   borderColor?: InputMaybe<SortOrder>;
-  card?: InputMaybe<CardOrderByRelationAggregateInput>;
+  card?: InputMaybe<CardOrderByWithRelationInput>;
   cardBackId?: InputMaybe<SortOrder>;
   cardFaces?: InputMaybe<ScryfallCardFaceOrderByRelationAggregateInput>;
   cardFacesRaw?: InputMaybe<SortOrder>;
@@ -1881,7 +1878,7 @@ export type ScryfallCardWhereInput = {
   artist?: InputMaybe<StringNullableFilter>;
   booster?: InputMaybe<BoolFilter>;
   borderColor?: InputMaybe<StringFilter>;
-  card?: InputMaybe<CardListRelationFilter>;
+  card?: InputMaybe<CardRelationFilter>;
   cardBackId?: InputMaybe<StringNullableFilter>;
   cardFaces?: InputMaybe<ScryfallCardFaceListRelationFilter>;
   cardFacesRaw?: InputMaybe<JsonNullableListFilter>;
@@ -2792,7 +2789,7 @@ export type PaginatedCardsInCollectionQueryVariables = Exact<{
 }>;
 
 
-export type PaginatedCardsInCollectionQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', _count: { __typename?: 'CollectionCount', cards: number }, cards: Array<{ __typename?: 'CardsInCollection', isFoil: boolean, isEtched: boolean, count: number, createdAt: any, updatedAt: any, price?: { __typename?: 'CardsInCollectionCardPrice', usd: number } | null, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', rarity: string, imageUris?: any | null, set: { __typename?: 'ScryfallSet', iconSvgUri: string, name: string, code: string } } } }> } };
+export type PaginatedCardsInCollectionQuery = { __typename?: 'Query', collection: { __typename?: 'Collection', _count: { __typename?: 'CollectionCount', cards: number }, cards: Array<{ __typename?: 'CardsInCollection', id: string, isFoil: boolean, isEtched: boolean, count: number, createdAt: any, updatedAt: any, price?: { __typename?: 'CardsInCollectionCardPrice', usd: number } | null, card: { __typename?: 'Card', canBeFoil: boolean, name: string, id: string, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', rarity: string, imageUris?: any | null, set: { __typename?: 'ScryfallSet', iconSvgUri: string, name: string, code: string } } } }> } };
 
 export type QuickAddCardToCollectionMutationVariables = Exact<{
   input: AddCardToCollectionInput;
@@ -3038,6 +3035,7 @@ export const PaginatedCardsInCollectionDocument = gql`
       cards
     }
     cards(take: $take, skip: $skip, orderBy: $orderBy) {
+      id
       isFoil
       isEtched
       count

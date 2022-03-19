@@ -1,54 +1,55 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { HideField } from '@nestjs/graphql';
 import { ScryfallCardCreateNestedOneWithoutCardInput } from '../scryfall-card/scryfall-card-create-nested-one-without-card.input';
 import { ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput } from '../scryfall-price/scryfall-price-create-nested-one-without-current-price-of-card.input';
-import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class CardCreateWithoutCollectionsInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
 
-    @Field(() => String, {nullable:true})
-    id?: string;
+  @HideField()
+  createdAt?: Date | string;
 
-    @Field(() => ScryfallCardCreateNestedOneWithoutCardInput, {nullable:false})
-    scryfallCard!: ScryfallCardCreateNestedOneWithoutCardInput;
+  @HideField()
+  updatedAt?: Date | string;
 
-    @Field(() => String, {nullable:false})
-    name!: string;
+  @Field(() => Boolean, { nullable: true })
+  isBorderless?: boolean;
 
-    @Field(() => String, {nullable:true})
-    collectorNumber?: string;
+  @Field(() => Boolean, { nullable: true })
+  isShowcase?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    isBorderless?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  canBeFoil?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    isShowcase?: boolean;
+  @Field(() => String, { nullable: true })
+  collectorNumber?: string;
 
-    @Field(() => Boolean, {nullable:true})
-    isPaper?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isPaper?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    isExtendedArt?: boolean;
+  @Field(() => String, { nullable: false })
+  name!: string;
 
-    @Field(() => Boolean, {nullable:true})
-    isRetro?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  canBeEtched?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    canBeNonFoil?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  canBeNonFoil?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    canBeFoil?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isExtendedArt?: boolean;
 
-    @Field(() => Boolean, {nullable:true})
-    canBeEtched?: boolean;
+  @Field(() => Boolean, { nullable: true })
+  isRetro?: boolean;
 
-    @Field(() => ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput, {nullable:true})
-    currentPrice?: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput;
+  @Field(() => ScryfallCardCreateNestedOneWithoutCardInput, { nullable: false })
+  scryfallCard!: ScryfallCardCreateNestedOneWithoutCardInput;
 
-    @HideField()
-    createdAt?: Date | string;
-
-    @HideField()
-    updatedAt?: Date | string;
+  @Field(() => ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput, {
+    nullable: true,
+  })
+  currentPrice?: ScryfallPriceCreateNestedOneWithoutCurrentPriceOfCardInput;
 }

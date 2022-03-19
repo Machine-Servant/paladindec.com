@@ -1,9 +1,9 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
-import { BoolFilter } from '../prisma/bool-filter.input';
 import { IntFilter } from '../prisma/int-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { BoolFilter } from '../prisma/bool-filter.input';
 
 @InputType()
 export class CardsInCollectionScalarWhereInput {
@@ -22,12 +22,6 @@ export class CardsInCollectionScalarWhereInput {
   @Field(() => StringFilter, { nullable: true })
   collectionId?: StringFilter;
 
-  @Field(() => BoolFilter, { nullable: true })
-  isFoil?: BoolFilter;
-
-  @Field(() => BoolFilter, { nullable: true })
-  isEtched?: BoolFilter;
-
   @Field(() => IntFilter, { nullable: true })
   count?: IntFilter;
 
@@ -36,4 +30,13 @@ export class CardsInCollectionScalarWhereInput {
 
   @Field(() => DateTimeFilter, { nullable: true })
   updatedAt?: DateTimeFilter;
+
+  @Field(() => BoolFilter, { nullable: true })
+  isEtched?: BoolFilter;
+
+  @Field(() => BoolFilter, { nullable: true })
+  isFoil?: BoolFilter;
+
+  @Field(() => StringFilter, { nullable: true })
+  id?: StringFilter;
 }

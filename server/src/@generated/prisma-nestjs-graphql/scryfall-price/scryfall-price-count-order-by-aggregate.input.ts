@@ -5,40 +5,39 @@ import { HideField } from '@nestjs/graphql';
 
 @InputType()
 export class ScryfallPriceCountOrderByAggregateInput {
+  @Field(() => SortOrder, { nullable: true })
+  date?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    id?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  eur?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    date?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  tix?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    eur?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  usd?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    tix?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  eurFoil?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    usd?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  usdFoil?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    eurFoil?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  usdEtched?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    usdFoil?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  cardId?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    usdEtched?: keyof typeof SortOrder;
+  @HideField()
+  createdAt?: keyof typeof SortOrder;
 
-    @HideField()
-    createdAt?: keyof typeof SortOrder;
+  @HideField()
+  updatedAt?: keyof typeof SortOrder;
 
-    @HideField()
-    updatedAt?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  id?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    cardId?: keyof typeof SortOrder;
-
-    @Field(() => SortOrder, {nullable:true})
-    currentPriceOfCardId?: keyof typeof SortOrder;
+  @Field(() => SortOrder, { nullable: true })
+  currentPriceOfCardId?: keyof typeof SortOrder;
 }

@@ -4,7 +4,12 @@ import { CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput } 
 
 @InputType()
 export class CardsInCollectionWhereUniqueInput {
+  @Field(() => String, { nullable: true })
+  id?: string;
 
-    @Field(() => CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput, {nullable:true})
-    cardId_collectionId_isFoil_isEtched?: CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput;
+  @Field(
+    () => CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput,
+    { nullable: true },
+  )
+  cardId_collectionId_isFoil_isEtched?: CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput;
 }

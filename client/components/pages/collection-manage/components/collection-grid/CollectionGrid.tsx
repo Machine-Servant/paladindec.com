@@ -24,6 +24,7 @@ import { CheckmarkCellRenderer } from './components/checkmark-cell-renderer';
 import { ImageCellRenderer } from './components/image-cell-renderer';
 import { ImageTooltip } from './components/image-tooltip';
 import { MgmtCellRenderer } from './components/mgmt-cell-renderer';
+import { NameCellRenderer } from './components/name-cell-renderer';
 import { SetCellRenderer } from './components/set-cell-renderer';
 
 export type CardInCollection =
@@ -68,6 +69,7 @@ export const CollectionGrid = React.forwardRef<
   const MemoizedCheckmarkCellRenderer = memo(CheckmarkCellRenderer);
   const MemoizedMgmtCellRenderer = memo(MgmtCellRenderer);
   const MemoizedImageCellRenderer = memo(ImageCellRenderer);
+  const MemoizedNameCellRenderer = memo(NameCellRenderer);
   const collectorNumberFormatter = useCallback(
     (params: ValueFormatterParams) => `(${params.value})`,
     [],
@@ -135,7 +137,11 @@ export const CollectionGrid = React.forwardRef<
                 set: cardInCollection.card.scryfallCard.set,
                 rarity: cardInCollection.card.scryfallCard.rarity,
               },
-              name: cardInCollection.card.name,
+              name: {
+                name: cardInCollection.card.name,
+                collectionId: props.collection.id,
+                id: cardInCollection.id,
+              },
               foil: cardInCollection.isFoil,
               etched: cardInCollection.isEtched,
               price: cardInCollection.price?.usd,
@@ -181,6 +187,7 @@ export const CollectionGrid = React.forwardRef<
     {
       field: 'name',
       flex: 1,
+      cellRenderer: MemoizedNameCellRenderer,
     },
     { field: 'foil', cellRenderer: MemoizedCheckmarkCellRenderer, width: 60 },
     {
