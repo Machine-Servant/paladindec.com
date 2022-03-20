@@ -18,15 +18,30 @@ import { ScryfallModule } from './modules/scryfall/scryfall.module';
 import { UserModule } from './modules/user/user.module';
 import { GraphqlInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
+    HttpModule.register({
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       context: ({ req }) => ({ req }),
       driver: ApolloDriver,
       introspection: true,
+      cors: {
+        origin: '*',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
+      },
     }),
     ConfigModule.forRoot(),
     BullModule.forRootAsync({

@@ -19,7 +19,6 @@ export class FirebaseAuthStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(token: string) {
-    this.logger.debug(`Token is`, token);
     try {
       const results = await this.firebaseAuthService.verifyToken(token);
       return results;
