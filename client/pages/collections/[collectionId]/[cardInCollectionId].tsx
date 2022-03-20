@@ -8,6 +8,7 @@ import { AppLayout } from '../../../components/app-layout';
 import { CardDetails } from '../../../components/pages/card-details';
 import { GraphQLClient } from '../../../graphql/graphql-client';
 import { useProtectedRoute } from '../../../hooks/useProtectedRoute';
+import { Logger } from '../../../utils/logger';
 
 type CardDetailsPageQueryType = {
   cardInCollectionId: string;
@@ -49,6 +50,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {},
     };
 
+  const logger = new Logger(
+    `${CardDetailsPage.name}_${getServerSideProps.name}`,
+  );
+
   const client = new GraphQLClient();
 
   const GET_CARD_DETAILS_QUERY = gql`
@@ -85,92 +90,102 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       }
     }
   `;
-  const results = await client.value.query({
-    query: GET_CARD_DETAILS_QUERY,
-    variables: { id: context.query.cardInCollectionId },
-    context: {
-      headers: {
-        ...context.req.headers,
+  try {
+    const results = await client.value.query({
+      query: GET_CARD_DETAILS_QUERY,
+      variables: { id: context.query.cardInCollectionId },
+      context: {
+        headers: {
+          ...context.req.headers,
+        },
       },
-    },
-  });
-
-  const GET_OTHER_PRINTINGS_BY_NAME_QUERY = gql`
-    query GetOtherPrintingsByCardName($name: String!, $collectionId: String!) {
-      otherPrintings: allCards(where: { name: { equals: $name } }) {
-        id
-        name
-        currentPrice {
-          usd
-          usdFoil
-          usdEtched
-        }
-        canBeFoil
-        canBeEtched
-        canBeNonFoil
-        isRetro
-        isShowcase
-        isBorderless
-        isExtendedArt
-        scryfallCard {
-          collectorNumber
-          set {
-            name
-            code
-            iconSvgUri
-          }
-          rarity
-        }
-      }
-      allCardsInCollection(
-        where: {
-          collectionId: { equals: $collectionId }
-          card: { is: { name: { equals: $name } } }
-        }
+    });
+    const GET_OTHER_PRINTINGS_BY_NAME_QUERY = gql`
+      query GetOtherPrintingsByCardName(
+        $name: String!
+        $collectionId: String!
       ) {
-        id
-        isFoil
-        isEtched
-        card {
+        otherPrintings: allCards(where: { name: { equals: $name } }) {
+          id
+          name
+          currentPrice {
+            usd
+            usdFoil
+            usdEtched
+          }
+          canBeFoil
+          canBeEtched
+          canBeNonFoil
           isRetro
           isShowcase
           isBorderless
           isExtendedArt
           scryfallCard {
-            imageUris
-            rarity
             collectorNumber
             set {
               name
               code
               iconSvgUri
             }
+            rarity
           }
         }
-        count
+        allCardsInCollection(
+          where: {
+            collectionId: { equals: $collectionId }
+            card: { is: { name: { equals: $name } } }
+          }
+        ) {
+          id
+          isFoil
+          isEtched
+          card {
+            isRetro
+            isShowcase
+            isBorderless
+            isExtendedArt
+            scryfallCard {
+              imageUris
+              rarity
+              collectorNumber
+              set {
+                name
+                code
+                iconSvgUri
+              }
+            }
+          }
+          count
+        }
       }
-    }
-  `;
-  const otherPrintingResults = await client.value.query({
-    query: GET_OTHER_PRINTINGS_BY_NAME_QUERY,
-    variables: {
-      name: results.data.cardsInCollection.card.name,
-      collectionId: context.query.collectionId,
-    },
-    context: {
-      headers: {
-        ...context.req.headers,
+    `;
+    const otherPrintingResults = await client.value.query({
+      query: GET_OTHER_PRINTINGS_BY_NAME_QUERY,
+      variables: {
+        name: results.data.cardsInCollection.card.name,
+        collectionId: context.query.collectionId,
       },
-    },
-  });
+      context: {
+        headers: {
+          ...context.req.headers,
+        },
+      },
+    });
 
-  return {
-    props: {
-      cardsInCollection: results.data.cardsInCollection,
-      otherPrintings: otherPrintingResults.data.otherPrintings,
-      allCardsInCollection: otherPrintingResults.data.allCardsInCollection,
-    },
-  };
+    return {
+      props: {
+        cardsInCollection: results.data.cardsInCollection,
+        otherPrintings: otherPrintingResults.data.otherPrintings,
+        allCardsInCollection: otherPrintingResults.data.allCardsInCollection,
+      },
+    };
+  } catch (err) {
+    logger.info(`client.value`, client.value);
+    logger.info(`context.req.headers`, context.req.headers);
+    logger.info(`context.query`, context.query);
+    logger.error(err);
+    return { props: {} };
+  }
 };
 
 export default CardDetailsPage;
