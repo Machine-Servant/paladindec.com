@@ -111,6 +111,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         headers: {
           ...context.req.headers,
           authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       },
     });
@@ -184,6 +185,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         headers: {
           ...context.req.headers,
           authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       },
     });

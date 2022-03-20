@@ -3,3 +3,5 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Credentials = "true"
+    Access-Control-Allow-Headers = "Authorization"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
