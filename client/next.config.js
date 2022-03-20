@@ -28,6 +28,23 @@ const moduleExports = {
       'c1.scryfall.com',
     ],
   },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/:path*',
+  //       headers: [
+  //         {
+  //           key: 'Access-Control-Allow-Origin',
+  //           value: '*',
+  //         },
+  //         {
+  //           key: 'Access-Control-Allow-Credentials',
+  //           value: 'true',
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

@@ -54,6 +54,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `${CardDetailsPage.name}_${getServerSideProps.name}`,
   );
 
+  const headers = context.req.headers;
+  const parts = headers.cookie?.split(';');
+  const found = parts?.find((x: string) =>
+    x.trim().startsWith('paladindeck_token'),
+  );
+  const token = found?.split(`paladindeck_token=`).pop();
+
   const client = new GraphQLClient();
 
   const GET_CARD_DETAILS_QUERY = gql`
@@ -97,6 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       context: {
         headers: {
           ...context.req.headers,
+          authorization: `Bearer ${token}`,
         },
       },
     });
@@ -168,6 +176,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       context: {
         headers: {
           ...context.req.headers,
+          authorization: `Bearer ${token}`,
         },
       },
     });
