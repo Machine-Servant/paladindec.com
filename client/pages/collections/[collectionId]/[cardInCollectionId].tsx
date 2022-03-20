@@ -54,14 +54,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `${CardDetailsPage.name}_${getServerSideProps.name}`,
   );
 
+  logger.debug(
+    `context.req.rawHeaders`,
+    JSON.stringify(context.req.rawHeaders, null, 2),
+  );
+
   const headers = context.req.headers;
   const parts = headers.cookie?.split(';');
   const found = parts?.find((x: string) =>
     x.trim().startsWith('paladindeck_token'),
   );
   const token = found?.split(`paladindeck_token=`).pop();
-
-  logger.debug('Found token', token);
 
   const client = new GraphQLClient();
 
@@ -100,10 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   `;
   try {
-    logger.debug('headers are', {
-      ...context.req.headers,
-      authorization: `Bearer ${token}`,
-    });
+    logger.debug('headers are', context.req.headers);
     const results = await client.value.query({
       query: GET_CARD_DETAILS_QUERY,
       variables: { id: context.query.cardInCollectionId },

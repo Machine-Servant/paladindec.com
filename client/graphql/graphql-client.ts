@@ -41,21 +41,21 @@ export class GraphQLClient {
       if (context?.headers?.cookie) {
         try {
           const parts = context.headers.cookie.split(';');
-          this.logger.debug(`token cookie name`, TOKEN_COOKIE_NAME);
-          this.logger.debug(`parts`, parts);
+          // this.logger.debug(`token cookie name`, TOKEN_COOKIE_NAME);
+          // this.logger.debug(`parts`, parts);
           const found = parts.find((x: string) =>
             x.trim().startsWith(TOKEN_COOKIE_NAME),
           );
-          this.logger.debug(`found`, found);
+          // this.logger.debug(`found`, found);
 
           token = found.split(`${TOKEN_COOKIE_NAME}=`).pop();
 
-          this.logger.debug('Found token', token);
+          // this.logger.debug('Found token', token);
         } catch (err) {
-          this.logger.error(
-            `OH NO! WHAT THE FUCK HAPPENED?`,
-            context.headers.cookie,
-          );
+          // this.logger.error(
+          //   `OH NO! WHAT THE FUCK HAPPENED?`,
+          //   context.headers.cookie,
+          // );
           this.logger.error(err);
         }
       } else {
@@ -67,7 +67,7 @@ export class GraphQLClient {
         authorization: token ? `Bearer ${token}` : ``,
       };
 
-      this.logger.info(`headers are`, headers);
+      // this.logger.info(`headers are`, headers);
 
       return { headers };
     });
