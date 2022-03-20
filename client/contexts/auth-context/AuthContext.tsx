@@ -25,6 +25,7 @@ export const AuthContextProvider: React.FC<
   const [user, loading, error] = useAuthState(auth);
 
   const handleAuthStateChanged = useCallback(async (authState: unknown) => {
+    console.log(TOKEN_COOKIE_NAME);
     if (!authState) {
       nookies.set(undefined, TOKEN_COOKIE_NAME, '', { path: '/' });
       return auth.signOut();
