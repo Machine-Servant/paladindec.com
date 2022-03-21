@@ -38,6 +38,7 @@ export const AuthContextProvider: React.FC<
     const token = await fbUser.getIdToken();
 
     nookies.set(undefined, TOKEN_COOKIE_NAME, token, { path: '/' });
+    nookies.set(undefined, 'domain', '.paladindeck.com', { path: '/' });
   }, []);
 
   useEffect(() => {
