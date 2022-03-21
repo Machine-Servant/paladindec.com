@@ -1,4 +1,10 @@
-import { gql } from '@apollo/client';
+import {
+  ApolloClient,
+  createHttpLink,
+  gql,
+  InMemoryCache,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
@@ -6,6 +12,7 @@ import React from 'react';
 import { Card, CardsInCollection } from '../../../@types/codegen/graphql';
 import { AppLayout } from '../../../components/app-layout';
 import { CardDetails } from '../../../components/pages/card-details';
+import { apolloConfig } from '../../../config/apollo.config';
 import { GraphQLClient } from '../../../graphql/graphql-client';
 import { useProtectedRoute } from '../../../hooks/useProtectedRoute';
 import { Logger } from '../../../utils/logger';
@@ -54,19 +61,45 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `${CardDetailsPage.name}_${getServerSideProps.name}`,
   );
 
-  logger.debug(
-    `context.req.rawHeaders`,
-    JSON.stringify(context.req.rawHeaders, null, 2),
-  );
+  // const client = new GraphQLClient();
 
-  const headers = context.req.headers;
-  const parts = headers.cookie?.split(';');
-  const found = parts?.find((x: string) =>
-    x.trim().startsWith('paladindeck_token'),
-  );
-  const token = found?.split(`paladindeck_token=`).pop();
+  let headers: Record<string, string> = {};
+  const token = context.req.headers.cookie
+    ?.split(';')
+    .find((x: string) => x.trim().startsWith('paladindeck_token='))
+    ?.split('paladindeck_token=')
+    .pop();
+  logger.debug('Token is', token);
+  if (token) {
+    headers = {
+      Authorization: token,
+    };
+  }
 
-  const client = new GraphQLClient();
+  const httpLinkOptions = {
+    uri: apolloConfig.uri,
+  };
+
+  logger.debug(`httpLink options`, httpLinkOptions);
+
+  const httpLink = createHttpLink(httpLinkOptions);
+
+  const authLink = setContext((req, { headers }) => {
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
+
+  const client = new ApolloClient({
+    ssrMode: typeof window === 'undefined',
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+    credentials: 'include',
+    headers,
+  });
 
   const GET_CARD_DETAILS_QUERY = gql`
     query GetCardInCollection($id: String!) {
@@ -104,14 +137,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   `;
   try {
     logger.debug('headers are', context.req.headers);
-    const results = await client.value.query({
+    const results = await client.query({
       query: GET_CARD_DETAILS_QUERY,
       variables: { id: context.query.cardInCollectionId },
       context: {
         headers: {
           ...context.req.headers,
-          authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
         },
       },
     });
@@ -175,7 +206,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
       }
     `;
-    const otherPrintingResults = await client.value.query({
+    const otherPrintingResults = await client.query({
       query: GET_OTHER_PRINTINGS_BY_NAME_QUERY,
       variables: {
         name: results.data.cardsInCollection.card.name,
@@ -184,8 +215,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       context: {
         headers: {
           ...context.req.headers,
-          authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
         },
       },
     });
@@ -198,7 +227,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (err) {
-    logger.info(`client.value`, client.value);
+    logger.info(`client`, client);
     logger.info(`context.req.headers`, context.req.headers);
     logger.info(`context.query`, context.query);
     logger.error(err);
