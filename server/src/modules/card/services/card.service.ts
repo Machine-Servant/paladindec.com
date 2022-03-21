@@ -39,11 +39,13 @@ export class CardService {
   }
 
   async upsert(data: CardCreateInput): Promise<Card> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { scryfallCard, ...toUpsert } = data;
     try {
       const result = await this.prismaService.card.upsert({
         where: { scryfallCardId: data.scryfallCard.connect.id },
         create: data,
-        update: data,
+        update: toUpsert,
       });
       return result;
     } catch (err) {
