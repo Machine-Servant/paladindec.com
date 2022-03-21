@@ -1,10 +1,9 @@
 import { User } from 'firebase/auth';
 import nookies from 'nookies';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../app/firebase.app';
 import { useLogger } from '../../hooks/useLogger';
-import { Logger } from '../../utils/logger';
 
 type AuthContextType = {
   user?: User | null;
@@ -25,7 +24,6 @@ export const AuthContextProvider: React.FC<
   const [user, loading, error] = useAuthState(auth);
 
   const handleAuthStateChanged = useCallback(async (authState: unknown) => {
-    console.log(TOKEN_COOKIE_NAME);
     if (!authState) {
       nookies.set(undefined, TOKEN_COOKIE_NAME, '', { path: '/' });
       return auth.signOut();
@@ -38,7 +36,6 @@ export const AuthContextProvider: React.FC<
     const token = await fbUser.getIdToken();
 
     nookies.set(undefined, TOKEN_COOKIE_NAME, token, { path: '/' });
-    nookies.set(undefined, 'domain', '.paladindeck.com', { path: '/' });
   }, []);
 
   useEffect(() => {
