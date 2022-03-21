@@ -80,26 +80,29 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     uri: apolloConfig.uri,
   };
 
-  logger.debug(`httpLink options`, httpLinkOptions);
+  // logger.debug(`httpLink options`, httpLinkOptions);
 
   const httpLink = createHttpLink(httpLinkOptions);
 
   const authLink = setContext((req, { headers }) => {
     return {
       headers: {
-        ...headers,
+        // ...headers,
+        // 'sec-fetch-site': 'cross-site',
         authorization: token ? `Bearer ${token}` : '',
       },
     };
   });
 
-  const client = new ApolloClient({
-    ssrMode: typeof window === 'undefined',
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-    credentials: 'include',
-    headers,
-  });
+  // const client = new ApolloClient({
+  //   ssrMode: typeof window === 'undefined',
+  //   link: authLink.concat(httpLink),
+  //   cache: new InMemoryCache(),
+  //   credentials: 'include',
+  //   headers,
+  // });
+
+  const client = new GraphQLClient();
 
   const GET_CARD_DETAILS_QUERY = gql`
     query GetCardInCollection($id: String!) {
@@ -136,8 +139,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   `;
   try {
-    logger.debug('headers are', context.req.headers);
-    const results = await client.query({
+    // logger.debug('headers are', context.req.headers);
+    const results = await client.value.query({
       query: GET_CARD_DETAILS_QUERY,
       variables: { id: context.query.cardInCollectionId },
       context: {
@@ -206,7 +209,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
       }
     `;
-    const otherPrintingResults = await client.query({
+    const otherPrintingResults = await client.value.query({
       query: GET_OTHER_PRINTINGS_BY_NAME_QUERY,
       variables: {
         name: results.data.cardsInCollection.card.name,
@@ -227,9 +230,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (err) {
-    logger.info(`client`, client);
-    logger.info(`context.req.headers`, context.req.headers);
-    logger.info(`context.query`, context.query);
+    // logger.info(`client`, client);
+    // logger.info(`context.req.headers`, context.req.headers);
+    // logger.info(`context.query`, context.query);
     logger.error(err);
     return { props: {} };
   }
