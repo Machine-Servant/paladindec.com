@@ -10,6 +10,7 @@ input AddCardToCollectionInput {
   id: String
   isEtched: Boolean
   isFoil: Boolean
+  tags: TagCreateNestedManyWithoutCardsInput
   updatedAt: DateTime
 }
 
@@ -210,6 +211,97 @@ enum CardScalarFieldEnum {
   updatedAt
 }
 
+input CardUpdateOneRequiredWithoutCollectionsInput {
+  connect: CardWhereUniqueInput
+  connectOrCreate: CardCreateOrConnectWithoutCollectionsInput
+  create: CardCreateWithoutCollectionsInput
+  update: CardUpdateWithoutCollectionsInput
+  upsert: CardUpsertWithoutCollectionsInput
+}
+
+input CardUpdateOneWithoutCurrentPriceInput {
+  connect: CardWhereUniqueInput
+  connectOrCreate: CardCreateOrConnectWithoutCurrentPriceInput
+  create: CardCreateWithoutCurrentPriceInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CardUpdateWithoutCurrentPriceInput
+  upsert: CardUpsertWithoutCurrentPriceInput
+}
+
+input CardUpdateOneWithoutScryfallCardInput {
+  connect: CardWhereUniqueInput
+  connectOrCreate: CardCreateOrConnectWithoutScryfallCardInput
+  create: CardCreateWithoutScryfallCardInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CardUpdateWithoutScryfallCardInput
+  upsert: CardUpsertWithoutScryfallCardInput
+}
+
+input CardUpdateWithoutCollectionsInput {
+  canBeEtched: BoolFieldUpdateOperationsInput
+  canBeFoil: BoolFieldUpdateOperationsInput
+  canBeNonFoil: BoolFieldUpdateOperationsInput
+  collectorNumber: NullableStringFieldUpdateOperationsInput
+  currentPrice: ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput
+  id: StringFieldUpdateOperationsInput
+  isBorderless: BoolFieldUpdateOperationsInput
+  isExtendedArt: BoolFieldUpdateOperationsInput
+  isPaper: BoolFieldUpdateOperationsInput
+  isRetro: BoolFieldUpdateOperationsInput
+  isShowcase: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  scryfallCard: ScryfallCardUpdateOneRequiredWithoutCardInput
+}
+
+input CardUpdateWithoutCurrentPriceInput {
+  canBeEtched: BoolFieldUpdateOperationsInput
+  canBeFoil: BoolFieldUpdateOperationsInput
+  canBeNonFoil: BoolFieldUpdateOperationsInput
+  collections: CardsInCollectionUpdateManyWithoutCardInput
+  collectorNumber: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isBorderless: BoolFieldUpdateOperationsInput
+  isExtendedArt: BoolFieldUpdateOperationsInput
+  isPaper: BoolFieldUpdateOperationsInput
+  isRetro: BoolFieldUpdateOperationsInput
+  isShowcase: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  scryfallCard: ScryfallCardUpdateOneRequiredWithoutCardInput
+}
+
+input CardUpdateWithoutScryfallCardInput {
+  canBeEtched: BoolFieldUpdateOperationsInput
+  canBeFoil: BoolFieldUpdateOperationsInput
+  canBeNonFoil: BoolFieldUpdateOperationsInput
+  collections: CardsInCollectionUpdateManyWithoutCardInput
+  collectorNumber: NullableStringFieldUpdateOperationsInput
+  currentPrice: ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput
+  id: StringFieldUpdateOperationsInput
+  isBorderless: BoolFieldUpdateOperationsInput
+  isExtendedArt: BoolFieldUpdateOperationsInput
+  isPaper: BoolFieldUpdateOperationsInput
+  isRetro: BoolFieldUpdateOperationsInput
+  isShowcase: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input CardUpsertWithoutCollectionsInput {
+  create: CardCreateWithoutCollectionsInput!
+  update: CardUpdateWithoutCollectionsInput!
+}
+
+input CardUpsertWithoutCurrentPriceInput {
+  create: CardCreateWithoutCurrentPriceInput!
+  update: CardUpdateWithoutCurrentPriceInput!
+}
+
+input CardUpsertWithoutScryfallCardInput {
+  create: CardCreateWithoutScryfallCardInput!
+  update: CardUpdateWithoutScryfallCardInput!
+}
+
 input CardWhereInput {
   AND: [CardWhereInput!]
   NOT: [CardWhereInput!]
@@ -237,6 +329,7 @@ input CardWhereUniqueInput {
 }
 
 type CardsInCollection {
+  _count: CardsInCollectionCount!
   card: Card!
   cardId: String!
   collection: Collection!
@@ -247,6 +340,7 @@ type CardsInCollection {
   isEtched: Boolean!
   isFoil: Boolean!
   price: CardsInCollectionCardPrice
+  tags(cursor: TagWhereUniqueInput, distinct: [TagScalarFieldEnum!], orderBy: [TagOrderByWithRelationInput!], skip: Int, take: Int, where: TagWhereInput): [Tag!]!
   updatedAt: DateTime!
 }
 
@@ -260,6 +354,10 @@ input CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput {
 type CardsInCollectionCardPrice {
   eur: Float!
   usd: Float!
+}
+
+type CardsInCollectionCount {
+  tags: Int!
 }
 
 input CardsInCollectionCreateManyCardInput {
@@ -306,6 +404,12 @@ input CardsInCollectionCreateNestedManyWithoutCollectionInput {
   createMany: CardsInCollectionCreateManyCollectionInputEnvelope
 }
 
+input CardsInCollectionCreateNestedManyWithoutTagsInput {
+  connect: [CardsInCollectionWhereUniqueInput!]
+  connectOrCreate: [CardsInCollectionCreateOrConnectWithoutTagsInput!]
+  create: [CardsInCollectionCreateWithoutTagsInput!]
+}
+
 input CardsInCollectionCreateOrConnectWithoutCardInput {
   create: CardsInCollectionCreateWithoutCardInput!
   where: CardsInCollectionWhereUniqueInput!
@@ -316,6 +420,11 @@ input CardsInCollectionCreateOrConnectWithoutCollectionInput {
   where: CardsInCollectionWhereUniqueInput!
 }
 
+input CardsInCollectionCreateOrConnectWithoutTagsInput {
+  create: CardsInCollectionCreateWithoutTagsInput!
+  where: CardsInCollectionWhereUniqueInput!
+}
+
 input CardsInCollectionCreateWithoutCardInput {
   collection: CollectionCreateNestedOneWithoutCardsInput!
   count: Int
@@ -323,11 +432,24 @@ input CardsInCollectionCreateWithoutCardInput {
   id: String
   isEtched: Boolean
   isFoil: Boolean
+  tags: TagCreateNestedManyWithoutCardsInput
   updatedAt: DateTime
 }
 
 input CardsInCollectionCreateWithoutCollectionInput {
   card: CardCreateNestedOneWithoutCollectionsInput!
+  count: Int
+  createdAt: DateTime
+  id: String
+  isEtched: Boolean
+  isFoil: Boolean
+  tags: TagCreateNestedManyWithoutCardsInput
+  updatedAt: DateTime
+}
+
+input CardsInCollectionCreateWithoutTagsInput {
+  card: CardCreateNestedOneWithoutCollectionsInput!
+  collection: CollectionCreateNestedOneWithoutCardsInput!
   count: Int
   createdAt: DateTime
   id: String
@@ -356,6 +478,7 @@ input CardsInCollectionOrderByWithRelationInput {
   id: SortOrder
   isEtched: SortOrder
   isFoil: SortOrder
+  tags: TagOrderByRelationAggregateInput
   updatedAt: SortOrder
 }
 
@@ -370,15 +493,161 @@ enum CardsInCollectionScalarFieldEnum {
   updatedAt
 }
 
-input CardsInCollectionUncheckedUpdateInput {
-  cardId: StringFieldUpdateOperationsInput
-  collectionId: StringFieldUpdateOperationsInput
+input CardsInCollectionScalarWhereInput {
+  AND: [CardsInCollectionScalarWhereInput!]
+  NOT: [CardsInCollectionScalarWhereInput!]
+  OR: [CardsInCollectionScalarWhereInput!]
+  cardId: StringFilter
+  collectionId: StringFilter
+  count: IntFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  isEtched: BoolFilter
+  isFoil: BoolFilter
+  updatedAt: DateTimeFilter
+}
+
+input CardsInCollectionUpdateInput {
+  card: CardUpdateOneRequiredWithoutCollectionsInput
+  collection: CollectionUpdateOneRequiredWithoutCardsInput
+  count: IntFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isEtched: BoolFieldUpdateOperationsInput
+  isFoil: BoolFieldUpdateOperationsInput
+  tags: TagUpdateManyWithoutCardsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CardsInCollectionUpdateManyMutationInput {
   count: IntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   isEtched: BoolFieldUpdateOperationsInput
   isFoil: BoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CardsInCollectionUpdateManyWithWhereWithoutCardInput {
+  data: CardsInCollectionUpdateManyMutationInput!
+  where: CardsInCollectionScalarWhereInput!
+}
+
+input CardsInCollectionUpdateManyWithWhereWithoutCollectionInput {
+  data: CardsInCollectionUpdateManyMutationInput!
+  where: CardsInCollectionScalarWhereInput!
+}
+
+input CardsInCollectionUpdateManyWithWhereWithoutTagsInput {
+  data: CardsInCollectionUpdateManyMutationInput!
+  where: CardsInCollectionScalarWhereInput!
+}
+
+input CardsInCollectionUpdateManyWithoutCardInput {
+  connect: [CardsInCollectionWhereUniqueInput!]
+  connectOrCreate: [CardsInCollectionCreateOrConnectWithoutCardInput!]
+  create: [CardsInCollectionCreateWithoutCardInput!]
+  createMany: CardsInCollectionCreateManyCardInputEnvelope
+  delete: [CardsInCollectionWhereUniqueInput!]
+  deleteMany: [CardsInCollectionScalarWhereInput!]
+  disconnect: [CardsInCollectionWhereUniqueInput!]
+  set: [CardsInCollectionWhereUniqueInput!]
+  update: [CardsInCollectionUpdateWithWhereUniqueWithoutCardInput!]
+  updateMany: [CardsInCollectionUpdateManyWithWhereWithoutCardInput!]
+  upsert: [CardsInCollectionUpsertWithWhereUniqueWithoutCardInput!]
+}
+
+input CardsInCollectionUpdateManyWithoutCollectionInput {
+  connect: [CardsInCollectionWhereUniqueInput!]
+  connectOrCreate: [CardsInCollectionCreateOrConnectWithoutCollectionInput!]
+  create: [CardsInCollectionCreateWithoutCollectionInput!]
+  createMany: CardsInCollectionCreateManyCollectionInputEnvelope
+  delete: [CardsInCollectionWhereUniqueInput!]
+  deleteMany: [CardsInCollectionScalarWhereInput!]
+  disconnect: [CardsInCollectionWhereUniqueInput!]
+  set: [CardsInCollectionWhereUniqueInput!]
+  update: [CardsInCollectionUpdateWithWhereUniqueWithoutCollectionInput!]
+  updateMany: [CardsInCollectionUpdateManyWithWhereWithoutCollectionInput!]
+  upsert: [CardsInCollectionUpsertWithWhereUniqueWithoutCollectionInput!]
+}
+
+input CardsInCollectionUpdateManyWithoutTagsInput {
+  connect: [CardsInCollectionWhereUniqueInput!]
+  connectOrCreate: [CardsInCollectionCreateOrConnectWithoutTagsInput!]
+  create: [CardsInCollectionCreateWithoutTagsInput!]
+  delete: [CardsInCollectionWhereUniqueInput!]
+  deleteMany: [CardsInCollectionScalarWhereInput!]
+  disconnect: [CardsInCollectionWhereUniqueInput!]
+  set: [CardsInCollectionWhereUniqueInput!]
+  update: [CardsInCollectionUpdateWithWhereUniqueWithoutTagsInput!]
+  updateMany: [CardsInCollectionUpdateManyWithWhereWithoutTagsInput!]
+  upsert: [CardsInCollectionUpsertWithWhereUniqueWithoutTagsInput!]
+}
+
+input CardsInCollectionUpdateWithWhereUniqueWithoutCardInput {
+  data: CardsInCollectionUpdateWithoutCardInput!
+  where: CardsInCollectionWhereUniqueInput!
+}
+
+input CardsInCollectionUpdateWithWhereUniqueWithoutCollectionInput {
+  data: CardsInCollectionUpdateWithoutCollectionInput!
+  where: CardsInCollectionWhereUniqueInput!
+}
+
+input CardsInCollectionUpdateWithWhereUniqueWithoutTagsInput {
+  data: CardsInCollectionUpdateWithoutTagsInput!
+  where: CardsInCollectionWhereUniqueInput!
+}
+
+input CardsInCollectionUpdateWithoutCardInput {
+  collection: CollectionUpdateOneRequiredWithoutCardsInput
+  count: IntFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isEtched: BoolFieldUpdateOperationsInput
+  isFoil: BoolFieldUpdateOperationsInput
+  tags: TagUpdateManyWithoutCardsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CardsInCollectionUpdateWithoutCollectionInput {
+  card: CardUpdateOneRequiredWithoutCollectionsInput
+  count: IntFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isEtched: BoolFieldUpdateOperationsInput
+  isFoil: BoolFieldUpdateOperationsInput
+  tags: TagUpdateManyWithoutCardsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CardsInCollectionUpdateWithoutTagsInput {
+  card: CardUpdateOneRequiredWithoutCollectionsInput
+  collection: CollectionUpdateOneRequiredWithoutCardsInput
+  count: IntFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isEtched: BoolFieldUpdateOperationsInput
+  isFoil: BoolFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CardsInCollectionUpsertWithWhereUniqueWithoutCardInput {
+  create: CardsInCollectionCreateWithoutCardInput!
+  update: CardsInCollectionUpdateWithoutCardInput!
+  where: CardsInCollectionWhereUniqueInput!
+}
+
+input CardsInCollectionUpsertWithWhereUniqueWithoutCollectionInput {
+  create: CardsInCollectionCreateWithoutCollectionInput!
+  update: CardsInCollectionUpdateWithoutCollectionInput!
+  where: CardsInCollectionWhereUniqueInput!
+}
+
+input CardsInCollectionUpsertWithWhereUniqueWithoutTagsInput {
+  create: CardsInCollectionCreateWithoutTagsInput!
+  update: CardsInCollectionUpdateWithoutTagsInput!
+  where: CardsInCollectionWhereUniqueInput!
 }
 
 input CardsInCollectionWhereInput {
@@ -394,6 +663,7 @@ input CardsInCollectionWhereInput {
   id: StringFilter
   isEtched: BoolFilter
   isFoil: BoolFilter
+  tags: TagListRelationFilter
   updatedAt: DateTimeFilter
 }
 
@@ -417,6 +687,23 @@ type CollectionCount {
   cards: Int!
 }
 
+input CollectionCreateManyUserInput {
+  id: String
+  name: String!
+}
+
+input CollectionCreateManyUserInputEnvelope {
+  data: [CollectionCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input CollectionCreateNestedManyWithoutUserInput {
+  connect: [CollectionWhereUniqueInput!]
+  connectOrCreate: [CollectionCreateOrConnectWithoutUserInput!]
+  create: [CollectionCreateWithoutUserInput!]
+  createMany: CollectionCreateManyUserInputEnvelope
+}
+
 input CollectionCreateNestedOneWithoutCardsInput {
   connect: CollectionWhereUniqueInput
   connectOrCreate: CollectionCreateOrConnectWithoutCardsInput
@@ -425,6 +712,11 @@ input CollectionCreateNestedOneWithoutCardsInput {
 
 input CollectionCreateOrConnectWithoutCardsInput {
   create: CollectionCreateWithoutCardsInput!
+  where: CollectionWhereUniqueInput!
+}
+
+input CollectionCreateOrConnectWithoutUserInput {
+  create: CollectionCreateWithoutUserInput!
   where: CollectionWhereUniqueInput!
 }
 
@@ -469,6 +761,75 @@ enum CollectionScalarFieldEnum {
   name
   updatedAt
   userId
+}
+
+input CollectionScalarWhereInput {
+  AND: [CollectionScalarWhereInput!]
+  NOT: [CollectionScalarWhereInput!]
+  OR: [CollectionScalarWhereInput!]
+  id: StringFilter
+  name: StringFilter
+  userId: StringFilter
+}
+
+input CollectionUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input CollectionUpdateManyWithWhereWithoutUserInput {
+  data: CollectionUpdateManyMutationInput!
+  where: CollectionScalarWhereInput!
+}
+
+input CollectionUpdateManyWithoutUserInput {
+  connect: [CollectionWhereUniqueInput!]
+  connectOrCreate: [CollectionCreateOrConnectWithoutUserInput!]
+  create: [CollectionCreateWithoutUserInput!]
+  createMany: CollectionCreateManyUserInputEnvelope
+  delete: [CollectionWhereUniqueInput!]
+  deleteMany: [CollectionScalarWhereInput!]
+  disconnect: [CollectionWhereUniqueInput!]
+  set: [CollectionWhereUniqueInput!]
+  update: [CollectionUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [CollectionUpdateManyWithWhereWithoutUserInput!]
+  upsert: [CollectionUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input CollectionUpdateOneRequiredWithoutCardsInput {
+  connect: CollectionWhereUniqueInput
+  connectOrCreate: CollectionCreateOrConnectWithoutCardsInput
+  create: CollectionCreateWithoutCardsInput
+  update: CollectionUpdateWithoutCardsInput
+  upsert: CollectionUpsertWithoutCardsInput
+}
+
+input CollectionUpdateWithWhereUniqueWithoutUserInput {
+  data: CollectionUpdateWithoutUserInput!
+  where: CollectionWhereUniqueInput!
+}
+
+input CollectionUpdateWithoutCardsInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutCollectionsInput
+}
+
+input CollectionUpdateWithoutUserInput {
+  cards: CardsInCollectionUpdateManyWithoutCollectionInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input CollectionUpsertWithWhereUniqueWithoutUserInput {
+  create: CollectionCreateWithoutUserInput!
+  update: CollectionUpdateWithoutUserInput!
+  where: CollectionWhereUniqueInput!
+}
+
+input CollectionUpsertWithoutCardsInput {
+  create: CollectionCreateWithoutCardsInput!
+  update: CollectionUpdateWithoutCardsInput!
 }
 
 input CollectionUserIdNameCompoundUniqueInput {
@@ -628,6 +989,7 @@ input JsonNullableListFilter {
 type Mutation {
   addCardToCollection(input: AddCardToCollectionInput!): CardsInCollection!
   addCollection(input: CollectionCreateWithoutUserInput!): Collection!
+  createTag(input: TagCreateWithoutUserInput!): Tag!
   deleteCardFromCollection(where: CardsInCollectionWhereUniqueInput!): CardsInCollection!
   downloadBulkData(typeName: String!): Boolean!
   getOrCreateUser(input: UserCreateWithoutCollectionsInput!): User!
@@ -639,7 +1001,7 @@ type Mutation {
   processPriceData: Boolean!
   processSetData: Boolean!
   processUpdateCardList: Boolean!
-  updateCardsInCollection(input: CardsInCollectionUncheckedUpdateInput!): CardsInCollection!
+  updateCardsInCollection(id: String!, input: CardsInCollectionUpdateInput!): CardsInCollection!
 }
 
 input NestedBoolFilter {
@@ -799,6 +1161,34 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
 }
 
+input NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input NullableFloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
+}
+
+input NullableIntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 type Query {
   allBulkData: [BulkDataObjectType!]!
   allCards(cursor: CardWhereUniqueInput, distinct: [CardScalarFieldEnum!], orderBy: [CardOrderByWithRelationInput!], skip: Int, take: Int, where: CardWhereInput): [Card!]!
@@ -808,6 +1198,7 @@ type Query {
   allScryfallCards(cursor: ScryfallCardWhereUniqueInput, distinct: [ScryfallCardScalarFieldEnum!], orderBy: [ScryfallCardOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallCardWhereInput): [ScryfallCard!]!
   allScryfallPrices(cursor: ScryfallPriceWhereUniqueInput, distinct: [ScryfallPriceScalarFieldEnum!], orderBy: [ScryfallPriceOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallPriceWhereInput): [ScryfallPrice!]!
   allScryfallSets(cursor: ScryfallSetWhereUniqueInput, distinct: [ScryfallSetScalarFieldEnum!], orderBy: [ScryfallSetOrderByWithRelationInput!], skip: Int, take: Int, where: ScryfallSetWhereInput): [ScryfallSet!]!
+  allTags(cursor: TagWhereUniqueInput, distinct: [TagScalarFieldEnum!], orderBy: [TagOrderByWithRelationInput!], skip: Int, take: Int, where: TagWhereInput): [Tag!]!
   card(where: CardWhereUniqueInput!): Card!
   cardsInCollection(cursor: CardsInCollectionWhereUniqueInput, distinct: [CardsInCollectionScalarFieldEnum!], orderBy: [CardsInCollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CardsInCollectionWhereInput): CardsInCollection!
   collection(cursor: CollectionWhereUniqueInput, distinct: [CollectionScalarFieldEnum!], orderBy: [CollectionOrderByWithRelationInput!], skip: Int, take: Int, where: CollectionWhereInput): Collection!
@@ -1455,6 +1846,122 @@ input ScryfallCardFaceOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+input ScryfallCardFaceScalarWhereInput {
+  AND: [ScryfallCardFaceScalarWhereInput!]
+  NOT: [ScryfallCardFaceScalarWhereInput!]
+  OR: [ScryfallCardFaceScalarWhereInput!]
+  artist: StringNullableFilter
+  cardId: StringFilter
+  cmc: FloatNullableFilter
+  colorIndicator: StringNullableListFilter
+  colors: StringNullableListFilter
+  flavorText: StringNullableFilter
+  id: StringFilter
+  illustrationId: StringNullableFilter
+  imageUris: JsonNullableFilter
+  layout: StringNullableFilter
+  loyalty: StringNullableFilter
+  manaCost: StringNullableFilter
+  name: StringFilter
+  oracleId: StringNullableFilter
+  oracleText: StringNullableFilter
+  power: StringNullableFilter
+  printedName: StringNullableFilter
+  printedText: StringNullableFilter
+  printedTypeLine: StringNullableFilter
+  toughness: StringNullableFilter
+  typeLine: StringNullableFilter
+  watermark: StringNullableFilter
+}
+
+input ScryfallCardFaceUpdateManyMutationInput {
+  artist: NullableStringFieldUpdateOperationsInput
+  cmc: NullableFloatFieldUpdateOperationsInput
+  colorIndicator: ScryfallCardFaceUpdatecolorIndicatorInput
+  colors: ScryfallCardFaceUpdatecolorsInput
+  flavorText: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  illustrationId: NullableStringFieldUpdateOperationsInput
+  imageUris: JSON
+  layout: NullableStringFieldUpdateOperationsInput
+  loyalty: NullableStringFieldUpdateOperationsInput
+  manaCost: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  oracleId: NullableStringFieldUpdateOperationsInput
+  oracleText: NullableStringFieldUpdateOperationsInput
+  power: NullableStringFieldUpdateOperationsInput
+  printedName: NullableStringFieldUpdateOperationsInput
+  printedText: NullableStringFieldUpdateOperationsInput
+  printedTypeLine: NullableStringFieldUpdateOperationsInput
+  toughness: NullableStringFieldUpdateOperationsInput
+  typeLine: NullableStringFieldUpdateOperationsInput
+  watermark: NullableStringFieldUpdateOperationsInput
+}
+
+input ScryfallCardFaceUpdateManyWithWhereWithoutCardInput {
+  data: ScryfallCardFaceUpdateManyMutationInput!
+  where: ScryfallCardFaceScalarWhereInput!
+}
+
+input ScryfallCardFaceUpdateManyWithoutCardInput {
+  connect: [ScryfallCardFaceWhereUniqueInput!]
+  connectOrCreate: [ScryfallCardFaceCreateOrConnectWithoutCardInput!]
+  create: [ScryfallCardFaceCreateWithoutCardInput!]
+  createMany: ScryfallCardFaceCreateManyCardInputEnvelope
+  delete: [ScryfallCardFaceWhereUniqueInput!]
+  deleteMany: [ScryfallCardFaceScalarWhereInput!]
+  disconnect: [ScryfallCardFaceWhereUniqueInput!]
+  set: [ScryfallCardFaceWhereUniqueInput!]
+  update: [ScryfallCardFaceUpdateWithWhereUniqueWithoutCardInput!]
+  updateMany: [ScryfallCardFaceUpdateManyWithWhereWithoutCardInput!]
+  upsert: [ScryfallCardFaceUpsertWithWhereUniqueWithoutCardInput!]
+}
+
+input ScryfallCardFaceUpdateWithWhereUniqueWithoutCardInput {
+  data: ScryfallCardFaceUpdateWithoutCardInput!
+  where: ScryfallCardFaceWhereUniqueInput!
+}
+
+input ScryfallCardFaceUpdateWithoutCardInput {
+  artist: NullableStringFieldUpdateOperationsInput
+  cmc: NullableFloatFieldUpdateOperationsInput
+  colorIndicator: ScryfallCardFaceUpdatecolorIndicatorInput
+  colors: ScryfallCardFaceUpdatecolorsInput
+  flavorText: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  illustrationId: NullableStringFieldUpdateOperationsInput
+  imageUris: JSON
+  layout: NullableStringFieldUpdateOperationsInput
+  loyalty: NullableStringFieldUpdateOperationsInput
+  manaCost: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  oracleId: NullableStringFieldUpdateOperationsInput
+  oracleText: NullableStringFieldUpdateOperationsInput
+  power: NullableStringFieldUpdateOperationsInput
+  printedName: NullableStringFieldUpdateOperationsInput
+  printedText: NullableStringFieldUpdateOperationsInput
+  printedTypeLine: NullableStringFieldUpdateOperationsInput
+  toughness: NullableStringFieldUpdateOperationsInput
+  typeLine: NullableStringFieldUpdateOperationsInput
+  watermark: NullableStringFieldUpdateOperationsInput
+}
+
+input ScryfallCardFaceUpdatecolorIndicatorInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardFaceUpdatecolorsInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardFaceUpsertWithWhereUniqueWithoutCardInput {
+  create: ScryfallCardFaceCreateWithoutCardInput!
+  update: ScryfallCardFaceUpdateWithoutCardInput!
+  where: ScryfallCardFaceWhereUniqueInput!
+}
+
 input ScryfallCardFaceWhereInput {
   AND: [ScryfallCardFaceWhereInput!]
   NOT: [ScryfallCardFaceWhereInput!]
@@ -1701,6 +2208,454 @@ enum ScryfallCardScalarFieldEnum {
   varationOf
   variation
   watermark
+}
+
+input ScryfallCardUpdateOneRequiredWithoutCardInput {
+  connect: ScryfallCardWhereUniqueInput
+  connectOrCreate: ScryfallCardCreateOrConnectWithoutCardInput
+  create: ScryfallCardCreateWithoutCardInput
+  update: ScryfallCardUpdateWithoutCardInput
+  upsert: ScryfallCardUpsertWithoutCardInput
+}
+
+input ScryfallCardUpdateOneRequiredWithoutReferencedByInput {
+  connect: ScryfallCardWhereUniqueInput
+  connectOrCreate: ScryfallCardCreateOrConnectWithoutReferencedByInput
+  create: ScryfallCardCreateWithoutReferencedByInput
+  update: ScryfallCardUpdateWithoutReferencedByInput
+  upsert: ScryfallCardUpsertWithoutReferencedByInput
+}
+
+input ScryfallCardUpdateOneRequiredWithoutRelatedToInput {
+  connect: ScryfallCardWhereUniqueInput
+  connectOrCreate: ScryfallCardCreateOrConnectWithoutRelatedToInput
+  create: ScryfallCardCreateWithoutRelatedToInput
+  update: ScryfallCardUpdateWithoutRelatedToInput
+  upsert: ScryfallCardUpsertWithoutRelatedToInput
+}
+
+input ScryfallCardUpdateOneRequiredWithoutScryfallPriceInput {
+  connect: ScryfallCardWhereUniqueInput
+  connectOrCreate: ScryfallCardCreateOrConnectWithoutScryfallPriceInput
+  create: ScryfallCardCreateWithoutScryfallPriceInput
+  update: ScryfallCardUpdateWithoutScryfallPriceInput
+  upsert: ScryfallCardUpsertWithoutScryfallPriceInput
+}
+
+input ScryfallCardUpdateWithoutCardInput {
+  allParts: ScryfallCardUpdateallPartsInput
+  arenaId: NullableIntFieldUpdateOperationsInput
+  artist: NullableStringFieldUpdateOperationsInput
+  booster: BoolFieldUpdateOperationsInput
+  borderColor: StringFieldUpdateOperationsInput
+  cardBackId: NullableStringFieldUpdateOperationsInput
+  cardFaces: ScryfallCardFaceUpdateManyWithoutCardInput
+  cardFacesRaw: ScryfallCardUpdatecardFacesRawInput
+  cardmarketId: NullableIntFieldUpdateOperationsInput
+  cmc: NullableFloatFieldUpdateOperationsInput
+  collectorNumber: StringFieldUpdateOperationsInput
+  colorIdentity: ScryfallCardUpdatecolorIdentityInput
+  colorIndicator: ScryfallCardUpdatecolorIndicatorInput
+  colors: ScryfallCardUpdatecolorsInput
+  contentWarning: NullableBoolFieldUpdateOperationsInput
+  digital: BoolFieldUpdateOperationsInput
+  edhrecRank: NullableIntFieldUpdateOperationsInput
+  finishes: ScryfallCardUpdatefinishesInput
+  flavorName: NullableStringFieldUpdateOperationsInput
+  frame: StringFieldUpdateOperationsInput
+  frameEffects: ScryfallCardUpdateframeEffectsInput
+  fullArt: BoolFieldUpdateOperationsInput
+  games: ScryfallCardUpdategamesInput
+  handModifier: NullableStringFieldUpdateOperationsInput
+  highresImage: BoolFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  illustrationId: NullableStringFieldUpdateOperationsInput
+  imageStatus: StringFieldUpdateOperationsInput
+  imageUris: JSON
+  keywords: ScryfallCardUpdatekeywordsInput
+  lang: StringFieldUpdateOperationsInput
+  layout: StringFieldUpdateOperationsInput
+  legalities: JSON
+  lifeModifier: NullableStringFieldUpdateOperationsInput
+  loyalty: NullableStringFieldUpdateOperationsInput
+  manaCost: NullableStringFieldUpdateOperationsInput
+  mtgoFoilId: NullableIntFieldUpdateOperationsInput
+  mtgoId: NullableIntFieldUpdateOperationsInput
+  multiverseIds: ScryfallCardUpdatemultiverseIdsInput
+  name: StringFieldUpdateOperationsInput
+  oracleId: NullableStringFieldUpdateOperationsInput
+  oracleText: NullableStringFieldUpdateOperationsInput
+  oversized: BoolFieldUpdateOperationsInput
+  power: NullableStringFieldUpdateOperationsInput
+  prices: JSON
+  printedName: NullableStringFieldUpdateOperationsInput
+  printedText: NullableStringFieldUpdateOperationsInput
+  printedTypeLine: NullableStringFieldUpdateOperationsInput
+  printsSearchUri: StringFieldUpdateOperationsInput
+  producedMana: ScryfallCardUpdateproducedManaInput
+  promo: BoolFieldUpdateOperationsInput
+  promoTypes: ScryfallCardUpdatepromoTypesInput
+  purchaseUris: JSON
+  rarity: StringFieldUpdateOperationsInput
+  referencedBy: ScryfallRelatedCardUpdateManyWithoutReferenceInput
+  relatedTo: ScryfallRelatedCardUpdateManyWithoutCardInput
+  relatedUris: JSON
+  releasedAt: DateTimeFieldUpdateOperationsInput
+  reprint: BoolFieldUpdateOperationsInput
+  reserved: BoolFieldUpdateOperationsInput
+  rulingUri: NullableStringFieldUpdateOperationsInput
+  scryfallPrice: ScryfallPriceUpdateManyWithoutCardInput
+  scryfallSetUri: StringFieldUpdateOperationsInput
+  scryfallUri: StringFieldUpdateOperationsInput
+  securityStamp: NullableStringFieldUpdateOperationsInput
+  set: ScryfallSetUpdateOneRequiredWithoutCardsInput
+  setCode: StringFieldUpdateOperationsInput
+  setName: StringFieldUpdateOperationsInput
+  setSearchUri: StringFieldUpdateOperationsInput
+  setType: StringFieldUpdateOperationsInput
+  setUri: StringFieldUpdateOperationsInput
+  storySpotlight: BoolFieldUpdateOperationsInput
+  tcgplayerEtchedId: NullableIntFieldUpdateOperationsInput
+  tcgplayerId: NullableIntFieldUpdateOperationsInput
+  textless: BoolFieldUpdateOperationsInput
+  toughness: NullableStringFieldUpdateOperationsInput
+  typeLine: NullableStringFieldUpdateOperationsInput
+  uri: StringFieldUpdateOperationsInput
+  varationOf: NullableStringFieldUpdateOperationsInput
+  variation: BoolFieldUpdateOperationsInput
+  watermark: NullableStringFieldUpdateOperationsInput
+}
+
+input ScryfallCardUpdateWithoutReferencedByInput {
+  allParts: ScryfallCardUpdateallPartsInput
+  arenaId: NullableIntFieldUpdateOperationsInput
+  artist: NullableStringFieldUpdateOperationsInput
+  booster: BoolFieldUpdateOperationsInput
+  borderColor: StringFieldUpdateOperationsInput
+  card: CardUpdateOneWithoutScryfallCardInput
+  cardBackId: NullableStringFieldUpdateOperationsInput
+  cardFaces: ScryfallCardFaceUpdateManyWithoutCardInput
+  cardFacesRaw: ScryfallCardUpdatecardFacesRawInput
+  cardmarketId: NullableIntFieldUpdateOperationsInput
+  cmc: NullableFloatFieldUpdateOperationsInput
+  collectorNumber: StringFieldUpdateOperationsInput
+  colorIdentity: ScryfallCardUpdatecolorIdentityInput
+  colorIndicator: ScryfallCardUpdatecolorIndicatorInput
+  colors: ScryfallCardUpdatecolorsInput
+  contentWarning: NullableBoolFieldUpdateOperationsInput
+  digital: BoolFieldUpdateOperationsInput
+  edhrecRank: NullableIntFieldUpdateOperationsInput
+  finishes: ScryfallCardUpdatefinishesInput
+  flavorName: NullableStringFieldUpdateOperationsInput
+  frame: StringFieldUpdateOperationsInput
+  frameEffects: ScryfallCardUpdateframeEffectsInput
+  fullArt: BoolFieldUpdateOperationsInput
+  games: ScryfallCardUpdategamesInput
+  handModifier: NullableStringFieldUpdateOperationsInput
+  highresImage: BoolFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  illustrationId: NullableStringFieldUpdateOperationsInput
+  imageStatus: StringFieldUpdateOperationsInput
+  imageUris: JSON
+  keywords: ScryfallCardUpdatekeywordsInput
+  lang: StringFieldUpdateOperationsInput
+  layout: StringFieldUpdateOperationsInput
+  legalities: JSON
+  lifeModifier: NullableStringFieldUpdateOperationsInput
+  loyalty: NullableStringFieldUpdateOperationsInput
+  manaCost: NullableStringFieldUpdateOperationsInput
+  mtgoFoilId: NullableIntFieldUpdateOperationsInput
+  mtgoId: NullableIntFieldUpdateOperationsInput
+  multiverseIds: ScryfallCardUpdatemultiverseIdsInput
+  name: StringFieldUpdateOperationsInput
+  oracleId: NullableStringFieldUpdateOperationsInput
+  oracleText: NullableStringFieldUpdateOperationsInput
+  oversized: BoolFieldUpdateOperationsInput
+  power: NullableStringFieldUpdateOperationsInput
+  prices: JSON
+  printedName: NullableStringFieldUpdateOperationsInput
+  printedText: NullableStringFieldUpdateOperationsInput
+  printedTypeLine: NullableStringFieldUpdateOperationsInput
+  printsSearchUri: StringFieldUpdateOperationsInput
+  producedMana: ScryfallCardUpdateproducedManaInput
+  promo: BoolFieldUpdateOperationsInput
+  promoTypes: ScryfallCardUpdatepromoTypesInput
+  purchaseUris: JSON
+  rarity: StringFieldUpdateOperationsInput
+  relatedTo: ScryfallRelatedCardUpdateManyWithoutCardInput
+  relatedUris: JSON
+  releasedAt: DateTimeFieldUpdateOperationsInput
+  reprint: BoolFieldUpdateOperationsInput
+  reserved: BoolFieldUpdateOperationsInput
+  rulingUri: NullableStringFieldUpdateOperationsInput
+  scryfallPrice: ScryfallPriceUpdateManyWithoutCardInput
+  scryfallSetUri: StringFieldUpdateOperationsInput
+  scryfallUri: StringFieldUpdateOperationsInput
+  securityStamp: NullableStringFieldUpdateOperationsInput
+  set: ScryfallSetUpdateOneRequiredWithoutCardsInput
+  setCode: StringFieldUpdateOperationsInput
+  setName: StringFieldUpdateOperationsInput
+  setSearchUri: StringFieldUpdateOperationsInput
+  setType: StringFieldUpdateOperationsInput
+  setUri: StringFieldUpdateOperationsInput
+  storySpotlight: BoolFieldUpdateOperationsInput
+  tcgplayerEtchedId: NullableIntFieldUpdateOperationsInput
+  tcgplayerId: NullableIntFieldUpdateOperationsInput
+  textless: BoolFieldUpdateOperationsInput
+  toughness: NullableStringFieldUpdateOperationsInput
+  typeLine: NullableStringFieldUpdateOperationsInput
+  uri: StringFieldUpdateOperationsInput
+  varationOf: NullableStringFieldUpdateOperationsInput
+  variation: BoolFieldUpdateOperationsInput
+  watermark: NullableStringFieldUpdateOperationsInput
+}
+
+input ScryfallCardUpdateWithoutRelatedToInput {
+  allParts: ScryfallCardUpdateallPartsInput
+  arenaId: NullableIntFieldUpdateOperationsInput
+  artist: NullableStringFieldUpdateOperationsInput
+  booster: BoolFieldUpdateOperationsInput
+  borderColor: StringFieldUpdateOperationsInput
+  card: CardUpdateOneWithoutScryfallCardInput
+  cardBackId: NullableStringFieldUpdateOperationsInput
+  cardFaces: ScryfallCardFaceUpdateManyWithoutCardInput
+  cardFacesRaw: ScryfallCardUpdatecardFacesRawInput
+  cardmarketId: NullableIntFieldUpdateOperationsInput
+  cmc: NullableFloatFieldUpdateOperationsInput
+  collectorNumber: StringFieldUpdateOperationsInput
+  colorIdentity: ScryfallCardUpdatecolorIdentityInput
+  colorIndicator: ScryfallCardUpdatecolorIndicatorInput
+  colors: ScryfallCardUpdatecolorsInput
+  contentWarning: NullableBoolFieldUpdateOperationsInput
+  digital: BoolFieldUpdateOperationsInput
+  edhrecRank: NullableIntFieldUpdateOperationsInput
+  finishes: ScryfallCardUpdatefinishesInput
+  flavorName: NullableStringFieldUpdateOperationsInput
+  frame: StringFieldUpdateOperationsInput
+  frameEffects: ScryfallCardUpdateframeEffectsInput
+  fullArt: BoolFieldUpdateOperationsInput
+  games: ScryfallCardUpdategamesInput
+  handModifier: NullableStringFieldUpdateOperationsInput
+  highresImage: BoolFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  illustrationId: NullableStringFieldUpdateOperationsInput
+  imageStatus: StringFieldUpdateOperationsInput
+  imageUris: JSON
+  keywords: ScryfallCardUpdatekeywordsInput
+  lang: StringFieldUpdateOperationsInput
+  layout: StringFieldUpdateOperationsInput
+  legalities: JSON
+  lifeModifier: NullableStringFieldUpdateOperationsInput
+  loyalty: NullableStringFieldUpdateOperationsInput
+  manaCost: NullableStringFieldUpdateOperationsInput
+  mtgoFoilId: NullableIntFieldUpdateOperationsInput
+  mtgoId: NullableIntFieldUpdateOperationsInput
+  multiverseIds: ScryfallCardUpdatemultiverseIdsInput
+  name: StringFieldUpdateOperationsInput
+  oracleId: NullableStringFieldUpdateOperationsInput
+  oracleText: NullableStringFieldUpdateOperationsInput
+  oversized: BoolFieldUpdateOperationsInput
+  power: NullableStringFieldUpdateOperationsInput
+  prices: JSON
+  printedName: NullableStringFieldUpdateOperationsInput
+  printedText: NullableStringFieldUpdateOperationsInput
+  printedTypeLine: NullableStringFieldUpdateOperationsInput
+  printsSearchUri: StringFieldUpdateOperationsInput
+  producedMana: ScryfallCardUpdateproducedManaInput
+  promo: BoolFieldUpdateOperationsInput
+  promoTypes: ScryfallCardUpdatepromoTypesInput
+  purchaseUris: JSON
+  rarity: StringFieldUpdateOperationsInput
+  referencedBy: ScryfallRelatedCardUpdateManyWithoutReferenceInput
+  relatedUris: JSON
+  releasedAt: DateTimeFieldUpdateOperationsInput
+  reprint: BoolFieldUpdateOperationsInput
+  reserved: BoolFieldUpdateOperationsInput
+  rulingUri: NullableStringFieldUpdateOperationsInput
+  scryfallPrice: ScryfallPriceUpdateManyWithoutCardInput
+  scryfallSetUri: StringFieldUpdateOperationsInput
+  scryfallUri: StringFieldUpdateOperationsInput
+  securityStamp: NullableStringFieldUpdateOperationsInput
+  set: ScryfallSetUpdateOneRequiredWithoutCardsInput
+  setCode: StringFieldUpdateOperationsInput
+  setName: StringFieldUpdateOperationsInput
+  setSearchUri: StringFieldUpdateOperationsInput
+  setType: StringFieldUpdateOperationsInput
+  setUri: StringFieldUpdateOperationsInput
+  storySpotlight: BoolFieldUpdateOperationsInput
+  tcgplayerEtchedId: NullableIntFieldUpdateOperationsInput
+  tcgplayerId: NullableIntFieldUpdateOperationsInput
+  textless: BoolFieldUpdateOperationsInput
+  toughness: NullableStringFieldUpdateOperationsInput
+  typeLine: NullableStringFieldUpdateOperationsInput
+  uri: StringFieldUpdateOperationsInput
+  varationOf: NullableStringFieldUpdateOperationsInput
+  variation: BoolFieldUpdateOperationsInput
+  watermark: NullableStringFieldUpdateOperationsInput
+}
+
+input ScryfallCardUpdateWithoutScryfallPriceInput {
+  allParts: ScryfallCardUpdateallPartsInput
+  arenaId: NullableIntFieldUpdateOperationsInput
+  artist: NullableStringFieldUpdateOperationsInput
+  booster: BoolFieldUpdateOperationsInput
+  borderColor: StringFieldUpdateOperationsInput
+  card: CardUpdateOneWithoutScryfallCardInput
+  cardBackId: NullableStringFieldUpdateOperationsInput
+  cardFaces: ScryfallCardFaceUpdateManyWithoutCardInput
+  cardFacesRaw: ScryfallCardUpdatecardFacesRawInput
+  cardmarketId: NullableIntFieldUpdateOperationsInput
+  cmc: NullableFloatFieldUpdateOperationsInput
+  collectorNumber: StringFieldUpdateOperationsInput
+  colorIdentity: ScryfallCardUpdatecolorIdentityInput
+  colorIndicator: ScryfallCardUpdatecolorIndicatorInput
+  colors: ScryfallCardUpdatecolorsInput
+  contentWarning: NullableBoolFieldUpdateOperationsInput
+  digital: BoolFieldUpdateOperationsInput
+  edhrecRank: NullableIntFieldUpdateOperationsInput
+  finishes: ScryfallCardUpdatefinishesInput
+  flavorName: NullableStringFieldUpdateOperationsInput
+  frame: StringFieldUpdateOperationsInput
+  frameEffects: ScryfallCardUpdateframeEffectsInput
+  fullArt: BoolFieldUpdateOperationsInput
+  games: ScryfallCardUpdategamesInput
+  handModifier: NullableStringFieldUpdateOperationsInput
+  highresImage: BoolFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  illustrationId: NullableStringFieldUpdateOperationsInput
+  imageStatus: StringFieldUpdateOperationsInput
+  imageUris: JSON
+  keywords: ScryfallCardUpdatekeywordsInput
+  lang: StringFieldUpdateOperationsInput
+  layout: StringFieldUpdateOperationsInput
+  legalities: JSON
+  lifeModifier: NullableStringFieldUpdateOperationsInput
+  loyalty: NullableStringFieldUpdateOperationsInput
+  manaCost: NullableStringFieldUpdateOperationsInput
+  mtgoFoilId: NullableIntFieldUpdateOperationsInput
+  mtgoId: NullableIntFieldUpdateOperationsInput
+  multiverseIds: ScryfallCardUpdatemultiverseIdsInput
+  name: StringFieldUpdateOperationsInput
+  oracleId: NullableStringFieldUpdateOperationsInput
+  oracleText: NullableStringFieldUpdateOperationsInput
+  oversized: BoolFieldUpdateOperationsInput
+  power: NullableStringFieldUpdateOperationsInput
+  prices: JSON
+  printedName: NullableStringFieldUpdateOperationsInput
+  printedText: NullableStringFieldUpdateOperationsInput
+  printedTypeLine: NullableStringFieldUpdateOperationsInput
+  printsSearchUri: StringFieldUpdateOperationsInput
+  producedMana: ScryfallCardUpdateproducedManaInput
+  promo: BoolFieldUpdateOperationsInput
+  promoTypes: ScryfallCardUpdatepromoTypesInput
+  purchaseUris: JSON
+  rarity: StringFieldUpdateOperationsInput
+  referencedBy: ScryfallRelatedCardUpdateManyWithoutReferenceInput
+  relatedTo: ScryfallRelatedCardUpdateManyWithoutCardInput
+  relatedUris: JSON
+  releasedAt: DateTimeFieldUpdateOperationsInput
+  reprint: BoolFieldUpdateOperationsInput
+  reserved: BoolFieldUpdateOperationsInput
+  rulingUri: NullableStringFieldUpdateOperationsInput
+  scryfallSetUri: StringFieldUpdateOperationsInput
+  scryfallUri: StringFieldUpdateOperationsInput
+  securityStamp: NullableStringFieldUpdateOperationsInput
+  set: ScryfallSetUpdateOneRequiredWithoutCardsInput
+  setCode: StringFieldUpdateOperationsInput
+  setName: StringFieldUpdateOperationsInput
+  setSearchUri: StringFieldUpdateOperationsInput
+  setType: StringFieldUpdateOperationsInput
+  setUri: StringFieldUpdateOperationsInput
+  storySpotlight: BoolFieldUpdateOperationsInput
+  tcgplayerEtchedId: NullableIntFieldUpdateOperationsInput
+  tcgplayerId: NullableIntFieldUpdateOperationsInput
+  textless: BoolFieldUpdateOperationsInput
+  toughness: NullableStringFieldUpdateOperationsInput
+  typeLine: NullableStringFieldUpdateOperationsInput
+  uri: StringFieldUpdateOperationsInput
+  varationOf: NullableStringFieldUpdateOperationsInput
+  variation: BoolFieldUpdateOperationsInput
+  watermark: NullableStringFieldUpdateOperationsInput
+}
+
+input ScryfallCardUpdateallPartsInput {
+  push: [JSON!]
+  set: [JSON!]
+}
+
+input ScryfallCardUpdatecardFacesRawInput {
+  push: [JSON!]
+  set: [JSON!]
+}
+
+input ScryfallCardUpdatecolorIdentityInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpdatecolorIndicatorInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpdatecolorsInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpdatefinishesInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpdateframeEffectsInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpdategamesInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpdatekeywordsInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpdatemultiverseIdsInput {
+  push: [Int!]
+  set: [Int!]
+}
+
+input ScryfallCardUpdateproducedManaInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpdatepromoTypesInput {
+  push: [String!]
+  set: [String!]
+}
+
+input ScryfallCardUpsertWithoutCardInput {
+  create: ScryfallCardCreateWithoutCardInput!
+  update: ScryfallCardUpdateWithoutCardInput!
+}
+
+input ScryfallCardUpsertWithoutReferencedByInput {
+  create: ScryfallCardCreateWithoutReferencedByInput!
+  update: ScryfallCardUpdateWithoutReferencedByInput!
+}
+
+input ScryfallCardUpsertWithoutRelatedToInput {
+  create: ScryfallCardCreateWithoutRelatedToInput!
+  update: ScryfallCardUpdateWithoutRelatedToInput!
+}
+
+input ScryfallCardUpsertWithoutScryfallPriceInput {
+  create: ScryfallCardCreateWithoutScryfallPriceInput!
+  update: ScryfallCardUpdateWithoutScryfallPriceInput!
 }
 
 input ScryfallCardWhereInput {
@@ -2112,6 +3067,22 @@ enum ScryfallPriceScalarFieldEnum {
   usdFoil
 }
 
+input ScryfallPriceScalarWhereInput {
+  AND: [ScryfallPriceScalarWhereInput!]
+  NOT: [ScryfallPriceScalarWhereInput!]
+  OR: [ScryfallPriceScalarWhereInput!]
+  cardId: StringFilter
+  currentPriceOfCardId: StringNullableFilter
+  date: DateTimeFilter
+  eur: FloatNullableFilter
+  eurFoil: FloatNullableFilter
+  id: StringFilter
+  tix: FloatNullableFilter
+  usd: FloatNullableFilter
+  usdEtched: FloatNullableFilter
+  usdFoil: FloatNullableFilter
+}
+
 input ScryfallPriceScalarWhereWithAggregatesInput {
   AND: [ScryfallPriceScalarWhereWithAggregatesInput!]
   NOT: [ScryfallPriceScalarWhereWithAggregatesInput!]
@@ -2153,6 +3124,86 @@ input ScryfallPriceSumOrderByAggregateInput {
   usd: SortOrder
   usdEtched: SortOrder
   usdFoil: SortOrder
+}
+
+input ScryfallPriceUpdateManyMutationInput {
+  date: DateTimeFieldUpdateOperationsInput
+  eur: NullableFloatFieldUpdateOperationsInput
+  eurFoil: NullableFloatFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  tix: NullableFloatFieldUpdateOperationsInput
+  usd: NullableFloatFieldUpdateOperationsInput
+  usdEtched: NullableFloatFieldUpdateOperationsInput
+  usdFoil: NullableFloatFieldUpdateOperationsInput
+}
+
+input ScryfallPriceUpdateManyWithWhereWithoutCardInput {
+  data: ScryfallPriceUpdateManyMutationInput!
+  where: ScryfallPriceScalarWhereInput!
+}
+
+input ScryfallPriceUpdateManyWithoutCardInput {
+  connect: [ScryfallPriceWhereUniqueInput!]
+  connectOrCreate: [ScryfallPriceCreateOrConnectWithoutCardInput!]
+  create: [ScryfallPriceCreateWithoutCardInput!]
+  createMany: ScryfallPriceCreateManyCardInputEnvelope
+  delete: [ScryfallPriceWhereUniqueInput!]
+  deleteMany: [ScryfallPriceScalarWhereInput!]
+  disconnect: [ScryfallPriceWhereUniqueInput!]
+  set: [ScryfallPriceWhereUniqueInput!]
+  update: [ScryfallPriceUpdateWithWhereUniqueWithoutCardInput!]
+  updateMany: [ScryfallPriceUpdateManyWithWhereWithoutCardInput!]
+  upsert: [ScryfallPriceUpsertWithWhereUniqueWithoutCardInput!]
+}
+
+input ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput {
+  connect: ScryfallPriceWhereUniqueInput
+  connectOrCreate: ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput
+  create: ScryfallPriceCreateWithoutCurrentPriceOfCardInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ScryfallPriceUpdateWithoutCurrentPriceOfCardInput
+  upsert: ScryfallPriceUpsertWithoutCurrentPriceOfCardInput
+}
+
+input ScryfallPriceUpdateWithWhereUniqueWithoutCardInput {
+  data: ScryfallPriceUpdateWithoutCardInput!
+  where: ScryfallPriceWhereUniqueInput!
+}
+
+input ScryfallPriceUpdateWithoutCardInput {
+  currentPriceOfCard: CardUpdateOneWithoutCurrentPriceInput
+  date: DateTimeFieldUpdateOperationsInput
+  eur: NullableFloatFieldUpdateOperationsInput
+  eurFoil: NullableFloatFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  tix: NullableFloatFieldUpdateOperationsInput
+  usd: NullableFloatFieldUpdateOperationsInput
+  usdEtched: NullableFloatFieldUpdateOperationsInput
+  usdFoil: NullableFloatFieldUpdateOperationsInput
+}
+
+input ScryfallPriceUpdateWithoutCurrentPriceOfCardInput {
+  card: ScryfallCardUpdateOneRequiredWithoutScryfallPriceInput
+  date: DateTimeFieldUpdateOperationsInput
+  eur: NullableFloatFieldUpdateOperationsInput
+  eurFoil: NullableFloatFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  tix: NullableFloatFieldUpdateOperationsInput
+  usd: NullableFloatFieldUpdateOperationsInput
+  usdEtched: NullableFloatFieldUpdateOperationsInput
+  usdFoil: NullableFloatFieldUpdateOperationsInput
+}
+
+input ScryfallPriceUpsertWithWhereUniqueWithoutCardInput {
+  create: ScryfallPriceCreateWithoutCardInput!
+  update: ScryfallPriceUpdateWithoutCardInput!
+  where: ScryfallPriceWhereUniqueInput!
+}
+
+input ScryfallPriceUpsertWithoutCurrentPriceOfCardInput {
+  create: ScryfallPriceCreateWithoutCurrentPriceOfCardInput!
+  update: ScryfallPriceUpdateWithoutCurrentPriceOfCardInput!
 }
 
 input ScryfallPriceWhereInput {
@@ -2270,6 +3321,105 @@ input ScryfallRelatedCardListRelationFilter {
 
 input ScryfallRelatedCardOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+input ScryfallRelatedCardScalarWhereInput {
+  AND: [ScryfallRelatedCardScalarWhereInput!]
+  NOT: [ScryfallRelatedCardScalarWhereInput!]
+  OR: [ScryfallRelatedCardScalarWhereInput!]
+  cardId: StringFilter
+  component: StringFilter
+  id: StringFilter
+  name: StringFilter
+  referenceId: StringFilter
+  typeLine: StringFilter
+  uri: StringFilter
+}
+
+input ScryfallRelatedCardUpdateManyMutationInput {
+  component: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  typeLine: StringFieldUpdateOperationsInput
+  uri: StringFieldUpdateOperationsInput
+}
+
+input ScryfallRelatedCardUpdateManyWithWhereWithoutCardInput {
+  data: ScryfallRelatedCardUpdateManyMutationInput!
+  where: ScryfallRelatedCardScalarWhereInput!
+}
+
+input ScryfallRelatedCardUpdateManyWithWhereWithoutReferenceInput {
+  data: ScryfallRelatedCardUpdateManyMutationInput!
+  where: ScryfallRelatedCardScalarWhereInput!
+}
+
+input ScryfallRelatedCardUpdateManyWithoutCardInput {
+  connect: [ScryfallRelatedCardWhereUniqueInput!]
+  connectOrCreate: [ScryfallRelatedCardCreateOrConnectWithoutCardInput!]
+  create: [ScryfallRelatedCardCreateWithoutCardInput!]
+  createMany: ScryfallRelatedCardCreateManyCardInputEnvelope
+  delete: [ScryfallRelatedCardWhereUniqueInput!]
+  deleteMany: [ScryfallRelatedCardScalarWhereInput!]
+  disconnect: [ScryfallRelatedCardWhereUniqueInput!]
+  set: [ScryfallRelatedCardWhereUniqueInput!]
+  update: [ScryfallRelatedCardUpdateWithWhereUniqueWithoutCardInput!]
+  updateMany: [ScryfallRelatedCardUpdateManyWithWhereWithoutCardInput!]
+  upsert: [ScryfallRelatedCardUpsertWithWhereUniqueWithoutCardInput!]
+}
+
+input ScryfallRelatedCardUpdateManyWithoutReferenceInput {
+  connect: [ScryfallRelatedCardWhereUniqueInput!]
+  connectOrCreate: [ScryfallRelatedCardCreateOrConnectWithoutReferenceInput!]
+  create: [ScryfallRelatedCardCreateWithoutReferenceInput!]
+  createMany: ScryfallRelatedCardCreateManyReferenceInputEnvelope
+  delete: [ScryfallRelatedCardWhereUniqueInput!]
+  deleteMany: [ScryfallRelatedCardScalarWhereInput!]
+  disconnect: [ScryfallRelatedCardWhereUniqueInput!]
+  set: [ScryfallRelatedCardWhereUniqueInput!]
+  update: [ScryfallRelatedCardUpdateWithWhereUniqueWithoutReferenceInput!]
+  updateMany: [ScryfallRelatedCardUpdateManyWithWhereWithoutReferenceInput!]
+  upsert: [ScryfallRelatedCardUpsertWithWhereUniqueWithoutReferenceInput!]
+}
+
+input ScryfallRelatedCardUpdateWithWhereUniqueWithoutCardInput {
+  data: ScryfallRelatedCardUpdateWithoutCardInput!
+  where: ScryfallRelatedCardWhereUniqueInput!
+}
+
+input ScryfallRelatedCardUpdateWithWhereUniqueWithoutReferenceInput {
+  data: ScryfallRelatedCardUpdateWithoutReferenceInput!
+  where: ScryfallRelatedCardWhereUniqueInput!
+}
+
+input ScryfallRelatedCardUpdateWithoutCardInput {
+  component: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  reference: ScryfallCardUpdateOneRequiredWithoutReferencedByInput
+  typeLine: StringFieldUpdateOperationsInput
+  uri: StringFieldUpdateOperationsInput
+}
+
+input ScryfallRelatedCardUpdateWithoutReferenceInput {
+  card: ScryfallCardUpdateOneRequiredWithoutRelatedToInput
+  component: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  typeLine: StringFieldUpdateOperationsInput
+  uri: StringFieldUpdateOperationsInput
+}
+
+input ScryfallRelatedCardUpsertWithWhereUniqueWithoutCardInput {
+  create: ScryfallRelatedCardCreateWithoutCardInput!
+  update: ScryfallRelatedCardUpdateWithoutCardInput!
+  where: ScryfallRelatedCardWhereUniqueInput!
+}
+
+input ScryfallRelatedCardUpsertWithWhereUniqueWithoutReferenceInput {
+  create: ScryfallRelatedCardCreateWithoutReferenceInput!
+  update: ScryfallRelatedCardUpdateWithoutReferenceInput!
+  where: ScryfallRelatedCardWhereUniqueInput!
 }
 
 input ScryfallRelatedCardWhereInput {
@@ -2410,6 +3560,42 @@ enum ScryfallSetScalarFieldEnum {
   uri
 }
 
+input ScryfallSetUpdateOneRequiredWithoutCardsInput {
+  connect: ScryfallSetWhereUniqueInput
+  connectOrCreate: ScryfallSetCreateOrConnectWithoutCardsInput
+  create: ScryfallSetCreateWithoutCardsInput
+  update: ScryfallSetUpdateWithoutCardsInput
+  upsert: ScryfallSetUpsertWithoutCardsInput
+}
+
+input ScryfallSetUpdateWithoutCardsInput {
+  arenaCode: NullableStringFieldUpdateOperationsInput
+  block: NullableStringFieldUpdateOperationsInput
+  blockCode: NullableStringFieldUpdateOperationsInput
+  cardCount: IntFieldUpdateOperationsInput
+  code: StringFieldUpdateOperationsInput
+  iconSvgUri: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  isDigital: BoolFieldUpdateOperationsInput
+  isFoilOnly: BoolFieldUpdateOperationsInput
+  isNonFoilOnly: BoolFieldUpdateOperationsInput
+  mtgoCode: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  parentSetCode: NullableStringFieldUpdateOperationsInput
+  printedSize: NullableIntFieldUpdateOperationsInput
+  releasedAt: NullableDateTimeFieldUpdateOperationsInput
+  scryfallUri: StringFieldUpdateOperationsInput
+  searchUri: StringFieldUpdateOperationsInput
+  setType: StringFieldUpdateOperationsInput
+  tcgPlayerId: NullableIntFieldUpdateOperationsInput
+  uri: StringFieldUpdateOperationsInput
+}
+
+input ScryfallSetUpsertWithoutCardsInput {
+  create: ScryfallSetCreateWithoutCardsInput!
+  update: ScryfallSetUpdateWithoutCardsInput!
+}
+
 input ScryfallSetWhereInput {
   AND: [ScryfallSetWhereInput!]
   NOT: [ScryfallSetWhereInput!]
@@ -2527,7 +3713,200 @@ input StringWithAggregatesFilter {
   startsWith: String
 }
 
+type Tag {
+  _count: TagCount!
+  cards: [CardsInCollection!]!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type TagCount {
+  cards: Int!
+}
+
+input TagCreateManyUserInput {
+  id: String
+  name: String!
+}
+
+input TagCreateManyUserInputEnvelope {
+  data: [TagCreateManyUserInput!]!
+  skipDuplicates: Boolean
+}
+
+input TagCreateNestedManyWithoutCardsInput {
+  connect: [TagWhereUniqueInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutCardsInput!]
+  create: [TagCreateWithoutCardsInput!]
+}
+
+input TagCreateNestedManyWithoutUserInput {
+  connect: [TagWhereUniqueInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutUserInput!]
+  create: [TagCreateWithoutUserInput!]
+  createMany: TagCreateManyUserInputEnvelope
+}
+
+input TagCreateOrConnectWithoutCardsInput {
+  create: TagCreateWithoutCardsInput!
+  where: TagWhereUniqueInput!
+}
+
+input TagCreateOrConnectWithoutUserInput {
+  create: TagCreateWithoutUserInput!
+  where: TagWhereUniqueInput!
+}
+
+input TagCreateWithoutCardsInput {
+  id: String
+  name: String!
+  user: UserCreateNestedOneWithoutTagInput!
+}
+
+input TagCreateWithoutUserInput {
+  cards: CardsInCollectionCreateNestedManyWithoutTagsInput
+  id: String
+  name: String!
+}
+
+input TagListRelationFilter {
+  every: TagWhereInput
+  none: TagWhereInput
+  some: TagWhereInput
+}
+
+input TagOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input TagOrderByWithRelationInput {
+  cards: CardsInCollectionOrderByRelationAggregateInput
+  id: SortOrder
+  name: SortOrder
+  user: UserOrderByWithRelationInput
+  userId: SortOrder
+}
+
+enum TagScalarFieldEnum {
+  createdAt
+  id
+  name
+  updatedAt
+  userId
+}
+
+input TagScalarWhereInput {
+  AND: [TagScalarWhereInput!]
+  NOT: [TagScalarWhereInput!]
+  OR: [TagScalarWhereInput!]
+  id: StringFilter
+  name: StringFilter
+  userId: StringFilter
+}
+
+input TagUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TagUpdateManyWithWhereWithoutCardsInput {
+  data: TagUpdateManyMutationInput!
+  where: TagScalarWhereInput!
+}
+
+input TagUpdateManyWithWhereWithoutUserInput {
+  data: TagUpdateManyMutationInput!
+  where: TagScalarWhereInput!
+}
+
+input TagUpdateManyWithoutCardsInput {
+  connect: [TagWhereUniqueInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutCardsInput!]
+  create: [TagCreateWithoutCardsInput!]
+  delete: [TagWhereUniqueInput!]
+  deleteMany: [TagScalarWhereInput!]
+  disconnect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutCardsInput!]
+  updateMany: [TagUpdateManyWithWhereWithoutCardsInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutCardsInput!]
+}
+
+input TagUpdateManyWithoutUserInput {
+  connect: [TagWhereUniqueInput!]
+  connectOrCreate: [TagCreateOrConnectWithoutUserInput!]
+  create: [TagCreateWithoutUserInput!]
+  createMany: TagCreateManyUserInputEnvelope
+  delete: [TagWhereUniqueInput!]
+  deleteMany: [TagScalarWhereInput!]
+  disconnect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [TagUpdateManyWithWhereWithoutUserInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input TagUpdateWithWhereUniqueWithoutCardsInput {
+  data: TagUpdateWithoutCardsInput!
+  where: TagWhereUniqueInput!
+}
+
+input TagUpdateWithWhereUniqueWithoutUserInput {
+  data: TagUpdateWithoutUserInput!
+  where: TagWhereUniqueInput!
+}
+
+input TagUpdateWithoutCardsInput {
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTagInput
+}
+
+input TagUpdateWithoutUserInput {
+  cards: CardsInCollectionUpdateManyWithoutTagsInput
+  id: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+}
+
+input TagUpsertWithWhereUniqueWithoutCardsInput {
+  create: TagCreateWithoutCardsInput!
+  update: TagUpdateWithoutCardsInput!
+  where: TagWhereUniqueInput!
+}
+
+input TagUpsertWithWhereUniqueWithoutUserInput {
+  create: TagCreateWithoutUserInput!
+  update: TagUpdateWithoutUserInput!
+  where: TagWhereUniqueInput!
+}
+
+input TagUserIdNameCompoundUniqueInput {
+  name: String!
+  userId: String!
+}
+
+input TagWhereInput {
+  AND: [TagWhereInput!]
+  NOT: [TagWhereInput!]
+  OR: [TagWhereInput!]
+  cards: CardsInCollectionListRelationFilter
+  id: StringFilter
+  name: StringFilter
+  user: UserRelationFilter
+  userId: StringFilter
+}
+
+input TagWhereUniqueInput {
+  id: String
+  userId_name: TagUserIdNameCompoundUniqueInput
+}
+
 type User {
+  Tag: [Tag!]
   _count: UserCount!
   collections: [Collection!]
   createdAt: DateTime!
@@ -2538,6 +3917,7 @@ type User {
 }
 
 type UserCount {
+  Tag: Int!
   collections: Int!
 }
 
@@ -2547,18 +3927,38 @@ input UserCreateNestedOneWithoutCollectionsInput {
   create: UserCreateWithoutCollectionsInput
 }
 
+input UserCreateNestedOneWithoutTagInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTagInput
+  create: UserCreateWithoutTagInput
+}
+
 input UserCreateOrConnectWithoutCollectionsInput {
   create: UserCreateWithoutCollectionsInput!
   where: UserWhereUniqueInput!
 }
 
+input UserCreateOrConnectWithoutTagInput {
+  create: UserCreateWithoutTagInput!
+  where: UserWhereUniqueInput!
+}
+
 input UserCreateWithoutCollectionsInput {
+  Tag: TagCreateNestedManyWithoutUserInput
+  email: String!
+  externalAuthId: String!
+  id: String
+}
+
+input UserCreateWithoutTagInput {
+  collections: CollectionCreateNestedManyWithoutUserInput
   email: String!
   externalAuthId: String!
   id: String
 }
 
 input UserOrderByWithRelationInput {
+  Tag: TagOrderByRelationAggregateInput
   collections: CollectionOrderByRelationAggregateInput
   email: SortOrder
   externalAuthId: SortOrder
@@ -2570,10 +3970,51 @@ input UserRelationFilter {
   isNot: UserWhereInput
 }
 
+input UserUpdateOneRequiredWithoutCollectionsInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCollectionsInput
+  create: UserCreateWithoutCollectionsInput
+  update: UserUpdateWithoutCollectionsInput
+  upsert: UserUpsertWithoutCollectionsInput
+}
+
+input UserUpdateOneRequiredWithoutTagInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTagInput
+  create: UserCreateWithoutTagInput
+  update: UserUpdateWithoutTagInput
+  upsert: UserUpsertWithoutTagInput
+}
+
+input UserUpdateWithoutCollectionsInput {
+  Tag: TagUpdateManyWithoutUserInput
+  email: StringFieldUpdateOperationsInput
+  externalAuthId: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutTagInput {
+  collections: CollectionUpdateManyWithoutUserInput
+  email: StringFieldUpdateOperationsInput
+  externalAuthId: StringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+}
+
+input UserUpsertWithoutCollectionsInput {
+  create: UserCreateWithoutCollectionsInput!
+  update: UserUpdateWithoutCollectionsInput!
+}
+
+input UserUpsertWithoutTagInput {
+  create: UserCreateWithoutTagInput!
+  update: UserUpdateWithoutTagInput!
+}
+
 input UserWhereInput {
   AND: [UserWhereInput!]
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  Tag: TagListRelationFilter
   collections: CollectionListRelationFilter
   email: StringFilter
   externalAuthId: StringFilter

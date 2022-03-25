@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import {
   useCollectionGridDeleteCardFromCollectionMutation,
   useCollectionManageLazyQuery,
-  useCollectionManageUpdateCardInCollectionMutation,
+  useUpdateCardInCollectionMutation,
 } from '../../../@types/codegen/graphql';
 import { CardInCollection, CollectionGrid } from './components/collection-grid';
 import { QuickAdd } from './components/quick-add';
@@ -17,8 +17,7 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
   const [fetchCollection, { data, loading }] = useCollectionManageLazyQuery();
   const [deleteCardFromCollection] =
     useCollectionGridDeleteCardFromCollectionMutation();
-  const [updateCardInCollection] =
-    useCollectionManageUpdateCardInCollectionMutation();
+  const [updateCardInCollection] = useUpdateCardInCollectionMutation();
 
   // I'm sure this is somehow "wrong", but it's the only damn way I was able to
   // figure out how to prevent the `ref.current` reference from disappearing
@@ -56,10 +55,7 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
       if (!data?.collection) return;
       await deleteCardFromCollection({
         variables: {
-          cardId: cardInCollection.card.id,
-          collectionId: data.collection.id,
-          isFoil: cardInCollection.isFoil,
-          isEtched: cardInCollection.isEtched,
+          id: cardInCollection.id,
         },
       });
       ref.current?.api.refreshServerSideStore();
@@ -70,8 +66,7 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
   const handleUpdateCardCount = useCallback(
     async (
       params: {
-        cardId: string;
-        collectionId: string;
+        id: string;
         isEtched: boolean;
         isFoil: boolean;
       },
@@ -80,9 +75,8 @@ export const CollectionManage: React.FC<CollectionManageProps> = (props) => {
       if (!data?.collection) return;
       await updateCardInCollection({
         variables: {
+          id: params.id,
           input: {
-            cardId: { set: params.cardId },
-            collectionId: { set: params.collectionId },
             isFoil: { set: params.isFoil },
             isEtched: { set: params.isEtched },
             count: { set: count },

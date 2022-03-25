@@ -1,0 +1,6 @@
+mutation CreateTag($input: TagCreateWithoutUserInput!) {
+  createTag(input: $input) {
+    id
+    name
+  }
+}

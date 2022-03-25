@@ -1,0 +1,8 @@
+mutation CollectionGridDeleteCardFromCollection($id: String!) {
+  deleteCardFromCollection(where: { id: $id }) {
+    cardId
+    collectionId
+    isEtched
+    isFoil
+  }
+}

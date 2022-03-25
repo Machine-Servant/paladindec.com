@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import { TagUncheckedCreateNestedManyWithoutCardsInput } from '../tag/tag-unchecked-create-nested-many-without-cards.input';
 
 @InputType()
 export class CardsInCollectionUncheckedCreateWithoutCardInput {
@@ -24,4 +25,9 @@ export class CardsInCollectionUncheckedCreateWithoutCardInput {
 
   @Field(() => String, { nullable: true })
   id?: string;
+
+  @Field(() => TagUncheckedCreateNestedManyWithoutCardsInput, {
+    nullable: true,
+  })
+  tags?: TagUncheckedCreateNestedManyWithoutCardsInput;
 }

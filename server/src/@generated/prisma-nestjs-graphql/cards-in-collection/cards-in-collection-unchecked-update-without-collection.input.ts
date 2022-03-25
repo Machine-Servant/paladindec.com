@@ -4,6 +4,7 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { IntFieldUpdateOperationsInput } from '../prisma/int-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-operations.input';
+import { TagUncheckedUpdateManyWithoutCardsInput } from '../tag/tag-unchecked-update-many-without-cards.input';
 
 @InputType()
 export class CardsInCollectionUncheckedUpdateWithoutCollectionInput {
@@ -27,4 +28,7 @@ export class CardsInCollectionUncheckedUpdateWithoutCollectionInput {
 
   @Field(() => StringFieldUpdateOperationsInput, { nullable: true })
   id?: StringFieldUpdateOperationsInput;
+
+  @Field(() => TagUncheckedUpdateManyWithoutCardsInput, { nullable: true })
+  tags?: TagUncheckedUpdateManyWithoutCardsInput;
 }

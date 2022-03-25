@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { CardCreateNestedOneWithoutCollectionsInput } from '../card/card-create-nested-one-without-collections.input';
+import { TagCreateNestedManyWithoutCardsInput } from '../tag/tag-create-nested-many-without-cards.input';
 
 @InputType()
 export class CardsInCollectionCreateWithoutCollectionInput {
@@ -25,4 +26,7 @@ export class CardsInCollectionCreateWithoutCollectionInput {
 
   @Field(() => CardCreateNestedOneWithoutCollectionsInput, { nullable: false })
   card!: CardCreateNestedOneWithoutCollectionsInput;
+
+  @Field(() => TagCreateNestedManyWithoutCardsInput, { nullable: true })
+  tags?: TagCreateNestedManyWithoutCardsInput;
 }

@@ -23,7 +23,7 @@ export const ApolloProvider: React.FC<React.PropsWithChildren<unknown>> = ({
 
   return (
     <ApolloContext.Provider value={{ client: client.value }}>
-      <BaseApolloProvider client={client.value}>{children}</BaseApolloProvider>;
+      <BaseApolloProvider client={client.value}>{children}</BaseApolloProvider>
     </ApolloContext.Provider>
   );
 };

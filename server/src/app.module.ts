@@ -19,6 +19,7 @@ import { UserModule } from './modules/user/user.module';
 import { GraphqlInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpModule } from '@nestjs/axios';
+import { TagModule } from './modules/tag/tag.module';
 
 @Module({
   imports: [
@@ -101,6 +102,7 @@ import { HttpModule } from '@nestjs/axios';
         environment: process.env.NODE_ENV,
       }),
     }),
+    TagModule,
   ],
   controllers: [AppController],
   providers: [

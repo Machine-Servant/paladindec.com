@@ -4,6 +4,8 @@ import { Int } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { Card } from '../card/card.model';
 import { Collection } from '../collection/collection.model';
+import { Tag } from '../tag/tag.model';
+import { CardsInCollectionCount } from './cards-in-collection-count.output';
 
 @ObjectType()
 export class CardsInCollection {
@@ -36,4 +38,10 @@ export class CardsInCollection {
 
   @Field(() => Collection, { nullable: false })
   collection?: Collection;
+
+  @Field(() => [Tag], { nullable: true })
+  tags?: Array<Tag>;
+
+  @Field(() => CardsInCollectionCount, { nullable: false })
+  _count?: CardsInCollectionCount;
 }

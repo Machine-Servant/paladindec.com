@@ -6,6 +6,7 @@ import { BoolFieldUpdateOperationsInput } from '../prisma/bool-field-update-oper
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { CardUpdateOneRequiredWithoutCollectionsInput } from '../card/card-update-one-required-without-collections.input';
 import { CollectionUpdateOneRequiredWithoutCardsInput } from '../collection/collection-update-one-required-without-cards.input';
+import { TagUpdateManyWithoutCardsInput } from '../tag/tag-update-many-without-cards.input';
 
 @InputType()
 export class CardsInCollectionUpdateInput {
@@ -32,4 +33,7 @@ export class CardsInCollectionUpdateInput {
 
   @Field(() => CollectionUpdateOneRequiredWithoutCardsInput, { nullable: true })
   collection?: CollectionUpdateOneRequiredWithoutCardsInput;
+
+  @Field(() => TagUpdateManyWithoutCardsInput, { nullable: true })
+  tags?: TagUpdateManyWithoutCardsInput;
 }
