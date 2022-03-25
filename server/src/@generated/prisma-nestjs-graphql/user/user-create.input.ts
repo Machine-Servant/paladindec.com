@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { HideField } from '@nestjs/graphql';
 import { CollectionCreateNestedManyWithoutUserInput } from '../collection/collection-create-nested-many-without-user.input';
+import { TagCreateNestedManyWithoutUserInput } from '../tag/tag-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateInput {
@@ -22,4 +23,7 @@ export class UserCreateInput {
 
   @Field(() => CollectionCreateNestedManyWithoutUserInput, { nullable: true })
   collections?: CollectionCreateNestedManyWithoutUserInput;
+
+  @Field(() => TagCreateNestedManyWithoutUserInput, { nullable: true })
+  Tag?: TagCreateNestedManyWithoutUserInput;
 }

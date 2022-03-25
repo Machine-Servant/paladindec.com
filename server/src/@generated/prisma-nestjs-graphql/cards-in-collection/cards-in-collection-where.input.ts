@@ -6,6 +6,7 @@ import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { BoolFilter } from '../prisma/bool-filter.input';
 import { CardRelationFilter } from '../card/card-relation-filter.input';
 import { CollectionRelationFilter } from '../collection/collection-relation-filter.input';
+import { TagListRelationFilter } from '../tag/tag-list-relation-filter.input';
 
 @InputType()
 export class CardsInCollectionWhereInput {
@@ -47,4 +48,7 @@ export class CardsInCollectionWhereInput {
 
   @Field(() => CollectionRelationFilter, { nullable: true })
   collection?: CollectionRelationFilter;
+
+  @Field(() => TagListRelationFilter, { nullable: true })
+  tags?: TagListRelationFilter;
 }

@@ -1,6 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CardsInCollection } from '@prisma/client';
-import { CardsInCollectionUncheckedUpdateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-unchecked-update.input';
+import { CardsInCollectionUpdateInput } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/cards-in-collection-update.input';
 import { DeleteOneCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/delete-one-cards-in-collection.args';
 import { FindFirstCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-first-cards-in-collection.args';
 import { FindManyCardsInCollectionArgs } from '../../../@generated/prisma-nestjs-graphql/cards-in-collection/find-many-cards-in-collection.args';
@@ -19,16 +19,26 @@ export class CardsInCollectionService {
   private readonly logger = new Logger(CardsInCollectionService.name);
 
   async update(
-    input?: CardsInCollectionUncheckedUpdateInput,
+    id: string,
+    userId: string,
+    input?: CardsInCollectionUpdateInput,
   ): Promise<CardsInCollection> {
+    const found = await this.prismaService.cardsInCollection.findFirst({
+      where: {
+        id,
+        collection: {
+          userId,
+        },
+      },
+    });
+
+    if (!found) {
+      throw new NotFoundException(`CardInCollection #${id} not found`);
+    }
+
     return this.prismaService.cardsInCollection.update({
       where: {
-        cardId_collectionId_isFoil_isEtched: {
-          cardId: input.cardId.set,
-          collectionId: input.collectionId.set,
-          isEtched: input.isEtched.set,
-          isFoil: input.isFoil.set,
-        },
+        id,
       },
       data: input,
     });

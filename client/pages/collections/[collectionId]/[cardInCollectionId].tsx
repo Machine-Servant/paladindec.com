@@ -2,9 +2,12 @@ import { gql } from '@apollo/client';
 import { GetServerSideProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
-import { Card, CardsInCollection } from '../../../@types/codegen/graphql';
+import { Card, CardsInCollection, Tag } from '../../../@types/codegen/graphql';
 import { AppLayout } from '../../../components/app-layout';
-import { CardDetails } from '../../../components/pages/card-details';
+import {
+  CardDetails,
+  CardDetailsCardInCollection,
+} from '../../../components/pages/card-details';
 import { GraphQLClient } from '../../../graphql/graphql-client';
 import { useProtectedRoute } from '../../../hooks/useProtectedRoute';
 import { Logger } from '../../../utils/logger';
@@ -15,9 +18,10 @@ type CardDetailsPageQueryType = {
 };
 
 type CardDetailsPageProps = {
-  cardsInCollection: Partial<CardsInCollection>;
+  cardsInCollection: CardDetailsCardInCollection;
   otherPrintings: Partial<Card>[];
   allCardsInCollection: Partial<CardsInCollection>[];
+  allTags: Pick<Tag, 'id' | 'name'>[];
 };
 
 function isCardDetailsPageQueryType(
@@ -38,6 +42,7 @@ const CardDetailsPage: React.FC<CardDetailsPageProps> = (props) => {
         cardsInCollection={props.cardsInCollection}
         otherPrintings={props.otherPrintings}
         allCardsInCollection={props.allCardsInCollection}
+        tags={props.allTags}
       />
     </AppLayout>
   );
@@ -65,6 +70,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           usd
         }
         count
+        collection {
+          id
+          name
+          userId
+        }
+        tags {
+          id
+          name
+        }
         card {
           name
           isRetro
@@ -87,6 +101,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           }
         }
       }
+      allTags {
+        id
+        name
+      }
     }
   `;
 
@@ -102,7 +120,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const GET_OTHER_PRINTINGS_BY_NAME_QUERY = gql`
     query GetOtherPrintingsByCardName($name: String!, $collectionId: String!) {
-      otherPrintings: allCards(where: { name: { equals: $name } }) {
+      otherPrintings: allCards(
+        where: { name: { equals: $name }, isPaper: { equals: true } }
+      ) {
         id
         name
         currentPrice {
@@ -174,6 +194,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       cardsInCollection: results.data.cardsInCollection,
       otherPrintings: otherPrintingResults.data.otherPrintings,
       allCardsInCollection: otherPrintingResults.data.allCardsInCollection,
+      allTags: results.data.allTags,
     },
   };
 };

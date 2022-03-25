@@ -27,6 +27,7 @@ export type AddCardToCollectionInput = {
   id?: InputMaybe<Scalars['String']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
+  tags?: InputMaybe<TagCreateNestedManyWithoutCardsInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -228,6 +229,97 @@ export enum CardScalarFieldEnum {
   UpdatedAt = 'updatedAt'
 }
 
+export type CardUpdateOneRequiredWithoutCollectionsInput = {
+  connect?: InputMaybe<CardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CardCreateOrConnectWithoutCollectionsInput>;
+  create?: InputMaybe<CardCreateWithoutCollectionsInput>;
+  update?: InputMaybe<CardUpdateWithoutCollectionsInput>;
+  upsert?: InputMaybe<CardUpsertWithoutCollectionsInput>;
+};
+
+export type CardUpdateOneWithoutCurrentPriceInput = {
+  connect?: InputMaybe<CardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CardCreateOrConnectWithoutCurrentPriceInput>;
+  create?: InputMaybe<CardCreateWithoutCurrentPriceInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<CardUpdateWithoutCurrentPriceInput>;
+  upsert?: InputMaybe<CardUpsertWithoutCurrentPriceInput>;
+};
+
+export type CardUpdateOneWithoutScryfallCardInput = {
+  connect?: InputMaybe<CardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CardCreateOrConnectWithoutScryfallCardInput>;
+  create?: InputMaybe<CardCreateWithoutScryfallCardInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<CardUpdateWithoutScryfallCardInput>;
+  upsert?: InputMaybe<CardUpsertWithoutScryfallCardInput>;
+};
+
+export type CardUpdateWithoutCollectionsInput = {
+  canBeEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  canBeFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  canBeNonFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  collectorNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  currentPrice?: InputMaybe<ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isBorderless?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isExtendedArt?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isPaper?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isRetro?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isShowcase?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  scryfallCard?: InputMaybe<ScryfallCardUpdateOneRequiredWithoutCardInput>;
+};
+
+export type CardUpdateWithoutCurrentPriceInput = {
+  canBeEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  canBeFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  canBeNonFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  collections?: InputMaybe<CardsInCollectionUpdateManyWithoutCardInput>;
+  collectorNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isBorderless?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isExtendedArt?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isPaper?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isRetro?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isShowcase?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  scryfallCard?: InputMaybe<ScryfallCardUpdateOneRequiredWithoutCardInput>;
+};
+
+export type CardUpdateWithoutScryfallCardInput = {
+  canBeEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  canBeFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  canBeNonFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  collections?: InputMaybe<CardsInCollectionUpdateManyWithoutCardInput>;
+  collectorNumber?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  currentPrice?: InputMaybe<ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isBorderless?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isExtendedArt?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isPaper?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isRetro?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isShowcase?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type CardUpsertWithoutCollectionsInput = {
+  create: CardCreateWithoutCollectionsInput;
+  update: CardUpdateWithoutCollectionsInput;
+};
+
+export type CardUpsertWithoutCurrentPriceInput = {
+  create: CardCreateWithoutCurrentPriceInput;
+  update: CardUpdateWithoutCurrentPriceInput;
+};
+
+export type CardUpsertWithoutScryfallCardInput = {
+  create: CardCreateWithoutScryfallCardInput;
+  update: CardUpdateWithoutScryfallCardInput;
+};
+
 export type CardWhereInput = {
   AND?: InputMaybe<Array<CardWhereInput>>;
   NOT?: InputMaybe<Array<CardWhereInput>>;
@@ -256,6 +348,7 @@ export type CardWhereUniqueInput = {
 
 export type CardsInCollection = {
   __typename?: 'CardsInCollection';
+  _count: CardsInCollectionCount;
   card: Card;
   cardId: Scalars['String'];
   collection: Collection;
@@ -266,7 +359,18 @@ export type CardsInCollection = {
   isEtched: Scalars['Boolean'];
   isFoil: Scalars['Boolean'];
   price?: Maybe<CardsInCollectionCardPrice>;
+  tags: Array<Tag>;
   updatedAt: Scalars['DateTime'];
+};
+
+
+export type CardsInCollectionTagsArgs = {
+  cursor?: InputMaybe<TagWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TagScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TagOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TagWhereInput>;
 };
 
 export type CardsInCollectionCardIdCollectionIdIsFoilIsEtchedCompoundUniqueInput = {
@@ -280,6 +384,11 @@ export type CardsInCollectionCardPrice = {
   __typename?: 'CardsInCollectionCardPrice';
   eur: Scalars['Float'];
   usd: Scalars['Float'];
+};
+
+export type CardsInCollectionCount = {
+  __typename?: 'CardsInCollectionCount';
+  tags: Scalars['Int'];
 };
 
 export type CardsInCollectionCreateManyCardInput = {
@@ -326,6 +435,12 @@ export type CardsInCollectionCreateNestedManyWithoutCollectionInput = {
   createMany?: InputMaybe<CardsInCollectionCreateManyCollectionInputEnvelope>;
 };
 
+export type CardsInCollectionCreateNestedManyWithoutTagsInput = {
+  connect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CardsInCollectionCreateOrConnectWithoutTagsInput>>;
+  create?: InputMaybe<Array<CardsInCollectionCreateWithoutTagsInput>>;
+};
+
 export type CardsInCollectionCreateOrConnectWithoutCardInput = {
   create: CardsInCollectionCreateWithoutCardInput;
   where: CardsInCollectionWhereUniqueInput;
@@ -336,6 +451,11 @@ export type CardsInCollectionCreateOrConnectWithoutCollectionInput = {
   where: CardsInCollectionWhereUniqueInput;
 };
 
+export type CardsInCollectionCreateOrConnectWithoutTagsInput = {
+  create: CardsInCollectionCreateWithoutTagsInput;
+  where: CardsInCollectionWhereUniqueInput;
+};
+
 export type CardsInCollectionCreateWithoutCardInput = {
   collection: CollectionCreateNestedOneWithoutCardsInput;
   count?: InputMaybe<Scalars['Int']>;
@@ -343,11 +463,24 @@ export type CardsInCollectionCreateWithoutCardInput = {
   id?: InputMaybe<Scalars['String']>;
   isEtched?: InputMaybe<Scalars['Boolean']>;
   isFoil?: InputMaybe<Scalars['Boolean']>;
+  tags?: InputMaybe<TagCreateNestedManyWithoutCardsInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type CardsInCollectionCreateWithoutCollectionInput = {
   card: CardCreateNestedOneWithoutCollectionsInput;
+  count?: InputMaybe<Scalars['Int']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  id?: InputMaybe<Scalars['String']>;
+  isEtched?: InputMaybe<Scalars['Boolean']>;
+  isFoil?: InputMaybe<Scalars['Boolean']>;
+  tags?: InputMaybe<TagCreateNestedManyWithoutCardsInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type CardsInCollectionCreateWithoutTagsInput = {
+  card: CardCreateNestedOneWithoutCollectionsInput;
+  collection: CollectionCreateNestedOneWithoutCardsInput;
   count?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   id?: InputMaybe<Scalars['String']>;
@@ -376,6 +509,7 @@ export type CardsInCollectionOrderByWithRelationInput = {
   id?: InputMaybe<SortOrder>;
   isEtched?: InputMaybe<SortOrder>;
   isFoil?: InputMaybe<SortOrder>;
+  tags?: InputMaybe<TagOrderByRelationAggregateInput>;
   updatedAt?: InputMaybe<SortOrder>;
 };
 
@@ -390,15 +524,161 @@ export enum CardsInCollectionScalarFieldEnum {
   UpdatedAt = 'updatedAt'
 }
 
-export type CardsInCollectionUncheckedUpdateInput = {
-  cardId?: InputMaybe<StringFieldUpdateOperationsInput>;
-  collectionId?: InputMaybe<StringFieldUpdateOperationsInput>;
+export type CardsInCollectionScalarWhereInput = {
+  AND?: InputMaybe<Array<CardsInCollectionScalarWhereInput>>;
+  NOT?: InputMaybe<Array<CardsInCollectionScalarWhereInput>>;
+  OR?: InputMaybe<Array<CardsInCollectionScalarWhereInput>>;
+  cardId?: InputMaybe<StringFilter>;
+  collectionId?: InputMaybe<StringFilter>;
+  count?: InputMaybe<IntFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  id?: InputMaybe<StringFilter>;
+  isEtched?: InputMaybe<BoolFilter>;
+  isFoil?: InputMaybe<BoolFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type CardsInCollectionUpdateInput = {
+  card?: InputMaybe<CardUpdateOneRequiredWithoutCollectionsInput>;
+  collection?: InputMaybe<CollectionUpdateOneRequiredWithoutCardsInput>;
+  count?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  tags?: InputMaybe<TagUpdateManyWithoutCardsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CardsInCollectionUpdateManyMutationInput = {
   count?: InputMaybe<IntFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   isEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
   isFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CardsInCollectionUpdateManyWithWhereWithoutCardInput = {
+  data: CardsInCollectionUpdateManyMutationInput;
+  where: CardsInCollectionScalarWhereInput;
+};
+
+export type CardsInCollectionUpdateManyWithWhereWithoutCollectionInput = {
+  data: CardsInCollectionUpdateManyMutationInput;
+  where: CardsInCollectionScalarWhereInput;
+};
+
+export type CardsInCollectionUpdateManyWithWhereWithoutTagsInput = {
+  data: CardsInCollectionUpdateManyMutationInput;
+  where: CardsInCollectionScalarWhereInput;
+};
+
+export type CardsInCollectionUpdateManyWithoutCardInput = {
+  connect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CardsInCollectionCreateOrConnectWithoutCardInput>>;
+  create?: InputMaybe<Array<CardsInCollectionCreateWithoutCardInput>>;
+  createMany?: InputMaybe<CardsInCollectionCreateManyCardInputEnvelope>;
+  delete?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CardsInCollectionScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  set?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  update?: InputMaybe<Array<CardsInCollectionUpdateWithWhereUniqueWithoutCardInput>>;
+  updateMany?: InputMaybe<Array<CardsInCollectionUpdateManyWithWhereWithoutCardInput>>;
+  upsert?: InputMaybe<Array<CardsInCollectionUpsertWithWhereUniqueWithoutCardInput>>;
+};
+
+export type CardsInCollectionUpdateManyWithoutCollectionInput = {
+  connect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CardsInCollectionCreateOrConnectWithoutCollectionInput>>;
+  create?: InputMaybe<Array<CardsInCollectionCreateWithoutCollectionInput>>;
+  createMany?: InputMaybe<CardsInCollectionCreateManyCollectionInputEnvelope>;
+  delete?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CardsInCollectionScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  set?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  update?: InputMaybe<Array<CardsInCollectionUpdateWithWhereUniqueWithoutCollectionInput>>;
+  updateMany?: InputMaybe<Array<CardsInCollectionUpdateManyWithWhereWithoutCollectionInput>>;
+  upsert?: InputMaybe<Array<CardsInCollectionUpsertWithWhereUniqueWithoutCollectionInput>>;
+};
+
+export type CardsInCollectionUpdateManyWithoutTagsInput = {
+  connect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CardsInCollectionCreateOrConnectWithoutTagsInput>>;
+  create?: InputMaybe<Array<CardsInCollectionCreateWithoutTagsInput>>;
+  delete?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CardsInCollectionScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  set?: InputMaybe<Array<CardsInCollectionWhereUniqueInput>>;
+  update?: InputMaybe<Array<CardsInCollectionUpdateWithWhereUniqueWithoutTagsInput>>;
+  updateMany?: InputMaybe<Array<CardsInCollectionUpdateManyWithWhereWithoutTagsInput>>;
+  upsert?: InputMaybe<Array<CardsInCollectionUpsertWithWhereUniqueWithoutTagsInput>>;
+};
+
+export type CardsInCollectionUpdateWithWhereUniqueWithoutCardInput = {
+  data: CardsInCollectionUpdateWithoutCardInput;
+  where: CardsInCollectionWhereUniqueInput;
+};
+
+export type CardsInCollectionUpdateWithWhereUniqueWithoutCollectionInput = {
+  data: CardsInCollectionUpdateWithoutCollectionInput;
+  where: CardsInCollectionWhereUniqueInput;
+};
+
+export type CardsInCollectionUpdateWithWhereUniqueWithoutTagsInput = {
+  data: CardsInCollectionUpdateWithoutTagsInput;
+  where: CardsInCollectionWhereUniqueInput;
+};
+
+export type CardsInCollectionUpdateWithoutCardInput = {
+  collection?: InputMaybe<CollectionUpdateOneRequiredWithoutCardsInput>;
+  count?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  tags?: InputMaybe<TagUpdateManyWithoutCardsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CardsInCollectionUpdateWithoutCollectionInput = {
+  card?: InputMaybe<CardUpdateOneRequiredWithoutCollectionsInput>;
+  count?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  tags?: InputMaybe<TagUpdateManyWithoutCardsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CardsInCollectionUpdateWithoutTagsInput = {
+  card?: InputMaybe<CardUpdateOneRequiredWithoutCollectionsInput>;
+  collection?: InputMaybe<CollectionUpdateOneRequiredWithoutCardsInput>;
+  count?: InputMaybe<IntFieldUpdateOperationsInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isEtched?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isFoil?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CardsInCollectionUpsertWithWhereUniqueWithoutCardInput = {
+  create: CardsInCollectionCreateWithoutCardInput;
+  update: CardsInCollectionUpdateWithoutCardInput;
+  where: CardsInCollectionWhereUniqueInput;
+};
+
+export type CardsInCollectionUpsertWithWhereUniqueWithoutCollectionInput = {
+  create: CardsInCollectionCreateWithoutCollectionInput;
+  update: CardsInCollectionUpdateWithoutCollectionInput;
+  where: CardsInCollectionWhereUniqueInput;
+};
+
+export type CardsInCollectionUpsertWithWhereUniqueWithoutTagsInput = {
+  create: CardsInCollectionCreateWithoutTagsInput;
+  update: CardsInCollectionUpdateWithoutTagsInput;
+  where: CardsInCollectionWhereUniqueInput;
 };
 
 export type CardsInCollectionWhereInput = {
@@ -414,6 +694,7 @@ export type CardsInCollectionWhereInput = {
   id?: InputMaybe<StringFilter>;
   isEtched?: InputMaybe<BoolFilter>;
   isFoil?: InputMaybe<BoolFilter>;
+  tags?: InputMaybe<TagListRelationFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
 };
 
@@ -449,6 +730,23 @@ export type CollectionCount = {
   cards: Scalars['Int'];
 };
 
+export type CollectionCreateManyUserInput = {
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+export type CollectionCreateManyUserInputEnvelope = {
+  data: Array<CollectionCreateManyUserInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type CollectionCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<CollectionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CollectionCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<CollectionCreateWithoutUserInput>>;
+  createMany?: InputMaybe<CollectionCreateManyUserInputEnvelope>;
+};
+
 export type CollectionCreateNestedOneWithoutCardsInput = {
   connect?: InputMaybe<CollectionWhereUniqueInput>;
   connectOrCreate?: InputMaybe<CollectionCreateOrConnectWithoutCardsInput>;
@@ -457,6 +755,11 @@ export type CollectionCreateNestedOneWithoutCardsInput = {
 
 export type CollectionCreateOrConnectWithoutCardsInput = {
   create: CollectionCreateWithoutCardsInput;
+  where: CollectionWhereUniqueInput;
+};
+
+export type CollectionCreateOrConnectWithoutUserInput = {
+  create: CollectionCreateWithoutUserInput;
   where: CollectionWhereUniqueInput;
 };
 
@@ -502,6 +805,75 @@ export enum CollectionScalarFieldEnum {
   UpdatedAt = 'updatedAt',
   UserId = 'userId'
 }
+
+export type CollectionScalarWhereInput = {
+  AND?: InputMaybe<Array<CollectionScalarWhereInput>>;
+  NOT?: InputMaybe<Array<CollectionScalarWhereInput>>;
+  OR?: InputMaybe<Array<CollectionScalarWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type CollectionUpdateManyMutationInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type CollectionUpdateManyWithWhereWithoutUserInput = {
+  data: CollectionUpdateManyMutationInput;
+  where: CollectionScalarWhereInput;
+};
+
+export type CollectionUpdateManyWithoutUserInput = {
+  connect?: InputMaybe<Array<CollectionWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<CollectionCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<CollectionCreateWithoutUserInput>>;
+  createMany?: InputMaybe<CollectionCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<CollectionWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<CollectionScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<CollectionWhereUniqueInput>>;
+  set?: InputMaybe<Array<CollectionWhereUniqueInput>>;
+  update?: InputMaybe<Array<CollectionUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: InputMaybe<Array<CollectionUpdateManyWithWhereWithoutUserInput>>;
+  upsert?: InputMaybe<Array<CollectionUpsertWithWhereUniqueWithoutUserInput>>;
+};
+
+export type CollectionUpdateOneRequiredWithoutCardsInput = {
+  connect?: InputMaybe<CollectionWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<CollectionCreateOrConnectWithoutCardsInput>;
+  create?: InputMaybe<CollectionCreateWithoutCardsInput>;
+  update?: InputMaybe<CollectionUpdateWithoutCardsInput>;
+  upsert?: InputMaybe<CollectionUpsertWithoutCardsInput>;
+};
+
+export type CollectionUpdateWithWhereUniqueWithoutUserInput = {
+  data: CollectionUpdateWithoutUserInput;
+  where: CollectionWhereUniqueInput;
+};
+
+export type CollectionUpdateWithoutCardsInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutCollectionsInput>;
+};
+
+export type CollectionUpdateWithoutUserInput = {
+  cards?: InputMaybe<CardsInCollectionUpdateManyWithoutCollectionInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type CollectionUpsertWithWhereUniqueWithoutUserInput = {
+  create: CollectionCreateWithoutUserInput;
+  update: CollectionUpdateWithoutUserInput;
+  where: CollectionWhereUniqueInput;
+};
+
+export type CollectionUpsertWithoutCardsInput = {
+  create: CollectionCreateWithoutCardsInput;
+  update: CollectionUpdateWithoutCardsInput;
+};
 
 export type CollectionUserIdNameCompoundUniqueInput = {
   name: Scalars['String'];
@@ -651,6 +1023,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addCardToCollection: CardsInCollection;
   addCollection: Collection;
+  createTag: Tag;
   deleteCardFromCollection: CardsInCollection;
   downloadBulkData: Scalars['Boolean'];
   getOrCreateUser: User;
@@ -676,6 +1049,11 @@ export type MutationAddCollectionArgs = {
 };
 
 
+export type MutationCreateTagArgs = {
+  input: TagCreateWithoutUserInput;
+};
+
+
 export type MutationDeleteCardFromCollectionArgs = {
   where: CardsInCollectionWhereUniqueInput;
 };
@@ -692,7 +1070,8 @@ export type MutationGetOrCreateUserArgs = {
 
 
 export type MutationUpdateCardsInCollectionArgs = {
-  input: CardsInCollectionUncheckedUpdateInput;
+  id: Scalars['String'];
+  input: CardsInCollectionUpdateInput;
 };
 
 export type NestedBoolFilter = {
@@ -852,15 +1231,45 @@ export type NestedStringWithAggregatesFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Float']>;
+  divide?: InputMaybe<Scalars['Float']>;
+  increment?: InputMaybe<Scalars['Float']>;
+  multiply?: InputMaybe<Scalars['Float']>;
+  set?: InputMaybe<Scalars['Float']>;
+};
+
+export type NullableIntFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Int']>;
+  divide?: InputMaybe<Scalars['Int']>;
+  increment?: InputMaybe<Scalars['Int']>;
+  multiply?: InputMaybe<Scalars['Int']>;
+  set?: InputMaybe<Scalars['Int']>;
+};
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: InputMaybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   allBulkData: Array<BulkDataObjectType>;
   allCards: Array<Card>;
+  allCardsInCollection: Array<CardsInCollection>;
   allCollections: Array<Collection>;
   allScryfallCardNames: Array<ScryfallCardName>;
   allScryfallCards: Array<ScryfallCard>;
   allScryfallPrices: Array<ScryfallPrice>;
   allScryfallSets: Array<ScryfallSet>;
+  allTags: Array<Tag>;
   card: Card;
   cardsInCollection: CardsInCollection;
   collection: Collection;
@@ -874,6 +1283,16 @@ export type QueryAllCardsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CardWhereInput>;
+};
+
+
+export type QueryAllCardsInCollectionArgs = {
+  cursor?: InputMaybe<CardsInCollectionWhereUniqueInput>;
+  distinct?: InputMaybe<Array<CardsInCollectionScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<CardsInCollectionOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CardsInCollectionWhereInput>;
 };
 
 
@@ -924,6 +1343,16 @@ export type QueryAllScryfallSetsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   take?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<ScryfallSetWhereInput>;
+};
+
+
+export type QueryAllTagsArgs = {
+  cursor?: InputMaybe<TagWhereUniqueInput>;
+  distinct?: InputMaybe<Array<TagScalarFieldEnum>>;
+  orderBy?: InputMaybe<Array<TagOrderByWithRelationInput>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<TagWhereInput>;
 };
 
 
@@ -1620,6 +2049,122 @@ export type ScryfallCardFaceOrderByRelationAggregateInput = {
   _count?: InputMaybe<SortOrder>;
 };
 
+export type ScryfallCardFaceScalarWhereInput = {
+  AND?: InputMaybe<Array<ScryfallCardFaceScalarWhereInput>>;
+  NOT?: InputMaybe<Array<ScryfallCardFaceScalarWhereInput>>;
+  OR?: InputMaybe<Array<ScryfallCardFaceScalarWhereInput>>;
+  artist?: InputMaybe<StringNullableFilter>;
+  cardId?: InputMaybe<StringFilter>;
+  cmc?: InputMaybe<FloatNullableFilter>;
+  colorIndicator?: InputMaybe<StringNullableListFilter>;
+  colors?: InputMaybe<StringNullableListFilter>;
+  flavorText?: InputMaybe<StringNullableFilter>;
+  id?: InputMaybe<StringFilter>;
+  illustrationId?: InputMaybe<StringNullableFilter>;
+  imageUris?: InputMaybe<JsonNullableFilter>;
+  layout?: InputMaybe<StringNullableFilter>;
+  loyalty?: InputMaybe<StringNullableFilter>;
+  manaCost?: InputMaybe<StringNullableFilter>;
+  name?: InputMaybe<StringFilter>;
+  oracleId?: InputMaybe<StringNullableFilter>;
+  oracleText?: InputMaybe<StringNullableFilter>;
+  power?: InputMaybe<StringNullableFilter>;
+  printedName?: InputMaybe<StringNullableFilter>;
+  printedText?: InputMaybe<StringNullableFilter>;
+  printedTypeLine?: InputMaybe<StringNullableFilter>;
+  toughness?: InputMaybe<StringNullableFilter>;
+  typeLine?: InputMaybe<StringNullableFilter>;
+  watermark?: InputMaybe<StringNullableFilter>;
+};
+
+export type ScryfallCardFaceUpdateManyMutationInput = {
+  artist?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cmc?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  colorIndicator?: InputMaybe<ScryfallCardFaceUpdatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardFaceUpdatecolorsInput>;
+  flavorText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  illustrationId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  layout?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  loyalty?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  manaCost?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  oracleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oracleText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  power?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedTypeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  toughness?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  typeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  watermark?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallCardFaceUpdateManyWithWhereWithoutCardInput = {
+  data: ScryfallCardFaceUpdateManyMutationInput;
+  where: ScryfallCardFaceScalarWhereInput;
+};
+
+export type ScryfallCardFaceUpdateManyWithoutCardInput = {
+  connect?: InputMaybe<Array<ScryfallCardFaceWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ScryfallCardFaceCreateOrConnectWithoutCardInput>>;
+  create?: InputMaybe<Array<ScryfallCardFaceCreateWithoutCardInput>>;
+  createMany?: InputMaybe<ScryfallCardFaceCreateManyCardInputEnvelope>;
+  delete?: InputMaybe<Array<ScryfallCardFaceWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<ScryfallCardFaceScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<ScryfallCardFaceWhereUniqueInput>>;
+  set?: InputMaybe<Array<ScryfallCardFaceWhereUniqueInput>>;
+  update?: InputMaybe<Array<ScryfallCardFaceUpdateWithWhereUniqueWithoutCardInput>>;
+  updateMany?: InputMaybe<Array<ScryfallCardFaceUpdateManyWithWhereWithoutCardInput>>;
+  upsert?: InputMaybe<Array<ScryfallCardFaceUpsertWithWhereUniqueWithoutCardInput>>;
+};
+
+export type ScryfallCardFaceUpdateWithWhereUniqueWithoutCardInput = {
+  data: ScryfallCardFaceUpdateWithoutCardInput;
+  where: ScryfallCardFaceWhereUniqueInput;
+};
+
+export type ScryfallCardFaceUpdateWithoutCardInput = {
+  artist?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cmc?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  colorIndicator?: InputMaybe<ScryfallCardFaceUpdatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardFaceUpdatecolorsInput>;
+  flavorText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  illustrationId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  layout?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  loyalty?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  manaCost?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  oracleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oracleText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  power?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedTypeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  toughness?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  typeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  watermark?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallCardFaceUpdatecolorIndicatorInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardFaceUpdatecolorsInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardFaceUpsertWithWhereUniqueWithoutCardInput = {
+  create: ScryfallCardFaceCreateWithoutCardInput;
+  update: ScryfallCardFaceUpdateWithoutCardInput;
+  where: ScryfallCardFaceWhereUniqueInput;
+};
+
 export type ScryfallCardFaceWhereInput = {
   AND?: InputMaybe<Array<ScryfallCardFaceWhereInput>>;
   NOT?: InputMaybe<Array<ScryfallCardFaceWhereInput>>;
@@ -1868,6 +2413,454 @@ export enum ScryfallCardScalarFieldEnum {
   Variation = 'variation',
   Watermark = 'watermark'
 }
+
+export type ScryfallCardUpdateOneRequiredWithoutCardInput = {
+  connect?: InputMaybe<ScryfallCardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallCardCreateOrConnectWithoutCardInput>;
+  create?: InputMaybe<ScryfallCardCreateWithoutCardInput>;
+  update?: InputMaybe<ScryfallCardUpdateWithoutCardInput>;
+  upsert?: InputMaybe<ScryfallCardUpsertWithoutCardInput>;
+};
+
+export type ScryfallCardUpdateOneRequiredWithoutReferencedByInput = {
+  connect?: InputMaybe<ScryfallCardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallCardCreateOrConnectWithoutReferencedByInput>;
+  create?: InputMaybe<ScryfallCardCreateWithoutReferencedByInput>;
+  update?: InputMaybe<ScryfallCardUpdateWithoutReferencedByInput>;
+  upsert?: InputMaybe<ScryfallCardUpsertWithoutReferencedByInput>;
+};
+
+export type ScryfallCardUpdateOneRequiredWithoutRelatedToInput = {
+  connect?: InputMaybe<ScryfallCardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallCardCreateOrConnectWithoutRelatedToInput>;
+  create?: InputMaybe<ScryfallCardCreateWithoutRelatedToInput>;
+  update?: InputMaybe<ScryfallCardUpdateWithoutRelatedToInput>;
+  upsert?: InputMaybe<ScryfallCardUpsertWithoutRelatedToInput>;
+};
+
+export type ScryfallCardUpdateOneRequiredWithoutScryfallPriceInput = {
+  connect?: InputMaybe<ScryfallCardWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallCardCreateOrConnectWithoutScryfallPriceInput>;
+  create?: InputMaybe<ScryfallCardCreateWithoutScryfallPriceInput>;
+  update?: InputMaybe<ScryfallCardUpdateWithoutScryfallPriceInput>;
+  upsert?: InputMaybe<ScryfallCardUpsertWithoutScryfallPriceInput>;
+};
+
+export type ScryfallCardUpdateWithoutCardInput = {
+  allParts?: InputMaybe<ScryfallCardUpdateallPartsInput>;
+  arenaId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  artist?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booster?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  borderColor?: InputMaybe<StringFieldUpdateOperationsInput>;
+  cardBackId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cardFaces?: InputMaybe<ScryfallCardFaceUpdateManyWithoutCardInput>;
+  cardFacesRaw?: InputMaybe<ScryfallCardUpdatecardFacesRawInput>;
+  cardmarketId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  cmc?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  collectorNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+  colorIdentity?: InputMaybe<ScryfallCardUpdatecolorIdentityInput>;
+  colorIndicator?: InputMaybe<ScryfallCardUpdatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardUpdatecolorsInput>;
+  contentWarning?: InputMaybe<NullableBoolFieldUpdateOperationsInput>;
+  digital?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  edhrecRank?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  finishes?: InputMaybe<ScryfallCardUpdatefinishesInput>;
+  flavorName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  frame?: InputMaybe<StringFieldUpdateOperationsInput>;
+  frameEffects?: InputMaybe<ScryfallCardUpdateframeEffectsInput>;
+  fullArt?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  games?: InputMaybe<ScryfallCardUpdategamesInput>;
+  handModifier?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  highresImage?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  illustrationId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  imageStatus?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  keywords?: InputMaybe<ScryfallCardUpdatekeywordsInput>;
+  lang?: InputMaybe<StringFieldUpdateOperationsInput>;
+  layout?: InputMaybe<StringFieldUpdateOperationsInput>;
+  legalities?: InputMaybe<Scalars['JSON']>;
+  lifeModifier?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  loyalty?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  manaCost?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  mtgoFoilId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  mtgoId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  multiverseIds?: InputMaybe<ScryfallCardUpdatemultiverseIdsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  oracleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oracleText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oversized?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  power?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  prices?: InputMaybe<Scalars['JSON']>;
+  printedName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedTypeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printsSearchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  producedMana?: InputMaybe<ScryfallCardUpdateproducedManaInput>;
+  promo?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  promoTypes?: InputMaybe<ScryfallCardUpdatepromoTypesInput>;
+  purchaseUris?: InputMaybe<Scalars['JSON']>;
+  rarity?: InputMaybe<StringFieldUpdateOperationsInput>;
+  referencedBy?: InputMaybe<ScryfallRelatedCardUpdateManyWithoutReferenceInput>;
+  relatedTo?: InputMaybe<ScryfallRelatedCardUpdateManyWithoutCardInput>;
+  relatedUris?: InputMaybe<Scalars['JSON']>;
+  releasedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  reprint?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reserved?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  rulingUri?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  scryfallPrice?: InputMaybe<ScryfallPriceUpdateManyWithoutCardInput>;
+  scryfallSetUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  scryfallUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  securityStamp?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  set?: InputMaybe<ScryfallSetUpdateOneRequiredWithoutCardsInput>;
+  setCode?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setSearchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setType?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  storySpotlight?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  tcgplayerEtchedId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  tcgplayerId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  textless?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  toughness?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  typeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  uri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  varationOf?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  variation?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  watermark?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallCardUpdateWithoutReferencedByInput = {
+  allParts?: InputMaybe<ScryfallCardUpdateallPartsInput>;
+  arenaId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  artist?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booster?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  borderColor?: InputMaybe<StringFieldUpdateOperationsInput>;
+  card?: InputMaybe<CardUpdateOneWithoutScryfallCardInput>;
+  cardBackId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cardFaces?: InputMaybe<ScryfallCardFaceUpdateManyWithoutCardInput>;
+  cardFacesRaw?: InputMaybe<ScryfallCardUpdatecardFacesRawInput>;
+  cardmarketId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  cmc?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  collectorNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+  colorIdentity?: InputMaybe<ScryfallCardUpdatecolorIdentityInput>;
+  colorIndicator?: InputMaybe<ScryfallCardUpdatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardUpdatecolorsInput>;
+  contentWarning?: InputMaybe<NullableBoolFieldUpdateOperationsInput>;
+  digital?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  edhrecRank?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  finishes?: InputMaybe<ScryfallCardUpdatefinishesInput>;
+  flavorName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  frame?: InputMaybe<StringFieldUpdateOperationsInput>;
+  frameEffects?: InputMaybe<ScryfallCardUpdateframeEffectsInput>;
+  fullArt?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  games?: InputMaybe<ScryfallCardUpdategamesInput>;
+  handModifier?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  highresImage?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  illustrationId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  imageStatus?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  keywords?: InputMaybe<ScryfallCardUpdatekeywordsInput>;
+  lang?: InputMaybe<StringFieldUpdateOperationsInput>;
+  layout?: InputMaybe<StringFieldUpdateOperationsInput>;
+  legalities?: InputMaybe<Scalars['JSON']>;
+  lifeModifier?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  loyalty?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  manaCost?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  mtgoFoilId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  mtgoId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  multiverseIds?: InputMaybe<ScryfallCardUpdatemultiverseIdsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  oracleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oracleText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oversized?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  power?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  prices?: InputMaybe<Scalars['JSON']>;
+  printedName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedTypeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printsSearchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  producedMana?: InputMaybe<ScryfallCardUpdateproducedManaInput>;
+  promo?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  promoTypes?: InputMaybe<ScryfallCardUpdatepromoTypesInput>;
+  purchaseUris?: InputMaybe<Scalars['JSON']>;
+  rarity?: InputMaybe<StringFieldUpdateOperationsInput>;
+  relatedTo?: InputMaybe<ScryfallRelatedCardUpdateManyWithoutCardInput>;
+  relatedUris?: InputMaybe<Scalars['JSON']>;
+  releasedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  reprint?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reserved?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  rulingUri?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  scryfallPrice?: InputMaybe<ScryfallPriceUpdateManyWithoutCardInput>;
+  scryfallSetUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  scryfallUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  securityStamp?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  set?: InputMaybe<ScryfallSetUpdateOneRequiredWithoutCardsInput>;
+  setCode?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setSearchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setType?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  storySpotlight?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  tcgplayerEtchedId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  tcgplayerId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  textless?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  toughness?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  typeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  uri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  varationOf?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  variation?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  watermark?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallCardUpdateWithoutRelatedToInput = {
+  allParts?: InputMaybe<ScryfallCardUpdateallPartsInput>;
+  arenaId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  artist?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booster?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  borderColor?: InputMaybe<StringFieldUpdateOperationsInput>;
+  card?: InputMaybe<CardUpdateOneWithoutScryfallCardInput>;
+  cardBackId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cardFaces?: InputMaybe<ScryfallCardFaceUpdateManyWithoutCardInput>;
+  cardFacesRaw?: InputMaybe<ScryfallCardUpdatecardFacesRawInput>;
+  cardmarketId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  cmc?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  collectorNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+  colorIdentity?: InputMaybe<ScryfallCardUpdatecolorIdentityInput>;
+  colorIndicator?: InputMaybe<ScryfallCardUpdatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardUpdatecolorsInput>;
+  contentWarning?: InputMaybe<NullableBoolFieldUpdateOperationsInput>;
+  digital?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  edhrecRank?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  finishes?: InputMaybe<ScryfallCardUpdatefinishesInput>;
+  flavorName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  frame?: InputMaybe<StringFieldUpdateOperationsInput>;
+  frameEffects?: InputMaybe<ScryfallCardUpdateframeEffectsInput>;
+  fullArt?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  games?: InputMaybe<ScryfallCardUpdategamesInput>;
+  handModifier?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  highresImage?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  illustrationId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  imageStatus?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  keywords?: InputMaybe<ScryfallCardUpdatekeywordsInput>;
+  lang?: InputMaybe<StringFieldUpdateOperationsInput>;
+  layout?: InputMaybe<StringFieldUpdateOperationsInput>;
+  legalities?: InputMaybe<Scalars['JSON']>;
+  lifeModifier?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  loyalty?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  manaCost?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  mtgoFoilId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  mtgoId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  multiverseIds?: InputMaybe<ScryfallCardUpdatemultiverseIdsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  oracleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oracleText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oversized?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  power?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  prices?: InputMaybe<Scalars['JSON']>;
+  printedName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedTypeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printsSearchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  producedMana?: InputMaybe<ScryfallCardUpdateproducedManaInput>;
+  promo?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  promoTypes?: InputMaybe<ScryfallCardUpdatepromoTypesInput>;
+  purchaseUris?: InputMaybe<Scalars['JSON']>;
+  rarity?: InputMaybe<StringFieldUpdateOperationsInput>;
+  referencedBy?: InputMaybe<ScryfallRelatedCardUpdateManyWithoutReferenceInput>;
+  relatedUris?: InputMaybe<Scalars['JSON']>;
+  releasedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  reprint?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reserved?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  rulingUri?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  scryfallPrice?: InputMaybe<ScryfallPriceUpdateManyWithoutCardInput>;
+  scryfallSetUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  scryfallUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  securityStamp?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  set?: InputMaybe<ScryfallSetUpdateOneRequiredWithoutCardsInput>;
+  setCode?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setSearchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setType?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  storySpotlight?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  tcgplayerEtchedId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  tcgplayerId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  textless?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  toughness?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  typeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  uri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  varationOf?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  variation?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  watermark?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallCardUpdateWithoutScryfallPriceInput = {
+  allParts?: InputMaybe<ScryfallCardUpdateallPartsInput>;
+  arenaId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  artist?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  booster?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  borderColor?: InputMaybe<StringFieldUpdateOperationsInput>;
+  card?: InputMaybe<CardUpdateOneWithoutScryfallCardInput>;
+  cardBackId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cardFaces?: InputMaybe<ScryfallCardFaceUpdateManyWithoutCardInput>;
+  cardFacesRaw?: InputMaybe<ScryfallCardUpdatecardFacesRawInput>;
+  cardmarketId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  cmc?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  collectorNumber?: InputMaybe<StringFieldUpdateOperationsInput>;
+  colorIdentity?: InputMaybe<ScryfallCardUpdatecolorIdentityInput>;
+  colorIndicator?: InputMaybe<ScryfallCardUpdatecolorIndicatorInput>;
+  colors?: InputMaybe<ScryfallCardUpdatecolorsInput>;
+  contentWarning?: InputMaybe<NullableBoolFieldUpdateOperationsInput>;
+  digital?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  edhrecRank?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  finishes?: InputMaybe<ScryfallCardUpdatefinishesInput>;
+  flavorName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  frame?: InputMaybe<StringFieldUpdateOperationsInput>;
+  frameEffects?: InputMaybe<ScryfallCardUpdateframeEffectsInput>;
+  fullArt?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  games?: InputMaybe<ScryfallCardUpdategamesInput>;
+  handModifier?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  highresImage?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  illustrationId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  imageStatus?: InputMaybe<StringFieldUpdateOperationsInput>;
+  imageUris?: InputMaybe<Scalars['JSON']>;
+  keywords?: InputMaybe<ScryfallCardUpdatekeywordsInput>;
+  lang?: InputMaybe<StringFieldUpdateOperationsInput>;
+  layout?: InputMaybe<StringFieldUpdateOperationsInput>;
+  legalities?: InputMaybe<Scalars['JSON']>;
+  lifeModifier?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  loyalty?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  manaCost?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  mtgoFoilId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  mtgoId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  multiverseIds?: InputMaybe<ScryfallCardUpdatemultiverseIdsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  oracleId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oracleText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  oversized?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  power?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  prices?: InputMaybe<Scalars['JSON']>;
+  printedName?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedText?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedTypeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printsSearchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  producedMana?: InputMaybe<ScryfallCardUpdateproducedManaInput>;
+  promo?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  promoTypes?: InputMaybe<ScryfallCardUpdatepromoTypesInput>;
+  purchaseUris?: InputMaybe<Scalars['JSON']>;
+  rarity?: InputMaybe<StringFieldUpdateOperationsInput>;
+  referencedBy?: InputMaybe<ScryfallRelatedCardUpdateManyWithoutReferenceInput>;
+  relatedTo?: InputMaybe<ScryfallRelatedCardUpdateManyWithoutCardInput>;
+  relatedUris?: InputMaybe<Scalars['JSON']>;
+  releasedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  reprint?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  reserved?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  rulingUri?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  scryfallSetUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  scryfallUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  securityStamp?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  set?: InputMaybe<ScryfallSetUpdateOneRequiredWithoutCardsInput>;
+  setCode?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setName?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setSearchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setType?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  storySpotlight?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  tcgplayerEtchedId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  tcgplayerId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  textless?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  toughness?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  typeLine?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  uri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  varationOf?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  variation?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  watermark?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallCardUpdateallPartsInput = {
+  push?: InputMaybe<Array<Scalars['JSON']>>;
+  set?: InputMaybe<Array<Scalars['JSON']>>;
+};
+
+export type ScryfallCardUpdatecardFacesRawInput = {
+  push?: InputMaybe<Array<Scalars['JSON']>>;
+  set?: InputMaybe<Array<Scalars['JSON']>>;
+};
+
+export type ScryfallCardUpdatecolorIdentityInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpdatecolorIndicatorInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpdatecolorsInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpdatefinishesInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpdateframeEffectsInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpdategamesInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpdatekeywordsInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpdatemultiverseIdsInput = {
+  push?: InputMaybe<Array<Scalars['Int']>>;
+  set?: InputMaybe<Array<Scalars['Int']>>;
+};
+
+export type ScryfallCardUpdateproducedManaInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpdatepromoTypesInput = {
+  push?: InputMaybe<Array<Scalars['String']>>;
+  set?: InputMaybe<Array<Scalars['String']>>;
+};
+
+export type ScryfallCardUpsertWithoutCardInput = {
+  create: ScryfallCardCreateWithoutCardInput;
+  update: ScryfallCardUpdateWithoutCardInput;
+};
+
+export type ScryfallCardUpsertWithoutReferencedByInput = {
+  create: ScryfallCardCreateWithoutReferencedByInput;
+  update: ScryfallCardUpdateWithoutReferencedByInput;
+};
+
+export type ScryfallCardUpsertWithoutRelatedToInput = {
+  create: ScryfallCardCreateWithoutRelatedToInput;
+  update: ScryfallCardUpdateWithoutRelatedToInput;
+};
+
+export type ScryfallCardUpsertWithoutScryfallPriceInput = {
+  create: ScryfallCardCreateWithoutScryfallPriceInput;
+  update: ScryfallCardUpdateWithoutScryfallPriceInput;
+};
 
 export type ScryfallCardWhereInput = {
   AND?: InputMaybe<Array<ScryfallCardWhereInput>>;
@@ -2284,6 +3277,22 @@ export enum ScryfallPriceScalarFieldEnum {
   UsdFoil = 'usdFoil'
 }
 
+export type ScryfallPriceScalarWhereInput = {
+  AND?: InputMaybe<Array<ScryfallPriceScalarWhereInput>>;
+  NOT?: InputMaybe<Array<ScryfallPriceScalarWhereInput>>;
+  OR?: InputMaybe<Array<ScryfallPriceScalarWhereInput>>;
+  cardId?: InputMaybe<StringFilter>;
+  currentPriceOfCardId?: InputMaybe<StringNullableFilter>;
+  date?: InputMaybe<DateTimeFilter>;
+  eur?: InputMaybe<FloatNullableFilter>;
+  eurFoil?: InputMaybe<FloatNullableFilter>;
+  id?: InputMaybe<StringFilter>;
+  tix?: InputMaybe<FloatNullableFilter>;
+  usd?: InputMaybe<FloatNullableFilter>;
+  usdEtched?: InputMaybe<FloatNullableFilter>;
+  usdFoil?: InputMaybe<FloatNullableFilter>;
+};
+
 export type ScryfallPriceScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<ScryfallPriceScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<ScryfallPriceScalarWhereWithAggregatesInput>>;
@@ -2326,6 +3335,86 @@ export type ScryfallPriceSumOrderByAggregateInput = {
   usd?: InputMaybe<SortOrder>;
   usdEtched?: InputMaybe<SortOrder>;
   usdFoil?: InputMaybe<SortOrder>;
+};
+
+export type ScryfallPriceUpdateManyMutationInput = {
+  date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  eur?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  eurFoil?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  tix?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usd?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usdEtched?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usdFoil?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+};
+
+export type ScryfallPriceUpdateManyWithWhereWithoutCardInput = {
+  data: ScryfallPriceUpdateManyMutationInput;
+  where: ScryfallPriceScalarWhereInput;
+};
+
+export type ScryfallPriceUpdateManyWithoutCardInput = {
+  connect?: InputMaybe<Array<ScryfallPriceWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ScryfallPriceCreateOrConnectWithoutCardInput>>;
+  create?: InputMaybe<Array<ScryfallPriceCreateWithoutCardInput>>;
+  createMany?: InputMaybe<ScryfallPriceCreateManyCardInputEnvelope>;
+  delete?: InputMaybe<Array<ScryfallPriceWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<ScryfallPriceScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<ScryfallPriceWhereUniqueInput>>;
+  set?: InputMaybe<Array<ScryfallPriceWhereUniqueInput>>;
+  update?: InputMaybe<Array<ScryfallPriceUpdateWithWhereUniqueWithoutCardInput>>;
+  updateMany?: InputMaybe<Array<ScryfallPriceUpdateManyWithWhereWithoutCardInput>>;
+  upsert?: InputMaybe<Array<ScryfallPriceUpsertWithWhereUniqueWithoutCardInput>>;
+};
+
+export type ScryfallPriceUpdateOneWithoutCurrentPriceOfCardInput = {
+  connect?: InputMaybe<ScryfallPriceWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallPriceCreateOrConnectWithoutCurrentPriceOfCardInput>;
+  create?: InputMaybe<ScryfallPriceCreateWithoutCurrentPriceOfCardInput>;
+  delete?: InputMaybe<Scalars['Boolean']>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  update?: InputMaybe<ScryfallPriceUpdateWithoutCurrentPriceOfCardInput>;
+  upsert?: InputMaybe<ScryfallPriceUpsertWithoutCurrentPriceOfCardInput>;
+};
+
+export type ScryfallPriceUpdateWithWhereUniqueWithoutCardInput = {
+  data: ScryfallPriceUpdateWithoutCardInput;
+  where: ScryfallPriceWhereUniqueInput;
+};
+
+export type ScryfallPriceUpdateWithoutCardInput = {
+  currentPriceOfCard?: InputMaybe<CardUpdateOneWithoutCurrentPriceInput>;
+  date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  eur?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  eurFoil?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  tix?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usd?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usdEtched?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usdFoil?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+};
+
+export type ScryfallPriceUpdateWithoutCurrentPriceOfCardInput = {
+  card?: InputMaybe<ScryfallCardUpdateOneRequiredWithoutScryfallPriceInput>;
+  date?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  eur?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  eurFoil?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  tix?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usd?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usdEtched?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+  usdFoil?: InputMaybe<NullableFloatFieldUpdateOperationsInput>;
+};
+
+export type ScryfallPriceUpsertWithWhereUniqueWithoutCardInput = {
+  create: ScryfallPriceCreateWithoutCardInput;
+  update: ScryfallPriceUpdateWithoutCardInput;
+  where: ScryfallPriceWhereUniqueInput;
+};
+
+export type ScryfallPriceUpsertWithoutCurrentPriceOfCardInput = {
+  create: ScryfallPriceCreateWithoutCurrentPriceOfCardInput;
+  update: ScryfallPriceUpdateWithoutCurrentPriceOfCardInput;
 };
 
 export type ScryfallPriceWhereInput = {
@@ -2444,6 +3533,105 @@ export type ScryfallRelatedCardListRelationFilter = {
 
 export type ScryfallRelatedCardOrderByRelationAggregateInput = {
   _count?: InputMaybe<SortOrder>;
+};
+
+export type ScryfallRelatedCardScalarWhereInput = {
+  AND?: InputMaybe<Array<ScryfallRelatedCardScalarWhereInput>>;
+  NOT?: InputMaybe<Array<ScryfallRelatedCardScalarWhereInput>>;
+  OR?: InputMaybe<Array<ScryfallRelatedCardScalarWhereInput>>;
+  cardId?: InputMaybe<StringFilter>;
+  component?: InputMaybe<StringFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  referenceId?: InputMaybe<StringFilter>;
+  typeLine?: InputMaybe<StringFilter>;
+  uri?: InputMaybe<StringFilter>;
+};
+
+export type ScryfallRelatedCardUpdateManyMutationInput = {
+  component?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  typeLine?: InputMaybe<StringFieldUpdateOperationsInput>;
+  uri?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallRelatedCardUpdateManyWithWhereWithoutCardInput = {
+  data: ScryfallRelatedCardUpdateManyMutationInput;
+  where: ScryfallRelatedCardScalarWhereInput;
+};
+
+export type ScryfallRelatedCardUpdateManyWithWhereWithoutReferenceInput = {
+  data: ScryfallRelatedCardUpdateManyMutationInput;
+  where: ScryfallRelatedCardScalarWhereInput;
+};
+
+export type ScryfallRelatedCardUpdateManyWithoutCardInput = {
+  connect?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ScryfallRelatedCardCreateOrConnectWithoutCardInput>>;
+  create?: InputMaybe<Array<ScryfallRelatedCardCreateWithoutCardInput>>;
+  createMany?: InputMaybe<ScryfallRelatedCardCreateManyCardInputEnvelope>;
+  delete?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<ScryfallRelatedCardScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  set?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  update?: InputMaybe<Array<ScryfallRelatedCardUpdateWithWhereUniqueWithoutCardInput>>;
+  updateMany?: InputMaybe<Array<ScryfallRelatedCardUpdateManyWithWhereWithoutCardInput>>;
+  upsert?: InputMaybe<Array<ScryfallRelatedCardUpsertWithWhereUniqueWithoutCardInput>>;
+};
+
+export type ScryfallRelatedCardUpdateManyWithoutReferenceInput = {
+  connect?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<ScryfallRelatedCardCreateOrConnectWithoutReferenceInput>>;
+  create?: InputMaybe<Array<ScryfallRelatedCardCreateWithoutReferenceInput>>;
+  createMany?: InputMaybe<ScryfallRelatedCardCreateManyReferenceInputEnvelope>;
+  delete?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<ScryfallRelatedCardScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  set?: InputMaybe<Array<ScryfallRelatedCardWhereUniqueInput>>;
+  update?: InputMaybe<Array<ScryfallRelatedCardUpdateWithWhereUniqueWithoutReferenceInput>>;
+  updateMany?: InputMaybe<Array<ScryfallRelatedCardUpdateManyWithWhereWithoutReferenceInput>>;
+  upsert?: InputMaybe<Array<ScryfallRelatedCardUpsertWithWhereUniqueWithoutReferenceInput>>;
+};
+
+export type ScryfallRelatedCardUpdateWithWhereUniqueWithoutCardInput = {
+  data: ScryfallRelatedCardUpdateWithoutCardInput;
+  where: ScryfallRelatedCardWhereUniqueInput;
+};
+
+export type ScryfallRelatedCardUpdateWithWhereUniqueWithoutReferenceInput = {
+  data: ScryfallRelatedCardUpdateWithoutReferenceInput;
+  where: ScryfallRelatedCardWhereUniqueInput;
+};
+
+export type ScryfallRelatedCardUpdateWithoutCardInput = {
+  component?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  reference?: InputMaybe<ScryfallCardUpdateOneRequiredWithoutReferencedByInput>;
+  typeLine?: InputMaybe<StringFieldUpdateOperationsInput>;
+  uri?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallRelatedCardUpdateWithoutReferenceInput = {
+  card?: InputMaybe<ScryfallCardUpdateOneRequiredWithoutRelatedToInput>;
+  component?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  typeLine?: InputMaybe<StringFieldUpdateOperationsInput>;
+  uri?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallRelatedCardUpsertWithWhereUniqueWithoutCardInput = {
+  create: ScryfallRelatedCardCreateWithoutCardInput;
+  update: ScryfallRelatedCardUpdateWithoutCardInput;
+  where: ScryfallRelatedCardWhereUniqueInput;
+};
+
+export type ScryfallRelatedCardUpsertWithWhereUniqueWithoutReferenceInput = {
+  create: ScryfallRelatedCardCreateWithoutReferenceInput;
+  update: ScryfallRelatedCardUpdateWithoutReferenceInput;
+  where: ScryfallRelatedCardWhereUniqueInput;
 };
 
 export type ScryfallRelatedCardWhereInput = {
@@ -2596,6 +3784,42 @@ export enum ScryfallSetScalarFieldEnum {
   Uri = 'uri'
 }
 
+export type ScryfallSetUpdateOneRequiredWithoutCardsInput = {
+  connect?: InputMaybe<ScryfallSetWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ScryfallSetCreateOrConnectWithoutCardsInput>;
+  create?: InputMaybe<ScryfallSetCreateWithoutCardsInput>;
+  update?: InputMaybe<ScryfallSetUpdateWithoutCardsInput>;
+  upsert?: InputMaybe<ScryfallSetUpsertWithoutCardsInput>;
+};
+
+export type ScryfallSetUpdateWithoutCardsInput = {
+  arenaCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  block?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  blockCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  cardCount?: InputMaybe<IntFieldUpdateOperationsInput>;
+  code?: InputMaybe<StringFieldUpdateOperationsInput>;
+  iconSvgUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  isDigital?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isFoilOnly?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  isNonFoilOnly?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  mtgoCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  parentSetCode?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  printedSize?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  releasedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
+  scryfallUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  searchUri?: InputMaybe<StringFieldUpdateOperationsInput>;
+  setType?: InputMaybe<StringFieldUpdateOperationsInput>;
+  tcgPlayerId?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
+  uri?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type ScryfallSetUpsertWithoutCardsInput = {
+  create: ScryfallSetCreateWithoutCardsInput;
+  update: ScryfallSetUpdateWithoutCardsInput;
+};
+
 export type ScryfallSetWhereInput = {
   AND?: InputMaybe<Array<ScryfallSetWhereInput>>;
   NOT?: InputMaybe<Array<ScryfallSetWhereInput>>;
@@ -2713,8 +3937,203 @@ export type StringWithAggregatesFilter = {
   startsWith?: InputMaybe<Scalars['String']>;
 };
 
+export type Tag = {
+  __typename?: 'Tag';
+  _count: TagCount;
+  cards: Array<CardsInCollection>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
+  user: User;
+  userId: Scalars['String'];
+};
+
+export type TagCount = {
+  __typename?: 'TagCount';
+  cards: Scalars['Int'];
+};
+
+export type TagCreateManyUserInput = {
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+export type TagCreateManyUserInputEnvelope = {
+  data: Array<TagCreateManyUserInput>;
+  skipDuplicates?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type TagCreateNestedManyWithoutCardsInput = {
+  connect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<TagCreateOrConnectWithoutCardsInput>>;
+  create?: InputMaybe<Array<TagCreateWithoutCardsInput>>;
+};
+
+export type TagCreateNestedManyWithoutUserInput = {
+  connect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<TagCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<TagCreateWithoutUserInput>>;
+  createMany?: InputMaybe<TagCreateManyUserInputEnvelope>;
+};
+
+export type TagCreateOrConnectWithoutCardsInput = {
+  create: TagCreateWithoutCardsInput;
+  where: TagWhereUniqueInput;
+};
+
+export type TagCreateOrConnectWithoutUserInput = {
+  create: TagCreateWithoutUserInput;
+  where: TagWhereUniqueInput;
+};
+
+export type TagCreateWithoutCardsInput = {
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  user: UserCreateNestedOneWithoutTagInput;
+};
+
+export type TagCreateWithoutUserInput = {
+  cards?: InputMaybe<CardsInCollectionCreateNestedManyWithoutTagsInput>;
+  id?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+export type TagListRelationFilter = {
+  every?: InputMaybe<TagWhereInput>;
+  none?: InputMaybe<TagWhereInput>;
+  some?: InputMaybe<TagWhereInput>;
+};
+
+export type TagOrderByRelationAggregateInput = {
+  _count?: InputMaybe<SortOrder>;
+};
+
+export type TagOrderByWithRelationInput = {
+  cards?: InputMaybe<CardsInCollectionOrderByRelationAggregateInput>;
+  id?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+  user?: InputMaybe<UserOrderByWithRelationInput>;
+  userId?: InputMaybe<SortOrder>;
+};
+
+export enum TagScalarFieldEnum {
+  CreatedAt = 'createdAt',
+  Id = 'id',
+  Name = 'name',
+  UpdatedAt = 'updatedAt',
+  UserId = 'userId'
+}
+
+export type TagScalarWhereInput = {
+  AND?: InputMaybe<Array<TagScalarWhereInput>>;
+  NOT?: InputMaybe<Array<TagScalarWhereInput>>;
+  OR?: InputMaybe<Array<TagScalarWhereInput>>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type TagUpdateManyMutationInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TagUpdateManyWithWhereWithoutCardsInput = {
+  data: TagUpdateManyMutationInput;
+  where: TagScalarWhereInput;
+};
+
+export type TagUpdateManyWithWhereWithoutUserInput = {
+  data: TagUpdateManyMutationInput;
+  where: TagScalarWhereInput;
+};
+
+export type TagUpdateManyWithoutCardsInput = {
+  connect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<TagCreateOrConnectWithoutCardsInput>>;
+  create?: InputMaybe<Array<TagCreateWithoutCardsInput>>;
+  delete?: InputMaybe<Array<TagWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<TagScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  set?: InputMaybe<Array<TagWhereUniqueInput>>;
+  update?: InputMaybe<Array<TagUpdateWithWhereUniqueWithoutCardsInput>>;
+  updateMany?: InputMaybe<Array<TagUpdateManyWithWhereWithoutCardsInput>>;
+  upsert?: InputMaybe<Array<TagUpsertWithWhereUniqueWithoutCardsInput>>;
+};
+
+export type TagUpdateManyWithoutUserInput = {
+  connect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  connectOrCreate?: InputMaybe<Array<TagCreateOrConnectWithoutUserInput>>;
+  create?: InputMaybe<Array<TagCreateWithoutUserInput>>;
+  createMany?: InputMaybe<TagCreateManyUserInputEnvelope>;
+  delete?: InputMaybe<Array<TagWhereUniqueInput>>;
+  deleteMany?: InputMaybe<Array<TagScalarWhereInput>>;
+  disconnect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  set?: InputMaybe<Array<TagWhereUniqueInput>>;
+  update?: InputMaybe<Array<TagUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: InputMaybe<Array<TagUpdateManyWithWhereWithoutUserInput>>;
+  upsert?: InputMaybe<Array<TagUpsertWithWhereUniqueWithoutUserInput>>;
+};
+
+export type TagUpdateWithWhereUniqueWithoutCardsInput = {
+  data: TagUpdateWithoutCardsInput;
+  where: TagWhereUniqueInput;
+};
+
+export type TagUpdateWithWhereUniqueWithoutUserInput = {
+  data: TagUpdateWithoutUserInput;
+  where: TagWhereUniqueInput;
+};
+
+export type TagUpdateWithoutCardsInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutTagInput>;
+};
+
+export type TagUpdateWithoutUserInput = {
+  cards?: InputMaybe<CardsInCollectionUpdateManyWithoutTagsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  name?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type TagUpsertWithWhereUniqueWithoutCardsInput = {
+  create: TagCreateWithoutCardsInput;
+  update: TagUpdateWithoutCardsInput;
+  where: TagWhereUniqueInput;
+};
+
+export type TagUpsertWithWhereUniqueWithoutUserInput = {
+  create: TagCreateWithoutUserInput;
+  update: TagUpdateWithoutUserInput;
+  where: TagWhereUniqueInput;
+};
+
+export type TagUserIdNameCompoundUniqueInput = {
+  name: Scalars['String'];
+  userId: Scalars['String'];
+};
+
+export type TagWhereInput = {
+  AND?: InputMaybe<Array<TagWhereInput>>;
+  NOT?: InputMaybe<Array<TagWhereInput>>;
+  OR?: InputMaybe<Array<TagWhereInput>>;
+  cards?: InputMaybe<CardsInCollectionListRelationFilter>;
+  id?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  user?: InputMaybe<UserRelationFilter>;
+  userId?: InputMaybe<StringFilter>;
+};
+
+export type TagWhereUniqueInput = {
+  id?: InputMaybe<Scalars['String']>;
+  userId_name?: InputMaybe<TagUserIdNameCompoundUniqueInput>;
+};
+
 export type User = {
   __typename?: 'User';
+  Tag?: Maybe<Array<Tag>>;
   _count: UserCount;
   collections?: Maybe<Array<Collection>>;
   createdAt: Scalars['DateTime'];
@@ -2726,6 +4145,7 @@ export type User = {
 
 export type UserCount = {
   __typename?: 'UserCount';
+  Tag: Scalars['Int'];
   collections: Scalars['Int'];
 };
 
@@ -2735,18 +4155,38 @@ export type UserCreateNestedOneWithoutCollectionsInput = {
   create?: InputMaybe<UserCreateWithoutCollectionsInput>;
 };
 
+export type UserCreateNestedOneWithoutTagInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTagInput>;
+  create?: InputMaybe<UserCreateWithoutTagInput>;
+};
+
 export type UserCreateOrConnectWithoutCollectionsInput = {
   create: UserCreateWithoutCollectionsInput;
   where: UserWhereUniqueInput;
 };
 
+export type UserCreateOrConnectWithoutTagInput = {
+  create: UserCreateWithoutTagInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserCreateWithoutCollectionsInput = {
+  Tag?: InputMaybe<TagCreateNestedManyWithoutUserInput>;
+  email: Scalars['String'];
+  externalAuthId: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+};
+
+export type UserCreateWithoutTagInput = {
+  collections?: InputMaybe<CollectionCreateNestedManyWithoutUserInput>;
   email: Scalars['String'];
   externalAuthId: Scalars['String'];
   id?: InputMaybe<Scalars['String']>;
 };
 
 export type UserOrderByWithRelationInput = {
+  Tag?: InputMaybe<TagOrderByRelationAggregateInput>;
   collections?: InputMaybe<CollectionOrderByRelationAggregateInput>;
   email?: InputMaybe<SortOrder>;
   externalAuthId?: InputMaybe<SortOrder>;
@@ -2758,10 +4198,51 @@ export type UserRelationFilter = {
   isNot?: InputMaybe<UserWhereInput>;
 };
 
+export type UserUpdateOneRequiredWithoutCollectionsInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutCollectionsInput>;
+  create?: InputMaybe<UserCreateWithoutCollectionsInput>;
+  update?: InputMaybe<UserUpdateWithoutCollectionsInput>;
+  upsert?: InputMaybe<UserUpsertWithoutCollectionsInput>;
+};
+
+export type UserUpdateOneRequiredWithoutTagInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutTagInput>;
+  create?: InputMaybe<UserCreateWithoutTagInput>;
+  update?: InputMaybe<UserUpdateWithoutTagInput>;
+  upsert?: InputMaybe<UserUpsertWithoutTagInput>;
+};
+
+export type UserUpdateWithoutCollectionsInput = {
+  Tag?: InputMaybe<TagUpdateManyWithoutUserInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  externalAuthId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutTagInput = {
+  collections?: InputMaybe<CollectionUpdateManyWithoutUserInput>;
+  email?: InputMaybe<StringFieldUpdateOperationsInput>;
+  externalAuthId?: InputMaybe<StringFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+};
+
+export type UserUpsertWithoutCollectionsInput = {
+  create: UserCreateWithoutCollectionsInput;
+  update: UserUpdateWithoutCollectionsInput;
+};
+
+export type UserUpsertWithoutTagInput = {
+  create: UserCreateWithoutTagInput;
+  update: UserUpdateWithoutTagInput;
+};
+
 export type UserWhereInput = {
   AND?: InputMaybe<Array<UserWhereInput>>;
   NOT?: InputMaybe<Array<UserWhereInput>>;
   OR?: InputMaybe<Array<UserWhereInput>>;
+  Tag?: InputMaybe<TagListRelationFilter>;
   collections?: InputMaybe<CollectionListRelationFilter>;
   email?: InputMaybe<StringFilter>;
   externalAuthId?: InputMaybe<StringFilter>;
@@ -2806,23 +4287,6 @@ export type QuickAddSearchResultsQueryVariables = Exact<{
 
 export type QuickAddSearchResultsQuery = { __typename?: 'Query', allCards: Array<{ __typename?: 'Card', id: string, name: string, canBeFoil: boolean, canBeEtched: boolean, canBeNonFoil: boolean, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', rarity: string, imageUris?: any | null, set: { __typename?: 'ScryfallSet', name: string, code: string, iconSvgUri: string } } }>, collection: { __typename?: 'Collection', id: string, cards: Array<{ __typename?: 'CardsInCollection', cardId: string, isFoil: boolean, isEtched: boolean, count: number, card: { __typename?: 'Card', name: string, scryfallCard: { __typename?: 'ScryfallCard', imageUris?: any | null, rarity: string, set: { __typename?: 'ScryfallSet', code: string, iconSvgUri: string } } } }> } };
 
-export type CollectionGridDeleteCardFromCollectionMutationVariables = Exact<{
-  cardId: Scalars['String'];
-  collectionId: Scalars['String'];
-  isFoil: Scalars['Boolean'];
-  isEtched: Scalars['Boolean'];
-}>;
-
-
-export type CollectionGridDeleteCardFromCollectionMutation = { __typename?: 'Mutation', deleteCardFromCollection: { __typename?: 'CardsInCollection', cardId: string, collectionId: string, isEtched: boolean, isFoil: boolean } };
-
-export type CollectionManageUpdateCardInCollectionMutationVariables = Exact<{
-  input: CardsInCollectionUncheckedUpdateInput;
-}>;
-
-
-export type CollectionManageUpdateCardInCollectionMutation = { __typename?: 'Mutation', updateCardsInCollection: { __typename?: 'CardsInCollection', cardId: string, collectionId: string, isFoil: boolean, isEtched: boolean, count: number } };
-
 export type AddCollectionMutationVariables = Exact<{
   input: CollectionCreateWithoutUserInput;
 }>;
@@ -2850,6 +4314,28 @@ export type SearchCardResultsQueryVariables = Exact<{
 export type SearchCardResultsQuery = { __typename?: 'Query', allCards: Array<{ __typename?: 'Card', id: string, canBeFoil: boolean, canBeEtched: boolean, canBeNonFoil: boolean, collectorNumber?: string | null, isBorderless: boolean, isShowcase: boolean, currentPrice: { __typename?: 'ScryfallPrice', usd?: number | null, usdFoil?: number | null, usdEtched?: number | null }, scryfallCard: { __typename?: 'ScryfallCard', allParts?: Array<any> | null, arenaId?: number | null, artist?: string | null, booster: boolean, borderColor: string, cardBackId?: string | null, cardFacesRaw?: Array<any> | null, cardmarketId?: number | null, cmc?: number | null, collectorNumber: string, colorIdentity?: Array<string> | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, contentWarning?: boolean | null, digital: boolean, edhrecRank?: number | null, finishes?: Array<string> | null, flavorName?: string | null, frame: string, frameEffects?: Array<string> | null, fullArt: boolean, games?: Array<string> | null, handModifier?: string | null, highresImage: boolean, id: string, illustrationId?: string | null, imageStatus: string, imageUris?: any | null, keywords?: Array<string> | null, lang: string, layout: string, legalities: any, lifeModifier?: string | null, loyalty?: string | null, manaCost?: string | null, mtgoFoilId?: number | null, mtgoId?: number | null, multiverseIds?: Array<number> | null, name: string, oracleId?: string | null, oracleText?: string | null, oversized: boolean, power?: string | null, prices: any, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, printsSearchUri: string, producedMana?: Array<string> | null, promo: boolean, promoTypes?: Array<string> | null, purchaseUris?: any | null, rarity: string, relatedUris: any, releasedAt: any, reprint: boolean, reserved: boolean, rulingUri?: string | null, scryfallSetUri: string, scryfallUri: string, securityStamp?: string | null, setCode: string, setId: string, setUri: string, setName: string, setSearchUri: string, setType: string, storySpotlight: boolean, tcgplayerEtchedId?: number | null, textless: boolean, typeLine?: string | null, uri: string, varationOf?: string | null, variation: boolean, watermark?: string | null, cardFaces: Array<{ __typename?: 'ScryfallCardFace', artist?: string | null, cardId: string, cmc?: number | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, flavorText?: string | null, id: string, illustrationId?: string | null, imageUris?: any | null, layout?: string | null, loyalty?: string | null, manaCost?: string | null, name: string, oracleId?: string | null, oracleText?: string | null, power?: string | null, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, toughness?: string | null, typeLine?: string | null, watermark?: string | null }>, referencedBy: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, relatedTo: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, scryfallMostRecentPrice?: { __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null } | null, scryfallPrice: Array<{ __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null }>, set: { __typename?: 'ScryfallSet', id: string, code: string, name: string, iconSvgUri: string } } }>, allCollections: Array<{ __typename?: 'Collection', id: string, name: string }> };
 
 export type ScryfallCardFullFragment = { __typename?: 'ScryfallCard', allParts?: Array<any> | null, arenaId?: number | null, artist?: string | null, booster: boolean, borderColor: string, cardBackId?: string | null, cardFacesRaw?: Array<any> | null, cardmarketId?: number | null, cmc?: number | null, collectorNumber: string, colorIdentity?: Array<string> | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, contentWarning?: boolean | null, digital: boolean, edhrecRank?: number | null, finishes?: Array<string> | null, flavorName?: string | null, frame: string, frameEffects?: Array<string> | null, fullArt: boolean, games?: Array<string> | null, handModifier?: string | null, highresImage: boolean, id: string, illustrationId?: string | null, imageStatus: string, imageUris?: any | null, keywords?: Array<string> | null, lang: string, layout: string, legalities: any, lifeModifier?: string | null, loyalty?: string | null, manaCost?: string | null, mtgoFoilId?: number | null, mtgoId?: number | null, multiverseIds?: Array<number> | null, name: string, oracleId?: string | null, oracleText?: string | null, oversized: boolean, power?: string | null, prices: any, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, printsSearchUri: string, producedMana?: Array<string> | null, promo: boolean, promoTypes?: Array<string> | null, purchaseUris?: any | null, rarity: string, relatedUris: any, releasedAt: any, reprint: boolean, reserved: boolean, rulingUri?: string | null, scryfallSetUri: string, scryfallUri: string, securityStamp?: string | null, setCode: string, setId: string, setUri: string, setName: string, setSearchUri: string, setType: string, storySpotlight: boolean, tcgplayerEtchedId?: number | null, textless: boolean, typeLine?: string | null, uri: string, varationOf?: string | null, variation: boolean, watermark?: string | null, cardFaces: Array<{ __typename?: 'ScryfallCardFace', artist?: string | null, cardId: string, cmc?: number | null, colorIndicator?: Array<string> | null, colors?: Array<string> | null, flavorText?: string | null, id: string, illustrationId?: string | null, imageUris?: any | null, layout?: string | null, loyalty?: string | null, manaCost?: string | null, name: string, oracleId?: string | null, oracleText?: string | null, power?: string | null, printedName?: string | null, printedText?: string | null, printedTypeLine?: string | null, toughness?: string | null, typeLine?: string | null, watermark?: string | null }>, referencedBy: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, relatedTo: Array<{ __typename?: 'ScryfallRelatedCard', cardId: string, component: string, name: string, typeLine: string, uri: string }>, scryfallMostRecentPrice?: { __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null } | null, scryfallPrice: Array<{ __typename?: 'ScryfallPrice', date: any, eur?: number | null, eurFoil?: number | null, tix?: number | null, usd?: number | null, usdEtched?: number | null, usdFoil?: number | null }>, set: { __typename?: 'ScryfallSet', id: string, code: string, name: string, iconSvgUri: string } };
+
+export type CreateTagMutationVariables = Exact<{
+  input: TagCreateWithoutUserInput;
+}>;
+
+
+export type CreateTagMutation = { __typename?: 'Mutation', createTag: { __typename?: 'Tag', id: string, name: string } };
+
+export type CollectionGridDeleteCardFromCollectionMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type CollectionGridDeleteCardFromCollectionMutation = { __typename?: 'Mutation', deleteCardFromCollection: { __typename?: 'CardsInCollection', cardId: string, collectionId: string, isEtched: boolean, isFoil: boolean } };
+
+export type UpdateCardInCollectionMutationVariables = Exact<{
+  id: Scalars['String'];
+  input: CardsInCollectionUpdateInput;
+}>;
+
+
+export type UpdateCardInCollectionMutation = { __typename?: 'Mutation', updateCardsInCollection: { __typename?: 'CardsInCollection', id: string, cardId: string, collectionId: string, isFoil: boolean, isEtched: boolean, count: number, tags: Array<{ __typename?: 'Tag', id: string, name: string, cards: Array<{ __typename?: 'CardsInCollection', id: string }> }> } };
 
 export const ScryfallCardFullFragmentDoc = gql`
     fragment ScryfallCardFull on ScryfallCard {
@@ -3217,84 +4703,6 @@ export function useQuickAddSearchResultsLazyQuery(baseOptions?: Apollo.LazyQuery
 export type QuickAddSearchResultsQueryHookResult = ReturnType<typeof useQuickAddSearchResultsQuery>;
 export type QuickAddSearchResultsLazyQueryHookResult = ReturnType<typeof useQuickAddSearchResultsLazyQuery>;
 export type QuickAddSearchResultsQueryResult = Apollo.QueryResult<QuickAddSearchResultsQuery, QuickAddSearchResultsQueryVariables>;
-export const CollectionGridDeleteCardFromCollectionDocument = gql`
-    mutation CollectionGridDeleteCardFromCollection($cardId: String!, $collectionId: String!, $isFoil: Boolean!, $isEtched: Boolean!) {
-  deleteCardFromCollection(
-    where: {cardId_collectionId_isFoil_isEtched: {cardId: $cardId, collectionId: $collectionId, isFoil: $isFoil, isEtched: $isEtched}}
-  ) {
-    cardId
-    collectionId
-    isEtched
-    isFoil
-  }
-}
-    `;
-export type CollectionGridDeleteCardFromCollectionMutationFn = Apollo.MutationFunction<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>;
-
-/**
- * __useCollectionGridDeleteCardFromCollectionMutation__
- *
- * To run a mutation, you first call `useCollectionGridDeleteCardFromCollectionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCollectionGridDeleteCardFromCollectionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [collectionGridDeleteCardFromCollectionMutation, { data, loading, error }] = useCollectionGridDeleteCardFromCollectionMutation({
- *   variables: {
- *      cardId: // value for 'cardId'
- *      collectionId: // value for 'collectionId'
- *      isFoil: // value for 'isFoil'
- *      isEtched: // value for 'isEtched'
- *   },
- * });
- */
-export function useCollectionGridDeleteCardFromCollectionMutation(baseOptions?: Apollo.MutationHookOptions<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>(CollectionGridDeleteCardFromCollectionDocument, options);
-      }
-export type CollectionGridDeleteCardFromCollectionMutationHookResult = ReturnType<typeof useCollectionGridDeleteCardFromCollectionMutation>;
-export type CollectionGridDeleteCardFromCollectionMutationResult = Apollo.MutationResult<CollectionGridDeleteCardFromCollectionMutation>;
-export type CollectionGridDeleteCardFromCollectionMutationOptions = Apollo.BaseMutationOptions<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>;
-export const CollectionManageUpdateCardInCollectionDocument = gql`
-    mutation CollectionManageUpdateCardInCollection($input: CardsInCollectionUncheckedUpdateInput!) {
-  updateCardsInCollection(input: $input) {
-    cardId
-    collectionId
-    isFoil
-    isEtched
-    count
-  }
-}
-    `;
-export type CollectionManageUpdateCardInCollectionMutationFn = Apollo.MutationFunction<CollectionManageUpdateCardInCollectionMutation, CollectionManageUpdateCardInCollectionMutationVariables>;
-
-/**
- * __useCollectionManageUpdateCardInCollectionMutation__
- *
- * To run a mutation, you first call `useCollectionManageUpdateCardInCollectionMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCollectionManageUpdateCardInCollectionMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [collectionManageUpdateCardInCollectionMutation, { data, loading, error }] = useCollectionManageUpdateCardInCollectionMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useCollectionManageUpdateCardInCollectionMutation(baseOptions?: Apollo.MutationHookOptions<CollectionManageUpdateCardInCollectionMutation, CollectionManageUpdateCardInCollectionMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CollectionManageUpdateCardInCollectionMutation, CollectionManageUpdateCardInCollectionMutationVariables>(CollectionManageUpdateCardInCollectionDocument, options);
-      }
-export type CollectionManageUpdateCardInCollectionMutationHookResult = ReturnType<typeof useCollectionManageUpdateCardInCollectionMutation>;
-export type CollectionManageUpdateCardInCollectionMutationResult = Apollo.MutationResult<CollectionManageUpdateCardInCollectionMutation>;
-export type CollectionManageUpdateCardInCollectionMutationOptions = Apollo.BaseMutationOptions<CollectionManageUpdateCardInCollectionMutation, CollectionManageUpdateCardInCollectionMutationVariables>;
 export const AddCollectionDocument = gql`
     mutation AddCollection($input: CollectionCreateWithoutUserInput!) {
   addCollection(input: $input) {
@@ -3456,3 +4864,119 @@ export function useSearchCardResultsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type SearchCardResultsQueryHookResult = ReturnType<typeof useSearchCardResultsQuery>;
 export type SearchCardResultsLazyQueryHookResult = ReturnType<typeof useSearchCardResultsLazyQuery>;
 export type SearchCardResultsQueryResult = Apollo.QueryResult<SearchCardResultsQuery, SearchCardResultsQueryVariables>;
+export const CreateTagDocument = gql`
+    mutation CreateTag($input: TagCreateWithoutUserInput!) {
+  createTag(input: $input) {
+    id
+    name
+  }
+}
+    `;
+export type CreateTagMutationFn = Apollo.MutationFunction<CreateTagMutation, CreateTagMutationVariables>;
+
+/**
+ * __useCreateTagMutation__
+ *
+ * To run a mutation, you first call `useCreateTagMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTagMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTagMutation, { data, loading, error }] = useCreateTagMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateTagMutation(baseOptions?: Apollo.MutationHookOptions<CreateTagMutation, CreateTagMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTagMutation, CreateTagMutationVariables>(CreateTagDocument, options);
+      }
+export type CreateTagMutationHookResult = ReturnType<typeof useCreateTagMutation>;
+export type CreateTagMutationResult = Apollo.MutationResult<CreateTagMutation>;
+export type CreateTagMutationOptions = Apollo.BaseMutationOptions<CreateTagMutation, CreateTagMutationVariables>;
+export const CollectionGridDeleteCardFromCollectionDocument = gql`
+    mutation CollectionGridDeleteCardFromCollection($id: String!) {
+  deleteCardFromCollection(where: {id: $id}) {
+    cardId
+    collectionId
+    isEtched
+    isFoil
+  }
+}
+    `;
+export type CollectionGridDeleteCardFromCollectionMutationFn = Apollo.MutationFunction<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>;
+
+/**
+ * __useCollectionGridDeleteCardFromCollectionMutation__
+ *
+ * To run a mutation, you first call `useCollectionGridDeleteCardFromCollectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCollectionGridDeleteCardFromCollectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [collectionGridDeleteCardFromCollectionMutation, { data, loading, error }] = useCollectionGridDeleteCardFromCollectionMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCollectionGridDeleteCardFromCollectionMutation(baseOptions?: Apollo.MutationHookOptions<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>(CollectionGridDeleteCardFromCollectionDocument, options);
+      }
+export type CollectionGridDeleteCardFromCollectionMutationHookResult = ReturnType<typeof useCollectionGridDeleteCardFromCollectionMutation>;
+export type CollectionGridDeleteCardFromCollectionMutationResult = Apollo.MutationResult<CollectionGridDeleteCardFromCollectionMutation>;
+export type CollectionGridDeleteCardFromCollectionMutationOptions = Apollo.BaseMutationOptions<CollectionGridDeleteCardFromCollectionMutation, CollectionGridDeleteCardFromCollectionMutationVariables>;
+export const UpdateCardInCollectionDocument = gql`
+    mutation UpdateCardInCollection($id: String!, $input: CardsInCollectionUpdateInput!) {
+  updateCardsInCollection(id: $id, input: $input) {
+    id
+    cardId
+    collectionId
+    isFoil
+    isEtched
+    count
+    tags {
+      id
+      name
+      cards {
+        id
+      }
+    }
+  }
+}
+    `;
+export type UpdateCardInCollectionMutationFn = Apollo.MutationFunction<UpdateCardInCollectionMutation, UpdateCardInCollectionMutationVariables>;
+
+/**
+ * __useUpdateCardInCollectionMutation__
+ *
+ * To run a mutation, you first call `useUpdateCardInCollectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCardInCollectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCardInCollectionMutation, { data, loading, error }] = useUpdateCardInCollectionMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateCardInCollectionMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCardInCollectionMutation, UpdateCardInCollectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateCardInCollectionMutation, UpdateCardInCollectionMutationVariables>(UpdateCardInCollectionDocument, options);
+      }
+export type UpdateCardInCollectionMutationHookResult = ReturnType<typeof useUpdateCardInCollectionMutation>;
+export type UpdateCardInCollectionMutationResult = Apollo.MutationResult<UpdateCardInCollectionMutation>;
+export type UpdateCardInCollectionMutationOptions = Apollo.BaseMutationOptions<UpdateCardInCollectionMutation, UpdateCardInCollectionMutationVariables>;

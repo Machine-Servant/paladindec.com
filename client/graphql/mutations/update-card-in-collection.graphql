@@ -1,0 +1,20 @@
+mutation UpdateCardInCollection(
+  $id: String!
+  $input: CardsInCollectionUpdateInput!
+) {
+  updateCardsInCollection(id: $id, input: $input) {
+    id
+    cardId
+    collectionId
+    isFoil
+    isEtched
+    count
+    tags {
+      id
+      name
+      cards {
+        id
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 schema: ${SCHEMA_PATH}
 documents:
   - './components/**/*.graphql'
-  - './fragments/**/*.graphql'
+  - './graphql/**/*.graphql'
 generates:
   ./@types/codegen/fragments.ts:
     plugins:

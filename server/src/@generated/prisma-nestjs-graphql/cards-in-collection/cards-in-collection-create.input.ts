@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { CardCreateNestedOneWithoutCollectionsInput } from '../card/card-create-nested-one-without-collections.input';
 import { CollectionCreateNestedOneWithoutCardsInput } from '../collection/collection-create-nested-one-without-cards.input';
+import { TagCreateNestedManyWithoutCardsInput } from '../tag/tag-create-nested-many-without-cards.input';
 
 @InputType()
 export class CardsInCollectionCreateInput {
@@ -29,4 +30,7 @@ export class CardsInCollectionCreateInput {
 
   @Field(() => CollectionCreateNestedOneWithoutCardsInput, { nullable: false })
   collection!: CollectionCreateNestedOneWithoutCardsInput;
+
+  @Field(() => TagCreateNestedManyWithoutCardsInput, { nullable: true })
+  tags?: TagCreateNestedManyWithoutCardsInput;
 }

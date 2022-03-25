@@ -35,8 +35,7 @@ export type CollectionGridProps = {
   onDeleteCardFromCollection: (card: CardInCollection) => void;
   onUpdateCardCount: (
     card: Pick<CardInCollection, 'isEtched' | 'isFoil'> & {
-      cardId: string;
-      collectionId: string;
+      id: string;
     },
     count: number,
   ) => void;
@@ -58,6 +57,7 @@ type RowDataType = {
   mgmt: { cardInCollection: CardInCollection };
   _images: unknown[];
   _cardId: string;
+  _cardInCollectionId: string;
 };
 
 // eslint-disable-next-line react/display-name
@@ -156,6 +156,7 @@ export const CollectionGrid = React.forwardRef<
               img: cardInCollection.card.name,
               _images: cardInCollection.card.scryfallCard.imageUris,
               _cardId: cardInCollection.card.id,
+              _cardInCollectionId: cardInCollection.id,
             })),
           });
         } else {
@@ -252,8 +253,7 @@ export const CollectionGrid = React.forwardRef<
         onCellValueChanged={(params: { data: RowDataType }) => {
           props.onUpdateCardCount(
             {
-              cardId: params.data._cardId,
-              collectionId: props.collection.id,
+              id: params.data._cardInCollectionId,
               isEtched: params.data.etched,
               isFoil: params.data.foil,
             },

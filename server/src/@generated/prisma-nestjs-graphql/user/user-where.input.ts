@@ -4,6 +4,7 @@ import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { HideField } from '@nestjs/graphql';
 import { CollectionListRelationFilter } from '../collection/collection-list-relation-filter.input';
+import { TagListRelationFilter } from '../tag/tag-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -33,4 +34,7 @@ export class UserWhereInput {
 
   @Field(() => CollectionListRelationFilter, { nullable: true })
   collections?: CollectionListRelationFilter;
+
+  @Field(() => TagListRelationFilter, { nullable: true })
+  Tag?: TagListRelationFilter;
 }

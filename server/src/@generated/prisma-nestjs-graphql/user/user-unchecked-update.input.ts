@@ -4,6 +4,7 @@ import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { HideField } from '@nestjs/graphql';
 import { CollectionUncheckedUpdateManyWithoutUserInput } from '../collection/collection-unchecked-update-many-without-user.input';
+import { TagUncheckedUpdateManyWithoutUserInput } from '../tag/tag-unchecked-update-many-without-user.input';
 
 @InputType()
 export class UserUncheckedUpdateInput {
@@ -26,4 +27,7 @@ export class UserUncheckedUpdateInput {
     nullable: true,
   })
   collections?: CollectionUncheckedUpdateManyWithoutUserInput;
+
+  @Field(() => TagUncheckedUpdateManyWithoutUserInput, { nullable: true })
+  Tag?: TagUncheckedUpdateManyWithoutUserInput;
 }
