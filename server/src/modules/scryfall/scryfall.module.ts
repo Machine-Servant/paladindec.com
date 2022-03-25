@@ -21,6 +21,7 @@ import { ScryfallPriceService } from './services/scryfall-price.service';
 import { ScryfallRelatedCardService } from './services/scryfall-related-card.service';
 import { ScryfallSetService } from './services/scryfall-set.service';
 import { SetDataService } from './services/set-data.service';
+import { ScryfallDailyProcessLogService } from './services/scryfall-daily-process-log.service';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { SetDataService } from './services/set-data.service';
     ScryfallCardNameService,
     ScryfallCardNameResolver,
     ScryfallCardNameConsumer,
+    ScryfallDailyProcessLogService,
   ],
   exports: [ScryfallPriceService, ScryfallCardService],
 })

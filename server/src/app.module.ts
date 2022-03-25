@@ -20,6 +20,7 @@ import { GraphqlInterceptor, SentryModule } from '@ntegral/nestjs-sentry';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpModule } from '@nestjs/axios';
 import { TagModule } from './modules/tag/tag.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -103,6 +104,7 @@ import { TagModule } from './modules/tag/tag.module';
       }),
     }),
     TagModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [

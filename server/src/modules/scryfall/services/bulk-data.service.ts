@@ -1,6 +1,8 @@
 import { InjectQueue } from '@nestjs/bull';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { Cron } from '@nestjs/schedule';
+import { ScryfallDailyProcessLog } from '@prisma/client';
 import axios from 'axios';
 import { Queue } from 'bull';
 import { flatten } from 'lodash';
@@ -12,16 +14,42 @@ import {
 } from '../types/scryfall.types';
 import { toPrismaScryfallRelatedCard } from '../utils/to-prisma-scryfall-related-card';
 import { ScryfallCardService } from './scryfall-card.service';
+import { ScryfallDailyProcessLogService } from './scryfall-daily-process-log.service';
 
 @Injectable()
 export class BulkDataService {
   constructor(
     private readonly configService: ConfigService,
     private readonly scryfallCardService: ScryfallCardService,
+    private readonly scyrfallDailyProcessLogService: ScryfallDailyProcessLogService,
     @InjectQueue('bulk-data') private readonly bulkDataQueue: Queue,
   ) {}
 
   private readonly logger = new Logger(BulkDataService.name);
+
+  @Cron('0 30 11 * * *', { name: 'cron:process-daily' })
+  async cronProcessDaily(): Promise<void> {
+    const results =
+      await this.scyrfallDailyProcessLogService.findCurrentlyRunningJobs(
+        new Date(),
+      );
+    if (results.length) {
+      this.logger.debug(`Found running jobs: ${results.map((r) => r.id)}`);
+      return;
+    }
+    this.logger.debug('RUNNING CRON');
+    const processLog = await this.scyrfallDailyProcessLogService.create({
+      data: {},
+    });
+    this.logger.debug(`Started process ${processLog.id}`);
+    const result = await this.process(processLog.id);
+    if (result === true) {
+      await this.scyrfallDailyProcessLogService.finish(processLog);
+      this.logger.debug(`Finished process ${processLog.id}`);
+    } else {
+      this.logger.error(`There was an error processing daily scryfall data`);
+    }
+  }
 
   async getBulkData(): Promise<BulkDataObjectType[]> {
     const results = await axios.get<ScryfallBulkDataResponseType>(
@@ -70,7 +98,20 @@ export class BulkDataService {
     return true;
   }
 
-  async process(): Promise<boolean> {
+  async process(logId?: string): Promise<boolean> {
+    let processLog: ScryfallDailyProcessLog;
+
+    if (logId) {
+      try {
+        processLog = await this.scyrfallDailyProcessLogService.findUnique({
+          where: { id: logId },
+        });
+      } catch (err) {
+        this.logger.error(err);
+        throw err;
+      }
+    }
+
     this.logger.debug(`Getting bulk data object`);
     const results = await axios.get<ScryfallBulkDataType>(
       `${this.configService.get<string>(
@@ -80,11 +121,15 @@ export class BulkDataService {
 
     this.logger.debug(`Adding to queue`);
     try {
-      await this.bulkDataQueue.add('process', {
+      const processJob = await this.bulkDataQueue.add('process', {
         uri: results.data.download_uri,
         contentType: results.data.content_type,
         typeName: 'default_cards',
       });
+      await processJob.finished();
+      if (processLog) {
+        this.scyrfallDailyProcessLogService.finish(processLog);
+      }
     } catch (err) {
       this.logger.error(err);
       throw err;

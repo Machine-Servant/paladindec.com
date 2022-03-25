@@ -295,3 +295,10 @@ model Tag {
   @@unique([userId, name])
   @@index([userId])
 }
+
+model ScryfallDailyProcessLog {
+  id          String   @id @default(uuid()) @db.Uuid
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+}
