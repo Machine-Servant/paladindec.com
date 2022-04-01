@@ -8,12 +8,14 @@ import {
   CardsInCollection,
   Collection,
   ScryfallCard,
+  ScryfallPrice,
   ScryfallSet,
   Tag,
   useUpdateCardInCollectionMutation,
 } from '../../../@types/codegen/graphql';
 import { dollar } from '../../../utils/dollar';
 import { Round } from '../../icons';
+import { PriceGraph } from '../../price-graph';
 import { SetIcon } from '../../set-icon';
 import { MetaTag } from './CardDetails.styles';
 
@@ -31,12 +33,19 @@ export type CardDetailsCardInCollection = Pick<
     | 'isPaper'
     | 'isRetro'
     | 'isShowcase'
+    | 'canBeEtched'
+    | 'canBeFoil'
+    | 'canBeNonFoil'
   > & {
     scryfallCard: Pick<
       ScryfallCard,
       'typeLine' | 'oracleText' | 'rarity' | 'legalities' | 'imageUris'
     > & {
       set: Pick<ScryfallSet, 'iconSvgUri' | 'name'>;
+      scryfallPrice: Pick<
+        ScryfallPrice,
+        'date' | 'usd' | 'usdFoil' | 'usdEtched'
+      >[];
     };
   };
 };
@@ -119,6 +128,17 @@ export const CardDetails: React.FC<CardDetailsProps> = (props) => {
   const [updateCardInCollection] = useUpdateCardInCollectionMutation();
   const [cardInCollection, setCardInCollection] =
     useState<CardDetailsCardInCollection>(props.cardsInCollection);
+
+  const prices = useMemo(() => {
+    return props.cardsInCollection.card.scryfallCard.scryfallPrice.map(
+      (scryfallPrice) => ({
+        date: new Date(scryfallPrice.date),
+        usd: scryfallPrice.usd || 0,
+        usdEtched: scryfallPrice.usdEtched || 0,
+        usdFoil: scryfallPrice.usdFoil || 0,
+      }),
+    );
+  }, [props.cardsInCollection.card.scryfallCard.scryfallPrice]);
 
   const otherPrintings = useMemo(() => {
     const results: {
@@ -391,6 +411,14 @@ export const CardDetails: React.FC<CardDetailsProps> = (props) => {
                 </div>
               )}
             </div>
+          </div>
+          <div className="w-full mt-4 border h-96 border-white-900 rounded-xl bg-white-700">
+            <PriceGraph
+              data={prices}
+              canBeFoil={props.cardsInCollection.card.canBeFoil}
+              canBeEtched={props.cardsInCollection.card.canBeEtched}
+              canBeNonFoil={props.cardsInCollection.card.canBeNonFoil}
+            />
           </div>
         </div>
         <div className="w-full h-20 max-w-md pl-4">
