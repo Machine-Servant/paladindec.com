@@ -58,10 +58,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     `${CardDetailsPage.name}_${getServerSideProps.name}`,
   );
 
+  const today = new Date();
+  const lastMonth = new Date(
+    today.getFullYear(),
+    today.getMonth() - 1,
+    today.getDate(),
+  );
+
   const client = new GraphQLClient();
 
   const GET_CARD_DETAILS_QUERY = gql`
-    query GetCardInCollection($id: String!) {
+    query GetCardInCollection($id: String!, $date: DateTime!) {
       cardsInCollection(where: { id: { equals: $id } }) {
         id
         isFoil
@@ -85,6 +92,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           isShowcase
           isBorderless
           isExtendedArt
+          canBeFoil
+          canBeEtched
+          canBeNonFoil
           scryfallCard {
             imageUris
             oracleText
@@ -93,6 +103,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             rarity
             legalities
             collectorNumber
+            scryfallPrice(
+              where: { date: { gte: $date } }
+              orderBy: [{ date: asc }]
+            ) {
+              date
+              usd
+              usdFoil
+              usdEtched
+            }
             set {
               name
               code
@@ -110,7 +129,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const results = await client.value.query({
     query: GET_CARD_DETAILS_QUERY,
-    variables: { id: context.query.cardInCollectionId },
+    variables: {
+      id: context.query.cardInCollectionId,
+      date: lastMonth,
+    },
     context: {
       headers: {
         ...context.req.headers,
